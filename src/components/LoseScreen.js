@@ -1,6 +1,7 @@
 import React from 'react';
 import {makeStyles} from  "@material-ui/core";
 import Button from '@mui/material/Button';
+import image from '../assets/looseBackground.svg';
 
 const useStyles = makeStyles((theme) => ({
   container:{
@@ -8,7 +9,8 @@ const useStyles = makeStyles((theme) => ({
     justifyContent:'center',
     alignItems:'center',
     height:'100vh',
-    backgroundColor:'lightGrey',
+  
+    
   },
 
   content:{
@@ -17,7 +19,9 @@ const useStyles = makeStyles((theme) => ({
     borderRadius:'20px',
     width: '800px',
     height: '500px',
-    backgroundColor: 'rgba(0,0,0,0.2)',
+    backgroundSize:'cover',
+    backgroundColor:'darkgrey',
+    backgroundImage: `url(${image})`,
   },
 
   title:{
