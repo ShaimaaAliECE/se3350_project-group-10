@@ -1,10 +1,9 @@
 import './App.css';
+import LoseScreen from './components/LoseScreen.js'
 
 function App() {
   return (
-    <div>
-      Hello World!
-    </div>
+    <LoseScreen/>
   );
 }
 
