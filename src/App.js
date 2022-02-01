@@ -1,14 +1,11 @@
 import "./App.css";
-import Key from "./components/Key.js";
+import Piano from "./components/Piano";
 
 function App() {
   return (
-    <div style = {{flexDirection: "row", display: "flex"}}>
-      
-      <Key index = {1}/>
-      <Key index = {2}/>
-      
-    </div>
+    <>
+      <Piano />
+    </>
   );
 }
 
