@@ -4,22 +4,25 @@ import * as Tone from "tone";
 const useStyles = makeStyles((theme) => ({
   white: {
     display: "flex",
-    backgroundColor: "white",
-    width: "25px",
-    height: "75px",
-    padding: "5px",
-    alignItems: "flex-start",
     justifyContent: "center",
+    backgroundColor: "white",
+    width: 80,
+    height: 300,
+    padding: 5,
+    zIndex: -1,
   },
   black: {
     display: "flex",
+    position: "relative",
+    justifyContent: "center",
     backgroundColor: "black",
     color: "white",
-    width: "12px",
-    height: "45px",
-    padding: "5px",
-    alignItems: "flex-start",
-    justifyContent: "center",
+    width: 50,
+    height: 170,
+    padding: 5,
+    zIndex: 2,
+    marginLeft: -25,
+    marginRight: -25,
   },
 }));
 
@@ -55,7 +58,7 @@ function playSound(totalNotes, currentNote) {
   }
   let noteLevel = parseInt(currentNote / 12);
   if (currentNote > 12) {
-    currentNoteStandard = currentNote - 12 * noteLevel - 1;
+    currentNoteStandard = parseInt(currentNote - 12 * noteLevel);
   } else {
     currentNoteStandard = currentNote - 1;
   }
@@ -64,6 +67,7 @@ function playSound(totalNotes, currentNote) {
     octave += noteLevel;
   }
   note = notes[currentNoteStandard] + "" + parseInt(octave);
+
   synth.triggerAttackRelease(note, "8n");
 }
 function Key(props) {
@@ -72,13 +76,26 @@ function Key(props) {
   const totalNotes = props.totalNotes;
   return (
     <button
-      className={index % 2 === 0 ? styles.white : styles.black}
+      style={{ alignItems: "flex-end", paddingBottom: 20 }}
+      className={
+        index % 12 === 1
+          ? styles.black
+          : index % 12 === 3
+          ? styles.black
+          : index % 12 === 6
+          ? styles.black
+          : index % 12 === 8
+          ? styles.black
+          : index % 12 === 10
+          ? styles.black
+          : styles.white
+      }
       onClick={() => {
-        playSound(totalNotes, index);
+        playSound(totalNotes, index + 1);
       }}
     >
       {" "}
-      {index}{" "}
+      {index + 1}{" "}
     </button>
   );
 }

@@ -5,7 +5,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
-    alignItems: "flex-end",
   },
   whiteKey: {
     padding: 10,
@@ -18,22 +17,12 @@ const useStyles = makeStyles((theme) => ({
 
 function RenderKeys(x) {
   let temp = [];
-
   //where x is the piano length
   for (let i = 0; i < x; i++) {
     temp.push(
-      <>
-        <Key
-          style={
-            i % 2 === 0
-              ? { backgroundColor: "white" }
-              : { backgroundColor: "back" }
-          }
-          index={i + 1}
-          key={i + 1}
-          totalNotes={x}
-        />
-      </>
+      <div style={{}}>
+        <Key index={i} key={i} totalNotes={x} />
+      </div>
     );
   }
   return temp;
@@ -43,7 +32,7 @@ function Piano() {
 
   //import store
   //get max# piano keys from store
-  const pianoLength = 13;
+  const pianoLength = 30;
   return <div className={styles.piano}>{RenderKeys(pianoLength)}</div>;
 }
 

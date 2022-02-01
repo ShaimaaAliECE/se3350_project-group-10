@@ -17,11 +17,16 @@ function playSound(notes, currentNote) {
     octave = 2;
   }
 
-  let noteLevel = currentNote / 12;
-  currentNoteStandard = currentNote - 12 * noteLevel;
+  let noteLevel = parseInt(currentNote / 12);
+
+  currentNoteStandard = parseInt(currentNote - 12 * noteLevel);
+
   //for every note level increment octave, if note level is 1, add 1 to octave
   octave += noteLevel;
+  console.loog(currentNoteStandard);
   note = notes[currentNoteStandard] + "" + octave;
+
+  console.log(note);
   synth.triggerAttackRelease(note, "8n");
 }
 
