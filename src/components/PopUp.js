@@ -32,19 +32,6 @@ const useStyles = makeStyles((theme) => ({
         color: "white",
     }
     }));
-/*const container = {
-    display: "flex",
-    justifyContent: "center",
-    alignItem: "center",
-    width: "200px"
-};
-
-const content = {
-    width: "50px",
-    height: "50px",
-    backgroundColor: "#838282"
-}
-*/
 
 export default function PopUp(){    
 const classes = useStyles();
