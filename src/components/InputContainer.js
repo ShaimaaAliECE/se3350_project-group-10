@@ -68,20 +68,18 @@ function InputContainer() {
   let arr = state.input;
   let divisor;
 
-  if ((state.step = 0)) {
+  if (!state.step == 0) {
     divisor = state.input.length / (2 * state.step);
+    console.log("OIN RUn");
   } else {
     divisor = state.input.length;
   }
-
-  // console.log(state.step); //This makes the state not increase?
 
   return (
     <div style={stylesMainOuter}>
       {/* chunk(arr, #) should run with a value from store. 3 is the max width of length of the mini array. so this will be based off of the step */}
       <div style={stylesMainInner}>{CreateMap(chunk(arr, divisor))}</div>
       <InputContainerButtons />
-      {state.step}
     </div>
   );
 }
