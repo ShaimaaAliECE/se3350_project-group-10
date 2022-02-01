@@ -1,10 +1,11 @@
-import './App.css';
-import Sheet from './components/Sheet.js'
+
+import "./App.css";
+
 
 function App() {
   return (
     <div>
-      <Sheet/>
+     
     </div>
   );
 }
