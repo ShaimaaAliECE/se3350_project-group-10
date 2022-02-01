@@ -7,7 +7,7 @@ import state from '../store/Store';
 
 
 // add scroll css to container (filled with multiple  groups of lines)
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     container: {
         flex: 'auto',
         justifyContent: 'space-between',
@@ -39,10 +39,17 @@ const useStyles = makeStyles((theme) => ({
         margin: 10,
         background: "rgba(220,220,220, .6)",
     },
-    mapped: {
+    main: {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+    },
+    stylesContainerInner: { display: "flex" },
+    stylesMainOuter: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        width: "100%",
     }
 
 
@@ -62,6 +69,7 @@ function Sheet() {
     return (
         <>
             <div className={style.container}>
+                <MainArray/>
                 <Lines />
                 <Lines />
                 <Lines />
@@ -71,7 +79,7 @@ function Sheet() {
                 <Lines />
                 <Lines />
             </div>
-        
+
         </>
 
     );
@@ -82,57 +90,60 @@ function Lines() {
     const style = useStyles();
 
     return (
-        <div className={style.lineRow}>
-            <hr className={style.lines}></hr>
-            <hr className={style.lines}></hr>
-            <hr className={style.lines}></hr>
-            <hr className={style.lines}></hr>
-            <hr className={style.lines}></hr>
+        <div>
+
+            <div className={style.lineRow}>
+                <hr className={style.lines}></hr>
+                <hr className={style.lines}></hr>
+                <hr className={style.lines}></hr>
+                <hr className={style.lines}></hr>
+                <hr className={style.lines}></hr>
+            </div>
         </div>
+
 
 
 
     )
 }
+function MainArray () {
+    const style = useStyles();
+    const arr = state.input;
+    return (
+        <div className={style.main}> <div className={style.square}>
+        {arr}
+    </div></div>
+    )
+    
+}
 
-// function Submit() {
-//     const style = useStyles();
-
-//     return (
-//         <div>
-//             <Button></Button>
-//         </div>
-//     )
-// }
-
-// function Array() {
-//     const style = useStyles();
-
-//     return (
-//         <div className='row'></div>
-//     )
-
-// }
-function CreateMap(arr) {
+function CreateMap(arrOuter) {
     const style = useStyles();
     //Maps user entered array
-    return arr.map((arr) => (
-      <div
-        className={style.square}
-        key={arr}
-        // style={styles}
-      >
-        {arr}
-      </div>
-    ));
-
-
-
-  }
+    return (
+        <div className={style.main}>
+            {arrOuter.map((arrInner) => (
+                <div className={style.stylesContainerInner}>
+                    {arrInner.map((arrObj) => (
+                        <div className={style.square} key={arrObj}>
+                            {arrObj}
+                        </div>
+                    ))}
+                </div>
+            ))}
+        </div>
+    );
+}
+function chunk(array, limit) {
+    const chunks = Math.ceil(array.length / limit);
+    return Array.from({ length: chunks }, (_, i) =>
+        array.slice((i * array.length) / chunks, ((i + 1) * array.length) / chunks)
+    );
+}
 function InputContainer() {
-  const arr = state.input;
-
-  return <div style={stylesMain}>{CreateMap(arr)}</div>;
+    const arr = state.input;
+    const style = useStyles();
+    return (<div className={style.main}>{CreateMap(chunk(arr, 4))}</div>);
 }
 
 
