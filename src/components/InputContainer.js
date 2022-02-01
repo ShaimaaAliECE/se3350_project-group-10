@@ -70,7 +70,6 @@ function InputContainer() {
 
   if (!state.step == 0) {
     divisor = state.input.length / (2 * state.step);
-    console.log("OIN RUn");
   } else {
     divisor = state.input.length;
   }

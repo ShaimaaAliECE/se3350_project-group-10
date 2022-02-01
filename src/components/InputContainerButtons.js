@@ -10,6 +10,11 @@ const styles = {
 
 function handleRestartClick() {
   //Set the store state back to empty
+  let len = state.input.length;
+  for (let i = 0; i < len; i++) {
+    state.input[i] = "";
+  }
+  state.step = 0;
 }
 
 function handleSubmitClick() {
