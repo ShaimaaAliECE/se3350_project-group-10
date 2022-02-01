@@ -2,6 +2,7 @@ import { makeStyles } from "@material-ui/core";
 import React from "react";
 import state from "../store/Store";
 import InputContainerButtons from "./InputContainerButtons";
+import { view } from "@risingstack/react-easy-state";
 
 const useStyles = makeStyles((theme) => ({
   styles: {
@@ -64,15 +65,25 @@ function CreateMap(arrOuter) {
 }
 
 function InputContainer() {
-  const arr = state.input;
+  let arr = state.input;
+  let divisor;
+
+  if ((state.step = 0)) {
+    divisor = state.input.length / (2 * state.step);
+  } else {
+    divisor = state.input.length;
+  }
+
+  // console.log(state.step); //This makes the state not increase?
 
   return (
     <div style={stylesMainOuter}>
       {/* chunk(arr, #) should run with a value from store. 3 is the max width of length of the mini array. so this will be based off of the step */}
-      <div style={stylesMainInner}>{CreateMap(chunk(arr, 4))}</div>
+      <div style={stylesMainInner}>{CreateMap(chunk(arr, divisor))}</div>
       <InputContainerButtons />
+      {state.step}
     </div>
   );
 }
 
-export default InputContainer;
+export default view(InputContainer);

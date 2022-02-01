@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "@material-ui/core";
 import state from "../store/Store.js";
+import { view } from "@risingstack/react-easy-state";
 
 const styles = {
   display: "flex",
@@ -14,9 +15,11 @@ function handleRestartClick() {
 function handleSubmitClick() {
   //Comapre store state with ans state
   //state.ans == state.input
+  state.stepInc();
+  //   console.log(state.step); << Not changing
 }
 
-function InputContainerButtons() {
+export default view(function InputContainerButtons() {
   return (
     <div style={styles}>
       <Button
@@ -38,6 +41,4 @@ function InputContainerButtons() {
       </Button>
     </div>
   );
-}
-
-export default InputContainerButtons;
+});
