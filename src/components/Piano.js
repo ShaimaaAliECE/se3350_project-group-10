@@ -29,8 +29,9 @@ function RenderKeys(x) {
               ? { backgroundColor: "white" }
               : { backgroundColor: "back" }
           }
-          index={i}
+          index={i + 1}
           key={i + 1}
+          totalNotes={x}
         />
       </>
     );
@@ -42,7 +43,7 @@ function Piano() {
 
   //import store
   //get max# piano keys from store
-  const pianoLength = 10;
+  const pianoLength = 13;
   return <div className={styles.piano}>{RenderKeys(pianoLength)}</div>;
 }
 
