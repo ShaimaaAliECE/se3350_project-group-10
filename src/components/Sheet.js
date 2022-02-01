@@ -2,8 +2,8 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-import { makeStyles } from "@material-ui/core";
-
+import { Button, makeStyles } from "@material-ui/core";
+import state from '../store/Store';
 
 
 // add scroll css to container (filled with multiple  groups of lines)
@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
         width: 980,
         marginTop: 80,
         marginLeft: 150,
-        overflow:'scroll',
+        overflow: 'scroll',
 
     },
     lines: {
@@ -27,12 +27,25 @@ const useStyles = makeStyles((theme) => ({
 
     },
     lineRow: {
-      
+
         flex: 'auto',
         marginTop: 50,
     },
+    square: {
+        display: "flex",
+        width: 50,
+        height: 50,
+        flexDirection: "row",
+        margin: 10,
+        background: "rgba(220,220,220, .6)",
+    },
+    mapped: {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+    }
 
-    
+
 }));
 
 
@@ -47,16 +60,20 @@ const useStyles = makeStyles((theme) => ({
 function Sheet() {
     const style = useStyles();
     return (
-        <div className={style.container}>
-            <Lines />
-            <Lines />
-            <Lines />
-            <Lines />
-            <Lines />
-            <Lines />
-            <Lines />
-            <Lines />
-        </div>
+        <>
+            <div className={style.container}>
+                <Lines />
+                <Lines />
+                <Lines />
+                <Lines />
+                <Lines />
+                <Lines />
+                <Lines />
+                <Lines />
+            </div>
+        
+        </>
+
     );
 }
 
@@ -77,6 +94,47 @@ function Lines() {
 
     )
 }
+
+// function Submit() {
+//     const style = useStyles();
+
+//     return (
+//         <div>
+//             <Button></Button>
+//         </div>
+//     )
+// }
+
+// function Array() {
+//     const style = useStyles();
+
+//     return (
+//         <div className='row'></div>
+//     )
+
+// }
+function CreateMap(arr) {
+    const style = useStyles();
+    //Maps user entered array
+    return arr.map((arr) => (
+      <div
+        className={style.square}
+        key={arr}
+        // style={styles}
+      >
+        {arr}
+      </div>
+    ));
+
+
+
+  }
+function InputContainer() {
+  const arr = state.input;
+
+  return <div style={stylesMain}>{CreateMap(arr)}</div>;
+}
+
 
 
 export default Sheet; 

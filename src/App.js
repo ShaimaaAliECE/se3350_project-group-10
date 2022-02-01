@@ -1,9 +1,10 @@
 import './App.css';
+import Sheet from './components/Sheet.js'
 
 function App() {
   return (
     <div>
-      Hello World!
+      <Sheet/>
     </div>
   );
 }
