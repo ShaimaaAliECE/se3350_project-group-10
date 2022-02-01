@@ -1,38 +1,78 @@
+import { makeStyles } from "@material-ui/core";
 import React from "react";
 import state from "../store/Store";
+import InputContainerButtons from "./InputContainerButtons";
 
-const styles = {
-  display: "flex",
-  width: 50,
-  height: 50,
-  flexDirection: "row",
-  margin: 10,
-  background: "rgba(220,220,220, .6)",
-};
+const useStyles = makeStyles((theme) => ({
+  styles: {
+    display: "flex",
+    width: 50,
+    height: 50,
+    flexDirection: "row",
+    margin: 10,
+    background: "rgba(220,220,220, .6)",
+  },
 
-const stylesMain = {
+  stylesContainerOuter: {
+    display: "flex",
+    justifyContent: "space-around",
+    width: "100%",
+  },
+
+  stylesContainerInner: { display: "flex" },
+}));
+
+const stylesMainInner = {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
+  width: "100%",
 };
 
-function createMap(arr) {
+const stylesMainOuter = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  width: "100%",
+};
+
+function chunk(array, limit) {
+  const chunks = Math.ceil(array.length / limit);
+  return Array.from({ length: chunks }, (_, i) =>
+    array.slice((i * array.length) / chunks, ((i + 1) * array.length) / chunks)
+  );
+}
+
+function CreateMap(arrOuter) {
   //Maps user entered array
-  return arr.map((arr) => (
-    <div
-      style={styles}
-      key={arr}
-      // style={styles}
-    >
-      {arr}
+
+  const style = useStyles();
+
+  return (
+    <div className={style.stylesContainerOuter}>
+      {arrOuter.map((arrInner) => (
+        <div className={style.stylesContainerInner}>
+          {arrInner.map((arrObj) => (
+            <div className={style.styles} key={arrObj}>
+              {arrObj}
+            </div>
+          ))}
+        </div>
+      ))}
     </div>
-  ));
+  );
 }
 
 function InputContainer() {
   const arr = state.input;
 
-  return <div style={stylesMain}>{createMap(arr)}</div>;
+  return (
+    <div style={stylesMainOuter}>
+      {/* chunk(arr, #) should run with a value from store. 3 is the max width of length of the mini array. so this will be based off of the step */}
+      <div style={stylesMainInner}>{CreateMap(chunk(arr, 4))}</div>
+      <InputContainerButtons />
+    </div>
+  );
 }
 
 export default InputContainer;
