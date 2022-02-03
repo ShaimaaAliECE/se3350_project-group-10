@@ -14,6 +14,8 @@ const stylesMain = {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
+  backgroundColor:  "transparent",
+  zIndex: 3,
 };
 
 function createMap(arr) {
@@ -29,8 +31,8 @@ function createMap(arr) {
   ));
 }
 
-function InputContainer() {
-  const arr = state.input;
+function InputContainer(props) {
+  const arr = props.array;
 
   return <div style={stylesMain}>{createMap(arr)}</div>;
 }
