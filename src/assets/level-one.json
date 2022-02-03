@@ -1,0 +1,8 @@
+[
+    {
+      "1": "For Merge Sort, the length of the array is taken and then divided by 2 to split the array in half. We take the floor function of the length/2 to correctly divide the array in half.",
+      "2": "True",
+      "3": "False",
+      "4": "False"
+  }
+    ]
