@@ -42,12 +42,12 @@ function onSubmit() {
         counter++;
 
       } else {
-
+        //TODO highlight input box red
         console.log('wrong');
         handleRestartClick(); // clear input array
         state.lives--; // lose a life
         break;
-        // reset imput field
+        // reset input field
       }
 
       if (counter == ans.length) {
@@ -56,7 +56,7 @@ function onSubmit() {
       }
     }
   } else {
-
+    //TODO highlight input container red
     console.log("fill input array");
     state.lives--;
     

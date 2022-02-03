@@ -54,7 +54,7 @@ function CreateMap(arrOuter) {
       {arrOuter.map((arrInner) => (
         <div className={style.stylesContainerInner}>
           {arrInner.map((arrObj) => (
-            <div className={style.styles} key={arrObj}>
+            <div id={arrObj}className={style.styles} key={arrObj}>
               {arrObj}
             </div>
           ))}
