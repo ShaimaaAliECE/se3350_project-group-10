@@ -20,7 +20,7 @@ function RenderKeys(x) {
   //where x is the piano length
   for (let i = 0; i < x; i++) {
     temp.push(
-      <div style={{}}>
+      <div style={{}} key={i}>
         <Key index={i} key={i} totalNotes={x} />
       </div>
     );
