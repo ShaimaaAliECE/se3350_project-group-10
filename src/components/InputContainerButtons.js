@@ -24,6 +24,38 @@ function handleSubmitClick() {
   //   console.log(state.step); << Not changing
 }
 
+// everytie piano click button, update state, click submit refer to store, compare input[] with ans[] at each step
+
+function onSubmit() {
+  // if input lenght not = to ans []
+  let input = state.input;
+  let ans = state.ans;
+  let counter = 0;
+  if (input.length == ans.length) {
+    for(let i =0; i< ans.length; i++) {
+
+      if(input[i] === ans[i]) {
+        counter++;
+      } else {
+        console.log('wrong');
+        // clears input array
+        handleRestartClick();
+        break;
+        // reset imput field
+      }
+
+      if (counter == ans.length) {
+        // append to sheet []
+        state.stepInc();
+      }
+    }
+  } else {
+    console.log("fill input array");
+  }
+
+
+}
+
 export default view(function InputContainerButtons() {
   return (
     <div style={styles}>
