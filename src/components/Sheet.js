@@ -5,9 +5,10 @@ import { StyleSheet, Text, View } from "react-native";
 import { Button, makeStyles } from "@material-ui/core";
 import state from '../store/Store';
 
+import InputContainer from './InputContainer.js';
 
 // add scroll css to container (filled with multiple  groups of lines)
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     container: {
         flex: 'auto',
         justifyContent: 'space-between',
@@ -19,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
         marginTop: 80,
         marginLeft: 150,
         overflow: 'scroll',
+        position: 'relative',
 
     },
     lines: {
@@ -30,6 +32,9 @@ const useStyles = makeStyles((theme) => ({
 
         flex: 'auto',
         marginTop: 50,
+
+
+
     },
     square: {
         display: "flex",
@@ -38,40 +43,33 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: "row",
         margin: 10,
         background: "rgba(220,220,220, .6)",
+        textAlign: 'center',
+
     },
-    mapped: {
+    main: {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-    }
+    },
+    stylesContainerInner: {
+        display: "flex",
+        flexDirection: "column",
 
-
+    },
 }));
-
-
-
 
 
 //creating function component sheet 
 //include Lines as component 
-//Lines component should include state (black or white)
-//state of lines set to white originally 
-// next group of lines state changes to black once player submits correct row of inputs
+
 function Sheet() {
     const style = useStyles();
     return (
         <>
             <div className={style.container}>
-                <Lines />
-                <Lines />
-                <Lines />
-                <Lines />
-                <Lines />
-                <Lines />
-                <Lines />
-                <Lines />
+                <MainArray />
             </div>
-        
+
         </>
 
     );
@@ -82,6 +80,8 @@ function Lines() {
     const style = useStyles();
 
     return (
+
+
         <div className={style.lineRow}>
             <hr className={style.lines}></hr>
             <hr className={style.lines}></hr>
@@ -90,49 +90,29 @@ function Lines() {
             <hr className={style.lines}></hr>
         </div>
 
-
-
     )
 }
 
-// function Submit() {
-//     const style = useStyles();
-
-//     return (
-//         <div>
-//             <Button></Button>
-//         </div>
-//     )
-// }
-
-// function Array() {
-//     const style = useStyles();
-
-//     return (
-//         <div className='row'></div>
-//     )
-
-// }
-function CreateMap(arr) {
+// function component to display input array and appended chunks of array
+function MainArray() {
     const style = useStyles();
-    //Maps user entered array
-    return arr.map((arr) => (
-      <div
-        className={style.square}
-        key={arr}
-        // style={styles}
-      >
-        {arr}
-      </div>
-    ));
+    const arr = state.sheet;
+    return (
+        <div>
+            <div className={style.stylesContainerInner}>
+                {arr.map((arrObj) => (
+                   
+                    <div>
+
+                        <Lines />
+                        <InputContainer array={arrObj} />
+                    </div>
 
 
-
-  }
-function InputContainer() {
-  const arr = state.input;
-
-  return <div style={stylesMain}>{CreateMap(arr)}</div>;
+                ))}
+            </div>
+        </div>
+    )
 }
 
 
