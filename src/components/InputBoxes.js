@@ -1,7 +1,6 @@
 import { makeStyles } from "@material-ui/core";
 import React from "react";
 import state from "../store/Store";
-import InputContainerButtons from "./InputContainerButtons";
 import { view } from "@risingstack/react-easy-state";
 
 const useStyles = makeStyles((theme) => ({
@@ -26,13 +25,6 @@ const useStyles = makeStyles((theme) => ({
 const stylesMainInner = {
   display: "flex",
   justifyContent: "center",
-  alignItems: "center",
-  width: "100%",
-};
-
-const stylesMainOuter = {
-  display: "flex",
-  flexDirection: "column",
   alignItems: "center",
   width: "100%",
 };
