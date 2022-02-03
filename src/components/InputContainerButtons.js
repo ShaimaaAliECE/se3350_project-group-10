@@ -27,19 +27,25 @@ function handleSubmitClick() {
 // everytie piano click button, update state, click submit refer to store, compare input[] with ans[] at each step
 
 function onSubmit() {
-  // if input lenght not = to ans []
   let input = state.input;
   let ans = state.ans;
   let counter = 0;
+
+  // check if input is missing any values
   if (input.length == ans.length) {
+
+    //iterate through input array 
     for(let i =0; i< ans.length; i++) {
 
+      //check if input array is equal to answer array
       if(input[i] === ans[i]) {
         counter++;
+
       } else {
+
         console.log('wrong');
-        // clears input array
-        handleRestartClick();
+        handleRestartClick(); // clear input array
+        state.lives--; // lose a life
         break;
         // reset imput field
       }
@@ -50,7 +56,10 @@ function onSubmit() {
       }
     }
   } else {
+
     console.log("fill input array");
+    state.lives--;
+    
   }
 
 
