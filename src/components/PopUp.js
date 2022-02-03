@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core";
 
+
 const useStyles = makeStyles((theme) => ({
 
     container: {
@@ -31,7 +32,8 @@ const useStyles = makeStyles((theme) => ({
         fontSize: "22px",
         color: "white",
     }
-    }));
+    }))
+
 
 export default function PopUp(){    
 const classes = useStyles();
@@ -40,7 +42,9 @@ const classes = useStyles();
          <div className={classes.detailsContainer}>
             <div className={classes.content}>
             <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway" />
-                Split the array as evenly as possible
+                <script>
+                
+                </script>
             </div>
          </div>
        
