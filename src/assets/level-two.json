@@ -1,0 +1,24 @@
+[
+    {
+      "1": "The array is split in half.",
+      "2": "Input the values from the original array into new arrays in the original order. ",
+      "3": "Submit to check answers.",
+      "4": "The arrays are split in half again. ",
+      "5": "Input the values from the original array into the new arrays. ",
+      "6": "Submit to check answers.",
+      "7": "The arrays are split in half again. ",
+      "8": "Input the values from the original array into the new arrays.",
+      "9": "Submit to check answers.",
+      "10": "Values in the original array are split again and now they are individual values.",
+      "11": "This is where the ordering starts! Order the values in the merged arrays in order from lowest to highest.",
+      "12": "Press submit to check your answers.",
+      "13": "Order the values in the merged arrays in order from lowest to highest. ",
+      "14": "Press submit to check your answers.",
+      "15": "Order the values in the merged arrays in order from lowest to highest. ",
+      "16": "Press submit to check your answers.",
+      "17": "Order the values in the merged arrays in order from lowest to highest. ",
+      "18": "Press submit to check your answers.",
+      "19": "Congratulations! You have now successfully completed Merge Sort on this array!"
+
+  }
+    ]
