@@ -21,6 +21,7 @@ function handleClick(level) {
       break;
     case 3:
       mergeSort([...random(1, 10)]);
+      state.input = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
       break;
     default:
   }
