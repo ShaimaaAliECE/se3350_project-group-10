@@ -25,11 +25,9 @@ function handleClick(level) {
     default:
   }
 }
-let step = 1;
+
 function merge(arr, start, mid, end) {
   let start2 = mid + 1;
-  console.log("INCREMENT STEP");
-  step++;
   // If the direct merge is already sorted
   if (arr[mid] <= arr[start2]) {
     return;
@@ -62,17 +60,12 @@ function merge(arr, start, mid, end) {
 }
 
 function mergeSort(arr, l, r) {
-  console.log(
-    "step",
-    step,
-    arr.slice(0, arr.length / step),
-    arr.slice(arr.length / step, arr.length)
-  );
   if (l < r) {
     // Same as (l + r) / 2, but avoids overflow
     // for large l and r
     let m = l + Math.floor((r - l) / 2);
-
+    //Push to answer sheet array
+    state.sheet.push(arr);
     // Sort first and second halves
     mergeSort(arr, l, m);
     mergeSort(arr, m + 1, r);
