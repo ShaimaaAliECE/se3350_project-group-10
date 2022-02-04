@@ -3,10 +3,11 @@ import { store } from "@risingstack/react-easy-state";
 const state = store({
   lives: 3,
   input: [0, 0, 0, 0, 0, 0, 0],
-  ans: [1, 2, 3, 4, 5, 6],
+  ans: [],
   level: 1,
   algo: "merge",
-  sheet: [[]],
+  sheetMerge: [[]],
+  sheetSplit: [[]],
   step: 0,
   //Example of function
   stepInc: () => state.step++,
