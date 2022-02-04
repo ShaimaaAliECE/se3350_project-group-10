@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core";
+import levelone from "../assets/levelone.json"
 
 
 const useStyles = makeStyles((theme) => ({
@@ -37,17 +38,17 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PopUp(){    
 const classes = useStyles();
-    return(
+
+    return(    
      <div className={classes.container}>
          <div className={classes.detailsContainer}>
             <div className={classes.content}>
-            <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway" />
-                <script>
-                
-                </script>
+                <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway" />
+                {levelone.map(levelone => (
+                    levelone[1]
+                ))}
             </div>
-         </div>
-       
+         </div>   
      </div>
 )
 }
