@@ -65,8 +65,8 @@ function CreateMap(arrOuter) {
   );
 }
 
-function InputBoxes() {
-  let arr = state.input;
+function InputBoxes(props) {
+  let arr = props.array ? props.array : state.input;
   let divisor;
   if (state.step !== 0) {
     divisor = state.input.length / (2 * state.step);

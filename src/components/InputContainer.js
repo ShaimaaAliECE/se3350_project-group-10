@@ -9,7 +9,7 @@ const stylesMainOuter = {
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  backgroundColor:  "transparent",
+  backgroundColor: "transparent",
   zIndex: 3,
 };
 function InputContainer() {
