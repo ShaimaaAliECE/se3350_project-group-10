@@ -34,7 +34,8 @@ const stylesMainOuter = {
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  width: "100%",
+  backgroundColor:  "transparent",
+  zIndex: 3,
 };
 
 function chunk(array, limit) {
@@ -64,6 +65,8 @@ function CreateMap(arrOuter) {
   );
 }
 
+function InputContainer(props) {
+  const arr = props.array;
 function InputContainer() {
   let arr = state.input;
   let divisor;
