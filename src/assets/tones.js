@@ -3,11 +3,11 @@ import * as Tone from "tone";
 
 export function playIncorrectSound() {
     
-      const synth = new Tone.Synth().toDestination();
-      const now = Tone.now();
-      synth.triggerAttackRelease("D3", "8n", now );
-      synth.triggerAttackRelease("C#3", "8n", now + 0.125);
-      synth.triggerAttackRelease("C3", "8n", now +0.25);
+  const synth = new Tone.Synth().toDestination();
+  const now = Tone.now();
+  synth.triggerAttackRelease("D3", "8n", now );
+  synth.triggerAttackRelease("C#3", "8n", now + 0.125);
+  synth.triggerAttackRelease("C3", "8n", now +0.25);
 
 }
 
