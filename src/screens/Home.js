@@ -71,7 +71,7 @@ function mergeSort(array) {
     state.depth++;
     console.log("INCREASE");
   }
-  const half = array.length / 2;
+  const half = Math.ceil(array.length / 2);
   state.ans.push([...array]);
   // Base case or terminating case
   if (array.length < 2) {
