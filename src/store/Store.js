@@ -6,8 +6,10 @@ const state = store({
   ans: [],
   level: 1,
   algo: "merge",
-  sheetMerge: [[]],
-  sheetSplit: [[]],
+  sheetMerge: [],
+  sheetSplit: [],
+  depth: 0,
+  runnable: 1,
   step: 0,
   //Example of function
   stepInc: () => state.step++,

@@ -89,7 +89,7 @@ export default view(function Key(props) {
     while (currentArr[i] !== 0) {
       i++;
     }
-    currentArr[i] = index;
+    currentArr[i] = index + 1;
     state.input = currentArr;
   };
   return (

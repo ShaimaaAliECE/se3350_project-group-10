@@ -10,7 +10,28 @@ const random = (min, max) => {
   }
   return num;
 };
+function initializeSheets() {
+  let depth = state.depth;
 
+  //Fill sheetSplit
+  let temp = [];
+  for (let i = 0; i < depth - 1; i++) {
+    temp = [];
+    for (let j = 0; j < state.ans[0].length; j++) {
+      temp.push(0);
+    }
+    state.sheetSplit.push(temp);
+  }
+
+  //Fill sheetMerge
+  for (let i = 0; i < depth - 2; i++) {
+    temp = [];
+    for (let j = 0; j < state.ans[0].length; j++) {
+      temp.push(0);
+    }
+    state.sheetMerge.push(temp);
+  }
+}
 function handleClick(level) {
   switch (level) {
     case 1:
@@ -22,6 +43,7 @@ function handleClick(level) {
     case 3:
       mergeSort([...random(1, 10)]);
       state.input = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+      initializeSheets();
       break;
     default:
   }
@@ -39,11 +61,16 @@ function merge(left, right) {
     }
   }
   state.ans.push([...arr, ...left, ...right]);
+  state.runnable = 0;
   // Concatenating the leftover elements
   // (in case we didn't go through the entire left or right array)
   return [...arr, ...left, ...right];
 }
 function mergeSort(array) {
+  if (state.runnable) {
+    state.depth++;
+    console.log("INCREASE");
+  }
   const half = array.length / 2;
   state.ans.push([...array]);
   // Base case or terminating case
