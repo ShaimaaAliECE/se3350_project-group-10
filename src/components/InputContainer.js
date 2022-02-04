@@ -9,9 +9,9 @@ const stylesMainOuter = {
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  width: "100%",
+  backgroundColor:  "transparent",
+  zIndex: 3,
 };
-
 function InputContainer() {
   return (
     <div style={stylesMainOuter}>
