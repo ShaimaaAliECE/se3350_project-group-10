@@ -1,5 +1,7 @@
 import { makeStyles } from "@material-ui/core";
 import Key from "./Key";
+import { view } from "@risingstack/react-easy-state";
+
 const useStyles = makeStyles((theme) => ({
   piano: {
     display: "flex",
@@ -20,20 +22,19 @@ function RenderKeys(x) {
   //where x is the piano length
   for (let i = 0; i < x; i++) {
     temp.push(
-      <div style={{}}>
-        <Key index={i} key={i} totalNotes={x} />
+      <div style={{}} key={i}>
+        <Key index={i} totalNotes={x} />
       </div>
     );
   }
   return temp;
 }
-function Piano() {
+
+export default view(function Piano() {
   const styles = useStyles();
 
   //import store
   //get max# piano keys from store
   const pianoLength = 30;
   return <div className={styles.piano}>{RenderKeys(pianoLength)}</div>;
-}
-
-export default Piano;
+});

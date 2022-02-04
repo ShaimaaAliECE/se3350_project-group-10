@@ -12,16 +12,13 @@ function handleRestartClick() {
   //Set the store state back to empty
   let len = state.input.length;
   for (let i = 0; i < len; i++) {
-    state.input[i] = "";
+    state.input[i] = 0;
   }
   state.step = 0;
 }
 
 function handleSubmitClick() {
-  //Comapre store state with ans state
-  //state.ans == state.input
   state.stepInc();
-  //   console.log(state.step); << Not changing
 }
 
 // everytie piano click button, update state, click submit refer to store, compare input[] with ans[] at each step

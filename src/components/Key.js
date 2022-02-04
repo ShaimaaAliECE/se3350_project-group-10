@@ -1,5 +1,7 @@
 import { makeStyles } from "@material-ui/core";
 import * as Tone from "tone";
+import state from "../store/Store.js";
+import { view } from "@risingstack/react-easy-state";
 
 const useStyles = makeStyles((theme) => ({
   white: {
@@ -46,7 +48,6 @@ function playSound(totalNotes, currentNote) {
   let octave;
   let currentNoteStandard;
   let note;
-
   //Based on how many notes, start at a different octave
   //notes /12 gives u # of octaves needed
   if (totalNotes / 12 < 2) {
@@ -70,10 +71,27 @@ function playSound(totalNotes, currentNote) {
 
   synth.triggerAttackRelease(note, "8n");
 }
-function Key(props) {
+
+export default view(function Key(props) {
   const styles = useStyles();
   const index = props.index;
   const totalNotes = props.totalNotes;
+
+  const handleClick = () => {
+    //If input boxes are full, dont add
+    if (state.input[state.input.length - 1] !== 0) {
+      return;
+    }
+    playSound(totalNotes, index + 1);
+    //Update Store with users choice
+    let currentArr = state.input;
+    let i = 0;
+    while (currentArr[i] !== 0) {
+      i++;
+    }
+    currentArr[i] = index;
+    state.input = currentArr;
+  };
   return (
     <button
       style={{ alignItems: "flex-end", paddingBottom: 20 }}
@@ -90,14 +108,10 @@ function Key(props) {
           ? styles.black
           : styles.white
       }
-      onClick={() => {
-        playSound(totalNotes, index + 1);
-      }}
+      onClick={handleClick}
     >
       {" "}
       {index + 1}{" "}
     </button>
   );
-}
-
-export default Key;
+});
