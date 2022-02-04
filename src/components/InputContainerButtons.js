@@ -18,6 +18,7 @@ function handleRestartClick() {
 }
 
 function handleSubmitClick() {
+  //Check the answer, if its right --> increment step, handle restart, state.sheet.push(state.input)
   state.stepInc();
 }
 
@@ -30,17 +31,14 @@ function onSubmit() {
 
   // check if input is missing any values
   if (input.length == ans.length) {
-
-    //iterate through input array 
-    for(let i =0; i< ans.length; i++) {
-
+    //iterate through input array
+    for (let i = 0; i < ans.length; i++) {
       //check if input array is equal to answer array
-      if(input[i] === ans[i]) {
+      if (input[i] === ans[i]) {
         counter++;
-
       } else {
         //TODO highlight input box red
-        console.log('wrong');
+        console.log("wrong");
         handleRestartClick(); // clear input array
         state.lives--; // lose a life
         break;
@@ -56,10 +54,7 @@ function onSubmit() {
     //TODO highlight input container red
     console.log("fill input array");
     state.lives--;
-    
   }
-
-
 }
 
 export default view(function InputContainerButtons() {

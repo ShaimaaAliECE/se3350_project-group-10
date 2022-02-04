@@ -13,6 +13,8 @@ const random = (min, max) => {
   }
 };
 
+// const mergsort function
+
 function handleClick(level) {
   switch (level) {
     case 1:
@@ -23,6 +25,7 @@ function handleClick(level) {
       break;
     case 3:
       random(1, 20);
+      // mergsortFunction(state.sheet[0])
       break;
     default:
   }
