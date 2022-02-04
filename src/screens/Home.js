@@ -35,7 +35,13 @@ export default function Home() {
         <Link to="/app">
           <Button
             variant="contained"
-            onClick={() => handleClick(3)}
+            onClick={
+                () => {
+                    handleClick(3);
+
+                }
+                
+                }
             sx={{
               backgroundColor: "#3D3D3D",
               height: "50px",
