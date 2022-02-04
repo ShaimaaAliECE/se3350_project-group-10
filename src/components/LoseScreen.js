@@ -2,6 +2,7 @@ import React from 'react';
 import {makeStyles} from  "@material-ui/core";
 import Button from '@mui/material/Button';
 import image from '../assets/looseBackground.svg';
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   container:{
@@ -9,8 +10,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent:'center',
     alignItems:'center',
     height:'100vh',
-  
-    
   },
 
   content:{
@@ -42,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     padding:'20px',
   },
 
-  })); 
+})); 
 
 export default function LoseScreen() {
 
@@ -56,40 +55,46 @@ export default function LoseScreen() {
         <div className={style.buttonSection}>
 
           <div className={style.buttons}>
-            <Button 
-            variant="contained" 
-            className={style.button}
-            sx={{
-              backgroundColor:'#3D3D3D',
-              height:'50px',
-              width:'250px',
-              
-            }}
-            >Restart Level</Button>
+            <Link to="/app">
+              <Button 
+              variant="contained" 
+              className={style.button}
+              sx={{
+                backgroundColor:'#3D3D3D',
+                height:'50px',
+                width:'250px',
+                
+              }}
+              >Restart Level</Button>
+            </Link>
           </div>
 
           <div className={style.buttons}>
-          <Button 
-            variant="contained" 
-            className={style.button}
-            sx={{
-              backgroundColor:'#3D3D3D',
-              height:'50px',
-              width:'250px',
-            }}
-            >Quit Level</Button>
+          <Link to="/app">
+            <Button 
+              variant="contained" 
+              className={style.button}
+              sx={{
+                backgroundColor:'#3D3D3D',
+                height:'50px',
+                width:'250px',
+              }}
+              >Quit Level</Button>
+            </Link>
           </div>
           
           <div className={style.buttons}>
-          <Button 
-            variant="contained" 
-            className={style.button}
-            sx={{
-              backgroundColor:'#3D3D3D',
-              height:'50px',
-              width:'250px',
-            }}
-            >Switch Algorithms</Button>
+          <Link to="/app">
+            <Button 
+              variant="contained" 
+              className={style.button}
+              sx={{
+                backgroundColor:'#3D3D3D',
+                height:'50px',
+                width:'250px',
+              }}
+              >Switch Algorithms</Button>
+          </Link>
           </div>
           
         </div>

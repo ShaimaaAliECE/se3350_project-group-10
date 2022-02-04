@@ -8,7 +8,7 @@ const state = store({
   algo: "merge",
   sheet: [["1", "3", "4", "3", "2", "4", "6"], [1,2], [1,2,3]],
   //Example of function
-  //Increment: () => counter.num++,
+  stepInc: () => state.step++,
 });
 
 export default state;
