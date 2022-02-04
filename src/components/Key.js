@@ -78,6 +78,10 @@ export default view(function Key(props) {
   const totalNotes = props.totalNotes;
 
   const handleClick = () => {
+    //If input boxes are full, dont add
+    if (state.input[state.input.length - 1] !== 0) {
+      return;
+    }
     playSound(totalNotes, index + 1);
     //Update Store with users choice
     let currentArr = state.input;
