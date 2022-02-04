@@ -16,10 +16,17 @@ function handleRestartClick() {
   }
   state.step = 0;
 }
-
+function arraysAreEqual(a, b) {
+  return a.every((val, index) => val === b[index]);
+}
 function handleSubmitClick() {
+  console.log(state.input, state.ans);
   //Check the answer, if its right --> increment step, handle restart, state.sheet.push(state.input)
-  state.stepInc();
+  if (arraysAreEqual(state.input, state.ans[state.step])) {
+    state.stepInc();
+    handleRestartClick();
+    state.sheet.push(state.input);
+  }
 }
 
 // everytie piano click button, update state, click submit refer to store, compare input[] with ans[] at each step

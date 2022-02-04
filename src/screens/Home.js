@@ -4,10 +4,14 @@ import { Link } from "react-router-dom";
 import state from "../store/Store";
 
 const random = (min, max) => {
-  for (let i = 0; i < 10; i++) {
-    let num = Math.floor(Math.random() * (max - min) + min);
-    state.sheet[0].push(num);
-  }
+  // for (let i = 0; i < 10; i++) {
+
+  //   // let num = Math.floor(Math.random() * (max - min) + min);
+  //   state.input[i] = 0;
+  //   state.sheet[0].push(num);
+  // }
+  let num = [2, 8, 3, 6, 4, 1, 12, 2, 6, 3];
+  state.sheet[0] = num;
 };
 
 function handleClick(level) {
@@ -20,60 +24,36 @@ function handleClick(level) {
       break;
     case 3:
       random(1, 20);
-      mergeSort(state.sheet[0], 0, state.sheet[0].length - 1);
+      mergeSort(state.sheet[0]);
       break;
     default:
   }
 }
+function merge(left, right) {
+  let sortedArr = []; // the sorted elements will go here
 
-function merge(arr, start, mid, end) {
-  let start2 = mid + 1;
-  // If the direct merge is already sorted
-  if (arr[mid] <= arr[start2]) {
-    return;
-  }
-
-  // Two pointers to maintain start
-  // of both arrays to merge
-  while (start <= mid && start2 <= end) {
-    // If element 1 is in right place
-    if (arr[start] <= arr[start2]) {
-      start++;
+  while (left.length && right.length) {
+    // insert the smallest element to the sortedArr
+    if (left[0] < right[0]) {
+      sortedArr.push(left.shift());
     } else {
-      let value = arr[start2];
-      let index = start2;
-
-      // Shift all the elements between element 1
-      // element 2, right by 1.
-      while (index != start) {
-        arr[index] = arr[index - 1];
-        index--;
-      }
-      arr[start] = value;
-
-      // Update all the pointers
-      start++;
-      mid++;
-      start2++;
+      sortedArr.push(right.shift());
     }
   }
+  return [...sortedArr, ...left, ...right];
 }
 
-function mergeSort(arr, l, r) {
-  if (l < r) {
-    // Same as (l + r) / 2, but avoids overflow
-    // for large l and r
-    let m = l + Math.floor((r - l) / 2);
-    //Push to answer sheet array
-    state.sheet.push(arr);
-    // Sort first and second halves
-    mergeSort(arr, l, m);
-    mergeSort(arr, m + 1, r);
-
-    merge(arr, l, m, r);
+function mergeSort(arr) {
+  const half = arr.length / 2;
+  // the base case is array length <=1
+  if (arr.length <= 1) {
+    return arr;
   }
-}
 
+  const left = arr.splice(0, half); // the first half of the array
+  const right = arr;
+  return merge(mergeSort(left), mergeSort(right));
+}
 export default function Home() {
   return (
     <div>
