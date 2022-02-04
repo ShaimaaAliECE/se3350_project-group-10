@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
         textAlign: "left",
         backgroundColor: "transparent",
         fontFamily: "Raleway",
-        fontSize: "22px",
+        fontSize: "19px",
         color: "white",
     }
     }))
