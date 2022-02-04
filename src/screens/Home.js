@@ -24,6 +24,7 @@ function handleClick(level) {
     case 3:
       random(1, 20);
       break;
+    default:
   }
 }
 
