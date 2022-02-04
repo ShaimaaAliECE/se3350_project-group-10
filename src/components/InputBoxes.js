@@ -46,8 +46,17 @@ function CreateMap(arrOuter) {
       {arrOuter.map((arrInner) => (
         <div className={style.stylesContainerInner}>
           {arrInner.map((arrObj) => (
-            <div className={style.styles} key={arrObj}>
-              {arrObj}
+            <div
+              style={{
+                display: "flex",
+                width: 50,
+                height: 50,
+                flexDirection: "row",
+                margin: 10,
+                background: "rgba(220,220,220, .6)",
+              }}
+            >
+              {arrObj === 0 ? "" : arrObj}
             </div>
           ))}
         </div>
@@ -59,13 +68,11 @@ function CreateMap(arrOuter) {
 function InputBoxes() {
   let arr = state.input;
   let divisor;
-
-  if (!state.step == 0) {
+  if (state.step !== 0) {
     divisor = state.input.length / (2 * state.step);
   } else {
     divisor = state.input.length;
   }
-
   return <div style={stylesMainInner}>{CreateMap(chunk(arr, divisor))}</div>;
 }
 
