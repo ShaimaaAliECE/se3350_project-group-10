@@ -6,7 +6,8 @@ const state = store({
   ans: [1, 2, 3, 4, 5, 6],
   level: 1,
   algo: "merge",
-  sheet: [["1", "3", "4", "3", "2", "4", "6"], [1,2], [1,2,3]],
+  sheet: [[]],
+  step: 0,
   //Example of function
   stepInc: () => state.step++,
 });
