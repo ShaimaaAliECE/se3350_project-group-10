@@ -14,11 +14,11 @@ const useStyles = makeStyles(() => ({
     background: "white",
     boxShadow: "0 3px 5px 2px rgba(0, 0, 0, 0.3)",
     color: "white",
-    height: 500,
+    height: 400,
     width: 980,
-    marginTop: 80,
-    marginLeft: 150,
-    overflow: "scroll",
+    margin: "auto",
+    marginTop: 20,
+    overflow: "auto",
     position: "relative",
   },
   lines: {
@@ -51,7 +51,6 @@ const useStyles = makeStyles(() => ({
 
 //creating function component sheet
 //include Lines as component
-
 function Sheet() {
   const styles = useStyles();
   state.sheetSplit[0] = state.ans[0].array;

@@ -4,29 +4,21 @@ import state from "../store/Store";
 import { view } from "@risingstack/react-easy-state";
 
 const useStyles = makeStyles((theme) => ({
-  styles: {
-    display: "flex",
-    width: 50,
-    height: 50,
-    flexDirection: "row",
-    margin: 10,
-    background: "rgba(220,220,220, .6)",
-  },
+  stylesContainerOuter: {},
 
-  stylesContainerOuter: {
+  stylesContainerInner: {
     display: "flex",
-    justifyContent: "space-around",
-    width: "100%",
+    alignContent: "center",
+    justifyContent: "center",
+    color: "black",
   },
-
-  stylesContainerInner: { display: "flex" },
 }));
 
 const stylesMainInner = {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  width: "100%",
+  // width: "100%",
 };
 
 function chunk(array, limit) {
@@ -52,6 +44,9 @@ function CreateMap(arrOuter) {
                 width: 50,
                 height: 50,
                 flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+                color: "black",
                 margin: 10,
                 background: "rgba(220,220,220, .6)",
               }}

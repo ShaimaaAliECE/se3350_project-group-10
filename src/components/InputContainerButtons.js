@@ -5,11 +5,6 @@ import { view } from "@risingstack/react-easy-state";
 import { generateEmptyArr } from "../screens/Home";
 import { playCorrectSound, playIncorrectSound } from "../assets/tones.js";
 
-const styles = {
-  display: "flex",
-  padding: 10,
-};
-
 function handleRestartClick() {
   //Set the store state back to empty
   let len = state.input.length;
@@ -44,42 +39,9 @@ function handleSubmitClick() {
 
 // everytie piano click button, update state, click submit refer to store, compare input[] with ans[] at each step
 
-function onSubmit() {
-  let input = state.input;
-  let ans = state.ans;
-  let counter = 0;
-
-  // check if input is missing any values
-  if (input.length == ans.length) {
-    //iterate through input array
-    for (let i = 0; i < ans.length; i++) {
-      //check if input array is equal to answer array
-      if (input[i] === ans[i]) {
-        counter++;
-      } else {
-        //TODO highlight input box red
-        console.log("wrong");
-        handleRestartClick(); // clear input array
-        state.lives--; // lose a life
-        break;
-        // reset input field
-      }
-
-      if (counter == ans.length) {
-        // append to sheet []
-        state.stepInc();
-      }
-    }
-  } else {
-    //TODO highlight input container red
-    console.log("fill input array");
-    state.lives--;
-  }
-}
-
 export default view(function InputContainerButtons() {
   return (
-    <div style={styles}>
+    <div style={{ display: "flex", padding: 10, flexDirection: "column" }}>
       <Button
         variant="contained"
         onClick={() => {
