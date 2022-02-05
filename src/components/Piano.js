@@ -8,6 +8,9 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
+    width: "100%",
+    backgroundColor: "black",
+    height: "100%",
   },
   whiteKey: {
     padding: 10,

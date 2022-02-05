@@ -7,10 +7,9 @@ import { view } from "@risingstack/react-easy-state";
 
 const stylesMainOuter = {
   display: "flex",
-  flexDirection: "column",
+  flexDirection: "row",
   alignItems: "center",
-  backgroundColor: "transparent",
-  zIndex: 3,
+  justifyContent: "center",
 };
 function InputContainer() {
   return (
