@@ -18,7 +18,6 @@ const stylesMainInner = {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  // width: "100%",
 };
 
 function chunk(array, limit) {
