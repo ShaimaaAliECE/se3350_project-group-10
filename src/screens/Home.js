@@ -13,7 +13,7 @@ let tripleEqual = 0;
 
 export function generateEmptyArr() {
   state.input = [];
-  for (let i = 0; i < state.ans[state.step + 1].array.length; i++) {
+  for (let i = 0; i < state.ans[state.step].array.length; i++) {
     state.input.push(0);
   }
 }
@@ -120,7 +120,6 @@ function mergeSort(array) {
   if (state.runnable) {
     state.depth++;
   }
-
 
   let rowObj = { array: [...array], row: rowSplit, type: "split" };
 

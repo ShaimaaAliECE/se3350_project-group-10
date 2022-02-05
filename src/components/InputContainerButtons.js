@@ -12,7 +12,6 @@ function handleRestartClick() {
   for (let i = 0; i < len; i++) {
     state.input[i] = 0;
   }
-  state.step = 0;
 }
 
 function arrComp(arr1, arr2) {
@@ -20,8 +19,6 @@ function arrComp(arr1, arr2) {
 }
 
 function handleSubmitClick(handleClickOpenFail, handleClickOpenWin) {
-  state.stepInc();
-
   //Check the answer, if its right --> increment step, handle restart, state.sheet.push(state.input)
   if (arrComp(state.ans[state.step].array, state.input)) {
     state.appendSheet(
@@ -29,6 +26,7 @@ function handleSubmitClick(handleClickOpenFail, handleClickOpenWin) {
       state.ans[state.step].array,
       state.ans[state.step].row
     );
+    state.stepInc();
     generateEmptyArr();
     handleRestartClick();
     playCorrectSound();
