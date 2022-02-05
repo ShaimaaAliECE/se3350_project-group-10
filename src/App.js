@@ -5,7 +5,6 @@ import Sheet from "./components/Sheet";
 import state from "./store/Store";
 
 function App() {
-  console.log(state.ans);
   return (
     <div>
       <Sheet />

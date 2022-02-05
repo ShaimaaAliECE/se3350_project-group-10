@@ -121,6 +121,7 @@ function mergeSort(array) {
     state.depth++;
   }
 
+
   let rowObj = { array: [...array], row: rowSplit, type: "split" };
 
   const half = Math.ceil(array.length / 2);
