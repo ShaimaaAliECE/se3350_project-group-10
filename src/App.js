@@ -6,7 +6,23 @@ import state from "./store/Store";
 
 function App() {
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        height: "100%",
+        width: "100%",
+        flexDirection: "column",
+        backgroundColor: "grey",
+        overflow: "hidden",
+      }}
+    >
+      <div
+        style={{
+          width: "100%",
+          height: 50,
+          backgroundColor: "black",
+        }}
+      />
       <Sheet />
       <InputContainer />
       <Piano />
