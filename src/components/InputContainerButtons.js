@@ -24,7 +24,7 @@ function arrComp(arr1, arr2) {
   return arr1.every((val, index) => val === arr2[index]);
 }
 
-function handleSubmitClick(props) {
+function handleSubmitClick(handleClickOpenFail, handleClickOpenWin) {
   state.stepInc();
 
   //Check the answer, if its right --> increment step, handle restart, state.sheet.push(state.input)
@@ -37,11 +37,12 @@ function handleSubmitClick(props) {
     generateEmptyArr();
     handleRestartClick();
     playCorrectSound();
+    handleClickOpenWin();
   } else {
     state.lives--;
     handleRestartClick();
     playIncorrectSound();
-    props.handleClickOpen();
+    handleClickOpenFail();
   }
 }
 
@@ -81,14 +82,21 @@ function handleSubmitClick(props) {
 // }
 
 export default view(function InputContainerButtons() {
-  const [open, setOpen] = React.useState(false);
+  const [openFail, setOpenFail] = React.useState(false);
+  const [openWin, setOpenWin] = React.useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  const handleClickOpenFail = () => {
+    setOpenFail(true);
+  };
+  const handleClickOpenWin = () => {
+    setOpenWin(true);
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleCloseFail = () => {
+    setOpenFail(false);
+  };
+  const handleCloseWin = () => {
+    setOpenWin(false);
   };
 
   return (
@@ -105,19 +113,28 @@ export default view(function InputContainerButtons() {
       <Button
         variant="contained"
         onClick={() => {
-          handleSubmitClick(handleClickOpen());
+          handleSubmitClick(handleClickOpenFail, handleClickOpenWin);
         }}
       >
         SUBMIT
       </Button>
       <Dialog
-        open={open}
-        onClose={handleClose}
+        open={openFail}
+        onClose={handleCloseFail}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
         style={{ width: 300, height: 300 }}
       >
         You made a mistake!
+      </Dialog>
+      <Dialog
+        open={openWin}
+        onClose={handleCloseWin}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        style={{ width: 300, height: 300 }}
+      >
+        Correct!
       </Dialog>
     </div>
   );
