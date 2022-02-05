@@ -16,7 +16,13 @@ function App() {
         overflow: "hidden",
       }}
     >
-      <div style={{ width: "100%", height: 50, backgroundColor: "black" }} />
+      <div
+        style={{
+          width: "100%",
+          height: 50,
+          backgroundColor: "black",
+        }}
+      />
       <Sheet />
       <InputContainer />
       <Piano />

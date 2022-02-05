@@ -11,8 +11,6 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     backgroundColor: "black",
     height: "100%",
-    paddingBottom: 20,
-    paddingTop: 20,
   },
   whiteKey: {
     padding: 10,
