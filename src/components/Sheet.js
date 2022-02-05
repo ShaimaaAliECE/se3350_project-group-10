@@ -53,41 +53,12 @@ const useStyles = makeStyles(() => ({
 //include Lines as component
 
 function Sheet() {
-  const style = useStyles();
-  return (
-    <>
-      <div className={style.container}>
-        <MainArray />
-      </div>
-    </>
-  );
-}
-
-//creating function component lines
-function Lines() {
-  const style = useStyles();
-
-  return (
-    <div className={style.lineRow}>
-      <hr className={style.lines}></hr>
-      <hr className={style.lines}></hr>
-      <hr className={style.lines}></hr>
-      <hr className={style.lines}></hr>
-      <hr className={style.lines}></hr>
-    </div>
-  );
-}
-
-// function component to display input array and appended chunks of array
-function MainArray() {
-  const style = useStyles();
-
+  const styles = useStyles();
   state.sheetSplit[0] = state.ans[0].array;
   let arr = [...state.sheetSplit, ...state.sheetMerge];
-
   return (
-    <div>
-      <div className={style.stylesContainerInner}>
+    <div className={styles.container}>
+      <div className={styles.stylesContainerInner}>
         {arr.map((arrObj) => (
           <div>
             <Lines />
@@ -95,6 +66,20 @@ function MainArray() {
           </div>
         ))}
       </div>
+    </div>
+  );
+}
+
+//creating function component lines
+function Lines() {
+  const style = useStyles();
+  return (
+    <div className={style.lineRow}>
+      <hr className={style.lines}></hr>
+      <hr className={style.lines}></hr>
+      <hr className={style.lines}></hr>
+      <hr className={style.lines}></hr>
+      <hr className={style.lines}></hr>
     </div>
   );
 }
