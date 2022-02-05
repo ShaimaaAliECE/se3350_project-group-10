@@ -3,6 +3,20 @@ import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import state from "../store/Store";
 
+let rowSplit = 0;
+let rowMerge = 0;
+
+let prevSizeSplit = 0;
+let prevSizeMerge = 0;
+
+let tripleEqual = 0;
+
+export function generateEmptyArr() {
+  state.input = [];
+  for (let i = 0; i < state.ans[state.step + 1].array.length; i++) {
+    state.input.push(0);
+  }
+}
 const random = (min, max) => {
   let num = [];
   for (let i = 0; i < 10; i++) {
@@ -15,16 +29,16 @@ function initializeSheets() {
 
   //Fill sheetSplit
   let temp = [];
-  for (let i = 0; i < depth - 1; i++) {
+  for (let i = 0; i < depth; i++) {
     temp = [];
-    for (let j = 0; j < state.ans[0].length; j++) {
+    for (let j = 0; j < state.ans[0].array.length; j++) {
       temp.push(0);
     }
     state.sheetSplit.push(temp);
   }
 
   //Fill sheetMerge
-  for (let i = 0; i < depth - 2; i++) {
+  for (let i = 0; i < depth - 1; i++) {
     temp = [];
     for (let j = 0; j < state.ans[0].length; j++) {
       temp.push(0);
@@ -32,6 +46,7 @@ function initializeSheets() {
     state.sheetMerge.push(temp);
   }
 }
+
 function handleClick(level) {
   switch (level) {
     case 1:
@@ -42,7 +57,7 @@ function handleClick(level) {
       break;
     case 3:
       mergeSort([...random(1, 10)]);
-      state.input = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+      generateEmptyArr();
       initializeSheets();
       break;
     default:
@@ -60,20 +75,59 @@ function merge(left, right) {
       arr.push(right.shift());
     }
   }
-  state.ans.push([...arr, ...left, ...right]);
+
+  if (arr.length < prevSizeMerge) {
+    rowMerge++;
+  } else if (arr.length > prevSizeMerge) {
+    //Should return 2 if given 4
+    let x = parseInt(Math.log(arr.length) / Math.log(2));
+    rowMerge = rowMerge - x;
+  }
+
+  let rowObj = {
+    array: [...arr, ...left, ...right],
+    row: rowMerge,
+    type: "merge",
+  };
+
+  state.ans.push(rowObj);
   state.runnable = 0;
+
+  prevSizeSplit = arr.length;
   // Concatenating the leftover elements
   // (in case we didn't go through the entire left or right array)
   return [...arr, ...left, ...right];
 }
+
+//SPLIT
 function mergeSort(array) {
+  if (array.length < prevSizeSplit) {
+    rowSplit++;
+  } else if (array.length > prevSizeSplit && rowSplit > 0) {
+    //Should return 2 if given 4
+    let x = parseInt(Math.log(array.length) / Math.log(2));
+    rowSplit = rowSplit - x;
+  } else {
+    if (array.length === 1 && !tripleEqual) {
+      tripleEqual = 1;
+    }
+    if (tripleEqual === array.length) {
+      //Special case >>apend to current index and prev index at nearest 0
+      tripleEqual = 0;
+    }
+  }
+
   if (state.runnable) {
     state.depth++;
-    console.log("INCREASE");
   }
-  const half = array.length / 2;
-  state.ans.push([...array]);
+
+  let rowObj = { array: [...array], row: rowSplit, type: "split" };
+
+  const half = Math.ceil(array.length / 2);
+
+  state.ans.push(rowObj);
   // Base case or terminating case
+  prevSizeSplit = array.length;
   if (array.length < 2) {
     return array;
   }
