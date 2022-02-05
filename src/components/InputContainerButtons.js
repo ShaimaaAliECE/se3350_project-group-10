@@ -3,6 +3,7 @@ import { Button } from "@material-ui/core";
 import state from "../store/Store.js";
 import { view } from "@risingstack/react-easy-state";
 import { generateEmptyArr } from "../screens/Home";
+import { playCorrectSound, playIncorrectSound } from "../assets/tones.js";
 
 const styles = {
   display: "flex",
@@ -33,9 +34,11 @@ function handleSubmitClick() {
     );
     generateEmptyArr();
     handleRestartClick();
+    playCorrectSound();
   } else {
     state.lives--;
     handleRestartClick();
+    playIncorrectSound();
   }
 }
 
