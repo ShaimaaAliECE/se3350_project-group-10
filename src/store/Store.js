@@ -10,6 +10,7 @@ function firstZeroFinder(index, arr) {
 
 function appendSheet(move, array, row) {
   //If move is merge
+  console.log("IN APPEND SHEET", array, row, state.ans[state.step], state.step);
   if (move === "merge") {
     state.sheetMerge[row].splice(
       firstZeroFinder(row, state.sheetMerge),
@@ -38,7 +39,7 @@ const state = store({
   sheetSplit: [],
   depth: 0,
   runnable: 1,
-  step: 0,
+  step: 1,
   depthInc: () => (state.runnable ? state.depth++ : state.depth),
   stepInc: () => state.step++,
   appendSheet: (move, array, row) => appendSheet(move, array, row),
