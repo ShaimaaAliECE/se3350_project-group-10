@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "@material-ui/core";
 import state from "../store/Store.js";
 import { view } from "@risingstack/react-easy-state";
+import { generateEmptyArr } from "../screens/Home";
 
 const styles = {
   display: "flex",
@@ -17,9 +18,25 @@ function handleRestartClick() {
   state.step = 0;
 }
 
+function arrComp(arr1, arr2) {
+  return arr1.every((val, index) => val === arr2[index]);
+}
+
 function handleSubmitClick() {
-  //Check the answer, if its right --> increment step, handle restart, state.sheet.push(state.input)
   state.stepInc();
+  //Check the answer, if its right --> increment step, handle restart, state.sheet.push(state.input)
+  if (arrComp(state.ans[state.step].array, state.input)) {
+    state.appendSheet(
+      state.ans[state.step].type,
+      state.ans[state.step].array,
+      state.ans[state.step].row
+    );
+    generateEmptyArr();
+    handleRestartClick();
+  } else {
+    state.lives--;
+    handleRestartClick();
+  }
 }
 
 // everytie piano click button, update state, click submit refer to store, compare input[] with ans[] at each step

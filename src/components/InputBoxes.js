@@ -67,12 +67,17 @@ function CreateMap(arrOuter) {
 
 function InputBoxes(props) {
   let arr = props.array ? props.array : state.input;
+
   let divisor;
-  if (state.step !== 0) {
-    divisor = state.input.length / (2 * state.step);
+
+  if (state.step !== 0 && props.array) {
+    divisor = 10;
+    // divisor = Math.ceil(state.input.length / (2 * state.step));
   } else {
-    divisor = state.input.length;
+    // divisor = arr.length;
+    divisor = 10;
   }
+
   return <div style={stylesMainInner}>{CreateMap(chunk(arr, divisor))}</div>;
 }
 

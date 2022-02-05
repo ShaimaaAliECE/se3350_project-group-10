@@ -36,6 +36,6 @@ export default view(function Piano() {
 
   //import store
   //get max# piano keys from store
-  const pianoLength = Math.max(...state.ans[0]);
+  const pianoLength = Math.max(...state.ans[0].array);
   return <div className={styles.piano}>{RenderKeys(pianoLength)}</div>;
 });
