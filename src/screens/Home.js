@@ -2,7 +2,7 @@ import React from "react";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import state from "../store/Store";
-import { mergeSort } from "../algorithms/mergsort";
+import { mergeSort } from "../algorithms/mergesort";
 export function generateEmptyArr() {
   state.input = [];
   for (let i = 0; i < state.ans[state.step].array.length; i++) {
