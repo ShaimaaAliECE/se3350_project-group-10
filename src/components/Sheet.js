@@ -9,17 +9,13 @@ import InputBoxes from "./InputBoxes";
 // add scroll css to container (filled with multiple  groups of lines)
 const useStyles = makeStyles(() => ({
   container: {
-    flex: "auto",
+    display: "flex",
     justifyContent: "space-between",
-    background: "white",
+    backgroundColor: "white",
     boxShadow: "0 3px 5px 2px rgba(0, 0, 0, 0.3)",
-    color: "white",
-    height: 400,
-    width: 980,
     margin: "auto",
-    marginTop: 20,
-    overflow: "auto",
-    position: "relative",
+    height: "400px",
+    width: "980px",
   },
   lines: {
     borderBottom: 15,
@@ -39,9 +35,11 @@ const useStyles = makeStyles(() => ({
     textAlign: "center",
   },
   main: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+    width: "100%",
+    color: "white",
+    overflow: "auto",
+    position: "relative",
+    margin: "20px",
   },
   stylesContainerInner: {
     display: "flex",
@@ -57,13 +55,15 @@ function Sheet() {
   let arr = [...state.sheetSplit, ...state.sheetMerge];
   return (
     <div className={styles.container}>
-      <div className={styles.stylesContainerInner}>
-        {arr.map((arrObj) => (
-          <div>
-            <Lines />
-            <InputBoxes array={arrObj} />
-          </div>
-        ))}
+      <div className={styles.main}>
+        <div className={styles.stylesContainerInner}>
+          {arr.map((arrObj) => (
+            <div>
+              <Lines />
+              <InputBoxes array={arrObj} />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
