@@ -59,18 +59,24 @@ function CreateMap(arrOuter) {
   );
 }
 
+let ind = 0;
+
 function InputBoxes(props) {
   let arr = props.array ? props.array : state.input;
 
   let divisor;
 
-  if (state.step !== 0 && props.array) {
-    divisor = 10;
-    // divisor = Math.ceil(state.input.length / (2 * state.step));
-  } else {
-    // divisor = arr.length;
-    divisor = 10;
+  if (ind + 1 === state.splits.length) {
+    ind = 0;
   }
+
+  if (state.step !== 0 && props.array && state.splits[ind] != 0) {
+    divisor = Math.round(state.ans[0].array.length / (2 * state.splits[ind]));
+  } else {
+    divisor = state.ans[0].array.length;
+  }
+
+  ind++;
 
   return <div style={stylesMainInner}>{CreateMap(chunk(arr, divisor))}</div>;
 }

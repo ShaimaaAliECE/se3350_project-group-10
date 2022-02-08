@@ -55,7 +55,7 @@ function Sheet() {
   const styles = useStyles();
   state.sheetSplit[0] = state.ans[0].array;
   let arr = [...state.sheetSplit, ...state.sheetMerge];
-  console.log(arr);
+
   return (
     <div className={styles.container}>
       <div className={styles.stylesContainerInner}>
