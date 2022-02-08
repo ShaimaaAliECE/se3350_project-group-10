@@ -12,8 +12,6 @@ const useStyles = makeStyles(() => ({
     background: "white",
     boxShadow: "0 3px 5px 2px rgba(0, 0, 0, 0.3)",
     color: "white",
-    height: 400,
-    width: 980,
     margin: "auto",
     height: "95%",
     width: "95%",
@@ -24,7 +22,6 @@ const useStyles = makeStyles(() => ({
     color: "black",
   },
   lineRow: {
-    flex: "auto",
     marginTop: 50,
   },
   square: {
@@ -53,6 +50,7 @@ function Sheet() {
   const styles = useStyles();
   state.sheetSplit[0] = state.ans[0].array;
   let arr = [...state.sheetSplit, ...state.sheetMerge];
+
   return (
     <div className={styles.container}>
       <div className={styles.stylesContainerInner}>

@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
     height: "60%",
     backgroundColor: "grey",
     display: "flex",
+    overflow: "auto",
   },
   inputContainer: {
     height: "10%",

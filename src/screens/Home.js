@@ -59,6 +59,7 @@ export function generateEmptyArr() {
     state.input.push(0);
   }
 }
+
 const random = (min, max) => {
   let num = [];
   for (let i = 0; i < 10; i++) {
@@ -66,6 +67,18 @@ const random = (min, max) => {
   }
   return num;
 };
+
+function initializeSplit() {
+  for (let i = 1; i < state.depth; i++) {
+    state.splits.push(i);
+  }
+  //Switch to -2 for 0,1,2,3,4,3,2,1,0 instead of 0,1,2,3,4,4,3,2,1,0
+  for (let i = state.depth - 1; i > 0; i--) {
+    state.splits.push(i);
+  }
+  state.splits.push(0);
+}
+
 function initializeSheets() {
   let depth = state.depth;
   //Fill sheetSplit
@@ -99,6 +112,7 @@ function handleClick(level) {
     case 3:
       mergeSort([...random(1, 11)]);
       generateEmptyArr();
+      initializeSplit();
       initializeSheets();
       break;
     default:
