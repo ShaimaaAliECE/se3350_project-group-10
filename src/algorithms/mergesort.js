@@ -90,8 +90,10 @@ export function mergeSort(array) {
   state.ans.push(rowObj);
 
   // Base case or terminating case
+
   prevSizeSplit = array.length;
-  // console.log("lengthAtEnd: " + prevSizeSplit);
+
+  // console.log("len gthAtEnd: " + prevSizeSplit);
   if (array.length < 2) {
     return array;
   }
