@@ -19,15 +19,14 @@ const useStyles = makeStyles((theme) => ({
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover ",
-    zIndex: "-1",
     display: "flex",
     alignItems: "center",
-    justifyContent: "center", 
+    justifyContent: "center",
   },
 
-  buttonContainer:{
-    display:"flex",
-    justifyContent:"center"
+  buttonContainer: {
+    display: "flex",
+    justifyContent: "center",
   },
 
   content: {
@@ -43,23 +42,21 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "row",
     justifyContent: "center",
     alignSelf: "center",
-    display:"flex",
+    display: "flex",
     padding: 12,
     margin: 10,
     fontSize: 18,
     fontWeight: 400,
     fontFamily: "Raleway",
-    color: "white", 
+    color: "white",
     textAlign: "center",
     backgroundColor: "#757575",
     border: 0,
-    borderRadius: 10
-    
+    borderRadius: 10,
   },
-  link:{
-    textDecoration:"none",
-  }
-
+  link: {
+    textDecoration: "none",
+  },
 }));
 
 export function generateEmptyArr() {
@@ -118,49 +115,56 @@ export default function Home() {
   const classes = useStyles();
   return (
     <div className={classes.container}>
-    <div className={classes.content}>
-      <div className={classes.logo}>
-      <img src={logo}  style={{ height: 209, width: 661 }} alt="logo"/>
-      </div>
-      <div className={classes.buttonContainer}>
-        <Link to="/app" className={classes.link}>
-          <button className={classes.button}
+      <div className={classes.content}>
+        <div className={classes.logo}>
+          <img src={logo} style={{ height: 209, width: 661 }} alt="logo" />
+        </div>
+        <div className={classes.buttonContainer}>
+          <Link to="/app" className={classes.link}>
+            <button
+              className={classes.button}
               onClick={() => {
-              handleClick(3);
-            }}>
+                handleClick(3);
+              }}
+            >
               Merge Sort
-          </button>
-        </Link>
-        <Link to="/app" className={classes.link}>
-          <button className={classes.button}
+            </button>
+          </Link>
+          <Link to="/app" className={classes.link}>
+            <button
+              className={classes.button}
               onClick={() => {
-              handleClick(3);
-            }}>
+                handleClick(3);
+              }}
+            >
               Quick Sort
-          </button>
-        </Link>
-        <Link to="/app" className={classes.link}>
-          <button className={classes.button}
+            </button>
+          </Link>
+          <Link to="/app" className={classes.link}>
+            <button
+              className={classes.button}
               onClick={() => {
-              handleClick(3);
-            }}>
+                handleClick(3);
+              }}
+            >
               Insertion Sort
-          </button>
-        </Link>
-        <Link to="/app" className={classes.link}>
-          <button className={classes.button}
+            </button>
+          </Link>
+          <Link to="/app" className={classes.link}>
+            <button
+              className={classes.button}
               onClick={() => {
-              handleClick(3);
-            }}>
+                handleClick(3);
+              }}
+            >
               Recursive Sort
-          </button>
-        </Link>
+            </button>
+          </Link>
+        </div>
       </div>
-    </div>
     </div>
   );
 }
-
 
 /*<Button
             variant="contained"
