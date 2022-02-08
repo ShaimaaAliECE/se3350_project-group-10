@@ -6,6 +6,7 @@ let prevSizeSplit = 0;
 let prevSizeMerge = 0;
 let tripleEqual = 0;
 let reachedDepth = 0;
+
 let x;
 
 function merge(left, right) {
@@ -75,11 +76,11 @@ export function mergeSort(array) {
     }
   }
 
-  if (array.length == 1) {
+  if (array.length === 1) {
     state.runnable = 0;
   }
 
-  if (state.runnable == 1) {
+  if (state.runnable === 1) {
     state.depth++;
   }
 

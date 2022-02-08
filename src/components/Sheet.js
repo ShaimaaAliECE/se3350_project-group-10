@@ -6,16 +6,18 @@ import { view } from "@risingstack/react-easy-state";
 
 import InputBoxes from "./InputBoxes";
 
-// add scroll css to container (filled with multiple  groups of lines)
 const useStyles = makeStyles(() => ({
   container: {
-    display: "flex",
     justifyContent: "space-between",
-    backgroundColor: "white",
+    background: "white",
     boxShadow: "0 3px 5px 2px rgba(0, 0, 0, 0.3)",
+    color: "white",
+    height: 400,
+    width: 980,
     margin: "auto",
     height: "95%",
     width: "95%",
+    overflowY: "auto",
   },
   lines: {
     borderBottom: 15,
@@ -35,11 +37,9 @@ const useStyles = makeStyles(() => ({
     textAlign: "center",
   },
   main: {
-    width: "100%",
-    color: "white",
-    overflow: "auto",
-    position: "relative",
-    margin: "20px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
   stylesContainerInner: {
     display: "flex",
@@ -55,15 +55,13 @@ function Sheet() {
   let arr = [...state.sheetSplit, ...state.sheetMerge];
   return (
     <div className={styles.container}>
-      <div className={styles.main}>
-        <div className={styles.stylesContainerInner}>
-          {arr.map((arrObj) => (
-            <div>
-              <Lines />
-              <InputBoxes array={arrObj} />
-            </div>
-          ))}
-        </div>
+      <div className={styles.stylesContainerInner}>
+        {arr.map((arrObj) => (
+          <div>
+            <Lines />
+            <InputBoxes array={arrObj} />
+          </div>
+        ))}
       </div>
     </div>
   );

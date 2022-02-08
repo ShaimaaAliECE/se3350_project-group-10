@@ -14,7 +14,7 @@ function appendSheet(move, array, row) {
     state.sheetMerge[row].splice(
       firstZeroFinder(row, state.sheetMerge),
       array.length,
-      ...array
+      array
     );
   }
 

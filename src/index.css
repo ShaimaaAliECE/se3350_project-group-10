@@ -21,3 +21,18 @@ body,
 .App {
   height: 100%;
 }
+
+@font-face {
+  font-family: "Raleway";
+  src: url("//db.onlinewebfonts.com/t/314107d2b4fd9c91314be5b4cccb08f6.eot");
+  src: url("//db.onlinewebfonts.com/t/314107d2b4fd9c91314be5b4cccb08f6.eot?#iefix")
+      format("embedded-opentype"),
+    url("//db.onlinewebfonts.com/t/314107d2b4fd9c91314be5b4cccb08f6.woff2")
+      format("woff2"),
+    url("//db.onlinewebfonts.com/t/314107d2b4fd9c91314be5b4cccb08f6.woff")
+      format("woff"),
+    url("//db.onlinewebfonts.com/t/314107d2b4fd9c91314be5b4cccb08f6.ttf")
+      format("truetype"),
+    url("//db.onlinewebfonts.com/t/314107d2b4fd9c91314be5b4cccb08f6.svg#Raleway")
+      format("svg");
+}
