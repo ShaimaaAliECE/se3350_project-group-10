@@ -3,12 +3,14 @@ import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import state from "../store/Store";
 import { mergeSort } from "../algorithms/mergsort";
+
 export function generateEmptyArr() {
   state.input = [];
   for (let i = 0; i < state.ans[state.step].array.length; i++) {
     state.input.push(0);
   }
 }
+
 const random = (min, max) => {
   let num = [];
   for (let i = 0; i < 10; i++) {
@@ -16,6 +18,7 @@ const random = (min, max) => {
   }
   return num;
 };
+
 function initializeSheets() {
   let depth = state.depth;
   //Fill sheetSplit
@@ -31,7 +34,7 @@ function initializeSheets() {
   //Fill sheetMerge
   for (let i = 0; i < depth - 1; i++) {
     temp = [];
-    for (let j = 0; j < state.ans[0].length; j++) {
+    for (let j = 0; j < state.ans[0].array.length; j++) {
       temp.push(0);
     }
     state.sheetMerge.push(temp);
@@ -47,7 +50,7 @@ function handleClick(level) {
       console.log("level 2");
       break;
     case 3:
-      mergeSort([...random(1, 10)]);
+      mergeSort([...random(1, 11)]);
       generateEmptyArr();
       initializeSheets();
       break;

@@ -14,7 +14,7 @@ function appendSheet(move, array, row) {
     state.sheetMerge[row].splice(
       firstZeroFinder(row, state.sheetMerge),
       array.length,
-      array
+      ...array
     );
   }
 
@@ -36,7 +36,7 @@ const state = store({
   algo: "merge",
   sheetMerge: [],
   sheetSplit: [],
-  depth: 0,
+  depth: 1,
   runnable: 1,
   step: 1,
   depthInc: () => (state.runnable ? state.depth++ : state.depth),
