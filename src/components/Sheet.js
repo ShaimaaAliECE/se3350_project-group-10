@@ -6,10 +6,8 @@ import { view } from "@risingstack/react-easy-state";
 
 import InputBoxes from "./InputBoxes";
 
-// add scroll css to container (filled with multiple  groups of lines)
 const useStyles = makeStyles(() => ({
   container: {
-    flex: "auto",
     justifyContent: "space-between",
     background: "white",
     boxShadow: "0 3px 5px 2px rgba(0, 0, 0, 0.3)",
@@ -17,9 +15,9 @@ const useStyles = makeStyles(() => ({
     height: 400,
     width: 980,
     margin: "auto",
-    marginTop: 20,
-    overflow: "auto",
-    position: "relative",
+    height: "95%",
+    width: "95%",
+    overflowY: "auto",
   },
   lines: {
     borderBottom: 15,

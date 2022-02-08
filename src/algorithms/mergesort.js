@@ -76,11 +76,11 @@ export function mergeSort(array) {
     }
   }
 
-  if (array.length == 1) {
+  if (array.length === 1) {
     state.runnable = 0;
   }
 
-  if (state.runnable == 1) {
+  if (state.runnable === 1) {
     state.depth++;
   }
 

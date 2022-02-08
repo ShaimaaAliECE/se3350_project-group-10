@@ -2,7 +2,56 @@ import React from "react";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import state from "../store/Store";
+import { makeStyles } from "@material-ui/core";
 import { mergeSort } from "../algorithms/mergesort";
+import bg from "../assets/homeBG.svg";
+import logo from "../assets/Logo.svg";
+
+const useStyles = makeStyles((theme) => ({
+  //put css here
+  container: {
+    padding: 0,
+    margin: 0,
+    width: "100%",
+    height: "100%",
+    backgroundImage: `url(${bg})`,
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  buttonContainer: {
+    display: "flex",
+    justifyContent: "space-between",
+  },
+
+  content: {
+    display: "flex",
+    flexDirection: "column",
+    marginBottom: 65, //Toolbar takes up 65px
+  },
+
+  button: {
+    padding: 12,
+    fontSize: 18,
+    fontWeight: 400,
+    fontFamily: "Raleway",
+    color: "white",
+    textAlign: "center",
+    backgroundColor: "#757575",
+    border: 0,
+    borderRadius: 10,
+    "&:hover": {
+      cursor: "pointer",
+    },
+  },
+  link: {
+    textDecoration: "none",
+  },
+}));
 
 export function generateEmptyArr() {
   state.input = [];
@@ -34,7 +83,7 @@ function initializeSheets() {
   let depth = state.depth;
   //Fill sheetSplit
   let temp = [];
-  for (let i = 0; i < depth; i++) {
+  for (let i = 0; i < depth + 1; i++) {
     temp = [];
     for (let j = 0; j < state.ans[0].array.length; j++) {
       temp.push(0);
@@ -71,25 +120,55 @@ function handleClick(level) {
 }
 
 export default function Home() {
+  const classes = useStyles();
   return (
-    <div>
-      HOME SCREEN
-      <div>
-        <Link to="/app">
-          <Button
-            variant="contained"
-            onClick={() => {
-              handleClick(3);
-            }}
-            sx={{
-              backgroundColor: "#3D3D3D",
-              height: "50px",
-              width: "250px",
-            }}
-          >
-            This goes to App.js
-          </Button>
-        </Link>
+    <div className={classes.container}>
+      <div className={classes.content}>
+        <div className={classes.logo}>
+          <img src={logo} style={{ height: 209, width: 661 }} alt="logo" />
+        </div>
+        <div className={classes.buttonContainer}>
+          <Link to="/app" className={classes.link}>
+            <button
+              className={classes.button}
+              onClick={() => {
+                handleClick(3);
+              }}
+            >
+              Merge Sort
+            </button>
+          </Link>
+          <Link to="/app" className={classes.link}>
+            <button
+              className={classes.button}
+              onClick={() => {
+                handleClick(3);
+              }}
+            >
+              Quick Sort
+            </button>
+          </Link>
+          <Link to="/app" className={classes.link}>
+            <button
+              className={classes.button}
+              onClick={() => {
+                handleClick(3);
+              }}
+            >
+              Insertion Sort
+            </button>
+          </Link>
+          <Link to="/app" className={classes.link}>
+            <button
+              className={classes.button}
+              onClick={() => {
+                handleClick(3);
+              }}
+            >
+              Recursive Sort
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   );
