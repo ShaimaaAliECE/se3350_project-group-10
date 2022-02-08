@@ -14,8 +14,8 @@ const useStyles = makeStyles(() => ({
     backgroundColor: "white",
     boxShadow: "0 3px 5px 2px rgba(0, 0, 0, 0.3)",
     margin: "auto",
-    height: "400px",
-    width: "980px",
+    height: "95%",
+    width: "95%",
   },
   lines: {
     borderBottom: 15,
