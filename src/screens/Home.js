@@ -1,10 +1,10 @@
 import React from "react";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
-import { makeStyles } from "@material-ui/core";
 import state from "../store/Store";
-import { mergeSort } from "../algorithms/mergsort";
-import bg from "../assets/HomeBG.svg";
+import { makeStyles } from "@material-ui/core";
+import { mergeSort } from "../algorithms/mergesort";
+import bg from "../assets/homeBG.svg";
 import logo from "../assets/Logo.svg";
 
 const useStyles = makeStyles((theme) => ({
@@ -70,7 +70,7 @@ function initializeSheets() {
   let depth = state.depth;
   //Fill sheetSplit
   let temp = [];
-  for (let i = 0; i < depth; i++) {
+  for (let i = 0; i < depth + 1; i++) {
     temp = [];
     for (let j = 0; j < state.ans[0].array.length; j++) {
       temp.push(0);
@@ -81,7 +81,7 @@ function initializeSheets() {
   //Fill sheetMerge
   for (let i = 0; i < depth - 1; i++) {
     temp = [];
-    for (let j = 0; j < state.ans[0].length; j++) {
+    for (let j = 0; j < state.ans[0].array.length; j++) {
       temp.push(0);
     }
     state.sheetMerge.push(temp);
@@ -97,7 +97,7 @@ function handleClick(level) {
       console.log("level 2");
       break;
     case 3:
-      mergeSort([...random(1, 10)]);
+      mergeSort([...random(1, 11)]);
       generateEmptyArr();
       initializeSheets();
       break;
