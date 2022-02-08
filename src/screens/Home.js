@@ -10,7 +10,6 @@ import logo from "../assets/Logo.svg";
 const useStyles = makeStyles((theme) => ({
   //put css here
   container: {
-    position: "fixed",
     padding: 0,
     margin: 0,
     width: "100%",
@@ -18,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundImage: `url(${bg})`,
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
-    backgroundSize: "cover ",
+    backgroundSize: "cover",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -26,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 
   buttonContainer: {
     display: "flex",
-    justifyContent: "center",
+    justifyContent: "space-between",
   },
 
   content: {
@@ -36,15 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   button: {
-    position: "relative",
-    display: "inline-flex",
-    flex: "none",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignSelf: "center",
-    display: "flex",
     padding: 12,
-    margin: 10,
     fontSize: 18,
     fontWeight: 400,
     fontFamily: "Raleway",
@@ -53,6 +44,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#757575",
     border: 0,
     borderRadius: 10,
+    "&:hover": {
+      cursor: "pointer",
+    },
   },
   link: {
     textDecoration: "none",
@@ -165,18 +159,3 @@ export default function Home() {
     </div>
   );
 }
-
-/*<Button
-            variant="contained"
-            onClick={() => {
-              handleClick(3);
-            }}
-            sx={{
-              backgroundColor: "#3D3D3D",
-              height: "50px",
-              width: "250px",
-            }}
-          >
-            This goes to App.js
-          </Button>
-          */
