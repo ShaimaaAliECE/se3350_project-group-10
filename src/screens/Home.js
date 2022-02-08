@@ -5,7 +5,7 @@ import state from "../store/Store";
 import { mergeSort } from "../algorithms/mergesort";
 export function generateEmptyArr() {
   state.input = [];
-  for (let i = 0; i < state.ans[state.step].array.length; i++) {
+  for (let i = 0; i < state.ans[state.step]?.array.length; i++) {
     state.input.push(0);
   }
 }

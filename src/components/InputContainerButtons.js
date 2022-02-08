@@ -3,7 +3,11 @@ import { Button } from "@material-ui/core";
 import state from "../store/Store.js";
 import { view } from "@risingstack/react-easy-state";
 import { generateEmptyArr } from "../screens/Home";
-import { playCorrectSound, playIncorrectSound } from "../assets/tones.js";
+import {
+  playCorrectSound,
+  playIncorrectSound,
+  winSound,
+} from "../assets/tones.js";
 import Dialog from "@mui/material/Dialog";
 
 function handleRestartClick() {
@@ -26,11 +30,21 @@ function handleSubmitClick(handleClickOpenFail, handleClickOpenWin) {
       state.ans[state.step].array,
       state.ans[state.step].row
     );
+
     state.stepInc();
-    generateEmptyArr();
-    handleRestartClick();
-    playCorrectSound();
-    handleClickOpenWin();
+    if (state.step >= state.ans.length) {
+      //Win!
+      console.log("Win!");
+      state.gameOver = true;
+      generateEmptyArr();
+      state.step = 0;
+      winSound();
+    } else {
+      generateEmptyArr();
+      handleRestartClick();
+      playCorrectSound();
+      handleClickOpenWin();
+    }
   } else {
     state.lives--;
     handleRestartClick();
@@ -66,6 +80,7 @@ export default view(function InputContainerButtons() {
         onClick={() => {
           handleRestartClick();
         }}
+        disabled={state.gameOver}
       >
         RESET
       </Button>
@@ -75,6 +90,7 @@ export default view(function InputContainerButtons() {
         onClick={() => {
           handleSubmitClick(handleClickOpenFail, handleClickOpenWin);
         }}
+        disabled={state.gameOver}
       >
         SUBMIT
       </Button>
