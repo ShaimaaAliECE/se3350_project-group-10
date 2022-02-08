@@ -4,13 +4,17 @@ import state from "../store/Store";
 import { view } from "@risingstack/react-easy-state";
 
 const useStyles = makeStyles((theme) => ({
-  stylesContainerOuter: {},
+  stylesContainerOuter: {
+    display: "flex",
+    flexDirection: "row",
+  },
 
   stylesContainerInner: {
     display: "flex",
     alignContent: "center",
     justifyContent: "center",
     color: "black",
+    margin: 15,
   },
 }));
 
