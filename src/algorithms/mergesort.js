@@ -6,6 +6,7 @@ let prevSizeSplit = 0;
 let prevSizeMerge = 0;
 let tripleEqual = 0;
 let reachedDepth = 0;
+
 let x;
 
 function merge(left, right) {
