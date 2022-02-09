@@ -8,13 +8,10 @@ import InputBoxes from "./InputBoxes";
 
 const useStyles = makeStyles(() => ({
   container: {
-    justifyContent: "space-between",
     background: "white",
     boxShadow: "0 3px 5px 2px rgba(0, 0, 0, 0.3)",
-    color: "white",
-    margin: "auto",
-    height: "95%",
-    width: "95%",
+    height: "100%",
+    width: "100%",
     overflowY: "auto",
   },
   lines: {

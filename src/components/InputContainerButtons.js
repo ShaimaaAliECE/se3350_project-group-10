@@ -85,30 +85,32 @@ export default view(function InputContainerButtons() {
   };
 
   return (
-    <div style={{ display: "flex", padding: 10, flexDirection: "column" }}>
-      <Button
-        variant="contained"
-        onClick={() => {
-          handleRestartClick();
-        }}
-        disabled={state.gameOver}
-      >
-        RESET
-      </Button>
-      <br />
-      <Button
-        variant="contained"
-        onClick={() => {
-          handleSubmitClick(
-            handleClickOpenFail,
-            handleClickOpenWin,
-            handleGameOver
-          );
-        }}
-        disabled={state.gameOver}
-      >
-        SUBMIT
-      </Button>
+    <>
+      <div style={{ display: "flex", padding: 10, flexDirection: "column" }}>
+        <Button
+          variant="contained"
+          onClick={() => {
+            handleRestartClick();
+          }}
+          disabled={state.gameOver}
+        >
+          RESET
+        </Button>
+        <br />
+        <Button
+          variant="contained"
+          onClick={() => {
+            handleSubmitClick(
+              handleClickOpenFail,
+              handleClickOpenWin,
+              handleGameOver
+            );
+          }}
+          disabled={state.gameOver}
+        >
+          SUBMIT
+        </Button>
+      </div>
       <Dialog
         open={openFail}
         onClose={handleCloseFail}
@@ -172,6 +174,6 @@ export default view(function InputContainerButtons() {
           </a>
         </div>
       </Modal>
-    </div>
+    </>
   );
 });
