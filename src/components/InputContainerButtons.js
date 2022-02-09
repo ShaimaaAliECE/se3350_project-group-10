@@ -16,6 +16,10 @@ import Dialog from "@mui/material/Dialog";
 function handleRestartClick(handleGameOver) {
   //Set the store state back to empty
   let len = state.input.length;
+
+
+  // add state to set the background colour state back to grey
+
   for (let i = 0; i < len; i++) {
     state.input[i] = 0;
   }
