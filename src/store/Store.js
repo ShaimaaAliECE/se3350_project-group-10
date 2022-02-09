@@ -38,6 +38,8 @@ function resetStates() {
   state.runnable = 1;
   state.step = 1;
   state.gameOver = false;
+  state.colorCheck = "grey"
+
 }
 
 const state = store({
@@ -53,6 +55,7 @@ const state = store({
   step: 1,
   gameOver: false,
   splits: [0],
+  colorCheck: "rgba(220,220,220, .6)",
   depthInc: () => (state.runnable ? state.depth++ : state.depth),
   stepInc: () => state.step++,
   appendSheet: (move, array, row) => appendSheet(move, array, row),
