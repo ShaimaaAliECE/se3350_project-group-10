@@ -16,6 +16,19 @@ const useStyles = makeStyles((theme) => ({
     color: "black",
     margin: 15,
   },
+
+  submitBox: {
+
+    display: "flex",
+    width: 50,
+    height: 50,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    color: "black",
+    margin: 10,
+    background: state.colorCheck,
+  },
 }));
 
 const stylesMainInner = {
@@ -23,6 +36,9 @@ const stylesMainInner = {
   justifyContent: "center",
   alignItems: "center",
 };
+
+
+
 
 function chunk(array, limit) {
   const chunks = Math.ceil(array.length / limit);
@@ -38,17 +54,17 @@ function arrComp(arr1, arr2) {
 
 
 
-
-
-
 // call this submit check functio in input container button (in handlesubmitclick function)
 function submitCheckColor() {
   if (arrComp(state.ans[state.step].array, state.input)) {
     // use states
 
     //set state of background colour to green on submit 
+
+    state.colorCheck = "green"
   } else {
-    // set state of background colour to red on submit 
+    // set state of background colour to red on submit
+    state.colorCheck = "red"
   }
 
 }
@@ -67,24 +83,15 @@ function CreateMap(arrOuter) {
         <div className={style.stylesContainerInner}>
           {arrInner.map((arrObj) => (
             <div
-              style={{
-                display: "flex",
-                width: 50,
-                height: 50,
-                flexDirection: "row",
-                justifyContent: "center",
-                alignItems: "center",
-                color: "black",
-                margin: 10,
-                background: "rgba(60,179,113, .6)",
-              }}
+              className={style.submitBox}
             >
               {arrObj === 0 ? "" : arrObj}
             </div>
           ))}
         </div>
-      ))}
-    </div>
+      ))
+      }
+    </div >
   );
 }
 
