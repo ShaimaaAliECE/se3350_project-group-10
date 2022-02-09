@@ -4,38 +4,35 @@ import { makeStyles } from "@material-ui/core";
 import Piano from "./components/Piano";
 import InputContainer from "./components/InputContainer";
 import Sheet from "./components/Sheet";
-import state from "./store/Store";
-import { Container } from "@mui/material";
-import { useEffect, useState } from "react";
-import { Link, Modal } from "@material-ui/core";
+
 const useStyles = makeStyles((theme) => ({
   container: {
     height: "100%",
     width: "100%",
+    display: "flex",
     flexDirection: "column",
     backgroundColor: "grey",
-    overflow: "hidden",
   },
   navbar: {
     color: "white",
     textAlign: "center",
+    padding: 10,
     fontSize: "30px",
-    height: "5%",
     backgroundColor: "black",
   },
   musicSheet: {
-    height: "60%",
+    height: "50%",
     backgroundColor: "grey",
     display: "flex",
     overflow: "auto",
   },
   inputContainer: {
-    height: "10%",
     backgroundColor: "grey",
   },
   piano: {
-    height: "25%",
     backgroundColor: "black",
+    flexGrow: 1,
+    paddingBottom: 20,
   },
 }));
 
