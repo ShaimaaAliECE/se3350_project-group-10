@@ -1,5 +1,4 @@
 import React from "react";
-import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import state from "../store/Store";
 import { makeStyles } from "@material-ui/core";
@@ -8,7 +7,6 @@ import bg from "../assets/homeBG.svg";
 import logo from "../assets/Logo.svg";
 
 const useStyles = makeStyles((theme) => ({
-  //put css here
   container: {
     padding: 0,
     margin: 0,
@@ -129,7 +127,7 @@ export default function Home() {
           <img src={logo} style={{ height: 209, width: 661 }} alt="logo" />
         </div>
         <div className={classes.buttonContainer}>
-          <Link to="/app" className={classes.link}>
+          <Link to="/level_3" className={classes.link}>
             <button
               className={classes.button}
               onClick={() => {
@@ -139,7 +137,7 @@ export default function Home() {
               Merge Sort
             </button>
           </Link>
-          <Link to="/app" className={classes.link}>
+          <Link to="/level_3" className={classes.link}>
             <button
               className={classes.button}
               onClick={() => {
@@ -149,7 +147,7 @@ export default function Home() {
               Quick Sort
             </button>
           </Link>
-          <Link to="/app" className={classes.link}>
+          <Link to="/level_3" className={classes.link}>
             <button
               className={classes.button}
               onClick={() => {
@@ -159,7 +157,7 @@ export default function Home() {
               Insertion Sort
             </button>
           </Link>
-          <Link to="/app" className={classes.link}>
+          <Link to="/level_3" className={classes.link}>
             <button
               className={classes.button}
               onClick={() => {
