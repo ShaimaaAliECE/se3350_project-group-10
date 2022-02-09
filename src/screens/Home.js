@@ -5,6 +5,12 @@ import { makeStyles } from "@material-ui/core";
 import { mergeSort } from "../algorithms/mergesort";
 import bg from "../assets/homeBG.svg";
 import logo from "../assets/Logo.svg";
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import Typography from '@mui/material/Typography';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -49,6 +55,19 @@ const useStyles = makeStyles((theme) => ({
   link: {
     textDecoration: "none",
   },
+  accordion: {
+    padding: 12,
+    fontSize: 18,
+    fontWeight: 400,
+    fontFamily: "Raleway",
+    textAlign: "center",
+    backgroundColor: "#757575",
+    border: 0,
+    borderRadius: 10,
+    "&:hover": {
+      cursor: "pointer",
+    },
+  }
 }));
 
 export function generateEmptyArr() {
@@ -126,6 +145,85 @@ export default function Home() {
         <div className={classes.logo}>
           <img src={logo} style={{ height: 209, width: 661 }} alt="logo" />
         </div>
+
+        <div>
+      <Accordion className={classes.accordion}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography>Merge Sort</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+            
+          <Link to="/level_3" className={classes.link}>
+            <button
+              className={classes.button}
+              onClick={() => {
+                handleClick(3);
+              }}
+            >
+              Level 3
+            </button>
+          </Link>
+
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+      <Accordion className={classes.accordion}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography>Quick Sort</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+            
+          <Link to="/level_3" className={classes.link}>
+            <button
+              className={classes.button}
+              onClick={() => {
+                handleClick(3);
+              }}
+            >
+              Level 3
+            </button>
+          </Link>
+
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+      <Accordion className={classes.accordion}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography>Insertion Sort</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+            
+          <Link to="/level_3" className={classes.link}>
+            <button
+              className={classes.button}
+              onClick={() => {
+                handleClick(3);
+              }}
+            >
+              Level 3
+            </button>
+          </Link>
+
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+      </div>
+
         <div className={classes.buttonContainer}>
           <Link to="/level_3" className={classes.link}>
             <button
@@ -137,6 +235,8 @@ export default function Home() {
               Merge Sort
             </button>
           </Link>
+
+
           <Link to="/level_3" className={classes.link}>
             <button
               className={classes.button}
