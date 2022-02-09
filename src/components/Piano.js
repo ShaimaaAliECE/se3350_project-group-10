@@ -9,7 +9,6 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "row",
     justifyContent: "center",
     height: "100%",
-
     backgroundColor: "black",
   },
   whiteKey: {

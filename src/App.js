@@ -25,6 +25,10 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "grey",
     display: "flex",
     overflow: "auto",
+    width: "95%",
+    marginLeft: "auto",
+    marginRight: "auto",
+    paddingTop: 20,
   },
   inputContainer: {
     backgroundColor: "grey",
