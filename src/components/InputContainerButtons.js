@@ -27,7 +27,7 @@ function handleSubmitClick(handleClickOpenFail, handleClickOpenWin) {
   if (arrComp(state.ans[state.step].array, state.input)) {
     state.appendSheet(
       state.ans[state.step].type,
-      state.ans[state.step].array,
+      state.input,
       state.ans[state.step].row
     );
 

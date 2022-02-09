@@ -1,55 +1,58 @@
 import "./App.css";
+import "./index.css";
+import { makeStyles } from "@material-ui/core";
 import Piano from "./components/Piano";
 import InputContainer from "./components/InputContainer";
 import Sheet from "./components/Sheet";
 import state from "./store/Store";
-import { useEffect, useState } from "react";
-import { Link, Modal } from "@material-ui/core";
+import { Container } from "@mui/material";
+
+const useStyles = makeStyles((theme) => ({
+  container: {
+    height: "100%",
+    width: "100%",
+    flexDirection: "column",
+    backgroundColor: "grey",
+    overflow: "hidden",
+  },
+  navbar: {
+    color: "white",
+    textAlign: "center",
+    fontSize: "30px",
+    height: "5%",
+    backgroundColor: "black",
+  },
+  musicSheet: {
+    height: "60%",
+    backgroundColor: "grey",
+    display: "flex",
+    overflow: "auto",
+  },
+  inputContainer: {
+    height: "10%",
+    backgroundColor: "grey",
+  },
+  piano: {
+    height: "25%",
+    backgroundColor: "black",
+  },
+}));
 
 function App() {
-  let [openModal, setOpenModal] = useState(false);
-  useEffect(() => {
-    setOpenModal(state.gameOver);
-  }, []);
-  const closeModal = () => {
-    setOpenModal(false);
-  };
+  const style = useStyles();
 
-  const handleHomeButton = () => {
-    closeModal();
-    state.resetStates();
-  };
   return (
-    <div
-      style={{
-        display: "flex",
-        height: "100%",
-        width: "100%",
-        flexDirection: "column",
-        backgroundColor: "grey",
-        overflow: "hidden",
-      }}
-    >
-      <div
-        style={{
-          width: "100%",
-          height: 50,
-          backgroundColor: "black",
-        }}
-      />
-      <Sheet />
-      <InputContainer />
-      <Piano />
-      <Modal
-        open={openModal}
-        onClose={closeModal}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Link to="/" onClick={handleHomeButton}>
-          Home
-        </Link>
-      </Modal>
+    <div className={style.container}>
+      <div className={style.navbar}>Level 1 - Merge Sort</div>
+      <div className={style.musicSheet}>
+        <Sheet />
+      </div>
+      <div className={style.inputContainer}>
+        <InputContainer />
+      </div>
+      <div className={style.piano}>
+        <Piano />
+      </div>
     </div>
   );
 }
