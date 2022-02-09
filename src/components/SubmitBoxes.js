@@ -31,9 +31,34 @@ function chunk(array, limit) {
   );
 }
 
+
+function arrComp(arr1, arr2) {
+  return arr1.every((val, index) => val === arr2[index]);
+}
+
+
+
+
+
+
+// call this submit check functio in input container button (in handlesubmitclick function)
+function submitCheckColor() {
+  if (arrComp(state.ans[state.step].array, state.input)) {
+    // use states
+
+    //set state of background colour to green on submit 
+  } else {
+    // set state of background colour to red on submit 
+  }
+
+}
+
+
+
 function CreateMap(arrOuter) {
   //Maps user entered array
 
+  //add initial state of background colour as grey
   const style = useStyles();
 
   return (
