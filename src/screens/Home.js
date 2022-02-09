@@ -110,6 +110,7 @@ function handleClick(level) {
       console.log("level 2");
       break;
     case 3:
+      state.resetStates();
       mergeSort([...random(1, 11)]);
       generateEmptyArr();
       initializeSplit();

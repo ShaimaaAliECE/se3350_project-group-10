@@ -3,6 +3,9 @@ import { Button } from "@material-ui/core";
 import state from "../store/Store.js";
 import { view } from "@risingstack/react-easy-state";
 import { generateEmptyArr } from "../screens/Home";
+import { Modal } from "@material-ui/core";
+import { useState } from "react";
+
 import {
   playCorrectSound,
   playIncorrectSound,
@@ -10,7 +13,7 @@ import {
 } from "../assets/tones.js";
 import Dialog from "@mui/material/Dialog";
 
-function handleRestartClick() {
+function handleRestartClick(handleGameOver) {
   //Set the store state back to empty
   let len = state.input.length;
   for (let i = 0; i < len; i++) {
@@ -22,7 +25,11 @@ function arrComp(arr1, arr2) {
   return arr1.every((val, index) => val === arr2[index]);
 }
 
-function handleSubmitClick(handleClickOpenFail, handleClickOpenWin) {
+function handleSubmitClick(
+  handleClickOpenFail,
+  handleClickOpenWin,
+  handleGameOver
+) {
   //Check the answer, if its right --> increment step, handle restart, state.sheet.push(state.input)
   if (arrComp(state.ans[state.step].array, state.input)) {
     state.appendSheet(
@@ -34,11 +41,7 @@ function handleSubmitClick(handleClickOpenFail, handleClickOpenWin) {
     state.stepInc();
     if (state.step >= state.ans.length) {
       //Win!
-      console.log("Win!");
-      state.gameOver = true;
-      generateEmptyArr();
-      state.step = 0;
-      winSound();
+      handleGameOver();
     } else {
       generateEmptyArr();
       handleRestartClick();
@@ -58,6 +61,14 @@ function handleSubmitClick(handleClickOpenFail, handleClickOpenWin) {
 export default view(function InputContainerButtons() {
   const [openFail, setOpenFail] = React.useState(false);
   const [openWin, setOpenWin] = React.useState(false);
+  let [openModal, setOpenModal] = useState(false);
+  const handleGameOver = () => {
+    state.gameOver = true;
+    setOpenModal(true);
+    generateEmptyArr();
+    state.step = 0;
+    winSound();
+  };
 
   const handleClickOpenFail = () => {
     setOpenFail(true);
@@ -88,7 +99,11 @@ export default view(function InputContainerButtons() {
       <Button
         variant="contained"
         onClick={() => {
-          handleSubmitClick(handleClickOpenFail, handleClickOpenWin);
+          handleSubmitClick(
+            handleClickOpenFail,
+            handleClickOpenWin,
+            handleGameOver
+          );
         }}
         disabled={state.gameOver}
       >
@@ -112,6 +127,51 @@ export default view(function InputContainerButtons() {
       >
         Correct!
       </Dialog>
+      <Modal
+        open={openModal}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100%",
+            flexDirection: "column",
+          }}
+        >
+          <p
+            style={{
+              backgroundColor: "white",
+              width: "25%",
+              height: "25%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            You have Completed Level {state.level}!
+          </p>
+          <a
+            href="/"
+            style={{
+              backgroundColor: "black",
+              paddingLeft: 30,
+              paddingTop: 10,
+              paddingBottom: 10,
+              paddingRight: 30,
+              borderRadius: 20,
+              textAlign: "center",
+              color: "white",
+              fontFamily: "Raleway",
+              textDecoration: "none",
+            }}
+          >
+            Home
+          </a>
+        </div>
+      </Modal>
     </div>
   );
 });

@@ -34,7 +34,7 @@ function resetStates() {
   state.level = 1;
   state.sheetMerge = [];
   state.sheetSplit = [];
-  state.depth = 0;
+  state.depth = 1;
   state.runnable = 1;
   state.step = 1;
   state.gameOver = false;
