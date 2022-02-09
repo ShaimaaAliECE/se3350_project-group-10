@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
 
 export function generateEmptyArr() {
   state.input = [];
-  for (let i = 0; i < state.ans[state.step].array.length; i++) {
+  for (let i = 0; i < state.ans[state.step]?.array.length; i++) {
     state.input.push(0);
   }
 }
@@ -110,6 +110,7 @@ function handleClick(level) {
       console.log("level 2");
       break;
     case 3:
+      state.resetStates();
       mergeSort([...random(1, 11)]);
       generateEmptyArr();
       initializeSplit();

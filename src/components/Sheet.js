@@ -48,7 +48,7 @@ const useStyles = makeStyles(() => ({
 //include Lines as component
 function Sheet() {
   const styles = useStyles();
-  state.sheetSplit[0] = state.ans[0].array;
+  state.sheetSplit[0] = state.ans[0]?.array;
   let arr = [...state.sheetSplit, ...state.sheetMerge];
 
   return (

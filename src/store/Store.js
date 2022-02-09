@@ -27,6 +27,18 @@ function appendSheet(move, array, row) {
     );
   }
 }
+function resetStates() {
+  state.lives = 3;
+  state.input = [];
+  state.ans = [];
+  state.level = 1;
+  state.sheetMerge = [];
+  state.sheetSplit = [];
+  state.depth = 1;
+  state.runnable = 1;
+  state.step = 1;
+  state.gameOver = false;
+}
 
 const state = store({
   lives: 3,
@@ -39,10 +51,12 @@ const state = store({
   depth: 1,
   runnable: 1,
   step: 1,
+  gameOver: false,
   splits: [0],
   depthInc: () => (state.runnable ? state.depth++ : state.depth),
   stepInc: () => state.step++,
   appendSheet: (move, array, row) => appendSheet(move, array, row),
+  resetStates: () => resetStates(),
 });
 
 export default state;
