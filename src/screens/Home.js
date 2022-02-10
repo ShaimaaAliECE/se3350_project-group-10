@@ -179,8 +179,8 @@ export default function Home() {
           <img src={logo} style={{ height: 209, width: 661 }} alt="logo" />
         </div>
 
-        <div className={classes.button}>
-        <Box sx={{ bgcolor: 'background.paper', width: 500 }}>
+        <div>
+        <Box sx={{ bgcolor: 'background.paper', width: "100%" }}>
       <AppBar position="static">
         <Tabs
           value={value}
@@ -308,6 +308,59 @@ export default function Home() {
           </Link>
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
+        <Link to="/level_3" className={classes.link}>
+            <button
+              className={classes.button}
+              onClick={() => {
+                handleClick(3);
+              }}
+            >
+              Level 1
+            </button>
+          </Link>    
+          
+          <Link to="/level_3" className={classes.link}>
+            <button
+              className={classes.button}
+              onClick={() => {
+                handleClick(3);
+              }}
+            >
+              Level 2
+            </button>
+          </Link>
+          <Link to="/level_3" className={classes.link}>
+            <button
+              className={classes.button}
+              onClick={() => {
+                handleClick(3);
+              }}
+            >
+              Level 3
+            </button>
+          </Link>
+          <Link to="/level_3" className={classes.link}>
+            <button
+              className={classes.button}
+              onClick={() => {
+                handleClick(3);
+              }}
+            >
+              Level 4
+            </button>
+          </Link>
+          <Link to="/level_3" className={classes.link}>
+            <button
+              className={classes.button}
+              onClick={() => {
+                handleClick(3);
+              }}
+            >
+              Level 5
+            </button>
+          </Link>
+        </TabPanel>
+        <TabPanel value={value} index={3} dir={theme.direction}>
         <Link to="/level_3" className={classes.link}>
             <button
               className={classes.button}
