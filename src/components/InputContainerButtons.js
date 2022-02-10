@@ -44,6 +44,7 @@ function handleSubmitClick(
       handleGameOver();
     } else {
       generateEmptyArr();
+      state.fillTheGaps();
       handleRestartClick();
       playCorrectSound();
       handleClickOpenWin();

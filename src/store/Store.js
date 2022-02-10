@@ -27,6 +27,37 @@ function appendSheet(move, array, row) {
     );
   }
 }
+
+function fillGapsArr(firstZero) {
+  let arr = [];
+
+  for (let i = 0; i < state.zeroesEncountered - firstZero; i++) {
+    arr.push("x");
+  }
+
+  return arr;
+}
+
+//fillTheGaps should first:
+//> check the total number of 1-length arrays we have encountered
+//> then make sure that the bottom row (this happens to be the only row that will encounter empty cells)
+//  is filled with non-zero values until the length is the same as the zeroes encountered
+// >> example: if zeroesEncountered == 4 and the length of the original array is 10
+//              then bottom row will show 11xx000000
+function fillTheGaps() {
+  let firstZero = firstZeroFinder(state.depth, state.sheetSplit);
+  console.log(state.zeroesEncountered);
+  state.sheetSplit[state.depth].splice(
+    firstZero,
+    //Zeroes encoun tered is set to the length of the array on startup >> algorithm runs completely which sets the value to max
+    //Need to like, store the value in the object per step. so it can be refferred to each step. This will prevent the overflow
+    //This also causes the rest of the generation to bug out becuase the row is filled with x and not 0
+    //Fixing this should just fix that error
+    state.zeroesEncountered - firstZero,
+    ...fillGapsArr(firstZero)
+  );
+}
+
 function resetStates() {
   state.lives = 3;
   state.input = [];
@@ -53,9 +84,11 @@ const state = store({
   step: 1,
   gameOver: false,
   splits: [0],
+  zeroesEncountered: 0,
   depthInc: () => (state.runnable ? state.depth++ : state.depth),
   stepInc: () => state.step++,
   appendSheet: (move, array, row) => appendSheet(move, array, row),
+  fillTheGaps: () => fillTheGaps(),
   resetStates: () => resetStates(),
 });
 

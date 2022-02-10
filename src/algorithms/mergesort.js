@@ -54,7 +54,8 @@ export function mergeSort(array) {
     //If the array has grown and has split more than once (is not the original)
   } else if (array.length > prevSizeSplit && rowSplit > 0) {
     //Should return 2 if given 4
-    x = parseInt(Math.log(array.length) / Math.log(2));
+    x = Math.floor(Math.log(array.length) / Math.log(2));
+    console.log(x);
     if (rowSplit === state.depth && !state.runnable) {
       x++;
       reachedDepth = true;
@@ -65,19 +66,24 @@ export function mergeSort(array) {
     if (reachedDepth) {
       x--;
     }
+
     //If the array has been the same length 3 times >> Do this after even arrays work
   } else {
     if (array.length === prevSizeSplit && !tripleEqual) {
       tripleEqual = 1;
     } else if (tripleEqual === array.length && array.length === prevSizeSplit) {
       //Special case >>apend to current index and prev index at nearest 0
+      rowSplit--;
       //Append to row previous
       tripleEqual = 0;
     }
   }
 
+  console.log(rowSplit);
+
   if (array.length === 1) {
     state.runnable = 0;
+    state.zeroesEncountered++;
   }
 
   if (state.runnable === 1) {
