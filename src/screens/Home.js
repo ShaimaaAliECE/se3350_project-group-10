@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   button: {
+    justifyContent: "space-between",
     padding: 12,
     fontSize: 18,
     fontWeight: 400,
@@ -148,7 +149,7 @@ export default function Home() {
 
         <div>
       <Accordion className={classes.accordion}>
-        <AccordionSummary
+        <AccordionSummary className={classes.accordion}
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
@@ -165,7 +166,47 @@ export default function Home() {
                 handleClick(3);
               }}
             >
+              Level 1
+            </button>
+          </Link>
+          <Link to="/level_3" className={classes.link}>
+            <button
+              className={classes.button}
+              onClick={() => {
+                handleClick(3);
+              }}
+            >
+              Level 2
+            </button>
+          </Link>
+          <Link to="/level_3" className={classes.link}>
+            <button
+              className={classes.button}
+              onClick={() => {
+                handleClick(3);
+              }}
+            >
               Level 3
+            </button>
+          </Link>
+          <Link to="/level_3" className={classes.link}>
+            <button
+              className={classes.button}
+              onClick={() => {
+                handleClick(3);
+              }}
+            >
+              Level 4
+            </button>
+          </Link>
+          <Link to="/level_3" className={classes.link}>
+            <button
+              className={classes.button}
+              onClick={() => {
+                handleClick(3);
+              }}
+            >
+              Level 5
             </button>
           </Link>
 
@@ -222,7 +263,34 @@ export default function Home() {
           </Typography>
         </AccordionDetails>
       </Accordion>
+      <Accordion className={classes.accordion}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography>Merge Sort</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+            
+          <Link to="/level_3" className={classes.link}>
+            <button
+              className={classes.button}
+              onClick={() => {
+                handleClick(3);
+              }}
+            >
+              Level 3
+            </button>
+          </Link>
+
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
       </div>
+        
+{/*}
 
         <div className={classes.buttonContainer}>
           <Link to="/level_3" className={classes.link}>
@@ -268,6 +336,7 @@ export default function Home() {
             </button>
           </Link>
         </div>
+        */}
       </div>
     </div>
   );
