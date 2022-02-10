@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   button: {
+    margin: 20,
     justifyContent: "space-between",
     padding: 12,
     fontSize: 18,
