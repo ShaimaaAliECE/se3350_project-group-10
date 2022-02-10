@@ -54,6 +54,7 @@ function handleSubmitClick(
     playIncorrectSound();
     handleClickOpenFail();
   }
+  state.indexReset = 1;
 }
 
 // everytie piano click button, update state, click submit refer to store, compare input[] with ans[] at each step

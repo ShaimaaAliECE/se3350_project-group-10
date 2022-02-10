@@ -2,6 +2,7 @@ import { makeStyles } from "@material-ui/core";
 import React from "react";
 import state from "../store/Store";
 import { view } from "@risingstack/react-easy-state";
+import { useState } from "react";
 
 const useStyles = makeStyles((theme) => ({
   stylesContainerOuter: {
@@ -67,20 +68,24 @@ let ind = 0;
 
 function InputBoxes(props) {
   let arr = props.array ? props.array : state.input;
-
   let divisor;
 
-  if (ind + 1 === state.splits.length) {
+  if (ind === state.splits.length) {
     ind = 0;
   }
+
+  console.log(ind);
 
   if (state.step !== 0 && props.array && state.splits[ind] != 0) {
     divisor = Math.round(state.ans[0].array.length / (2 * state.splits[ind]));
   } else {
     divisor = state.ans[0].array.length;
   }
+  console.log(divisor);
 
-  ind++;
+  if (props.array) {
+    ind++;
+  }
 
   return <div style={stylesMainInner}>{CreateMap(chunk(arr, divisor))}</div>;
 }
