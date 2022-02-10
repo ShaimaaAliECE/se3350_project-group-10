@@ -224,6 +224,26 @@ export default function Home() {
         <AccordionDetails>
           <Typography>
             
+           <Link to="/level_3" className={classes.link}>
+            <button
+              className={classes.button}
+              onClick={() => {
+                handleClick(3);
+              }}
+            >
+              Level 1
+            </button>
+          </Link>
+          <Link to="/level_3" className={classes.link}>
+            <button
+              className={classes.button}
+              onClick={() => {
+                handleClick(3);
+              }}
+            >
+              Level 2
+            </button>
+          </Link>
           <Link to="/level_3" className={classes.link}>
             <button
               className={classes.button}
@@ -232,6 +252,26 @@ export default function Home() {
               }}
             >
               Level 3
+            </button>
+          </Link>
+          <Link to="/level_3" className={classes.link}>
+            <button
+              className={classes.button}
+              onClick={() => {
+                handleClick(3);
+              }}
+            >
+              Level 4
+            </button>
+          </Link>
+          <Link to="/level_3" className={classes.link}>
+            <button
+              className={classes.button}
+              onClick={() => {
+                handleClick(3);
+              }}
+            >
+              Level 5
             </button>
           </Link>
 
@@ -256,7 +296,47 @@ export default function Home() {
                 handleClick(3);
               }}
             >
+              Level 1
+            </button>
+          </Link>
+          <Link to="/level_3" className={classes.link}>
+            <button
+              className={classes.button}
+              onClick={() => {
+                handleClick(3);
+              }}
+            >
+              Level 2
+            </button>
+          </Link>
+          <Link to="/level_3" className={classes.link}>
+            <button
+              className={classes.button}
+              onClick={() => {
+                handleClick(3);
+              }}
+            >
               Level 3
+            </button>
+          </Link>
+          <Link to="/level_3" className={classes.link}>
+            <button
+              className={classes.button}
+              onClick={() => {
+                handleClick(3);
+              }}
+            >
+              Level 4
+            </button>
+          </Link>
+          <Link to="/level_3" className={classes.link}>
+            <button
+              className={classes.button}
+              onClick={() => {
+                handleClick(3);
+              }}
+            >
+              Level 5
             </button>
           </Link>
 
@@ -269,7 +349,7 @@ export default function Home() {
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography>Merge Sort</Typography>
+          <Typography>Recursive Sort</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
@@ -281,7 +361,47 @@ export default function Home() {
                 handleClick(3);
               }}
             >
+              Level 1
+            </button>
+          </Link>
+          <Link to="/level_3" className={classes.link}>
+            <button
+              className={classes.button}
+              onClick={() => {
+                handleClick(3);
+              }}
+            >
+              Level 2
+            </button>
+          </Link>
+          <Link to="/level_3" className={classes.link}>
+            <button
+              className={classes.button}
+              onClick={() => {
+                handleClick(3);
+              }}
+            >
               Level 3
+            </button>
+          </Link>
+          <Link to="/level_3" className={classes.link}>
+            <button
+              className={classes.button}
+              onClick={() => {
+                handleClick(3);
+              }}
+            >
+              Level 4
+            </button>
+          </Link>
+          <Link to="/level_3" className={classes.link}>
+            <button
+              className={classes.button}
+              onClick={() => {
+                handleClick(3);
+              }}
+            >
+              Level 5
             </button>
           </Link>
 
