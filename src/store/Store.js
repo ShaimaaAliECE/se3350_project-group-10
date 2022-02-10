@@ -38,7 +38,7 @@ function resetStates() {
   state.runnable = 1;
   state.step = 1;
   state.gameOver = false;
-  state.colorCheck = "grey"
+  state.colorCheck = "rgba(220,220,220, .6)"
 
 }
 

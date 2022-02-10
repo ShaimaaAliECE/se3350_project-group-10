@@ -39,7 +39,8 @@ function handleSubmitClick(
     state.appendSheet(
       state.ans[state.step].type,
       state.input,
-      state.ans[state.step].row
+      state.ans[state.step].row,
+      state.colorCheck= 'green'
     );
 
     state.stepInc();
@@ -54,6 +55,7 @@ function handleSubmitClick(
     }
   } else {
     state.lives--;
+    state.colorCheck= 'red'
     handleRestartClick();
     playIncorrectSound();
     handleClickOpenFail();
