@@ -102,7 +102,13 @@ function initializeSheets() {
 function handleClick(level) {
   switch (level) {
     case 1:
-      console.log("level 1");
+      console.log("Tutorial Level");
+      state.resetStates();
+      mergeSort([...random(1, 11)]);
+      generateEmptyArr();
+      initializeSplit();
+      initializeSheets();
+      state.level = 1;
       break;
     case 2:
       console.log("level 2");
@@ -113,6 +119,7 @@ function handleClick(level) {
       generateEmptyArr();
       initializeSplit();
       initializeSheets();
+      state.level = 3;
       break;
     default:
   }
@@ -127,11 +134,11 @@ export default function Home() {
           <img src={logo} style={{ height: 209, width: 661 }} alt="logo" />
         </div>
         <div className={classes.buttonContainer}>
-          <Link to="/level_3" className={classes.link}>
+          <Link to="/level_1" className={classes.link}>
             <button
               className={classes.button}
               onClick={() => {
-                handleClick(3);
+                handleClick(1);
               }}
             >
               Merge Sort

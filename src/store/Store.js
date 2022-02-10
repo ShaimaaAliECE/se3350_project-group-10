@@ -31,7 +31,7 @@ function resetStates() {
   state.lives = 3;
   state.input = [];
   state.ans = [];
-  state.level = 1;
+  state.level = 0;
   state.sheetMerge = [];
   state.sheetSplit = [];
   state.depth = 1;
@@ -44,7 +44,7 @@ const state = store({
   lives: 3,
   input: [],
   ans: [],
-  level: 1,
+  level: 0,
   algo: "merge",
   sheetMerge: [],
   sheetSplit: [],

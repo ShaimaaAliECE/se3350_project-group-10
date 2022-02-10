@@ -1,7 +1,9 @@
 import { makeStyles } from "@material-ui/core";
 import Piano from "../components/Piano";
 import InputContainer from "../components/InputContainer";
+import state from "../store/Store";
 import Sheet from "../components/Sheet";
+import PopUp from "../components/PopUp";
 import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -42,10 +44,10 @@ const useStyles = makeStyles((theme) => ({
 function Level() {
   const style = useStyles();
   let params = useParams();
-  // console.log(level.)
-
+  console.log(state.level);
   return (
     <div className={style.container}>
+      {state.level === 1 ? <PopUp /> : null}
       <div className={style.navbar}>Level {params.level} - Merge Sort</div>
       <div className={style.musicSheet}>
         <Sheet />

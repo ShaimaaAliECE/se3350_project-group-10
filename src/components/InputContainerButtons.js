@@ -1,10 +1,10 @@
 import React from "react";
-import { Button } from "@material-ui/core";
 import state from "../store/Store.js";
 import { view } from "@risingstack/react-easy-state";
 import { generateEmptyArr } from "../screens/Home";
 import { Modal } from "@material-ui/core";
 import { useState } from "react";
+import { Button, makeStyles } from "@material-ui/core";
 
 import {
   playCorrectSound,
