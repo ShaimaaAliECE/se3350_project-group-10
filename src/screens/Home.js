@@ -5,12 +5,42 @@ import { makeStyles } from "@material-ui/core";
 import { mergeSort } from "../algorithms/mergesort";
 import bg from "../assets/homeBG.svg";
 import logo from "../assets/Logo.svg";
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
+import PropTypes from 'prop-types';
+import SwipeableViews from 'react-swipeable-views';
+import { useTheme } from '@mui/material/styles';
+import AppBar from '@mui/material/AppBar';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Box from '@mui/material/Box';
 
+
+
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`full-width-tabpanel-${index}`}
+      aria-labelledby={`full-width-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};   
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -57,19 +87,7 @@ const useStyles = makeStyles((theme) => ({
   link: {
     textDecoration: "none",
   },
-  accordion: {
-    padding: 12,
-    fontSize: 18,
-    fontWeight: 400,
-    fontFamily: "Raleway",
-    textAlign: "center",
-    backgroundColor: "#757575",
-    border: 0,
-    borderRadius: 10,
-    "&:hover": {
-      cursor: "pointer",
-    },
-  }
+ 
 }));
 
 export function generateEmptyArr() {
@@ -140,6 +158,19 @@ function handleClick(level) {
 }
 
 export default function Home() {
+
+  const theme = useTheme();
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  const handleChangeIndex = (index) => {
+    setValue(index);
+  };
+
+
   const classes = useStyles();
   return (
     <div className={classes.container}>
@@ -148,19 +179,30 @@ export default function Home() {
           <img src={logo} style={{ height: 209, width: 661 }} alt="logo" />
         </div>
 
-        <div>
-      <Accordion className={classes.accordion}>
-        <AccordionSummary className={classes.accordion}
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
+        <div className={classes.button}>
+        <Box sx={{ bgcolor: 'background.paper', width: 500 }}>
+      <AppBar position="static">
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          indicatorColor="secondary"
+          textColor="inherit"
+          variant="fullWidth"
         >
-          <Typography>Merge Sort</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            
-          <Link to="/level_3" className={classes.link}>
+          <Tab label="Merge Sort" />
+          <Tab label="Quick Sort"  />
+          <Tab label="Insertion Sort"/>
+          <Tab label="Recursive Sort"/>
+        </Tabs>
+      </AppBar>
+
+      <SwipeableViews
+        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+        index={value}
+        onChangeIndex={handleChangeIndex}
+      >
+        <TabPanel value={value} index={0} dir={theme.direction}>
+        <Link to="/level_3" className={classes.link}>
             <button
               className={classes.button}
               onClick={() => {
@@ -169,7 +211,8 @@ export default function Home() {
             >
               Level 1
             </button>
-          </Link>
+          </Link>    
+          
           <Link to="/level_3" className={classes.link}>
             <button
               className={classes.button}
@@ -210,22 +253,9 @@ export default function Home() {
               Level 5
             </button>
           </Link>
-
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion className={classes.accordion}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography>Quick Sort</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            
-           <Link to="/level_3" className={classes.link}>
+        </TabPanel>
+        <TabPanel value={value} index={1} dir={theme.direction}>
+        <Link to="/level_3" className={classes.link}>
             <button
               className={classes.button}
               onClick={() => {
@@ -234,7 +264,8 @@ export default function Home() {
             >
               Level 1
             </button>
-          </Link>
+          </Link>    
+          
           <Link to="/level_3" className={classes.link}>
             <button
               className={classes.button}
@@ -275,22 +306,9 @@ export default function Home() {
               Level 5
             </button>
           </Link>
-
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion className={classes.accordion}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography>Insertion Sort</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            
-          <Link to="/level_3" className={classes.link}>
+        </TabPanel>
+        <TabPanel value={value} index={2} dir={theme.direction}>
+        <Link to="/level_3" className={classes.link}>
             <button
               className={classes.button}
               onClick={() => {
@@ -299,7 +317,8 @@ export default function Home() {
             >
               Level 1
             </button>
-          </Link>
+          </Link>    
+          
           <Link to="/level_3" className={classes.link}>
             <button
               className={classes.button}
@@ -340,75 +359,12 @@ export default function Home() {
               Level 5
             </button>
           </Link>
+        </TabPanel>
+      </SwipeableViews>
+    </Box>
+    
+       
 
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion className={classes.accordion}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography>Recursive Sort</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            
-          <Link to="/level_3" className={classes.link}>
-            <button
-              className={classes.button}
-              onClick={() => {
-                handleClick(3);
-              }}
-            >
-              Level 1
-            </button>
-          </Link>
-          <Link to="/level_3" className={classes.link}>
-            <button
-              className={classes.button}
-              onClick={() => {
-                handleClick(3);
-              }}
-            >
-              Level 2
-            </button>
-          </Link>
-          <Link to="/level_3" className={classes.link}>
-            <button
-              className={classes.button}
-              onClick={() => {
-                handleClick(3);
-              }}
-            >
-              Level 3
-            </button>
-          </Link>
-          <Link to="/level_3" className={classes.link}>
-            <button
-              className={classes.button}
-              onClick={() => {
-                handleClick(3);
-              }}
-            >
-              Level 4
-            </button>
-          </Link>
-          <Link to="/level_3" className={classes.link}>
-            <button
-              className={classes.button}
-              onClick={() => {
-                handleClick(3);
-              }}
-            >
-              Level 5
-            </button>
-          </Link>
-
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
       </div>
         
 {/*}
