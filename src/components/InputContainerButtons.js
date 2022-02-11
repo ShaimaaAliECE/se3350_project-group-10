@@ -86,7 +86,14 @@ export default view(function InputContainerButtons() {
 
   return (
     <>
-      <div style={{ display: "flex", padding: 10, flexDirection: "column" }}>
+      <div
+        style={{
+          display: "flex",
+          padding: 10,
+          flexDirection: "column",
+          fontFamily: "Raleway",
+        }}
+      >
         <Button
           variant="contained"
           onClick={() => {

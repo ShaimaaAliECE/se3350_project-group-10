@@ -5,27 +5,6 @@ import InputContainerButtons from "./InputContainerButtons";
 import InputBoxes from "./InputBoxes";
 import { view } from "@risingstack/react-easy-state";
 
-// const stylesMainOuter = {
-//   display: "flex",
-//   flexDirection: "row",
-//   alignItems: "center",
-//   justifyContent: "center",
-// };
-
-//  display: "flex",
-//     justifyContent: "center",
-//     backgroundColor: "white",
-//     width: 60,
-//     height: "100%",
-//     padding: 5,
-//     zIndex: -1,
-
-// const fillerSpace = {
-//   display: "flex",
-//   flexDirection: "row",
-//   height: "100px",
-// };
-
 const useStyles = makeStyles((theme) => ({
   stylesMainOuter: {
     fontFamily: "Raleway",
@@ -47,6 +26,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+function displayStep() {
+  // increment displayed step
+  return 0;
+}
+
 function InputContainer() {
   const style = useStyles();
 
@@ -59,7 +43,9 @@ function InputContainer() {
           <Button
             variant="contained"
             className={style.nextBtn}
-            onClick={() => {}}
+            onClick={() => {
+              displayStep();
+            }}
           >
             Next
           </Button>

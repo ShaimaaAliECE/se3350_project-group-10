@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   container: {
+    fontFamily: "Raleway",
     height: "100%",
     width: "100%",
     display: "flex",
