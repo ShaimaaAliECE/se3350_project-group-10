@@ -30,6 +30,7 @@ function handleSubmitClick(
   handleClickOpenWin,
   handleGameOver
 ) {
+  console.log("ze: " + state.ans[state.step - 1].zeroesEncountered);
   //Check the answer, if its right --> increment step, handle restart, state.sheet.push(state.input)
   if (arrComp(state.ans[state.step].array, state.input)) {
     state.appendSheet(
@@ -44,7 +45,7 @@ function handleSubmitClick(
       handleGameOver();
     } else {
       generateEmptyArr();
-      state.fillTheGaps();
+      state.fillTheGaps(state.ans[state.step - 1].zeroesEncountered);
       handleRestartClick();
       playCorrectSound();
       handleClickOpenWin();
@@ -55,6 +56,7 @@ function handleSubmitClick(
     playIncorrectSound();
     handleClickOpenFail();
   }
+  state.indexReset = 1;
 }
 
 // everytie piano click button, update state, click submit refer to store, compare input[] with ans[] at each step

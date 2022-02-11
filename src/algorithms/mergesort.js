@@ -35,6 +35,7 @@ function merge(left, right) {
     array: [...arr, ...left, ...right],
     row: rowMerge,
     type: "merge",
+    zeroesEncountered: state.zeroesEncountered,
   };
 
   state.ans.push(rowObj);
@@ -50,12 +51,11 @@ export function mergeSort(array) {
   //If the length of the array has shrunk since last check
   if (array.length < prevSizeSplit) {
     rowSplit++;
-
+    tripleEqual = 0;
     //If the array has grown and has split more than once (is not the original)
   } else if (array.length > prevSizeSplit && rowSplit > 0) {
     //Should return 2 if given 4
     x = Math.floor(Math.log(array.length) / Math.log(2));
-    console.log(x);
     if (rowSplit === state.depth && !state.runnable) {
       x++;
       reachedDepth = true;
@@ -67,6 +67,7 @@ export function mergeSort(array) {
       x--;
     }
 
+    tripleEqual = 0;
     //If the array has been the same length 3 times >> Do this after even arrays work
   } else {
     if (array.length === prevSizeSplit && !tripleEqual) {
@@ -79,8 +80,6 @@ export function mergeSort(array) {
     }
   }
 
-  console.log(rowSplit);
-
   if (array.length === 1) {
     state.runnable = 0;
     state.zeroesEncountered++;
@@ -90,7 +89,12 @@ export function mergeSort(array) {
     state.depth++;
   }
 
-  let rowObj = { array: [...array], row: rowSplit, type: "split" };
+  let rowObj = {
+    array: [...array],
+    row: rowSplit,
+    type: "split",
+    zeroesEncountered: state.zeroesEncountered,
+  };
 
   const half = Math.ceil(array.length / 2);
 
@@ -100,7 +104,6 @@ export function mergeSort(array) {
 
   prevSizeSplit = array.length;
 
-  // console.log("len gthAtEnd: " + prevSizeSplit);
   if (array.length < 2) {
     return array;
   }
