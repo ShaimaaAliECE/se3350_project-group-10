@@ -74,14 +74,11 @@ function InputBoxes(props) {
     ind = 0;
   }
 
-  console.log(ind);
-
   if (state.step !== 0 && props.array && state.splits[ind] != 0) {
     divisor = Math.round(state.ans[0].array.length / (2 * state.splits[ind]));
   } else {
     divisor = state.ans[0].array.length;
   }
-  console.log(divisor);
 
   if (props.array) {
     ind++;
