@@ -5,42 +5,14 @@ import { makeStyles } from "@material-ui/core";
 import { mergeSort } from "../algorithms/mergesort";
 import bg from "../assets/homeBG.svg";
 import logo from "../assets/Logo.svg";
-import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 import { useTheme } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import {TabPanel} from "../components/Tabs.js"; 
 
-
-
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`full-width-tabpanel-${index}`}
-      aria-labelledby={`full-width-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
-};   
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -67,7 +39,13 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     marginBottom: 65, //Toolbar takes up 65px
   },
-
+  tabs:
+  {
+    fontFamily: "Raleway", 
+    color:"white", 
+    fontSize: 15, 
+    fontWeight: 450
+  }, 
   button: {
     margin: 20,
     justifyContent: "space-between",
@@ -77,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Raleway",
     color: "white",
     textAlign: "center",
-    backgroundColor: "#757575",
+    backgroundColor: "#504c4c",
     border: 0,
     borderRadius: 10,
     "&:hover": {
@@ -157,8 +135,9 @@ function handleClick(level) {
   }
 }
 
-export default function Home() {
+export default function Home(){
 
+  //Values and States for the Tabs  
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
 
@@ -180,19 +159,22 @@ export default function Home() {
         </div>
 
         <div>
-        <Box sx={{ bgcolor: 'background.paper', width: "100%" }}>
-      <AppBar position="static">
+        <Box sx={{ bgcolor: 'background.paper', width: "100%", borderRadius:'5px'}}>
+      <AppBar style={{borderRadius:'5px', backgroundColor:"#646464" }} position="static">
         <Tabs
+          TabIndicatorProps={{style: {backgroundColor: "white"}}}
           value={value}
           onChange={handleChange}
-          indicatorColor="secondary"
           textColor="inherit"
           variant="fullWidth"
+          style={{borderRadius:'5px', indicatorColor:"red", backgroundColor:"#646464"}}
+          
+         
         >
-          <Tab label="Merge Sort" />
-          <Tab label="Quick Sort"  />
-          <Tab label="Insertion Sort"/>
-          <Tab label="Recursive Sort"/>
+          <Tab label={<span className={classes.tabs}>Merge Sort</span>} />
+          <Tab label={<span className={classes.tabs}>Quick Sort</span>} />
+          <Tab label={<span className={classes.tabs}>Insertion Sort</span>} />
+          <Tab label={<span className={classes.tabs}>Recursive Sort</span>} />
         </Tabs>
       </AppBar>
 
@@ -416,57 +398,7 @@ export default function Home() {
       </SwipeableViews>
     </Box>
     
-       
-
       </div>
-        
-{/*}
-
-        <div className={classes.buttonContainer}>
-          <Link to="/level_3" className={classes.link}>
-            <button
-              className={classes.button}
-              onClick={() => {
-                handleClick(3);
-              }}
-            >
-              Merge Sort
-            </button>
-          </Link>
-
-
-          <Link to="/level_3" className={classes.link}>
-            <button
-              className={classes.button}
-              onClick={() => {
-                handleClick(3);
-              }}
-            >
-              Quick Sort
-            </button>
-          </Link>
-          <Link to="/level_3" className={classes.link}>
-            <button
-              className={classes.button}
-              onClick={() => {
-                handleClick(3);
-              }}
-            >
-              Insertion Sort
-            </button>
-          </Link>
-          <Link to="/level_3" className={classes.link}>
-            <button
-              className={classes.button}
-              onClick={() => {
-                handleClick(3);
-              }}
-            >
-              Recursive Sort
-            </button>
-          </Link>
-        </div>
-        */}
       </div>
     </div>
   );
