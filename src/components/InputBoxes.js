@@ -28,7 +28,10 @@ const stylesMainInner = {
 function chunk(array, limit) {
   const chunks = Math.ceil(array.length / limit);
   return Array.from({ length: chunks }, (_, i) =>
-    array.slice((i * array.length) / chunks, ((i + 1) * array.length) / chunks)
+    array.slice(
+      Math.ceil((i * array.length) / chunks),
+      Math.ceil(((i + 1) * array.length) / chunks)
+    )
   );
 }
 
@@ -74,14 +77,11 @@ function InputBoxes(props) {
     ind = 0;
   }
 
-  console.log(ind);
-
   if (state.step !== 0 && props.array && state.splits[ind] != 0) {
     divisor = Math.round(state.ans[0].array.length / (2 * state.splits[ind]));
   } else {
     divisor = state.ans[0].array.length;
   }
-  console.log(divisor);
 
   if (props.array) {
     ind++;

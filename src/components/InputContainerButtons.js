@@ -44,6 +44,7 @@ function handleSubmitClick(
       handleGameOver();
     } else {
       generateEmptyArr();
+      state.fillTheGaps(state.ans[state.step - 1].zeroesEncountered);
       handleRestartClick();
       playCorrectSound();
       handleClickOpenWin();
