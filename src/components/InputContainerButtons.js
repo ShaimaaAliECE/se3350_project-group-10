@@ -30,7 +30,6 @@ function handleSubmitClick(
   handleClickOpenWin,
   handleGameOver
 ) {
-  console.log("ze: " + state.ans[state.step - 1].zeroesEncountered);
   //Check the answer, if its right --> increment step, handle restart, state.sheet.push(state.input)
   if (arrComp(state.ans[state.step].array, state.input)) {
     state.appendSheet(
