@@ -28,7 +28,10 @@ const stylesMainInner = {
 function chunk(array, limit) {
   const chunks = Math.ceil(array.length / limit);
   return Array.from({ length: chunks }, (_, i) =>
-    array.slice((i * array.length) / chunks, ((i + 1) * array.length) / chunks)
+    array.slice(
+      Math.ceil((i * array.length) / chunks),
+      Math.ceil(((i + 1) * array.length) / chunks)
+    )
   );
 }
 
