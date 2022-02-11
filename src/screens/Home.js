@@ -15,6 +15,14 @@ import {TabPanel} from "../components/Tabs.js";
 
 
 const useStyles = makeStyles((theme) => ({
+  appBar:{
+    borderRadius:'5px', 
+    backgroundColor:"#646464"
+  },
+  box:{
+    width: "100%", 
+    borderRadius:'5px'
+  },
   container: {
     padding: 0,
     margin: 0,
@@ -39,13 +47,6 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     marginBottom: 65, //Toolbar takes up 65px
   },
-  tabs:
-  {
-    fontFamily: "Raleway", 
-    color:"white", 
-    fontSize: 15, 
-    fontWeight: 450
-  }, 
   button: {
     margin: 20,
     justifyContent: "space-between",
@@ -65,7 +66,17 @@ const useStyles = makeStyles((theme) => ({
   link: {
     textDecoration: "none",
   },
- 
+  tabs:  {
+    fontFamily: "Raleway", 
+    color:"white", 
+    fontSize: 15, 
+    fontWeight: 450
+  }, 
+  tabContainer:{
+    borderRadius:'5px', 
+    indicatorColor:"red", 
+    backgroundColor:"#646464"
+  }
 }));
 
 export function generateEmptyArr() {
@@ -159,15 +170,15 @@ export default function Home(){
         </div>
 
         <div>
-        <Box sx={{ bgcolor: 'background.paper', width: "100%", borderRadius:'5px'}}>
-      <AppBar style={{borderRadius:'5px', backgroundColor:"#646464" }} position="static">
+        <Box sx={{bgcolor: 'background.paper'}} className={classes.box}>
+      <AppBar className={classes.appBar} position="static">
         <Tabs
           TabIndicatorProps={{style: {backgroundColor: "white"}}}
           value={value}
           onChange={handleChange}
           textColor="inherit"
           variant="fullWidth"
-          style={{borderRadius:'5px', indicatorColor:"red", backgroundColor:"#646464"}}
+          className={classes.tabContainer}
           
          
         >
