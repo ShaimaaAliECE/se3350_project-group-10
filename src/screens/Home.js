@@ -5,24 +5,8 @@ import { makeStyles } from "@material-ui/core";
 import { mergeSort } from "../algorithms/mergesort";
 import bg from "../assets/homeBG.svg";
 import logo from "../assets/Logo.svg";
-import SwipeableViews from 'react-swipeable-views';
-import { useTheme } from '@mui/material/styles';
-import AppBar from '@mui/material/AppBar';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Box from '@mui/material/Box';
-import {TabPanel} from "../components/Tabs.js"; 
-
 
 const useStyles = makeStyles((theme) => ({
-  appBar:{
-    borderRadius:'5px', 
-    backgroundColor:"#646464"
-  },
-  box:{
-    width: "100%", 
-    borderRadius:'5px'
-  },
   container: {
     padding: 0,
     margin: 0,
@@ -47,16 +31,15 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     marginBottom: 65, //Toolbar takes up 65px
   },
+
   button: {
-    margin: 20,
-    justifyContent: "space-between",
     padding: 12,
     fontSize: 18,
     fontWeight: 400,
     fontFamily: "Raleway",
     color: "white",
     textAlign: "center",
-    backgroundColor: "#504c4c",
+    backgroundColor: "#757575",
     border: 0,
     borderRadius: 10,
     "&:hover": {
@@ -66,17 +49,6 @@ const useStyles = makeStyles((theme) => ({
   link: {
     textDecoration: "none",
   },
-  tabs:  {
-    fontFamily: "Raleway", 
-    color:"white", 
-    fontSize: 15, 
-    fontWeight: 450
-  }, 
-  tabContainer:{
-    borderRadius:'5px', 
-    indicatorColor:"red", 
-    backgroundColor:"#646464"
-  }
 }));
 
 export function generateEmptyArr() {
@@ -146,21 +118,7 @@ function handleClick(level) {
   }
 }
 
-export default function Home(){
-
-  //Values and States for the Tabs  
-  const theme = useTheme();
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
-  const handleChangeIndex = (index) => {
-    setValue(index);
-  };
-
-
+export default function Home() {
   const classes = useStyles();
   return (
     <div className={classes.container}>
@@ -168,44 +126,7 @@ export default function Home(){
         <div className={classes.logo}>
           <img src={logo} style={{ height: 209, width: 661 }} alt="logo" />
         </div>
-
-        <div>
-        <Box sx={{bgcolor: 'background.paper'}} className={classes.box}>
-      <AppBar className={classes.appBar} position="static">
-        <Tabs
-          TabIndicatorProps={{style: {backgroundColor: "white"}}}
-          value={value}
-          onChange={handleChange}
-          textColor="inherit"
-          variant="fullWidth"
-          className={classes.tabContainer}
-          
-         
-        >
-          <Tab label={<span className={classes.tabs}>Merge Sort</span>} />
-          <Tab label={<span className={classes.tabs}>Quick Sort</span>} />
-          <Tab label={<span className={classes.tabs}>Insertion Sort</span>} />
-          <Tab label={<span className={classes.tabs}>Recursive Sort</span>} />
-        </Tabs>
-      </AppBar>
-
-      <SwipeableViews
-        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-        index={value}
-        onChangeIndex={handleChangeIndex}
-      >
-        <TabPanel value={value} index={0} dir={theme.direction}>
-        <Link to="/level_3" className={classes.link}>
-            <button
-              className={classes.button}
-              onClick={() => {
-                handleClick(3);
-              }}
-            >
-              Level 1
-            </button>
-          </Link>    
-          
+        <div className={classes.buttonContainer}>
           <Link to="/level_3" className={classes.link}>
             <button
               className={classes.button}
@@ -213,7 +134,7 @@ export default function Home(){
                 handleClick(3);
               }}
             >
-              Level 2
+              Merge Sort
             </button>
           </Link>
           <Link to="/level_3" className={classes.link}>
@@ -223,7 +144,7 @@ export default function Home(){
                 handleClick(3);
               }}
             >
-              Level 3
+              Quick Sort
             </button>
           </Link>
           <Link to="/level_3" className={classes.link}>
@@ -233,7 +154,7 @@ export default function Home(){
                 handleClick(3);
               }}
             >
-              Level 4
+              Insertion Sort
             </button>
           </Link>
           <Link to="/level_3" className={classes.link}>
@@ -243,173 +164,10 @@ export default function Home(){
                 handleClick(3);
               }}
             >
-              Level 5
+              Recursive Sort
             </button>
           </Link>
-        </TabPanel>
-        <TabPanel value={value} index={1} dir={theme.direction}>
-        <Link to="/level_3" className={classes.link}>
-            <button
-              className={classes.button}
-              onClick={() => {
-                handleClick(3);
-              }}
-            >
-              Level 1
-            </button>
-          </Link>    
-          
-          <Link to="/level_3" className={classes.link}>
-            <button
-              className={classes.button}
-              onClick={() => {
-                handleClick(3);
-              }}
-            >
-              Level 2
-            </button>
-          </Link>
-          <Link to="/level_3" className={classes.link}>
-            <button
-              className={classes.button}
-              onClick={() => {
-                handleClick(3);
-              }}
-            >
-              Level 3
-            </button>
-          </Link>
-          <Link to="/level_3" className={classes.link}>
-            <button
-              className={classes.button}
-              onClick={() => {
-                handleClick(3);
-              }}
-            >
-              Level 4
-            </button>
-          </Link>
-          <Link to="/level_3" className={classes.link}>
-            <button
-              className={classes.button}
-              onClick={() => {
-                handleClick(3);
-              }}
-            >
-              Level 5
-            </button>
-          </Link>
-        </TabPanel>
-        <TabPanel value={value} index={2} dir={theme.direction}>
-        <Link to="/level_3" className={classes.link}>
-            <button
-              className={classes.button}
-              onClick={() => {
-                handleClick(3);
-              }}
-            >
-              Level 1
-            </button>
-          </Link>    
-          
-          <Link to="/level_3" className={classes.link}>
-            <button
-              className={classes.button}
-              onClick={() => {
-                handleClick(3);
-              }}
-            >
-              Level 2
-            </button>
-          </Link>
-          <Link to="/level_3" className={classes.link}>
-            <button
-              className={classes.button}
-              onClick={() => {
-                handleClick(3);
-              }}
-            >
-              Level 3
-            </button>
-          </Link>
-          <Link to="/level_3" className={classes.link}>
-            <button
-              className={classes.button}
-              onClick={() => {
-                handleClick(3);
-              }}
-            >
-              Level 4
-            </button>
-          </Link>
-          <Link to="/level_3" className={classes.link}>
-            <button
-              className={classes.button}
-              onClick={() => {
-                handleClick(3);
-              }}
-            >
-              Level 5
-            </button>
-          </Link>
-        </TabPanel>
-        <TabPanel value={value} index={3} dir={theme.direction}>
-        <Link to="/level_3" className={classes.link}>
-            <button
-              className={classes.button}
-              onClick={() => {
-                handleClick(3);
-              }}
-            >
-              Level 1
-            </button>
-          </Link>    
-          
-          <Link to="/level_3" className={classes.link}>
-            <button
-              className={classes.button}
-              onClick={() => {
-                handleClick(3);
-              }}
-            >
-              Level 2
-            </button>
-          </Link>
-          <Link to="/level_3" className={classes.link}>
-            <button
-              className={classes.button}
-              onClick={() => {
-                handleClick(3);
-              }}
-            >
-              Level 3
-            </button>
-          </Link>
-          <Link to="/level_3" className={classes.link}>
-            <button
-              className={classes.button}
-              onClick={() => {
-                handleClick(3);
-              }}
-            >
-              Level 4
-            </button>
-          </Link>
-          <Link to="/level_3" className={classes.link}>
-            <button
-              className={classes.button}
-              onClick={() => {
-                handleClick(3);
-              }}
-            >
-              Level 5
-            </button>
-          </Link>
-        </TabPanel>
-      </SwipeableViews>
-    </Box>
-    
-      </div>
+        </div>
       </div>
     </div>
   );
