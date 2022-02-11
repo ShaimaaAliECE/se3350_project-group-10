@@ -4,6 +4,10 @@ import state from "../store/Store";
 import InputContainerButtons from "./InputContainerButtons";
 import InputBoxes from "./InputBoxes";
 import { view } from "@risingstack/react-easy-state";
+import levelone from "../assets/level-one.json";
+
+// //importing level 1 instructions
+// const levelOne = require("../assets/level-one.json");
 
 const useStyles = makeStyles((theme) => ({
   stylesMainOuter: {
@@ -26,11 +30,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function displayStep() {
-  // increment displayed step
-  return 0;
-}
-
 function InputContainer() {
   const style = useStyles();
 
@@ -44,7 +43,7 @@ function InputContainer() {
             variant="contained"
             className={style.nextBtn}
             onClick={() => {
-              displayStep();
+              state.instruct = state.instruct + 1;
             }}
           >
             Next

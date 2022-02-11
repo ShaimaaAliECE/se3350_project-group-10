@@ -38,6 +38,7 @@ function resetStates() {
   state.runnable = 1;
   state.step = 1;
   state.gameOver = false;
+  state.instruct = 0;
 }
 
 const state = store({
@@ -45,6 +46,7 @@ const state = store({
   input: [],
   ans: [],
   level: 0,
+  instruct: 0,
   algo: "merge",
   sheetMerge: [],
   sheetSplit: [],
