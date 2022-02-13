@@ -6,6 +6,8 @@ import InputBoxes from "./InputBoxes";
 import { view } from "@risingstack/react-easy-state";
 import levelone from "../assets/level-one.json";
 
+import { handleSubmitClick } from "./InputContainerButtons.js";
+
 // //importing level 1 instructions
 // const levelOne = require("../assets/level-one.json");
 
@@ -44,6 +46,9 @@ function InputContainer() {
             className={style.nextBtn}
             onClick={() => {
               state.instruct = state.instruct + 1;
+              state.input = state.ans[state.instruct].array;
+              //submit from inbutContainerButtons >
+              handleSubmitClick();
             }}
           >
             Next

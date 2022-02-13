@@ -25,7 +25,7 @@ function arrComp(arr1, arr2) {
   return arr1.every((val, index) => val === arr2[index]);
 }
 
-function handleSubmitClick(
+export function handleSubmitClick(
   handleClickOpenFail,
   handleClickOpenWin,
   handleGameOver
