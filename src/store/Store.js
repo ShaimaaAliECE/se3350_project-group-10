@@ -27,6 +27,27 @@ function appendSheet(move, array, row) {
     );
   }
 }
+
+function fillGapsArr(firstZero, zeroesEncountered) {
+  let arr = [];
+
+  for (let i = 0; i < zeroesEncountered - firstZero; i++) {
+    arr.push("x");
+  }
+
+  return arr;
+}
+
+function fillTheGaps(zeroesEncountered) {
+  let firstZero = firstZeroFinder(state.depth - 1, state.sheetSplit);
+
+  state.sheetSplit[state.depth - 1].splice(
+    firstZero,
+    zeroesEncountered - firstZero,
+    ...fillGapsArr(firstZero, zeroesEncountered)
+  );
+}
+
 function resetStates() {
   state.lives = 3;
   state.input = [];
@@ -55,9 +76,12 @@ const state = store({
   step: 1,
   gameOver: false,
   splits: [0],
+  zeroesEncountered: 0,
+  indexReset: 0,
   depthInc: () => (state.runnable ? state.depth++ : state.depth),
   stepInc: () => state.step++,
   appendSheet: (move, array, row) => appendSheet(move, array, row),
+  fillTheGaps: (zeroesEncountered) => fillTheGaps(zeroesEncountered),
   resetStates: () => resetStates(),
 });
 
