@@ -40,7 +40,7 @@ function handleSubmitClick(
       state.ans[state.step].type,
       state.input,
       state.ans[state.step].row,
-      state.colorCheck= 'green'
+
     );
 
     state.stepInc();
@@ -55,7 +55,7 @@ function handleSubmitClick(
     }
   } else {
     state.lives--;
-    state.colorCheck= 'red'
+
     handleRestartClick();
     playIncorrectSound();
     handleClickOpenFail();
@@ -68,6 +68,7 @@ export default view(function InputContainerButtons() {
   const [openFail, setOpenFail] = React.useState(false);
   const [openWin, setOpenWin] = React.useState(false);
   let [openModal, setOpenModal] = useState(false);
+
   const handleGameOver = () => {
     state.gameOver = true;
     setOpenModal(true);

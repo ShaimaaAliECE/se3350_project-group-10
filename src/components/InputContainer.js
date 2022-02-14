@@ -16,7 +16,6 @@ function InputContainer() {
   return (
     <div style={stylesMainOuter}>
       <SubmitBoxes />
-      <InputContainerButtons />
     </div>
   );
 }
