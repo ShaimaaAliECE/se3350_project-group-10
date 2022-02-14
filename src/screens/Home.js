@@ -98,10 +98,9 @@ function initializeSplit() {
     state.splits.push(i);
   }
   //Switch to -2 for 0,1,2,3,4,3,2,1,0 instead of 0,1,2,3,4,4,3,2,1,0
-  for (let i = state.depth - 1; i > 0; i--) {
+  for (let i = state.depth - 2; i > 0; i--) {
     state.splits.push(i);
   }
-  state.splits.push(0);
 }
 
 function initializeSheets() {
@@ -117,7 +116,7 @@ function initializeSheets() {
   }
 
   //Fill sheetMerge
-  for (let i = 0; i < depth - 1; i++) {
+  for (let i = 0; i < depth - 2; i++) {
     temp = [];
     for (let j = 0; j < state.ans[0].array.length; j++) {
       temp.push(0);
