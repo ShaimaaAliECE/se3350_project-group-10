@@ -1,9 +1,7 @@
 import React from "react";
-
-import { Button, makeStyles } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 import state from "../store/Store";
 import { view } from "@risingstack/react-easy-state";
-
 import InputBoxes from "./InputBoxes";
 
 const useStyles = makeStyles(() => ({
@@ -16,24 +14,11 @@ const useStyles = makeStyles(() => ({
   },
   lines: {
     borderBottom: 15,
+    width: "100%",
     color: "black",
   },
   lineRow: {
-    marginTop: 50,
-  },
-  square: {
-    display: "flex",
-    width: 50,
-    height: 50,
-    flexDirection: "row",
-    margin: 10,
-    background: "rgba(220,220,220, .6)",
-    textAlign: "center",
-  },
-  main: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+    zIndex: 2,
   },
   stylesContainerInner: {
     display: "flex",
@@ -41,22 +26,38 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-//creating function component sheet
-//include Lines as component
 function Sheet() {
   const styles = useStyles();
-  state.sheetSplit[0] = state.ans[0]?.array;
+  state.sheetSplit[0] = { array: state.ans[0]?.array, row: 0 };
   let arr = [...state.sheetSplit, ...state.sheetMerge];
-
+  let indRef = -1;
   return (
     <div className={styles.container}>
       <div className={styles.stylesContainerInner}>
-        {arr.map((arrObj) => (
-          <div>
-            <Lines />
-            <InputBoxes array={arrObj} />
-          </div>
-        ))}
+        {arr.map(function (arrObj) {
+          indRef++;
+          return (
+            <div
+              style={{
+                position: "relative",
+                marginTop: 50,
+              }}
+            >
+              <Lines />
+              <div
+                style={{
+                  zIndex: 1,
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  transform: " translate(-50%, -50%)",
+                }}
+              >
+                <InputBoxes arrObj={arrObj} indRef={indRef} />
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

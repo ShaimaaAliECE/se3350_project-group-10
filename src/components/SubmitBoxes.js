@@ -69,6 +69,13 @@ function CreateMap(arrOuter) {
     setFeedback("rgba(220,220,220, .6)");
     state.reseting = false;
   }
+  function navigateSheet() {
+    let row = state.ans[state.step].row;
+    if (row >= 1) {
+      let el = document.getElementById(row - 1);
+      el?.scrollIntoView();
+    }
+  }
 
   function handleSubmitClick(handleGameOver) {
     //Check the answer, if its right --> increment step, handle restart, state.sheet.push(state.input)
@@ -78,8 +85,8 @@ function CreateMap(arrOuter) {
         state.input,
         state.ans[state.step].row
       );
-
       state.stepInc();
+      setTimeout(navigateSheet, 1000);
       if (state.step >= state.ans.length) {
         //Win!
         handleGameOver();
