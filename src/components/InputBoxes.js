@@ -2,7 +2,6 @@ import { makeStyles } from "@material-ui/core";
 import React from "react";
 import state from "../store/Store";
 import { view } from "@risingstack/react-easy-state";
-import { useState } from "react";
 
 const useStyles = makeStyles((theme) => ({
   stylesContainerOuter: {
@@ -55,7 +54,7 @@ function CreateMap(arrOuter) {
                 alignItems: "center",
                 color: "black",
                 margin: 10,
-                background: "rgba(220,220,220, .6)",
+                background: "rgba(220,220,220, 1)",
               }}
             >
               {arrObj === 0 ? "" : arrObj}
@@ -67,27 +66,22 @@ function CreateMap(arrOuter) {
   );
 }
 
-let ind = 0;
-
 function InputBoxes(props) {
-  let arr = props.array ? props.array : state.input;
+  let arr = props.arrObj.array;
+  let indRef = props.indRef;
   let divisor;
-
-  if (ind === state.splits.length) {
-    ind = 0;
-  }
-
-  if (state.step !== 0 && props.array && state.splits[ind] != 0) {
-    divisor = Math.round(state.ans[0].array.length / (2 * state.splits[ind]));
+  if (state.step !== 0 && state.splits[indRef] !== 0) {
+    divisor = Math.round(
+      state.ans[0].array.length / (2 * state.splits[indRef])
+    );
   } else {
     divisor = state.ans[0].array.length;
   }
-
-  if (props.array) {
-    ind++;
-  }
-
-  return <div style={stylesMainInner}>{CreateMap(chunk(arr, divisor))}</div>;
+  return (
+    <div id={props.arrObj.row} style={stylesMainInner}>
+      {CreateMap(chunk(arr, divisor))}
+    </div>
+  );
 }
 
 export default view(InputBoxes);

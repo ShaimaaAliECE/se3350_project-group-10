@@ -1,15 +1,10 @@
 import { makeStyles, Button } from "@material-ui/core";
 import React from "react";
-import state from "../store/Store";
-import InputContainerButtons from "./InputContainerButtons";
-import InputBoxes from "./InputBoxes";
 import { view } from "@risingstack/react-easy-state";
 import levelone from "../assets/level-one.json";
-
-import { handleSubmitClick } from "./InputContainerButtons.js";
-
-// //importing level 1 instructions
-// const levelOne = require("../assets/level-one.json");
+import { handleSubmitClick } from "./SubmitBoxes";
+import SubmitBoxes from "./SubmitBoxes";
+import state from "../store/Store";
 
 const useStyles = makeStyles((theme) => ({
   stylesMainOuter: {
@@ -38,7 +33,7 @@ function InputContainer() {
   return (
     <div className={style.stylesMainOuter}>
       {state.level != 1 ? (
-        <InputBoxes />
+        <SubmitBoxes />
       ) : (
         <div className={style.fillerSpace}>
           <Button
@@ -47,7 +42,6 @@ function InputContainer() {
             onClick={() => {
               state.instruct = state.instruct + 1;
               state.input = state.ans[state.instruct].array;
-              //submit from inbutContainerButtons >
               handleSubmitClick();
             }}
           >
@@ -55,7 +49,6 @@ function InputContainer() {
           </Button>
         </div>
       )}
-      {state.level != 1 ? <InputContainerButtons /> : null}
     </div>
   );
 }

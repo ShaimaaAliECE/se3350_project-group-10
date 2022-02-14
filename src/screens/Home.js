@@ -98,7 +98,7 @@ function initializeSplit() {
     state.splits.push(i);
   }
   //Switch to -2 for 0,1,2,3,4,3,2,1,0 instead of 0,1,2,3,4,4,3,2,1,0
-  for (let i = state.depth - 1; i > 0; i--) {
+  for (let i = state.depth - 2; i > 0; i--) {
     state.splits.push(i);
   }
   state.splits.push(0);
@@ -113,16 +113,16 @@ function initializeSheets() {
     for (let j = 0; j < state.ans[0].array.length; j++) {
       temp.push(0);
     }
-    state.sheetSplit.push(temp);
+    state.sheetSplit.push({ array: temp, row: i });
   }
 
   //Fill sheetMerge
-  for (let i = 0; i < depth - 1; i++) {
+  for (let i = 0; i < depth - 2; i++) {
     temp = [];
     for (let j = 0; j < state.ans[0].array.length; j++) {
       temp.push(0);
     }
-    state.sheetMerge.push(temp);
+    state.sheetMerge.push({ array: temp, row: i + depth + 1 });
   }
 }
 
@@ -192,7 +192,6 @@ export default function Home() {
         <div className={classes.logo}>
           <img src={logo} style={{ height: 209, width: 661 }} alt="logo" />
         </div>
-
         <div>
           <Box sx={{ bgcolor: "background.paper" }} className={classes.box}>
             <AppBar className={classes.appBar} position="static">
@@ -220,9 +219,8 @@ export default function Home() {
               index={value}
               onChangeIndex={handleChangeIndex}
             >
-              {/* Merge Sort Tab*/}
               <TabPanel value={value} index={0} dir={theme.direction}>
-                <Link to="/level_3" className={classes.link}>
+                <Link to="/level_1" className={classes.link}>
                   <button
                     className={classes.button}
                     onClick={() => {
@@ -232,12 +230,11 @@ export default function Home() {
                     Level 1
                   </button>
                 </Link>
-
                 <Link to="/level_3" className={classes.link}>
                   <button
                     className={classes.button}
                     onClick={() => {
-                      handleClick(2);
+                      handleClick(3);
                     }}
                   >
                     Level 2
@@ -274,19 +271,17 @@ export default function Home() {
                   </button>
                 </Link>
               </TabPanel>
-              {/* Quick Sort Tab*/}
               <TabPanel value={value} index={1} dir={theme.direction}>
-                <Link to="/level_3" className={classes.link}>
+                <Link to="/level_1" className={classes.link}>
                   <button
                     className={classes.button}
                     onClick={() => {
-                      handleClick(3);
+                      handleClick(1);
                     }}
                   >
                     Level 1
                   </button>
                 </Link>
-
                 <Link to="/level_3" className={classes.link}>
                   <button
                     className={classes.button}
@@ -328,19 +323,17 @@ export default function Home() {
                   </button>
                 </Link>
               </TabPanel>
-              {/* Insertion Sort Tab*/}
               <TabPanel value={value} index={2} dir={theme.direction}>
-                <Link to="/level_3" className={classes.link}>
+                <Link to="/level_1" className={classes.link}>
                   <button
                     className={classes.button}
                     onClick={() => {
-                      handleClick(3);
+                      handleClick(1);
                     }}
                   >
                     Level 1
                   </button>
                 </Link>
-
                 <Link to="/level_3" className={classes.link}>
                   <button
                     className={classes.button}
@@ -382,13 +375,12 @@ export default function Home() {
                   </button>
                 </Link>
               </TabPanel>
-              {/* Recursive Sort Tab*/}
               <TabPanel value={value} index={3} dir={theme.direction}>
-                <Link to="/level_3" className={classes.link}>
+                <Link to="/level_1" className={classes.link}>
                   <button
                     className={classes.button}
                     onClick={() => {
-                      handleClick(3);
+                      handleClick(1);
                     }}
                   >
                     Level 1
