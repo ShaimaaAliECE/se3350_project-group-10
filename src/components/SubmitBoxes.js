@@ -52,10 +52,6 @@ function arrComp(arr1, arr2) {
 
 
 
-
-
-
-
 function CreateMap(arrOuter) {
   //Maps user entered array
 
