@@ -2,7 +2,6 @@ import { makeStyles } from "@material-ui/core";
 import React from "react";
 import state from "../store/Store";
 import { view } from "@risingstack/react-easy-state";
-import { useState } from "react";
 
 const useStyles = makeStyles((theme) => ({
   stylesContainerOuter: {
@@ -55,7 +54,7 @@ function CreateMap(arrOuter) {
                 alignItems: "center",
                 color: "black",
                 margin: 10,
-                background: "rgba(220,220,220, .6)",
+                background: "rgba(220,220,220, 1)",
               }}
             >
               {arrObj === 0 ? "" : arrObj}
@@ -77,7 +76,7 @@ function InputBoxes(props) {
     ind = 0;
   }
 
-  if (state.step !== 0 && props.array && state.splits[ind] != 0) {
+  if (state.step !== 0 && props.array && state.splits[ind] !== 0) {
     divisor = Math.round(state.ans[0].array.length / (2 * state.splits[ind]));
   } else {
     divisor = state.ans[0].array.length;

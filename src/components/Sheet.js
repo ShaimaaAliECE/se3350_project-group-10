@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Button, makeStyles } from "@material-ui/core";
 import state from "../store/Store";
@@ -16,24 +16,11 @@ const useStyles = makeStyles(() => ({
   },
   lines: {
     borderBottom: 15,
+    width: "100%",
     color: "black",
   },
   lineRow: {
-    marginTop: 50,
-  },
-  square: {
-    display: "flex",
-    width: 50,
-    height: 50,
-    flexDirection: "row",
-    margin: 10,
-    background: "rgba(220,220,220, .6)",
-    textAlign: "center",
-  },
-  main: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+    zIndex: 2,
   },
   stylesContainerInner: {
     display: "flex",
@@ -41,20 +28,33 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-//creating function component sheet
-//include Lines as component
 function Sheet() {
   const styles = useStyles();
   state.sheetSplit[0] = state.ans[0]?.array;
   let arr = [...state.sheetSplit, ...state.sheetMerge];
 
   return (
-    <div className={styles.container}>
+    <div id={"sheet"} className={styles.container}>
       <div className={styles.stylesContainerInner}>
         {arr.map((arrObj) => (
-          <div>
+          <div
+            style={{
+              position: "relative",
+              marginTop: 50,
+            }}
+          >
             <Lines />
-            <InputBoxes array={arrObj} />
+            <div
+              style={{
+                zIndex: 1,
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: " translate(-50%, -50%)",
+              }}
+            >
+              <InputBoxes array={arrObj} />
+            </div>
           </div>
         ))}
       </div>
