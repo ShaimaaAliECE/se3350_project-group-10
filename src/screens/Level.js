@@ -1,11 +1,14 @@
 import { makeStyles } from "@material-ui/core";
 import Piano from "../components/Piano";
-import Sheet from "../components/Sheet";
-import { useParams } from "react-router-dom";
 import InputContainer from "../components/InputContainer";
+import state from "../store/Store";
+import Sheet from "../components/Sheet";
+import PopUp from "../components/InstructionPopup";
+import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   container: {
+    fontFamily: "Raleway",
     height: "100%",
     width: "100%",
     display: "flex",
@@ -42,10 +45,9 @@ const useStyles = makeStyles((theme) => ({
 function Level() {
   const style = useStyles();
   let params = useParams();
-  // console.log(level.)
-
   return (
     <div className={style.container}>
+      {state.level === 1 ? <PopUp /> : null}
       <div className={style.navbar}>Level {params.level} - Merge Sort</div>
       <div className={style.musicSheet}>
         <Sheet />

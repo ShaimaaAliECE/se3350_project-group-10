@@ -44,66 +44,56 @@ function arrComp(arr1, arr2) {
   return arr1.every((val, index) => val === arr2[index]);
 }
 
+function handleRestartClick(handleGameOver) {
+  //Set the store state back to empty
+  let len = state.input.length;
+
+  for (let i = 0; i < len; i++) {
+    state.input[i] = 0;
+  }
+  state.feedbackColor = "rgba(220,220,220, .6)";
+  state.reseting = false;
+}
+
+function generateEmptyArr() {
+  state.input = [];
+  for (let i = 0; i < state.ans[state.step]?.array.length; i++) {
+    state.input.push(0);
+  }
+  state.feedbackColor = "rgba(220,220,220, .6)";
+  state.reseting = false;
+}
+
+export function handleSubmitClick(handleGameOver) {
+  //Check the answer, if its right --> increment step, handle restart, state.sheet.push(state.input)
+  if (arrComp(state.ans[state.step].array, state.input)) {
+    state.appendSheet(
+      state.ans[state.step].type,
+      state.input,
+      state.ans[state.step].row
+    );
+
+    state.stepInc();
+    if (state.step >= state.ans.length) {
+      //Win!
+      handleGameOver();
+    } else {
+      state.reseting = true;
+      setTimeout(generateEmptyArr, 1000);
+      setTimeout(handleRestartClick, 1000);
+      playCorrectSound();
+    }
+  } else {
+    state.lives--;
+    state.reseting = true;
+    setTimeout(handleRestartClick, 1000);
+    playIncorrectSound();
+  }
+}
+
 function CreateMap(arrOuter) {
   //Maps user entered array
-
   const style = useStyles();
-  const [feedback, setFeedback] = useState("rgba(220,220,220, .6");
-
-  function handleRestartClick(handleGameOver) {
-    //Set the store state back to empty
-    let len = state.input.length;
-
-    for (let i = 0; i < len; i++) {
-      state.input[i] = 0;
-    }
-    setFeedback("rgba(220,220,220, .6)");
-    state.reseting = false;
-  }
-
-  function generateEmptyArr() {
-    state.input = [];
-    for (let i = 0; i < state.ans[state.step]?.array.length; i++) {
-      state.input.push(0);
-    }
-    setFeedback("rgba(220,220,220, .6)");
-    state.reseting = false;
-  }
-  function navigateSheet() {
-    let row = state.ans[state.step].row;
-    if (row >= 1) {
-      let el = document.getElementById(row - 1);
-      el?.scrollIntoView();
-    }
-  }
-
-  function handleSubmitClick(handleGameOver) {
-    //Check the answer, if its right --> increment step, handle restart, state.sheet.push(state.input)
-    if (arrComp(state.ans[state.step].array, state.input)) {
-      state.appendSheet(
-        state.ans[state.step].type,
-        state.input,
-        state.ans[state.step].row
-      );
-      state.stepInc();
-      setTimeout(navigateSheet, 1000);
-      if (state.step >= state.ans.length) {
-        //Win!
-        handleGameOver();
-      } else {
-        state.reseting = true;
-        state.fillTheGaps(state.ans[state.step - 1].zeroesEncountered);
-        setTimeout(generateEmptyArr, 1000);
-        setTimeout(handleRestartClick, 1000);
-        playCorrectSound();
-      }
-    } else {
-      state.lives--;
-      state.reseting = true;
-      setTimeout(handleRestartClick, 1000);
-      playIncorrectSound();
-    }
-  }
 
   const submitBox = {
     display: "flex",
@@ -114,18 +104,17 @@ function CreateMap(arrOuter) {
     alignItems: "center",
     color: "black",
     margin: 10,
-    background: feedback,
+    background: state.feedbackColor,
   };
 
   const handleFeedbackColor = () => {
     //if user input of array is correct
     if (arrComp(state.ans[state.step].array, state.input)) {
       //set state of background colour to green on submit
-      setFeedback("rgba(0, 255, 0, 0.6)");
+      state.feedbackColor = "rgba(0, 255, 0, 0.6)";
     } else {
       // set state of background colour to red on submit
-      setFeedback("rgba(255, 0, 0, 0.6)");
-      console.log("one or more inputs are incorrect!");
+      state.feedbackColor = "rgba(255, 0, 0, 0.6)";
     }
   };
 

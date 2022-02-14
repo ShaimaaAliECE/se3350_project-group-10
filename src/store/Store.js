@@ -52,20 +52,22 @@ function resetStates() {
   state.lives = 3;
   state.input = [];
   state.ans = [];
-  state.level = 1;
+  state.level = 0;
   state.sheetMerge = [];
   state.sheetSplit = [];
   state.depth = 1;
   state.runnable = 1;
   state.step = 1;
   state.gameOver = false;
+  state.instruct = 0;
 }
 
 const state = store({
   lives: 3,
   input: [],
   ans: [],
-  level: 1,
+  level: 0,
+  instruct: 0,
   algo: "merge",
   sheetMerge: [],
   sheetSplit: [],
@@ -76,6 +78,7 @@ const state = store({
   splits: [0],
   zeroesEncountered: 0,
   reseting: false,
+  feedbackColor: "rgba(220,220,220, .6)",
   depthInc: () => (state.runnable ? state.depth++ : state.depth),
   stepInc: () => state.step++,
   appendSheet: (move, array, row) => appendSheet(move, array, row),
