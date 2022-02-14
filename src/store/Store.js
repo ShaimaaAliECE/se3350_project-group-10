@@ -59,8 +59,6 @@ function resetStates() {
   state.runnable = 1;
   state.step = 1;
   state.gameOver = false;
-
-
 }
 
 const state = store({
@@ -78,6 +76,7 @@ const state = store({
   splits: [0],
   zeroesEncountered: 0,
   indexReset: 0,
+  reseting: false,
   depthInc: () => (state.runnable ? state.depth++ : state.depth),
   stepInc: () => state.step++,
   appendSheet: (move, array, row) => appendSheet(move, array, row),

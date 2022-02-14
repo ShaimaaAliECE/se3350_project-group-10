@@ -12,7 +12,6 @@ import {
   winSound,
 } from "../assets/tones.js";
 
-
 const useStyles = makeStyles((theme) => ({
   stylesContainerOuter: {
     display: "flex",
@@ -26,7 +25,6 @@ const useStyles = makeStyles((theme) => ({
     color: "black",
     margin: 15,
   },
-
 }));
 
 const stylesMainInner = {
@@ -35,8 +33,6 @@ const stylesMainInner = {
   alignItems: "center",
 };
 
-
-
 function chunk(array, limit) {
   const chunks = Math.ceil(array.length / limit);
   return Array.from({ length: chunks }, (_, i) =>
@@ -44,19 +40,15 @@ function chunk(array, limit) {
   );
 }
 
-
 function arrComp(arr1, arr2) {
   return arr1.every((val, index) => val === arr2[index]);
 }
-
-
-
 
 function CreateMap(arrOuter) {
   //Maps user entered array
 
   const style = useStyles();
-  const [feedback, setFeedback] = useState('rgba(220,220,220, .6');
+  const [feedback, setFeedback] = useState("rgba(220,220,220, .6");
 
   function handleRestartClick(handleGameOver) {
     //Set the store state back to empty
@@ -66,6 +58,7 @@ function CreateMap(arrOuter) {
       state.input[i] = 0;
     }
     setFeedback("rgba(220,220,220, .6)");
+    state.reseting = false;
   }
 
   function generateEmptyArr() {
@@ -74,22 +67,16 @@ function CreateMap(arrOuter) {
       state.input.push(0);
     }
     setFeedback("rgba(220,220,220, .6)");
+    state.reseting = false;
   }
 
-
-  function handleSubmitClick(
-    handleClickOpenFail,
-    handleClickOpenWin,
-    handleGameOver,
-
-  ) {
+  function handleSubmitClick(handleGameOver) {
     //Check the answer, if its right --> increment step, handle restart, state.sheet.push(state.input)
     if (arrComp(state.ans[state.step].array, state.input)) {
       state.appendSheet(
         state.ans[state.step].type,
         state.input,
-        state.ans[state.step].row,
-
+        state.ans[state.step].row
       );
 
       state.stepInc();
@@ -97,28 +84,20 @@ function CreateMap(arrOuter) {
         //Win!
         handleGameOver();
       } else {
-        setTimeout(generateEmptyArr, 2000);
-        setTimeout(handleRestartClick, 2000);
+        state.reseting = true;
+        setTimeout(generateEmptyArr, 1000);
+        setTimeout(handleRestartClick, 1000);
         playCorrectSound();
-        setTimeout(handleClickOpenWin, 2000)
-        handleClickOpenWin();
       }
-
     } else {
       state.lives--;
-
-      // handleRestartClick();
-      setTimeout(handleRestartClick, 2000);
+      state.reseting = true;
+      setTimeout(handleRestartClick, 1000);
       playIncorrectSound();
-      handleClickOpenFail();
-
     }
   }
 
-
-
   const submitBox = {
-
     display: "flex",
     width: 50,
     height: 50,
@@ -130,26 +109,18 @@ function CreateMap(arrOuter) {
     background: feedback,
   };
 
-
   const handleFeedbackColor = () => {
     //if user input of array is correct
     if (arrComp(state.ans[state.step].array, state.input)) {
-
-      //set state of background colour to green on submit 
-      setFeedback('rgba(0, 255, 0, 0.6)');
-
+      //set state of background colour to green on submit
+      setFeedback("rgba(0, 255, 0, 0.6)");
     } else {
       // set state of background colour to red on submit
-      setFeedback('rgba(255, 0, 0, 0.6)');
+      setFeedback("rgba(255, 0, 0, 0.6)");
       console.log("one or more inputs are incorrect!");
     }
+  };
 
-
-  }
-
-
-  const [openFail, setOpenFail] = useState(false);
-  const [openWin, setOpenWin] = useState(false);
   let [openModal, setOpenModal] = useState(false);
 
   const handleGameOver = () => {
@@ -159,19 +130,6 @@ function CreateMap(arrOuter) {
     state.step = 0;
     winSound();
   };
-  const handleClickOpenFail = () => {
-    setOpenFail(true);
-
-  };
-  const handleClickOpenWin = () => {
-    setOpenWin(true);
-  };
-  const handleCloseFail = () => {
-    setOpenFail(false);
-  };
-  const handleCloseWin = () => {
-    setOpenWin(false);
-  };
 
   return (
     <>
@@ -179,22 +137,17 @@ function CreateMap(arrOuter) {
         {arrOuter.map((arrInner) => (
           <div className={style.stylesContainerInner}>
             {arrInner.map((arrObj) => (
-              <div
-                style={submitBox}
-              >
-                {arrObj === 0 ? "" : arrObj}
-              </div>
+              <div style={submitBox}>{arrObj === 0 ? "" : arrObj}</div>
             ))}
           </div>
-        ))
-        }
+        ))}
         <div style={{ display: "flex", padding: 10, flexDirection: "column" }}>
           <Button
             variant="contained"
             onClick={() => {
               handleRestartClick();
             }}
-            disabled={state.gameOver}
+            disabled={state.gameOver || state.reseting}
           >
             RESET
           </Button>
@@ -203,35 +156,14 @@ function CreateMap(arrOuter) {
             variant="contained"
             onClick={() => {
               handleFeedbackColor();
-              handleSubmitClick(
-                handleClickOpenFail,
-                handleClickOpenWin,
-                handleGameOver
-              );
+              handleSubmitClick(handleGameOver);
             }}
-            disabled={state.gameOver}
+            disabled={state.gameOver || state.reseting}
           >
             SUBMIT
           </Button>
-        </div >
-        <Dialog
-          open={openFail}
-          onClose={handleCloseFail}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-          style={{ width: 300, height: 300 }}
-        >
-          You made a mistake!
-        </Dialog>
-        <Dialog
-          open={openWin}
-          onClose={handleCloseWin}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-          style={{ width: 300, height: 300 }}
-        >
-          Correct!
-        </Dialog>
+        </div>
+
         <Modal
           open={openModal}
           aria-labelledby="modal-modal-title"
