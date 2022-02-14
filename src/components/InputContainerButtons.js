@@ -37,8 +37,12 @@ function handleSubmitClick(
       state.input,
       state.ans[state.step].row
     );
-
     state.stepInc();
+    let row = state.ans[state.step].row;
+    if (row >= 1) {
+      let el = document.getElementById(row - 1);
+      el?.scrollIntoView();
+    }
     if (state.step >= state.ans.length) {
       //Win!
       handleGameOver();

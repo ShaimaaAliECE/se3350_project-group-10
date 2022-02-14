@@ -30,11 +30,11 @@ const useStyles = makeStyles(() => ({
 
 function Sheet() {
   const styles = useStyles();
-  state.sheetSplit[0] = state.ans[0]?.array;
+  state.sheetSplit[0] = { array: state.ans[0]?.array, row: 0 };
   let arr = [...state.sheetSplit, ...state.sheetMerge];
 
   return (
-    <div id={"sheet"} className={styles.container}>
+    <div className={styles.container}>
       <div className={styles.stylesContainerInner}>
         {arr.map((arrObj) => (
           <div
@@ -53,7 +53,7 @@ function Sheet() {
                 transform: " translate(-50%, -50%)",
               }}
             >
-              <InputBoxes array={arrObj} />
+              <InputBoxes arrObj={arrObj} />
             </div>
           </div>
         ))}

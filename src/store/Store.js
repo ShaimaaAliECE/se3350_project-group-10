@@ -1,8 +1,8 @@
 import { store } from "@risingstack/react-easy-state";
 
 function firstZeroFinder(index, arr) {
-  for (let i = 0; i < arr[index].length; i++) {
-    if (arr[index][i] === 0) {
+  for (let i = 0; i < arr[index].array.length; i++) {
+    if (arr[index].array[i] === 0) {
       return i;
     }
   }
@@ -11,7 +11,7 @@ function firstZeroFinder(index, arr) {
 function appendSheet(move, array, row) {
   //If move is merge
   if (move === "merge") {
-    state.sheetMerge[row].splice(
+    state.sheetMerge[row].array.splice(
       firstZeroFinder(row, state.sheetMerge),
       array.length,
       ...array
@@ -20,7 +20,7 @@ function appendSheet(move, array, row) {
 
   //Otherwise move is split
   else {
-    state.sheetSplit[row].splice(
+    state.sheetSplit[row].array.splice(
       firstZeroFinder(row, state.sheetSplit),
       array.length,
       ...array
@@ -41,7 +41,7 @@ function fillGapsArr(firstZero, zeroesEncountered) {
 function fillTheGaps(zeroesEncountered) {
   let firstZero = firstZeroFinder(state.depth - 1, state.sheetSplit);
 
-  state.sheetSplit[state.depth - 1].splice(
+  state.sheetSplit[state.depth - 1].array.splice(
     firstZero,
     zeroesEncountered - firstZero,
     ...fillGapsArr(firstZero, zeroesEncountered)
