@@ -75,7 +75,6 @@ const state = store({
   gameOver: false,
   splits: [0],
   zeroesEncountered: 0,
-  indexReset: 0,
   reseting: false,
   depthInc: () => (state.runnable ? state.depth++ : state.depth),
   stepInc: () => state.step++,

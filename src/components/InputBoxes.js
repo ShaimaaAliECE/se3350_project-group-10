@@ -66,28 +66,19 @@ function CreateMap(arrOuter) {
   );
 }
 
-let ind = 0;
-
 function InputBoxes(props) {
-  let arr = props.arrObj?.array ? props.arrObj?.array : state.input;
+  let arr = props.arrObj.array;
+  let indRef = props.indRef;
   let divisor;
-
-  if (ind === state.splits.length) {
-    ind = 0;
-  }
-
-  if (state.step !== 0 && props.arrObj?.array && state.splits[ind] !== 0) {
-    divisor = Math.round(state.ans[0].array.length / (2 * state.splits[ind]));
+  if (state.step !== 0 && state.splits[indRef] !== 0) {
+    divisor = Math.round(
+      state.ans[0].array.length / (2 * state.splits[indRef])
+    );
   } else {
     divisor = state.ans[0].array.length;
   }
-
-  if (props.arrObj?.array) {
-    ind++;
-  }
-
   return (
-    <div id={props.arrObj?.row} style={stylesMainInner}>
+    <div id={props.arrObj.row} style={stylesMainInner}>
       {CreateMap(chunk(arr, divisor))}
     </div>
   );

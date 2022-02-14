@@ -1,9 +1,7 @@
-import React, { useEffect } from "react";
-
-import { Button, makeStyles } from "@material-ui/core";
+import React from "react";
+import { makeStyles } from "@material-ui/core";
 import state from "../store/Store";
 import { view } from "@risingstack/react-easy-state";
-
 import InputBoxes from "./InputBoxes";
 
 const useStyles = makeStyles(() => ({
@@ -32,31 +30,34 @@ function Sheet() {
   const styles = useStyles();
   state.sheetSplit[0] = { array: state.ans[0]?.array, row: 0 };
   let arr = [...state.sheetSplit, ...state.sheetMerge];
-
+  let indRef = -1;
   return (
     <div className={styles.container}>
       <div className={styles.stylesContainerInner}>
-        {arr.map((arrObj) => (
-          <div
-            style={{
-              position: "relative",
-              marginTop: 50,
-            }}
-          >
-            <Lines />
+        {arr.map(function (arrObj) {
+          indRef++;
+          return (
             <div
               style={{
-                zIndex: 1,
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: " translate(-50%, -50%)",
+                position: "relative",
+                marginTop: 50,
               }}
             >
-              <InputBoxes arrObj={arrObj} />
+              <Lines />
+              <div
+                style={{
+                  zIndex: 1,
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  transform: " translate(-50%, -50%)",
+                }}
+              >
+                <InputBoxes arrObj={arrObj} indRef={indRef} />
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

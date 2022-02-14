@@ -101,6 +101,7 @@ function initializeSplit() {
   for (let i = state.depth - 2; i > 0; i--) {
     state.splits.push(i);
   }
+  state.splits.push(0);
 }
 
 function initializeSheets() {
