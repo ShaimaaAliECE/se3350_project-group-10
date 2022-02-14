@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import state from "../store/Store";
 import { view } from "@risingstack/react-easy-state";
 import { Button } from "@material-ui/core";
-import { generateEmptyArr } from "../screens/Home";
 import { Modal } from "@material-ui/core";
 import Dialog from "@mui/material/Dialog";
 
@@ -151,6 +150,8 @@ function CreateMap(arrOuter) {
 
 
   }
+
+
   const [openFail, setOpenFail] = useState(false);
   const [openWin, setOpenWin] = useState(false);
   let [openModal, setOpenModal] = useState(false);
