@@ -76,6 +76,7 @@ const state = store({
   splits: [0],
   zeroesEncountered: 0,
   indexReset: 0,
+  reseting: false,
   depthInc: () => (state.runnable ? state.depth++ : state.depth),
   stepInc: () => state.step++,
   appendSheet: (move, array, row) => appendSheet(move, array, row),

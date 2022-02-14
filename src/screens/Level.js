@@ -1,8 +1,8 @@
 import { makeStyles } from "@material-ui/core";
 import Piano from "../components/Piano";
-import InputContainer from "../components/InputContainer";
 import Sheet from "../components/Sheet";
 import { useParams } from "react-router-dom";
+import InputContainer from "../components/InputContainer";
 
 const useStyles = makeStyles((theme) => ({
   container: {
