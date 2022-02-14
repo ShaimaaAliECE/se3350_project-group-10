@@ -92,6 +92,7 @@ function CreateMap(arrOuter) {
         handleGameOver();
       } else {
         state.reseting = true;
+        state.fillTheGaps(state.ans[state.step - 1].zeroesEncountered);
         setTimeout(generateEmptyArr, 1000);
         setTimeout(handleRestartClick, 1000);
         playCorrectSound();
