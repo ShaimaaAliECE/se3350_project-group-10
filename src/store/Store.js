@@ -48,8 +48,6 @@ function fillTheGaps(zeroesEncountered, type) {
     }
 
     let firstZero = firstZeroFinder(0, state.sheetMerge, "merge");
-
-    console.log(state.maxMergLen);
     state.sheetMerge[0].array.splice(
       firstZero,
       state.maxMergLen - firstZero,
