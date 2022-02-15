@@ -50,16 +50,19 @@ function CreateMap(arrOuter, row) {
   let index;
 
   for (let i in arrOuter) {
-    // console.log(state.ans[state.step].row, row);
-    if (state.ans[state.step].row === row) {
+    if (
+      state.ans[state.step].row === row ||
+      state.ans[state.step].row + state.depth + 1 === row
+    ) {
       //length of desired array
       let length = state.ans[state.step].array.length;
       //If the length of the array is equal to the desired step array and a 0 exists in the array, set the index to this array
-      console.log(
-        "currentLength: " + arrOuter[i].length,
-        "desiredLength: " + length,
-        "firstZeroIndex: " + state.firstZeroFinder1D(arrOuter[i])
-      );
+      // console.log(
+      //   "currentArray:" + arrOuter[i],
+      //   "currentLength: " + arrOuter[i].length,
+      //   "desiredLength: " + length,
+      //   "firstZeroIndex: " + state.firstZeroFinder1D(arrOuter[i])
+      // );
       if (
         Math.abs(length - arrOuter[i].length) <= 1 &&
         state.firstZeroFinder1D(arrOuter[i]) > -1
@@ -71,7 +74,6 @@ function CreateMap(arrOuter, row) {
   }
   const style = useStyles();
   //If the current step answer row is equal to current row
-  // console.log(state.ans[state.step].row, row);
   let i = -1;
   return (
     <div className={style.stylesContainerOuter}>
@@ -80,7 +82,9 @@ function CreateMap(arrOuter, row) {
         return (
           <div
             className={style.stylesContainerInner}
-            style={i == index ? { backgroundColor: "black" } : null}
+            style={
+              i == index ? { backgroundColor: "grey", borderRadius: 10 } : null
+            }
           >
             {arrInner.map(function (arrObj) {
               return (
