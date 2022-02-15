@@ -7,6 +7,14 @@ function firstZeroFinder(index, arr) {
     }
   }
 }
+function firstZeroFinder1D(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === 0) {
+      return i;
+    }
+  }
+  return -1;
+}
 
 function appendSheet(move, array, row) {
   //If move is merge
@@ -84,6 +92,7 @@ const state = store({
   appendSheet: (move, array, row) => appendSheet(move, array, row),
   fillTheGaps: (zeroesEncountered) => fillTheGaps(zeroesEncountered),
   resetStates: () => resetStates(),
+  firstZeroFinder1D: (arr) => firstZeroFinder1D(arr),
 });
 
 export default state;
