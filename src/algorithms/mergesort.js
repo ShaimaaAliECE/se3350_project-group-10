@@ -31,11 +31,7 @@ function merge(left, right) {
     [...arr, ...left, ...right].length === prevSizeMerge ||
     [...arr, ...left, ...right].length + 1 === prevSizeMerge
   ) {
-  }
-  //if ([...arr, ...left, ...right].length < prevSizeMerge)
-  else {
-    //if we decrese
-
+  } else {
     let y = Math.floor(
       Math.log([...arr, ...left, ...right].length) / Math.log(2)
     );
