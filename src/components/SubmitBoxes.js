@@ -64,6 +64,7 @@ function generateEmptyArr() {
   state.reseting = false;
 }
 
+// <<<<<<< Updated upstream
 export function handleSubmitClick(handleGameOver) {
   //Check the answer, if its right --> increment step, handle restart, state.sheet.push(state.input)
   if (arrComp(state.ans[state.step].array, state.input)) {
@@ -77,8 +78,38 @@ export function handleSubmitClick(handleGameOver) {
     if (state.step >= state.ans.length) {
       //Win!
       handleGameOver();
+      // =======
+      //   function handleSubmitClick(handleGameOver) {
+      //     //Check the answer, if its right --> increment step, handle restart, state.sheet.push(state.input)
+      //     if (arrComp(state.ans[state.step].array, state.input)) {
+      //       state.appendSheet(
+      //         state.ans[state.step].type,
+      //         state.input,
+      //         state.ans[state.step].row
+      //       );
+      //       state.stepInc();
+      //       setTimeout(navigateSheet, 1000);
+      //       if (state.step >= state.ans.length) {
+      //         //Win!
+      //         handleGameOver();
+      //       } else {
+      //         state.reseting = true;
+      //         state.fillTheGaps(
+      //           state.ans[state.step - 1].zeroesEncountered,
+      //           state.ans[state.step - 1].type
+      //         );
+
+      //         setTimeout(generateEmptyArr, 1000);
+      //         setTimeout(handleRestartClick, 1000);
+      //         playCorrectSound();
+      //       }
+      // >>>>>>> Stashed changes
     } else {
       state.reseting = true;
+      state.fillTheGaps(
+        state.ans[state.step - 1].zeroesEncountered,
+        state.ans[state.step - 1].type
+      );
       setTimeout(generateEmptyArr, 1000);
       setTimeout(handleRestartClick, 1000);
       playCorrectSound();
@@ -222,7 +253,7 @@ function SubmitBoxes(props) {
     ind = 0;
   }
 
-  if (state.step !== 0 && props.array && state.splits[ind] != 0) {
+  if (state.step !== 0 && props.array && state.splits[ind] !== 0) {
     divisor = Math.round(state.ans[0].array.length / (2 * state.splits[ind]));
   } else {
     divisor = state.ans[0].array.length;
