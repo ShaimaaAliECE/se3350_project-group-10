@@ -23,11 +23,19 @@ function merge(left, right) {
 
   //If the array has grown in size while merging
   if ([...arr, ...left, ...right].length > prevSizeMerge) {
+    //If we increase, for sure increase
     rowMerge++;
 
     //If the merged array is smaller than the previous array
-  } else if ([...arr, ...left, ...right].length < prevSizeMerge) {
-    let y = parseInt(Math.log(arr.length) / Math.log(2));
+  } else if (
+    [...arr, ...left, ...right].length === prevSizeMerge ||
+    [...arr, ...left, ...right].length + 1 === prevSizeMerge
+  ) {
+  } else {
+    let y = Math.floor(
+      Math.log([...arr, ...left, ...right].length) / Math.log(2)
+    );
+
     rowMerge = rowMerge - y - 1;
   }
 

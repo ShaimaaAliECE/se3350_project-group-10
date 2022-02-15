@@ -4,7 +4,6 @@ import state from "../store/Store";
 import { view } from "@risingstack/react-easy-state";
 import { Button } from "@material-ui/core";
 import { Modal } from "@material-ui/core";
-import Dialog from "@mui/material/Dialog";
 
 import {
   playCorrectSound,
@@ -63,6 +62,20 @@ function generateEmptyArr() {
   state.feedbackColor = "rgba(220,220,220, .6)";
   state.reseting = false;
 }
+function navigateSheet() {
+  let row;
+  if (state.ans[state.step].type == "merge") {
+    let depth = state.depth;
+
+    row = state.ans[state.step].row + depth;
+  } else {
+    row = state.ans[state.step].row;
+    row--;
+  }
+
+  let el = document.getElementById(row);
+  el?.scrollIntoView();
+}
 
 export function handleSubmitClick(handleGameOver) {
   //Check the answer, if its right --> increment step, handle restart, state.sheet.push(state.input)
@@ -74,11 +87,16 @@ export function handleSubmitClick(handleGameOver) {
     );
 
     state.stepInc();
+    setTimeout(navigateSheet, 1000);
     if (state.step >= state.ans.length) {
       //Win!
       handleGameOver();
     } else {
       state.reseting = true;
+      state.fillTheGaps(
+        state.ans[state.step - 1].zeroesEncountered,
+        state.ans[state.step - 1].type
+      );
       setTimeout(generateEmptyArr, 1000);
       setTimeout(handleRestartClick, 1000);
       playCorrectSound();
@@ -211,26 +229,14 @@ function CreateMap(arrOuter) {
   );
 }
 
-let ind = 0;
+function SubmitBoxes() {
+  let arr = state.input;
 
-function SubmitBoxes(props) {
-  let arr = props.array ? props.array : state.input;
-
-  let divisor;
-
-  if (ind + 1 === state.splits.length) {
-    ind = 0;
-  }
-
-  if (state.step !== 0 && props.array && state.splits[ind] != 0) {
-    divisor = Math.round(state.ans[0].array.length / (2 * state.splits[ind]));
-  } else {
-    divisor = state.ans[0].array.length;
-  }
-
-  ind++;
-
-  return <div style={stylesMainInner}>{CreateMap(chunk(arr, divisor))}</div>;
+  return (
+    <div style={stylesMainInner}>
+      {CreateMap(chunk(arr, state.ans[0].array.length))}
+    </div>
+  );
 }
 
 export default view(SubmitBoxes);

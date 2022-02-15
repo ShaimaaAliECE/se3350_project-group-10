@@ -108,7 +108,7 @@ function initializeSheets() {
   let depth = state.depth;
   //Fill sheetSplit
   let temp = [];
-  for (let i = 0; i < depth + 1; i++) {
+  for (let i = 0; i < depth; i++) {
     temp = [];
     for (let j = 0; j < state.ans[0].array.length; j++) {
       temp.push(0);
@@ -117,7 +117,7 @@ function initializeSheets() {
   }
 
   //Fill sheetMerge
-  for (let i = 0; i < depth - 2; i++) {
+  for (let i = 0; i < depth - 1; i++) {
     temp = [];
     for (let j = 0; j < state.ans[0].array.length; j++) {
       temp.push(0);
