@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
     height: 300,
     backgroundColor: "rgba(131,130,130,0.9)",
     margin: "auto",
+    zIndex: 10,
   },
 
   detailsContainer: {
