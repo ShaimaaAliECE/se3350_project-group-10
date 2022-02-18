@@ -42,7 +42,6 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     paddingBottom: 20,
   },
-
 }));
 
 function Level() {
@@ -50,27 +49,24 @@ function Level() {
   let params = useParams();
   return (
     <>
-      {state.loseGame === true ? <LoseScreen/>:
-      
-      <div className={style.container}>
-      {state.level === 1 ? <PopUp /> : null}
-        <div className={style.navbar}>Level {params.level} - Merge Sort</div>
-
-        <div className={style.musicSheet}>
-          <Sheet />
-        </div>
-        
-        <div className={style.inputContainer}>
+      {state.loseGame === true ? (
+        <LoseScreen />
+      ) : (
+        <div className={style.container}>
+          {state.level === 1 || state.level === 2 ? <PopUp /> : null}
+          <div className={style.navbar}>Level {params.level} - Merge Sort</div>
+          <div className={style.musicSheet}>
+            <Sheet />
+          </div>
+          <div className={style.inputContainer}>
             <InputContainer />
+          </div>
+          <div className={style.piano}>
+            <Piano />
+          </div>
         </div>
-
-        <div className={style.piano}>
-          <Piano />
-        </div>
-      </div>
-      }
+      )}
     </>
-    
   );
 }
 

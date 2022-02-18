@@ -84,6 +84,7 @@ function resetStates() {
   state.step = 1;
   state.gameOver = false;
   state.instruct = 0;
+  state.loseGame = false;
 }
 
 const state = store({
