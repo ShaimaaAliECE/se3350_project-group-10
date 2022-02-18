@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "black",
     flexGrow: 1,
     paddingBottom: 20,
-  },
+  }
 }));
 
 function App() {

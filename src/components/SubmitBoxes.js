@@ -4,11 +4,13 @@ import state from "../store/Store";
 import { view } from "@risingstack/react-easy-state";
 import { Button } from "@material-ui/core";
 import { Modal } from "@material-ui/core";
+import LoseScreen from "../components/LoseScreen";
 
 import {
   playCorrectSound,
   playIncorrectSound,
   winSound,
+  loseSound
 } from "../assets/tones.js";
 
 const useStyles = makeStyles((theme) => ({
@@ -102,10 +104,27 @@ export function handleSubmitClick(handleGameOver) {
       playCorrectSound();
     }
   } else {
+    // if incorrect, minus 1 life, play incorrect sound
     state.lives--;
     state.reseting = true;
     setTimeout(handleRestartClick, 1000);
     playIncorrectSound();
+
+    // remove life visually
+    if (state.lives === 2) {
+      let lostLife1 = document.getElementById("l1");
+      lostLife1.style.display = "none";
+    } else if (state.lives === 1) {
+      let lostLife2 = document.getElementById("l2");
+      lostLife2.style.display = "none";
+    } else if (state.lives === 0) {
+      let lostLife3 = document.getElementById("l3");
+      lostLife3.style.display = "none";
+      loseSound(); // play lose sound
+      state.loseGame = true;
+
+    }
+
   }
 }
 
@@ -148,7 +167,8 @@ function CreateMap(arrOuter) {
 
   return (
     <>
-      <div className={style.stylesContainerOuter}>
+      
+        <div className={style.stylesContainerOuter}>
         {arrOuter.map((arrInner) => (
           <div className={style.stylesContainerInner}>
             {arrInner.map((arrObj) => (
@@ -178,7 +198,6 @@ function CreateMap(arrOuter) {
             SUBMIT
           </Button>
         </div>
-
         <Modal
           open={openModal}
           aria-labelledby="modal-modal-title"
@@ -225,6 +244,10 @@ function CreateMap(arrOuter) {
           </div>
         </Modal>
       </div>
+      
+      
+
+     
     </>
   );
 }
