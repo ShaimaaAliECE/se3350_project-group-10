@@ -30,11 +30,12 @@ function Sheet() {
   const styles = useStyles();
   state.sheetSplit[0] = { array: state.ans[0]?.array, row: 0 };
   let arr = [...state.sheetSplit, ...state.sheetMerge];
-
+  let indRef = -1;
   return (
     <div className={styles.container}>
       <div className={styles.stylesContainerInner}>
         {arr.map(function (arrObj) {
+          indRef++;
           return (
             <div
               style={{
@@ -52,7 +53,7 @@ function Sheet() {
                   transform: " translate(-50%, -50%)",
                 }}
               >
-                <InputBoxes arrObj={arrObj} />
+                <InputBoxes arrObj={arrObj} indRef={indRef} />
               </div>
             </div>
           );

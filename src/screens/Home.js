@@ -93,46 +93,79 @@ const random = (min, max) => {
   return num;
 };
 
+function initializeSplit() {
+  for (let i = 1; i < state.depth; i++) {
+    state.splits.push(i);
+  }
+  //Switch to -2 for 0,1,2,3,4,3,2,1,0 instead of 0,1,2,3,4,4,3,2,1,0
+  for (let i = state.depth - 2; i > 0; i--) {
+    state.splits.push(i);
+  }
+  state.splits.push(0);
+}
+
+function initializeSheets() {
+  let depth = state.depth;
+  //Fill sheetSplit
+  let temp = [];
+  for (let i = 0; i < depth; i++) {
+    temp = [];
+    for (let j = 0; j < state.ans[0].array.length; j++) {
+      temp.push(0);
+    }
+    state.sheetSplit.push({ array: temp, row: i });
+  }
+
+  //Fill sheetMerge
+  for (let i = 0; i < depth - 1; i++) {
+    temp = [];
+    for (let j = 0; j < state.ans[0].array.length; j++) {
+      temp.push(0);
+    }
+    state.sheetMerge.push({ array: temp, row: i + depth + 1 });
+  }
+}
+
 function handleClick(level) {
   switch (level) {
     case 1: // Level 1, Tutorial level, includes step by step instructions/tutorial
       state.resetStates();
       mergeSort([...random(1, 11)]);
       generateEmptyArr();
-      state.initializeSplit();
-      state.initializeSheets();
+      initializeSplit();
+      initializeSheets();
       state.level = 1;
       break;
     case 2: // Level 2, Includes instructions only
       state.resetStates();
       mergeSort([...random(1, 11)]);
       generateEmptyArr();
-      state.initializeSplit();
-      state.initializeSheets();
+      initializeSplit();
+      initializeSheets();
       state.level = 2;
       break;
     case 3: // Level 3
       state.resetStates();
       mergeSort([...random(1, 11)]);
       generateEmptyArr();
-      state.initializeSplit();
-      state.initializeSheets();
+      initializeSplit();
+      initializeSheets();
       state.level = 3;
       break;
     case 4: // Level 4
       state.resetStates();
       mergeSort([...random(1, 11)]);
       generateEmptyArr();
-      state.initializeSplit();
-      state.initializeSheets();
+      initializeSplit();
+      initializeSheets();
       state.level = 4;
       break;
     case 5: // Level 5
       state.resetStates();
       mergeSort([...random(1, 11)]);
       generateEmptyArr();
-      state.initializeSplit();
-      state.initializeSheets();
+      initializeSplit();
+      initializeSheets();
       state.level = 5;
       break;
     default:

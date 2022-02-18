@@ -35,6 +35,16 @@ const stylesMainInner = {
   alignItems: "center",
 };
 
+function chunk(array, limit) {
+  const chunks = Math.ceil(array.length / limit);
+  return Array.from({ length: chunks }, (_, i) =>
+    array.slice(
+      Math.ceil((i * array.length) / chunks),
+      Math.ceil(((i + 1) * array.length) / chunks)
+    )
+  );
+}
+
 function CreateMap(arrOuter, row) {
   //Maps user entered array
   let index;
@@ -65,13 +75,10 @@ function CreateMap(arrOuter, row) {
   const style = useStyles();
   //If the current step answer row is equal to current row
   let i = -1;
-
   return (
     <div className={style.stylesContainerOuter}>
       {arrOuter.map(function (arrInner) {
         i++;
-        let temp = Object.values(arrInner);
-        console.log(temp, typeof temp);
         return (
           <div
             className={style.stylesContainerInner}
@@ -79,7 +86,7 @@ function CreateMap(arrOuter, row) {
               i == index ? { backgroundColor: "grey", borderRadius: 10 } : null
             }
           >
-            {temp.map(function (arrObj) {
+            {arrInner.map(function (arrObj) {
               return (
                 <div className={style.box}>{arrObj === 0 ? "" : arrObj}</div>
               );
@@ -94,12 +101,18 @@ function CreateMap(arrOuter, row) {
 function InputBoxes(props) {
   let arr = props.arrObj.array;
   let row = props.arrObj.row;
-  let indRef = state.indRef;
-
-  //no more chunk, change to arr
+  let indRef = props.indRef;
+  let divisor;
+  if (state.step !== 0 && state.splits[indRef] !== 0) {
+    divisor = Math.round(
+      state.ans[0].array.length / (2 * state.splits[indRef])
+    );
+  } else {
+    divisor = state.ans[0].array.length;
+  }
   return (
     <div id={row} style={stylesMainInner}>
-      {CreateMap(arr, row)}
+      {CreateMap(chunk(arr, divisor), row)}
     </div>
   );
 }

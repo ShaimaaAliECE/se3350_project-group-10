@@ -72,86 +72,6 @@ function fillTheGaps(zeroesEncountered, type) {
   }
 }
 
-function chunk(array) {
-  let divisor;
-  let temp = [];
-  state.indRef++;
-  if (state.splits[state.indRef] !== 0) {
-    divisor = Math.round(
-      state.ans[0].array.length / (2 * state.splits[state.indRef])
-    );
-  } else {
-    divisor = state.ans[0].array.length;
-  }
-
-  const chunks = Math.ceil(array.length / divisor);
-  let arr = Array.from({ length: chunks }, (_, i) =>
-    array.slice(
-      Math.ceil((i * array.length) / chunks),
-      Math.ceil(((i + 1) * array.length) / chunks)
-    )
-  );
-
-  console.log("flags", state.flags);
-  if (divisor === 3) {
-    state.flags = [];
-    for (let i in arr) {
-      if (arr[i].length === 3) {
-        state.flags.push(1);
-      } else {
-        state.flags.push(0);
-      }
-    }
-  } else if (divisor === 2) {
-    for (let i in state.flags) {
-      if (state.flags[i]) {
-        temp.push(...[[0, 0], [0]]);
-      } else {
-        //push next array of arrays
-        temp.push([0, 0]);
-      }
-    }
-  }
-  console.log("Temp", temp);
-  if (temp.length) {
-    return temp;
-  } else {
-    return arr;
-  }
-}
-function initializeSplit() {
-  for (let i = 1; i < state.depth; i++) {
-    state.splits.push(i);
-  }
-  //Switch to -2 for 0,1,2,3,4,3,2,1,0 instead of 0,1,2,3,4,4,3,2,1,0
-  for (let i = state.depth - 2; i > 0; i--) {
-    state.splits.push(i);
-  }
-  state.splits.push(0);
-}
-
-function initializeSheets() {
-  let depth = state.depth;
-  //Fill sheetSplit
-  let temp = [];
-  for (let i = 0; i < depth; i++) {
-    temp = [];
-    for (let j = 0; j < state.ans[0].array.length; j++) {
-      temp.push(0);
-    }
-    console.log("TEMP", temp);
-
-    state.sheetSplit.push({ array: chunk([...temp]), row: i });
-  }
-  console.log(state.sheetSplit);
-  //Fill sheetMerge
-  for (let i = 0; i < state.sheetSplit.length; i++) {
-    let temp = state.sheetSplit[state.sheetSplit.length - 1 - i];
-    temp.row = i;
-    state.sheetMerge.push(temp);
-  }
-}
-
 function resetStates() {
   state.lives = 3;
   state.input = [];
@@ -175,7 +95,6 @@ const state = store({
   algo: "merge",
   sheetMerge: [],
   sheetSplit: [],
-  flags: [],
   depth: 1,
   runnable: 1,
   step: 1,
@@ -184,7 +103,6 @@ const state = store({
   zeroesEncountered: 0,
   maxMergLen: 0,
   reseting: false,
-  indRef: -1,
   feedbackColor: "rgba(220,220,220, .6)",
   depthInc: () => (state.runnable ? state.depth++ : state.depth),
   stepInc: () => state.step++,
@@ -193,8 +111,6 @@ const state = store({
     fillTheGaps(zeroesEncountered, type),
   resetStates: () => resetStates(),
   firstZeroFinder1D: (arr) => firstZeroFinder1D(arr),
-  initializeSheets: () => initializeSheets(),
-  initializeSplit: () => initializeSplit(),
 });
 
 export default state;
