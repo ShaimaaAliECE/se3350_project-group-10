@@ -85,7 +85,7 @@ export function generateEmptyArr() {
   }
 }
 
-const random = (min, max) => {
+export const random = (min, max) => {
   let num = [];
   for (let i = 0; i < 10; i++) {
     num.push(Math.floor(Math.random() * (max - min) + min));
@@ -93,7 +93,7 @@ const random = (min, max) => {
   return num;
 };
 
-function initializeSplit() {
+export function initializeSplit() {
   for (let i = 1; i < state.depth; i++) {
     state.splits.push(i);
   }
@@ -104,7 +104,7 @@ function initializeSplit() {
   state.splits.push(0);
 }
 
-function initializeSheets() {
+export function initializeSheets() {
   let depth = state.depth;
   //Fill sheetSplit
   let temp = [];
@@ -126,7 +126,7 @@ function initializeSheets() {
   }
 }
 
-function handleClick(level) {
+export function handleClick(level) {
   switch (level) {
     case 1: // Level 1, Tutorial level, includes step by step instructions/tutorial
       state.resetStates();
@@ -250,21 +250,21 @@ export default function Home() {
                     Level 3
                   </button>
                 </Link>
-                <Link to="/level_3" className={classes.link}>
+                <Link to="/level_4" className={classes.link}>
                   <button
                     className={classes.button}
                     onClick={() => {
-                      handleClick(3);
+                      handleClick(4);
                     }}
                   >
                     Level 4
                   </button>
                 </Link>
-                <Link to="/level_3" className={classes.link}>
+                <Link to="/level_5" className={classes.link}>
                   <button
                     className={classes.button}
                     onClick={() => {
-                      handleClick(3);
+                      handleClick(5);
                     }}
                   >
                     Level 5
@@ -302,21 +302,21 @@ export default function Home() {
                     Level 3
                   </button>
                 </Link>
-                <Link to="/level_3" className={classes.link}>
+                <Link to="/level_4" className={classes.link}>
                   <button
                     className={classes.button}
                     onClick={() => {
-                      handleClick(3);
+                      handleClick(4);
                     }}
                   >
                     Level 4
                   </button>
                 </Link>
-                <Link to="/level_3" className={classes.link}>
+                <Link to="/level_5" className={classes.link}>
                   <button
                     className={classes.button}
                     onClick={() => {
-                      handleClick(3);
+                      handleClick(5);
                     }}
                   >
                     Level 5
@@ -334,16 +334,6 @@ export default function Home() {
                     Level 1
                   </button>
                 </Link>
-                <Link to="/level_1" className={classes.link}>
-                  <button
-                    className={classes.button}
-                    onClick={() => {
-                      handleClick(1);
-                    }}
-                  >
-                    Level 2
-                  </button>
-                </Link>
                 <Link to="/level_2" className={classes.link}>
                   <button
                     className={classes.button}
@@ -351,7 +341,7 @@ export default function Home() {
                       handleClick(2);
                     }}
                   >
-                    Level 3
+                    Level 2
                   </button>
                 </Link>
                 <Link to="/level_3" className={classes.link}>
@@ -361,14 +351,24 @@ export default function Home() {
                       handleClick(3);
                     }}
                   >
-                    Level 4
+                    Level 3
                   </button>
                 </Link>
-                <Link to="/level_3" className={classes.link}>
+                <Link to="/level_4" className={classes.link}>
                   <button
                     className={classes.button}
                     onClick={() => {
-                      handleClick(3);
+                      handleClick(4);
+                    }}
+                  >
+                    Level 4
+                  </button>
+                </Link>
+                <Link to="/level_5" className={classes.link}>
+                  <button
+                    className={classes.button}
+                    onClick={() => {
+                      handleClick(5);
                     }}
                   >
                     Level 5
@@ -406,21 +406,21 @@ export default function Home() {
                     Level 3
                   </button>
                 </Link>
-                <Link to="/level_3" className={classes.link}>
+                <Link to="/level_4" className={classes.link}>
                   <button
                     className={classes.button}
                     onClick={() => {
-                      handleClick(3);
+                      handleClick(4);
                     }}
                   >
                     Level 4
                   </button>
                 </Link>
-                <Link to="/level_3" className={classes.link}>
+                <Link to="/level_5" className={classes.link}>
                   <button
                     className={classes.button}
                     onClick={() => {
-                      handleClick(3);
+                      handleClick(5);
                     }}
                   >
                     Level 5

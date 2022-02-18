@@ -10,7 +10,7 @@ import {
   playCorrectSound,
   playIncorrectSound,
   winSound,
-  loseSound
+  loseSound,
 } from "../assets/tones.js";
 
 const useStyles = makeStyles((theme) => ({
@@ -125,9 +125,7 @@ export function handleSubmitClick(handleGameOver) {
       lostLife3.style.display = "none";
       loseSound(); // play lose sound
       state.loseGame = true;
-
     }
-
   }
 }
 
@@ -171,8 +169,7 @@ function CreateMap(arrOuter) {
 
   return (
     <>
-      
-        <div className={style.stylesContainerOuter}>
+      <div className={style.stylesContainerOuter}>
         {arrOuter.map((arrInner) => (
           <div className={style.stylesContainerInner}>
             {arrInner.map((arrObj) => (
@@ -248,10 +245,6 @@ function CreateMap(arrOuter) {
           </div>
         </Modal>
       </div>
-      
-      
-
-     
     </>
   );
 }
