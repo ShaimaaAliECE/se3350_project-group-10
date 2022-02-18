@@ -35,9 +35,10 @@ const stylesMainInner = {
   alignItems: "center",
 };
 
-function chunk(array, row, indRef) {
+function chunk(array, type, row, indRef) {
   let divisor;
   let temp = [];
+  console.log(state.splits[indRef], indRef);
   if (state.splits[indRef] !== 0) {
     divisor = Math.round(
       state.ans[0].array.length / (2 * state.splits[indRef])
@@ -52,7 +53,6 @@ function chunk(array, row, indRef) {
       Math.ceil(((i + 1) * array.length) / chunks)
     )
   );
-
   if (divisor === 3) {
     state.flags = [];
     for (let i in arr) {
@@ -63,20 +63,31 @@ function chunk(array, row, indRef) {
       }
     }
   } else if (divisor === 2) {
-    for (let i in state.flags) {
-      //Store last chunk from split, refer to it instead of state.sheet.. index like below still
-      if (state.flags[i] === 1) {
-        temp.push([state.lastChunk[i][0], state.lastChunk[i][1]]);
-        temp.push([state.lastChunk[i][2]]);
-      } else {
-        //push next array of arrays
-        temp.push([state.lastChunk[i][0], state.lastChunk[i][1]]);
-      }
-    }
+    // console.log("IN 2");
+    // for (let i in state.flags) {
+    //   let arr;
+    //   if (type == "merge") {
+    //     arr = state.sheetMerge[row - 1];
+    //   } else {
+    //     arr = state.sheetSplit[row - 1];
+    //   }
+    //Store last chunk from split, refer to it instead of state.sheet.. index like below still
+    //   console.log("hehe", arr.array);
+    //   if (state.flags[i] === 1) {
+    //     let hi = [arr[i][0], arr[i][1], arr[i][2]];
+    //     // temp.push([arr[i][0], arr[i][1], [arr[i][2]]]);
+    //     console.log("TEMP", hi);
+    //   } else {
+    //     //push next array of arrays
+    //     temp.push([arr.array[], arr[i][1]]);
+    //   }
+    // }
   }
+
   if (temp.length) {
     return [...temp];
   } else {
+    console.log("hi", arr);
     return [...arr];
   }
 }
@@ -137,16 +148,12 @@ function CreateMap(arrOuter, row) {
 function InputBoxes(props) {
   let arr = props.arrObj.array;
   let row = props.arrObj.row;
+  let type = props.arrObj.type;
   let indRef = props.indRef;
-
-  console.log(arr);
-
-  let chunked = chunk(arr, row, indRef);
-  state.lastChunk = chunked;
-
+  console.log(props.arrObj.type);
   return (
     <div id={row} style={stylesMainInner}>
-      {CreateMap(chunked, row)}
+      {CreateMap(chunk(arr, type, row, indRef), row)}
     </div>
   );
 }
