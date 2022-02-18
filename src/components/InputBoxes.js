@@ -35,14 +35,61 @@ const stylesMainInner = {
   alignItems: "center",
 };
 
-function chunk(array, limit) {
-  const chunks = Math.ceil(array.length / limit);
-  return Array.from({ length: chunks }, (_, i) =>
+function chunk(array, type, row, indRef) {
+  let divisor;
+  let temp = [];
+  console.log(state.splits[indRef], indRef);
+  if (state.splits[indRef] !== 0) {
+    divisor = Math.round(
+      state.ans[0].array.length / (2 * state.splits[indRef])
+    );
+  } else {
+    divisor = state.ans[0].array.length;
+  }
+  const chunks = Math.ceil(array.length / divisor);
+  let arr = Array.from({ length: chunks }, (_, i) =>
     array.slice(
       Math.ceil((i * array.length) / chunks),
       Math.ceil(((i + 1) * array.length) / chunks)
     )
   );
+  if (divisor === 3) {
+    state.flags = [];
+    for (let i in arr) {
+      if (arr[i].length === 3) {
+        state.flags.push(1);
+      } else {
+        state.flags.push(0);
+      }
+    }
+  } else if (divisor === 2) {
+    // console.log("IN 2");
+    // for (let i in state.flags) {
+    //   let arr;
+    //   if (type == "merge") {
+    //     arr = state.sheetMerge[row - 1];
+    //   } else {
+    //     arr = state.sheetSplit[row - 1];
+    //   }
+    //Store last chunk from split, refer to it instead of state.sheet.. index like below still
+    //   console.log("hehe", arr.array);
+    //   if (state.flags[i] === 1) {
+    //     let hi = [arr[i][0], arr[i][1], arr[i][2]];
+    //     // temp.push([arr[i][0], arr[i][1], [arr[i][2]]]);
+    //     console.log("TEMP", hi);
+    //   } else {
+    //     //push next array of arrays
+    //     temp.push([arr.array[], arr[i][1]]);
+    //   }
+    // }
+  }
+
+  if (temp.length) {
+    return [...temp];
+  } else {
+    console.log("hi", arr);
+    return [...arr];
+  }
 }
 
 function CreateMap(arrOuter, row) {
@@ -101,18 +148,12 @@ function CreateMap(arrOuter, row) {
 function InputBoxes(props) {
   let arr = props.arrObj.array;
   let row = props.arrObj.row;
+  let type = props.arrObj.type;
   let indRef = props.indRef;
-  let divisor;
-  if (state.step !== 0 && state.splits[indRef] !== 0) {
-    divisor = Math.round(
-      state.ans[0].array.length / (2 * state.splits[indRef])
-    );
-  } else {
-    divisor = state.ans[0].array.length;
-  }
+  console.log(props.arrObj.type);
   return (
     <div id={row} style={stylesMainInner}>
-      {CreateMap(chunk(arr, divisor), row)}
+      {CreateMap(chunk(arr, type, row, indRef), row)}
     </div>
   );
 }
