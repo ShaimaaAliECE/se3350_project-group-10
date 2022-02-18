@@ -40,13 +40,13 @@ const useStyles = makeStyles((theme) => ({
 export function handleSubmitClick(handleGameOver) {
 }
 
-function Lives() {
+export function Lives() {
     const classes = useStyles();
     return (
       <div className={classes.livesContainer}>
-          <div className={classes.life1}> <img src={l1} alt="life 1"></img></div>
-          <div className={classes.life2}> <img src={l2} alt="life 2"></img></div>
-          <div className={classes.life3}> <img src={l3} alt="life 3"></img></div>
+          <div id = "l1" className={classes.life1}> <img src={l1} alt="life 1"></img></div>
+          <div id = "l2" className={classes.life2}> <img src={l2} alt="life 2"></img></div>
+          <div id = "l3" className={classes.life3}> <img src={l3} alt="life 3"></img></div>
       </div>
     );
   }
