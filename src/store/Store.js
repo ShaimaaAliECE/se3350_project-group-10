@@ -1,76 +1,66 @@
 import { store } from "@risingstack/react-easy-state";
 
-function firstZeroFinder(index, arr, type = "split") {
-  for (let i = 0; i < arr[index].array.length; i++) {
-    if (arr[index].array[i] === 0) {
-      if (type === "merge" && state.maxMergLen < i) {
-        state.maxMergLen = i;
-      }
+function firstZeroFinder(arr) {
+  for (let i in arr.array) {
+    if (arr.array[i][0] === 0) {
       return i;
     }
   }
-}
-function firstZeroFinder1D(arr) {
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] === 0) {
-      return i;
-    }
-  }
-  return -1;
+  return;
 }
 
-function appendSheet(move, array, row) {
-  //If move is merge
-  if (move === "merge") {
-    state.sheetMerge[row].array.splice(
-      firstZeroFinder(row, state.sheetMerge, "merge"),
-      array.length,
-      ...array
-    );
-  }
+function appendSheet(array, row) {
+  //state.sheet[0][row].array is shortened before it enters here
+  let temp = [...state.sheet[0][row].array];
 
-  //Otherwise move is split
-  else {
-    state.sheetSplit[row].array.splice(
-      firstZeroFinder(row, state.sheetSplit),
-      array.length,
-      ...array
-    );
-  }
+  let zeroIndex = firstZeroFinder(state.sheet[0][row]);
+
+  //Splice returns what was removed >> array of length 2
+
+  state.sheet[0][row].array.splice(zeroIndex, 1, [...array]); //Splice removed entire array but only half values filled?
+
+  // console.log(
+  //   "setting",
+  //   state.sheet[0][row].array[zeroIndex],
+  //   "to",
+  //   temp[zeroIndex]
+  // ); //This is setting [2] = [1]
+
+  // state.sheet[0][row].array[zeroIndex] = temp[zeroIndex]; //PROBLEM IS HERE>> temp not returning entire array
 }
 
-function fillGapsArr(start, end) {
-  let arr = [];
+// function fillGapsArr(start, end) {
+//   let arr = [];
 
-  for (let i = 0; i < end - start; i++) {
-    arr.push("x");
-  }
+//   for (let i = 0; i < end - start; i++) {
+//     arr.push("x");
+//   }
 
-  return arr;
-}
+//   return arr;
+// }
 
-function fillTheGaps(zeroesEncountered, type) {
-  if (type === "merge") {
-    for (let i = 0; i < state.depth - 2; i++) {
-      firstZeroFinder(i, state.sheetMerge, "merge");
-    }
+// function fillTheGaps(zeroesEncountered, type) {
+//   if (type === "merge") {
+//     for (let i = 0; i < state.depth - 2; i++) {
+//       firstZeroFinder(i, state.sheetMerge, "merge");
+//     }
 
-    let firstZero = firstZeroFinder(0, state.sheetMerge, "merge");
-    state.sheetMerge[0].array.splice(
-      firstZero,
-      state.maxMergLen - firstZero,
-      ...fillGapsArr(firstZero, state.maxMergLen)
-    );
-  } else {
-    let firstZero = firstZeroFinder(state.depth - 1, state.sheetSplit);
+//     let firstZero = firstZeroFinder(0, state.sheetMerge, "merge");
+//     state.sheetMerge[0].array.splice(
+//       firstZero,
+//       state.maxMergLen - firstZero,
+//       ...fillGapsArr(firstZero, state.maxMergLen)
+//     );
+//   } else {
+//     let firstZero = firstZeroFinder(state.depth - 1, state.sheetSplit);
 
-    state.sheetSplit[state.depth - 1].array.splice(
-      firstZero,
-      zeroesEncountered - firstZero,
-      ...fillGapsArr(firstZero, zeroesEncountered)
-    );
-  }
-}
+//     state.sheetSplit[state.depth - 1].array.splice(
+//       firstZero,
+//       zeroesEncountered - firstZero,
+//       ...fillGapsArr(firstZero, zeroesEncountered)
+//     );
+//   }
+// }
 
 function chunk(array) {
   let divisor;
@@ -92,7 +82,6 @@ function chunk(array) {
     )
   );
 
-  console.log("flags", state.flags);
   if (divisor === 3) {
     state.flags = [];
     for (let i in arr) {
@@ -108,11 +97,10 @@ function chunk(array) {
         temp.push(...[[0, 0], [0]]);
       } else {
         //push next array of arrays
-        temp.push([0, 0]);
+        temp.push(...[[0], [0]]);
       }
     }
   }
-  console.log("Temp", temp);
   if (temp.length) {
     return temp;
   } else {
@@ -130,26 +118,33 @@ function initializeSplit() {
   state.splits.push(0);
 }
 
+//Changed ther row to i + depth
 function initializeSheets() {
   let depth = state.depth;
+  let sheetSplit = [];
+  let sheetMerge = [];
+
   //Fill sheetSplit
-  let temp = [];
+  let temp;
   for (let i = 0; i < depth; i++) {
     temp = [];
     for (let j = 0; j < state.ans[0].array.length; j++) {
       temp.push(0);
     }
-    console.log("TEMP", temp);
-
-    state.sheetSplit.push({ array: chunk([...temp]), row: i });
+    sheetSplit.push({ array: chunk([...temp]), row: i });
   }
-  console.log(state.sheetSplit);
   //Fill sheetMerge
-  for (let i = 0; i < state.sheetSplit.length; i++) {
-    let temp = state.sheetSplit[state.sheetSplit.length - 1 - i];
-    temp.row = i;
-    state.sheetMerge.push(temp);
+  for (let i = 1; i < depth; i++) {
+    temp = [];
+    for (let j = 0; j < state.ans[0].array.length; j++) {
+      temp.push(0);
+    }
+    sheetMerge.push({ array: chunk([...temp]), row: i + depth - 1 });
   }
+
+  state.sheet.push([...sheetSplit, ...sheetMerge]);
+
+  state.appendSheet(state.ans[0].array, 0);
 }
 
 function resetStates() {
@@ -157,8 +152,7 @@ function resetStates() {
   state.input = [];
   state.ans = [];
   state.level = 0;
-  state.sheetMerge = [];
-  state.sheetSplit = [];
+  state.sheet = [];
   state.depth = 1;
   state.runnable = 1;
   state.step = 1;
@@ -173,8 +167,7 @@ const state = store({
   level: 0,
   instruct: 0,
   algo: "merge",
-  sheetMerge: [],
-  sheetSplit: [],
+  sheet: [],
   flags: [],
   depth: 1,
   runnable: 1,
@@ -188,11 +181,11 @@ const state = store({
   feedbackColor: "rgba(220,220,220, .6)",
   depthInc: () => (state.runnable ? state.depth++ : state.depth),
   stepInc: () => state.step++,
-  appendSheet: (move, array, row) => appendSheet(move, array, row),
-  fillTheGaps: (zeroesEncountered, type) =>
-    fillTheGaps(zeroesEncountered, type),
+  appendSheet: (array, row) => appendSheet(array, row),
+  // fillTheGaps: (zeroesEncountered, type) =>
+  //   fillTheGaps(zeroesEncountered, type),
   resetStates: () => resetStates(),
-  firstZeroFinder1D: (arr) => firstZeroFinder1D(arr),
+  firstZeroFinder: (arr) => firstZeroFinder(arr),
   initializeSheets: () => initializeSheets(),
   initializeSplit: () => initializeSplit(),
 });

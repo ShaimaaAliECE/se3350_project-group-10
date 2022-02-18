@@ -28,34 +28,35 @@ const useStyles = makeStyles(() => ({
 
 function Sheet() {
   const styles = useStyles();
-  state.sheetSplit[0] = { array: state.ans[0]?.array, row: 0 };
-  let arr = [...state.sheetSplit, ...state.sheetMerge];
 
+  let arr = [...state.sheet];
   return (
     <div className={styles.container}>
       <div className={styles.stylesContainerInner}>
         {arr.map(function (arrObj) {
-          return (
-            <div
-              style={{
-                position: "relative",
-                marginTop: 50,
-              }}
-            >
-              <Lines />
+          return arrObj.map(function (arrInnerObj) {
+            return (
               <div
                 style={{
-                  zIndex: 1,
-                  position: "absolute",
-                  top: "50%",
-                  left: "50%",
-                  transform: " translate(-50%, -50%)",
+                  position: "relative",
+                  marginTop: 50,
                 }}
               >
-                <InputBoxes arrObj={arrObj} />
+                <Lines />
+                <div
+                  style={{
+                    zIndex: 1,
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: " translate(-50%, -50%)",
+                  }}
+                >
+                  <InputBoxes arrInnerObj={arrInnerObj} />
+                </div>
               </div>
-            </div>
-          );
+            );
+          });
         })}
       </div>
     </div>

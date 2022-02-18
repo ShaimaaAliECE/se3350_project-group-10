@@ -80,11 +80,14 @@ function navigateSheet() {
 export function handleSubmitClick(handleGameOver) {
   //Check the answer, if its right --> increment step, handle restart, state.sheet.push(state.input)
   if (arrComp(state.ans[state.step].array, state.input)) {
-    state.appendSheet(
-      state.ans[state.step].type,
-      state.input,
-      state.ans[state.step].row
-    );
+    let row;
+    if (state.ans[state.step].type == "merge") {
+      row = state.ans[state.step].row + state.depth;
+    } else {
+      row = state.ans[state.step].row;
+    }
+    // console.log("pre append row", row, "input", state.input);
+    state.appendSheet(state.input, row);
 
     state.stepInc();
     setTimeout(navigateSheet, 1000);
@@ -93,10 +96,10 @@ export function handleSubmitClick(handleGameOver) {
       handleGameOver();
     } else {
       state.reseting = true;
-      state.fillTheGaps(
-        state.ans[state.step - 1].zeroesEncountered,
-        state.ans[state.step - 1].type
-      );
+      // state.fillTheGaps(
+      //   state.ans[state.step - 1].zeroesEncountered,
+      //   state.ans[state.step - 1].type
+      // );
       setTimeout(generateEmptyArr, 1000);
       setTimeout(handleRestartClick, 1000);
       playCorrectSound();
@@ -141,20 +144,18 @@ function CreateMap(arrOuter) {
   const handleGameOver = () => {
     state.gameOver = true;
     setOpenModal(true);
-    state.resetStates();
+    // state.resetStates();
     winSound();
   };
 
   return (
     <>
       <div className={style.stylesContainerOuter}>
-        {arrOuter.map((arrInner) => (
-          <div className={style.stylesContainerInner}>
-            {arrInner.map((arrObj) => (
-              <div style={submitBox}>{arrObj === 0 ? "" : arrObj}</div>
-            ))}
-          </div>
-        ))}
+        <div className={style.stylesContainerInner}>
+          {arrOuter.map((arrInner) => (
+            <div style={submitBox}>{arrInner === 0 ? "" : arrInner}</div>
+          ))}
+        </div>
         <div style={{ display: "flex", padding: 10, flexDirection: "column" }}>
           <Button
             variant="contained"
@@ -231,11 +232,7 @@ function CreateMap(arrOuter) {
 function SubmitBoxes() {
   let arr = state.input;
 
-  return (
-    <div style={stylesMainInner}>
-      {CreateMap(chunk(arr, state.ans[0].array.length))}
-    </div>
-  );
+  return <div style={stylesMainInner}>{CreateMap(arr)}</div>;
 }
 
 export default view(SubmitBoxes);
