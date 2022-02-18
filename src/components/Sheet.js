@@ -28,7 +28,7 @@ const useStyles = makeStyles(() => ({
 
 function Sheet() {
   const styles = useStyles();
-  state.sheetSplit[0] = { array: state.ans[0]?.array, row: 0, type: "split" };
+  state.sheetSplit[0] = { array: state.ans[0]?.array, row: 0 };
   let arr = [...state.sheetSplit, ...state.sheetMerge];
   let indRef = -1;
   return (

@@ -113,7 +113,7 @@ function initializeSheets() {
     for (let j = 0; j < state.ans[0].array.length; j++) {
       temp.push(0);
     }
-    state.sheetSplit.push({ array: temp, row: i, type: "split" });
+    state.sheetSplit.push({ array: temp, row: i });
   }
 
   //Fill sheetMerge
@@ -122,7 +122,7 @@ function initializeSheets() {
     for (let j = 0; j < state.ans[0].array.length; j++) {
       temp.push(0);
     }
-    state.sheetMerge.push({ array: temp, row: i + depth + 1, type: "merge" });
+    state.sheetMerge.push({ array: temp, row: i + depth + 1 });
   }
 }
 

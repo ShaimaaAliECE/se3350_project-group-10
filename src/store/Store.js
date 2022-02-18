@@ -101,7 +101,6 @@ const state = store({
   gameOver: false,
   splits: [0],
   zeroesEncountered: 0,
-  flags: [],
   maxMergLen: 0,
   reseting: false,
   feedbackColor: "rgba(220,220,220, .6)",
