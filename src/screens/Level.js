@@ -5,6 +5,8 @@ import state from "../store/Store";
 import Sheet from "../components/Sheet";
 import PopUp from "../components/InstructionPopup";
 import { useParams } from "react-router-dom";
+import LoseScreen from "../components/LoseScreen";
+import { view } from "@risingstack/react-easy-state";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -46,20 +48,26 @@ function Level() {
   const style = useStyles();
   let params = useParams();
   return (
-    <div className={style.container}>
-      {state.level === 1 || state.level === 2 ? <PopUp /> : null}
-      <div className={style.navbar}>Level {params.level} - Merge Sort</div>
-      <div className={style.musicSheet}>
-        <Sheet />
-      </div>
-      <div className={style.inputContainer}>
-        <InputContainer />
-      </div>
-      <div className={style.piano}>
-        <Piano />
-      </div>
-    </div>
+    <>
+      {state.loseGame === true ? (
+        <LoseScreen />
+      ) : (
+        <div className={style.container}>
+          {state.level === 1 || state.level === 2 ? <PopUp /> : null}
+          <div className={style.navbar}>Level {params.level} - Merge Sort</div>
+          <div className={style.musicSheet}>
+            <Sheet />
+          </div>
+          <div className={style.inputContainer}>
+            <InputContainer />
+          </div>
+          <div className={style.piano}>
+            <Piano />
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 
-export default Level;
+export default view(Level);

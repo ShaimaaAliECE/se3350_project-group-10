@@ -9,6 +9,7 @@ import { generateEmptyArr } from "./SubmitBoxes";
 import { winSound } from "../assets/tones.js";
 import { useState } from "react";
 import { Modal } from "@material-ui/core";
+import Lives from "../components/Lives";
 
 const useStyles = makeStyles((theme) => ({
   stylesMainOuter: {
@@ -28,6 +29,15 @@ const useStyles = makeStyles((theme) => ({
     width: "100px",
     height: "50px",
     borderRadius: "15px",
+  },
+  lives: {
+    position: "absolute",
+    justifyContent: "flex-end",
+    right: 10,
+  },
+  container: {
+    display: "flex",
+    flexDirection: "row",
   },
 }));
 
@@ -92,10 +102,14 @@ function InputContainer() {
           </a>
         </div>
       </Modal>
-
       <div className={style.stylesMainOuter}>
         {state.level != 1 ? (
-          <SubmitBoxes />
+          <div className={style.container}>
+            <SubmitBoxes />
+            <div className={style.lives}>
+              <Lives />
+            </div>
+          </div>
         ) : (
           <div className={style.fillerSpace}>
             <Button
