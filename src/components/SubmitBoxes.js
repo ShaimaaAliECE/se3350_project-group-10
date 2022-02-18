@@ -87,6 +87,7 @@ export function handleSubmitClick(handleGameOver) {
     );
 
     state.stepInc();
+    state.instruct++;
     setTimeout(navigateSheet, 1000);
     if (state.step >= state.ans.length) {
       //Win!

@@ -47,7 +47,7 @@ function Level() {
   let params = useParams();
   return (
     <div className={style.container}>
-      {state.level === 1 ? <PopUp /> : null}
+      {state.level === 1 || state.level === 2 ? <PopUp /> : null}
       <div className={style.navbar}>Level {params.level} - Merge Sort</div>
       <div className={style.musicSheet}>
         <Sheet />

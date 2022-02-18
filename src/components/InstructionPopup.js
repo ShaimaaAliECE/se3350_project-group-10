@@ -39,7 +39,6 @@ const useStyles = makeStyles((theme) => ({
 function PopUp() {
   const classes = useStyles();
 
-
   return (
     <div className={classes.container}>
       <div className={classes.detailsContainer}>

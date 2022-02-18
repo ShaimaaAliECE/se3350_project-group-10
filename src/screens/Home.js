@@ -230,11 +230,11 @@ export default function Home() {
                     Level 1
                   </button>
                 </Link>
-                <Link to="/level_3" className={classes.link}>
+                <Link to="/level_2" className={classes.link}>
                   <button
                     className={classes.button}
                     onClick={() => {
-                      handleClick(3);
+                      handleClick(2);
                     }}
                   >
                     Level 2
@@ -282,11 +282,11 @@ export default function Home() {
                     Level 1
                   </button>
                 </Link>
-                <Link to="/level_3" className={classes.link}>
+                <Link to="/level_2" className={classes.link}>
                   <button
                     className={classes.button}
                     onClick={() => {
-                      handleClick(3);
+                      handleClick(2);
                     }}
                   >
                     Level 2
@@ -334,21 +334,21 @@ export default function Home() {
                     Level 1
                   </button>
                 </Link>
-                <Link to="/level_3" className={classes.link}>
+                <Link to="/level_1" className={classes.link}>
                   <button
                     className={classes.button}
                     onClick={() => {
-                      handleClick(3);
+                      handleClick(1);
                     }}
                   >
                     Level 2
                   </button>
                 </Link>
-                <Link to="/level_3" className={classes.link}>
+                <Link to="/level_2" className={classes.link}>
                   <button
                     className={classes.button}
                     onClick={() => {
-                      handleClick(3);
+                      handleClick(2);
                     }}
                   >
                     Level 3
@@ -386,11 +386,11 @@ export default function Home() {
                     Level 1
                   </button>
                 </Link>
-                <Link to="/level_3" className={classes.link}>
+                <Link to="/level_2" className={classes.link}>
                   <button
                     className={classes.button}
                     onClick={() => {
-                      handleClick(3);
+                      handleClick(2);
                     }}
                   >
                     Level 2
