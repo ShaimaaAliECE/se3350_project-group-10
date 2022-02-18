@@ -5,6 +5,7 @@ import levelone from "../assets/level-one.json";
 import { handleSubmitClick } from "./SubmitBoxes";
 import SubmitBoxes from "./SubmitBoxes";
 import state from "../store/Store";
+import Lives from "../components/Lives";
 
 const useStyles = makeStyles((theme) => ({
   stylesMainOuter: {
@@ -25,6 +26,15 @@ const useStyles = makeStyles((theme) => ({
     height: "50px",
     borderRadius: "15px",
   },
+  lives: {
+    position: "absolute",
+    justifyContent: "flex-end",
+    right: 10
+  },
+  container: {
+    display: "flex",
+    flexDirection: "row"
+  }
 }));
 
 function InputContainer() {
@@ -33,7 +43,13 @@ function InputContainer() {
   return (
     <div className={style.stylesMainOuter}>
       {state.level != 1 ? (
-        <SubmitBoxes />
+        <div className={style.container}>
+           <SubmitBoxes />
+           <div className={style.lives}>
+            <Lives />
+          </div>
+          </div>
+        
       ) : (
         <div className={style.fillerSpace}>
           <Button

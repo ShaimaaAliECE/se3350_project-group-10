@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
     color: "black",
     margin: 15,
   },
+ 
 }));
 
 const stylesMainInner = {

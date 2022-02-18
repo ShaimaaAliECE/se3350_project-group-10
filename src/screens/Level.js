@@ -40,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     paddingBottom: 20,
   },
+
 }));
 
 function Level() {
@@ -52,9 +53,13 @@ function Level() {
       <div className={style.musicSheet}>
         <Sheet />
       </div>
+      
       <div className={style.inputContainer}>
-        <InputContainer />
+          <InputContainer />
       </div>
+
+      
+      
       <div className={style.piano}>
         <Piano />
       </div>
