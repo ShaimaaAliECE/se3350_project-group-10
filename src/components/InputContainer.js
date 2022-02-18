@@ -35,6 +35,7 @@ function InputContainer() {
   const style = useStyles();
 
   let [openModal, setOpenModal] = useState(false);
+
   const handleGameOver = () => {
     state.gameOver = true;
     setOpenModal(true);
@@ -43,6 +44,7 @@ function InputContainer() {
     state.instruct = 0;
     winSound();
   };
+
   return (
     <>
       <Modal
@@ -90,6 +92,7 @@ function InputContainer() {
           </a>
         </div>
       </Modal>
+
       <div className={style.stylesMainOuter}>
         {state.level != 1 ? (
           <SubmitBoxes />
@@ -102,7 +105,6 @@ function InputContainer() {
                 if (state.instruct < state.ans.length) {
                   state.instruct++;
                 }
-
                 state.input = state.ans[state.step].array;
                 handleSubmitClick(handleGameOver);
               }}
