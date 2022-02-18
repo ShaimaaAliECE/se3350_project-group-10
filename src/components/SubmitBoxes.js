@@ -54,7 +54,7 @@ function handleRestartClick(handleGameOver) {
   state.reseting = false;
 }
 
-function generateEmptyArr() {
+export function generateEmptyArr() {
   state.input = [];
   for (let i = 0; i < state.ans[state.step]?.array.length; i++) {
     state.input.push(0);
@@ -143,6 +143,7 @@ function CreateMap(arrOuter) {
     setOpenModal(true);
     generateEmptyArr();
     state.step = 0;
+    state.instruct = 0;
     winSound();
   };
 

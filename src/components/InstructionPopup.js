@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
 function PopUp() {
   const classes = useStyles();
 
+
   return (
     <div className={classes.container}>
       <div className={classes.detailsContainer}>
@@ -48,7 +49,10 @@ function PopUp() {
             type="text/css"
             href="//fonts.googleapis.com/css?family=Raleway"
           />
-          {levelone.map((levelone) => levelone[state.instruct])}
+          {/* kinda hard coded for now, but will fix later :) */}
+          {state.instruct === 0
+            ? "Split the array in half as evenly as possible. Take the floor function of the length/2 to correctly divide the array. Start by entering the values of the left sub-array."
+            : levelone.map((levelone) => levelone[state.instruct])}
         </div>
       </div>
     </div>
