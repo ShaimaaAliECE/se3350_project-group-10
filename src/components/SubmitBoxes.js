@@ -141,8 +141,7 @@ function CreateMap(arrOuter) {
   const handleGameOver = () => {
     state.gameOver = true;
     setOpenModal(true);
-    generateEmptyArr();
-    state.step = 0;
+    state.resetStates();
     winSound();
   };
 
