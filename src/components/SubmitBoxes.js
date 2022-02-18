@@ -4,7 +4,7 @@ import state from "../store/Store";
 import { view } from "@risingstack/react-easy-state";
 import { Button } from "@material-ui/core";
 import { Modal } from "@material-ui/core";
-import Lives from "./Lives";
+import LoseScreen from "../components/LoseScreen";
 
 import {
   playCorrectSound,
@@ -108,6 +108,8 @@ export function handleSubmitClick(handleGameOver) {
     state.lives--;
     state.reseting = true;
     setTimeout(handleRestartClick, 1000);
+    playIncorrectSound();
+
     // remove life visually
     if (state.lives === 2) {
       let lostLife1 = document.getElementById("l1");
@@ -119,8 +121,9 @@ export function handleSubmitClick(handleGameOver) {
       let lostLife3 = document.getElementById("l3");
       lostLife3.style.display = "none";
       loseSound(); // play lose sound
+      state.loseGame = true;
+
     }
-    playIncorrectSound();
 
   }
 }
@@ -164,7 +167,8 @@ function CreateMap(arrOuter) {
 
   return (
     <>
-      <div className={style.stylesContainerOuter}>
+      
+        <div className={style.stylesContainerOuter}>
         {arrOuter.map((arrInner) => (
           <div className={style.stylesContainerInner}>
             {arrInner.map((arrObj) => (
@@ -194,7 +198,6 @@ function CreateMap(arrOuter) {
             SUBMIT
           </Button>
         </div>
-
         <Modal
           open={openModal}
           aria-labelledby="modal-modal-title"
@@ -241,6 +244,10 @@ function CreateMap(arrOuter) {
           </div>
         </Modal>
       </div>
+      
+      
+
+     
     </>
   );
 }
