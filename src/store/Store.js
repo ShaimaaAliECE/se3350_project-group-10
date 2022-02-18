@@ -105,6 +105,7 @@ const state = store({
   maxMergLen: 0,
   reseting: false,
   feedbackColor: "rgba(220,220,220, .6)",
+  lastChunk: [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]],
   depthInc: () => (state.runnable ? state.depth++ : state.depth),
   stepInc: () => state.step++,
   appendSheet: (move, array, row) => appendSheet(move, array, row),
