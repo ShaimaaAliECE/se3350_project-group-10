@@ -97,7 +97,7 @@ export function handleClick(level) {
   switch (level) {
     case 1: // Level 1, Tutorial level, includes step by step instructions/tutorial
       state.resetStates();
-      mergeSort([...random(1, 11)]);
+      mergeSort([...random(1, 21)]);
       generateEmptyArr();
       state.initializeSplit();
       state.initializeSheets();
@@ -105,7 +105,7 @@ export function handleClick(level) {
       break;
     case 2: // Level 2, Includes instructions only
       state.resetStates();
-      mergeSort([...random(1, 11)]);
+      mergeSort([...random(1, 21)]);
       generateEmptyArr();
       state.initializeSplit();
       state.initializeSheets();
@@ -113,7 +113,7 @@ export function handleClick(level) {
       break;
     case 3: // Level 3
       state.resetStates();
-      mergeSort([...random(1, 11)]);
+      mergeSort([...random(1, 21)]);
       generateEmptyArr();
       state.initializeSplit();
       state.initializeSheets();
@@ -121,7 +121,7 @@ export function handleClick(level) {
       break;
     case 4: // Level 4
       state.resetStates();
-      mergeSort([...random(1, 11)]);
+      mergeSort([...random(1, 21)]);
       generateEmptyArr();
       state.initializeSplit();
       state.initializeSheets();
@@ -129,7 +129,7 @@ export function handleClick(level) {
       break;
     case 5: // Level 5
       state.resetStates();
-      mergeSort([...random(1, 11)]);
+      mergeSort([...random(1, 21)]);
       generateEmptyArr();
       state.initializeSplit();
       state.initializeSheets();
