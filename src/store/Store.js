@@ -1,66 +1,68 @@
 import { store } from "@risingstack/react-easy-state";
 
-function firstZeroFinder(arr) {
+function firstZeroFinder(arr, type = "split") {
+  let temp = [];
   for (let i in arr.array) {
     if (arr.array[i][0] === 0) {
+      if (type === "merge" && state.maxMergLen < getLengths(temp)) {
+        state.maxMergLen = getLengths(temp);
+      }
       return i;
     }
+    temp.push(arr.array[i]);
   }
+
   return;
 }
 
 function appendSheet(array, row) {
-  //state.sheet[0][row].array is shortened before it enters here
-  let temp = [...state.sheet[0][row].array];
-
   let zeroIndex = firstZeroFinder(state.sheet[0][row]);
-
-  //Splice returns what was removed >> array of length 2
-
-  state.sheet[0][row].array.splice(zeroIndex, 1, [...array]); //Splice removed entire array but only half values filled?
-
-  // console.log(
-  //   "setting",
-  //   state.sheet[0][row].array[zeroIndex],
-  //   "to",
-  //   temp[zeroIndex]
-  // ); //This is setting [2] = [1]
-
-  // state.sheet[0][row].array[zeroIndex] = temp[zeroIndex]; //PROBLEM IS HERE>> temp not returning entire array
+  state.sheet[0][row].array.splice(zeroIndex, 1, [...array]);
+}
+function getLengths(array) {
+  //where array is 2d
+  let count = -1;
+  for (let i in array) {
+    for (let j in array[i]) {
+      count++;
+    }
+  }
+  return count;
 }
 
-// function fillGapsArr(start, end) {
-//   let arr = [];
+function fillGapsArr(start, end) {
+  let arr = [];
 
-//   for (let i = 0; i < end - start; i++) {
-//     arr.push("x");
-//   }
+  for (let i = 0; i < end - start; i++) {
+    arr.push(["x"]);
+  }
 
-//   return arr;
-// }
+  return arr;
+}
 
-// function fillTheGaps(zeroesEncountered, type) {
-//   if (type === "merge") {
-//     for (let i = 0; i < state.depth - 2; i++) {
-//       firstZeroFinder(i, state.sheetMerge, "merge");
-//     }
+function fillTheGaps(zeroesEncountered, type) {
+  if (type === "merge") {
+    for (let i = 0; i < state.depth - 2; i++) {
+      firstZeroFinder(state.sheet[0][i + state.depth], "merge");
+    }
 
-//     let firstZero = firstZeroFinder(0, state.sheetMerge, "merge");
-//     state.sheetMerge[0].array.splice(
-//       firstZero,
-//       state.maxMergLen - firstZero,
-//       ...fillGapsArr(firstZero, state.maxMergLen)
-//     );
-//   } else {
-//     let firstZero = firstZeroFinder(state.depth - 1, state.sheetSplit);
+    let firstZero = firstZeroFinder(state.sheet[0][state.depth]);
 
-//     state.sheetSplit[state.depth - 1].array.splice(
-//       firstZero,
-//       zeroesEncountered - firstZero,
-//       ...fillGapsArr(firstZero, zeroesEncountered)
-//     );
-//   }
-// }
+    state.sheet[0][state.depth].array.splice(
+      firstZero,
+      state.maxMergLen - firstZero,
+      ...fillGapsArr(firstZero, state.maxMergLen)
+    );
+  } else {
+    let firstZero = firstZeroFinder(state.sheet[0][state.depth - 1]);
+
+    state.sheet[0][state.depth - 1].array.splice(
+      firstZero,
+      zeroesEncountered - firstZero,
+      ...fillGapsArr(firstZero, zeroesEncountered)
+    );
+  }
+}
 
 function chunk(array) {
   let divisor;
@@ -182,12 +184,12 @@ const state = store({
   depthInc: () => (state.runnable ? state.depth++ : state.depth),
   stepInc: () => state.step++,
   appendSheet: (array, row) => appendSheet(array, row),
-  // fillTheGaps: (zeroesEncountered, type) =>
-  //   fillTheGaps(zeroesEncountered, type),
   resetStates: () => resetStates(),
   firstZeroFinder: (arr) => firstZeroFinder(arr),
   initializeSheets: () => initializeSheets(),
   initializeSplit: () => initializeSplit(),
+  fillTheGaps: (zeroesEncountered, type) =>
+    fillTheGaps(zeroesEncountered, type),
 });
 
 export default state;

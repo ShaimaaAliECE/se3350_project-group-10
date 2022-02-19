@@ -86,7 +86,6 @@ export function handleSubmitClick(handleGameOver) {
     } else {
       row = state.ans[state.step].row;
     }
-    // console.log("pre append row", row, "input", state.input);
     state.appendSheet(state.input, row);
 
     state.stepInc();
@@ -96,10 +95,10 @@ export function handleSubmitClick(handleGameOver) {
       handleGameOver();
     } else {
       state.reseting = true;
-      // state.fillTheGaps(
-      //   state.ans[state.step - 1].zeroesEncountered,
-      //   state.ans[state.step - 1].type
-      // );
+      state.fillTheGaps(
+        state.ans[state.step - 1].zeroesEncountered,
+        state.ans[state.step - 1].type
+      );
       setTimeout(generateEmptyArr, 1000);
       setTimeout(handleRestartClick, 1000);
       playCorrectSound();
