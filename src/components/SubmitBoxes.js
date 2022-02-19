@@ -83,11 +83,13 @@ export function handleSubmitClick(handleGameOver) {
   //Check the answer, if its right --> increment step, handle restart, state.sheet.push(state.input)
 
   if (arrComp(state.ans[state.step].array, state.input)) {
-    state.appendSheet(
-      state.ans[state.step].type,
-      state.input,
-      state.ans[state.step].row
-    );
+    let row;
+    if (state.ans[state.step].type == "merge") {
+      row = state.ans[state.step].row + state.depth;
+    } else {
+      row = state.ans[state.step].row;
+    }
+    state.appendSheet(state.input, row);
 
     state.stepInc();
     if (state.level === 2) {
@@ -171,13 +173,11 @@ function CreateMap(arrOuter) {
   return (
     <>
       <div className={style.stylesContainerOuter}>
-        {arrOuter.map((arrInner) => (
-          <div className={style.stylesContainerInner}>
-            {arrInner.map((arrObj) => (
-              <div style={submitBox}>{arrObj === 0 ? "" : arrObj}</div>
-            ))}
-          </div>
-        ))}
+        <div className={style.stylesContainerInner}>
+          {arrOuter.map((arrInner) => (
+            <div style={submitBox}>{arrInner === 0 ? "" : arrInner}</div>
+          ))}
+        </div>
         <div style={{ display: "flex", padding: 10, flexDirection: "column" }}>
           <Button
             variant="contained"
@@ -254,11 +254,7 @@ function CreateMap(arrOuter) {
 function SubmitBoxes() {
   let arr = state.input;
 
-  return (
-    <div style={stylesMainInner}>
-      {CreateMap(chunk(arr, state.ans[0].array.length))}
-    </div>
-  );
+  return <div style={stylesMainInner}>{CreateMap(arr)}</div>;
 }
 
 export default view(SubmitBoxes);
