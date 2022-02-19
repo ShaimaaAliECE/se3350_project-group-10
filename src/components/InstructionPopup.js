@@ -7,14 +7,14 @@ import { view } from "@risingstack/react-easy-state";
 const useStyles = makeStyles((theme) => ({
   container: {
     position: "fixed",
-    top: 80,
-    left: 55,
+    bottom: "4%",
+    left: "2%",
     borderRadius: 30,
-    width: 200,
-    height: 300,
+    width: 300,
+    height: 200,
     backgroundColor: "rgba(131,130,130,0.9)",
     margin: "auto",
-    zIndex: 10,
+    zIndex: 6,
   },
 
   detailsContainer: {
@@ -48,7 +48,10 @@ function PopUp() {
             type="text/css"
             href="//fonts.googleapis.com/css?family=Raleway"
           />
-          {levelone.map((levelone) => levelone[state.instruct])}
+          {/* kinda hard coded for now, but will fix later :) */}
+          {state.instruct === 0
+            ? "Split the array in half as evenly as possible. Take the floor function of the length/2 to correctly divide the array. Start by entering the values of the left sub-array."
+            : levelone.map((levelone) => levelone[state.instruct])}
         </div>
       </div>
     </div>

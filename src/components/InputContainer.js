@@ -5,6 +5,11 @@ import levelone from "../assets/level-one.json";
 import { handleSubmitClick } from "./SubmitBoxes";
 import SubmitBoxes from "./SubmitBoxes";
 import state from "../store/Store";
+import { generateEmptyArr } from "./SubmitBoxes";
+import { winSound } from "../assets/tones.js";
+import { useState } from "react";
+import { Modal } from "@material-ui/core";
+import Lives from "../components/Lives";
 
 const useStyles = makeStyles((theme) => ({
   stylesMainOuter: {
@@ -25,31 +30,105 @@ const useStyles = makeStyles((theme) => ({
     height: "50px",
     borderRadius: "15px",
   },
+  lives: {
+    position: "absolute",
+    justifyContent: "flex-end",
+    right: 10,
+  },
+  container: {
+    display: "flex",
+    flexDirection: "row",
+  },
 }));
 
 function InputContainer() {
   const style = useStyles();
 
+  let [openModal, setOpenModal] = useState(false);
+
+  const handleGameOver = () => {
+    state.gameOver = true;
+    setOpenModal(true);
+    generateEmptyArr();
+    state.step = 0;
+    state.instruct = 0;
+    winSound();
+  };
+
   return (
-    <div className={style.stylesMainOuter}>
-      {state.level != 1 ? (
-        <SubmitBoxes />
-      ) : (
-        <div className={style.fillerSpace}>
-          <Button
-            variant="contained"
-            className={style.nextBtn}
-            onClick={() => {
-              state.instruct = state.instruct + 1;
-              state.input = state.ans[state.instruct].array;
-              handleSubmitClick();
+    <>
+      <Modal
+        open={openModal}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100%",
+            flexDirection: "column",
+          }}
+        >
+          <p
+            style={{
+              backgroundColor: "white",
+              width: "25%",
+              height: "25%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
             }}
           >
-            Next
-          </Button>
+            You have Completed Level {state.level}!
+          </p>
+          <a
+            href="/"
+            style={{
+              backgroundColor: "black",
+              paddingLeft: 30,
+              paddingTop: 10,
+              paddingBottom: 10,
+              paddingRight: 30,
+              borderRadius: 20,
+              textAlign: "center",
+              color: "white",
+              fontFamily: "Raleway",
+              textDecoration: "none",
+            }}
+          >
+            Home
+          </a>
         </div>
-      )}
-    </div>
+      </Modal>
+      <div className={style.stylesMainOuter}>
+        {state.level != 1 ? (
+          <div className={style.container}>
+            <SubmitBoxes />
+            <div className={style.lives}>
+              <Lives />
+            </div>
+          </div>
+        ) : (
+          <div className={style.fillerSpace}>
+            <Button
+              variant="contained"
+              className={style.nextBtn}
+              onClick={() => {
+                if (state.instruct < state.ans.length) {
+                  state.instruct++;
+                }
+                state.input = state.ans[state.step].array;
+                handleSubmitClick(handleGameOver);
+              }}
+            >
+              Next
+            </Button>
+          </div>
+        )}
+      </div>
+    </>
   );
 }
 

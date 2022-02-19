@@ -160,6 +160,7 @@ function resetStates() {
   state.step = 1;
   state.gameOver = false;
   state.instruct = 0;
+  state.loseGame = false;
 }
 
 const state = store({
@@ -181,6 +182,7 @@ const state = store({
   reseting: false,
   indRef: -1,
   feedbackColor: "rgba(220,220,220, .6)",
+  loseGame: false,
   depthInc: () => (state.runnable ? state.depth++ : state.depth),
   stepInc: () => state.step++,
   appendSheet: (array, row) => appendSheet(array, row),

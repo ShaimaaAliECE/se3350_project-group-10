@@ -12,6 +12,5 @@ ReactDOM.render(
       <Route path="/level_:level" element={<Level />} />
     </Routes>
   </BrowserRouter>,
-
   document.getElementById("root")
 );

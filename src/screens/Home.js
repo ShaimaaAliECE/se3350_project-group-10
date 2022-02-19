@@ -85,7 +85,7 @@ export function generateEmptyArr() {
   }
 }
 
-const random = (min, max) => {
+export const random = (min, max) => {
   let num = [];
   for (let i = 0; i < 10; i++) {
     num.push(Math.floor(Math.random() * (max - min) + min));
@@ -197,11 +197,11 @@ export default function Home() {
                     Level 1
                   </button>
                 </Link>
-                <Link to="/level_3" className={classes.link}>
+                <Link to="/level_2" className={classes.link}>
                   <button
                     className={classes.button}
                     onClick={() => {
-                      handleClick(3);
+                      handleClick(2);
                     }}
                   >
                     Level 2
@@ -217,21 +217,21 @@ export default function Home() {
                     Level 3
                   </button>
                 </Link>
-                <Link to="/level_3" className={classes.link}>
+                <Link to="/level_4" className={classes.link}>
                   <button
                     className={classes.button}
                     onClick={() => {
-                      handleClick(3);
+                      handleClick(4);
                     }}
                   >
                     Level 4
                   </button>
                 </Link>
-                <Link to="/level_3" className={classes.link}>
+                <Link to="/level_5" className={classes.link}>
                   <button
                     className={classes.button}
                     onClick={() => {
-                      handleClick(3);
+                      handleClick(5);
                     }}
                   >
                     Level 5
@@ -249,11 +249,11 @@ export default function Home() {
                     Level 1
                   </button>
                 </Link>
-                <Link to="/level_3" className={classes.link}>
+                <Link to="/level_2" className={classes.link}>
                   <button
                     className={classes.button}
                     onClick={() => {
-                      handleClick(3);
+                      handleClick(2);
                     }}
                   >
                     Level 2
@@ -269,21 +269,21 @@ export default function Home() {
                     Level 3
                   </button>
                 </Link>
-                <Link to="/level_3" className={classes.link}>
+                <Link to="/level_4" className={classes.link}>
                   <button
                     className={classes.button}
                     onClick={() => {
-                      handleClick(3);
+                      handleClick(4);
                     }}
                   >
                     Level 4
                   </button>
                 </Link>
-                <Link to="/level_3" className={classes.link}>
+                <Link to="/level_5" className={classes.link}>
                   <button
                     className={classes.button}
                     onClick={() => {
-                      handleClick(3);
+                      handleClick(5);
                     }}
                   >
                     Level 5
@@ -301,11 +301,11 @@ export default function Home() {
                     Level 1
                   </button>
                 </Link>
-                <Link to="/level_3" className={classes.link}>
+                <Link to="/level_2" className={classes.link}>
                   <button
                     className={classes.button}
                     onClick={() => {
-                      handleClick(3);
+                      handleClick(2);
                     }}
                   >
                     Level 2
@@ -321,21 +321,21 @@ export default function Home() {
                     Level 3
                   </button>
                 </Link>
-                <Link to="/level_3" className={classes.link}>
+                <Link to="/level_4" className={classes.link}>
                   <button
                     className={classes.button}
                     onClick={() => {
-                      handleClick(3);
+                      handleClick(4);
                     }}
                   >
                     Level 4
                   </button>
                 </Link>
-                <Link to="/level_3" className={classes.link}>
+                <Link to="/level_5" className={classes.link}>
                   <button
                     className={classes.button}
                     onClick={() => {
-                      handleClick(3);
+                      handleClick(5);
                     }}
                   >
                     Level 5
@@ -353,11 +353,11 @@ export default function Home() {
                     Level 1
                   </button>
                 </Link>
-                <Link to="/level_3" className={classes.link}>
+                <Link to="/level_2" className={classes.link}>
                   <button
                     className={classes.button}
                     onClick={() => {
-                      handleClick(3);
+                      handleClick(2);
                     }}
                   >
                     Level 2
@@ -373,21 +373,21 @@ export default function Home() {
                     Level 3
                   </button>
                 </Link>
-                <Link to="/level_3" className={classes.link}>
+                <Link to="/level_4" className={classes.link}>
                   <button
                     className={classes.button}
                     onClick={() => {
-                      handleClick(3);
+                      handleClick(4);
                     }}
                   >
                     Level 4
                   </button>
                 </Link>
-                <Link to="/level_3" className={classes.link}>
+                <Link to="/level_5" className={classes.link}>
                   <button
                     className={classes.button}
                     onClick={() => {
-                      handleClick(3);
+                      handleClick(5);
                     }}
                   >
                     Level 5

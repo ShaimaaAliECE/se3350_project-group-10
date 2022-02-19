@@ -4,11 +4,13 @@ import state from "../store/Store";
 import { view } from "@risingstack/react-easy-state";
 import { Button } from "@material-ui/core";
 import { Modal } from "@material-ui/core";
+//import LoseScreen from "../components/LoseScreen";
 
 import {
   playCorrectSound,
   playIncorrectSound,
   winSound,
+  loseSound,
 } from "../assets/tones.js";
 
 const useStyles = makeStyles((theme) => ({
@@ -54,7 +56,7 @@ function handleRestartClick(handleGameOver) {
   state.reseting = false;
 }
 
-function generateEmptyArr() {
+export function generateEmptyArr() {
   state.input = [];
   for (let i = 0; i < state.ans[state.step]?.array.length; i++) {
     state.input.push(0);
@@ -79,6 +81,7 @@ function navigateSheet() {
 
 export function handleSubmitClick(handleGameOver) {
   //Check the answer, if its right --> increment step, handle restart, state.sheet.push(state.input)
+
   if (arrComp(state.ans[state.step].array, state.input)) {
     let row;
     if (state.ans[state.step].type == "merge") {
@@ -89,6 +92,9 @@ export function handleSubmitClick(handleGameOver) {
     state.appendSheet(state.input, row);
 
     state.stepInc();
+    if (state.level === 2) {
+      state.instruct++;
+    }
     setTimeout(navigateSheet, 1000);
     if (state.step >= state.ans.length) {
       //Win!
@@ -104,10 +110,25 @@ export function handleSubmitClick(handleGameOver) {
       playCorrectSound();
     }
   } else {
+    // if incorrect, minus 1 life, play incorrect sound
     state.lives--;
     state.reseting = true;
     setTimeout(handleRestartClick, 1000);
     playIncorrectSound();
+
+    // remove life visually
+    if (state.lives === 2) {
+      let lostLife1 = document.getElementById("l1");
+      lostLife1.style.display = "none";
+    } else if (state.lives === 1) {
+      let lostLife2 = document.getElementById("l2");
+      lostLife2.style.display = "none";
+    } else if (state.lives === 0) {
+      let lostLife3 = document.getElementById("l3");
+      lostLife3.style.display = "none";
+      loseSound(); // play lose sound
+      state.loseGame = true;
+    }
   }
 }
 
@@ -143,7 +164,9 @@ function CreateMap(arrOuter) {
   const handleGameOver = () => {
     state.gameOver = true;
     setOpenModal(true);
-    // state.resetStates();
+    generateEmptyArr();
+    state.step = 0;
+    state.instruct = 0;
     winSound();
   };
 
