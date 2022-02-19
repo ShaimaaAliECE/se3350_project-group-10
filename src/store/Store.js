@@ -168,6 +168,7 @@ function resetStates() {
   state.reseting = false;
   state.indRef = -1;
   state.feedbackColor = "rgba(220,220,220, .6)";
+  state.loseGame = false;
 }
 
 const state = store({
