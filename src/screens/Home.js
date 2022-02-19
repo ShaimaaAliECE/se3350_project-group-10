@@ -93,7 +93,7 @@ export const random = (min, max) => {
   return num;
 };
 
-function handleClick(level) {
+export function handleClick(level) {
   switch (level) {
     case 1: // Level 1, Tutorial level, includes step by step instructions/tutorial
       state.resetStates();

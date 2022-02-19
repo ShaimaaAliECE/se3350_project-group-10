@@ -3,14 +3,7 @@ import { makeStyles } from "@material-ui/core";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import state from "../store/Store";
-import {
-  generateEmptyArr,
-  initializeSheets,
-  initializeSplit,
-  random,
-  handleClick,
-} from "../screens/Home";
-import { mergeSort } from "../algorithms/mergesort";
+import { handleClick } from "../screens/Home";
 
 const useStyles = makeStyles((theme) => ({
   container: {
