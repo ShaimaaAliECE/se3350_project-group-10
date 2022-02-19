@@ -150,16 +150,24 @@ function initializeSheets() {
 }
 
 function resetStates() {
-  state.lives = 3;
-  state.input = [];
-  state.ans = [];
-  state.level = 0;
-  state.sheet = [];
-  state.depth = 1;
-  state.runnable = 1;
-  state.step = 1;
-  state.gameOver = false;
-  state.instruct = 0;
+  lives = 3;
+  input = [];
+  ans = [];
+  level = 0;
+  instruct = 0;
+  algo = "merge";
+  sheet = [];
+  flags = [];
+  depth = 1;
+  runnable = 1;
+  step = 1;
+  gameOver = false;
+  splits = [0];
+  zeroesEncountered = 0;
+  maxMergLen = 0;
+  reseting = false;
+  indRef = -1;
+  feedbackColor = "rgba(220,220,220, .6)";
 }
 
 const state = store({
