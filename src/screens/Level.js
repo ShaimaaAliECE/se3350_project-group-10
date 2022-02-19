@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, Button } from "@material-ui/core";
 import Piano from "../components/Piano";
 import InputContainer from "../components/InputContainer";
 import state from "../store/Store";
@@ -7,6 +7,8 @@ import PopUp from "../components/InstructionPopup";
 import { useParams } from "react-router-dom";
 import LoseScreen from "../components/LoseScreen";
 import { view } from "@risingstack/react-easy-state";
+import Lives from "../components/Lives";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -16,14 +18,29 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     backgroundColor: "grey",
+    zindex: 10,
   },
+  // not complete yet
   navbar: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     color: "white",
     textAlign: "center",
-    padding: 10,
     fontSize: "30px",
     backgroundColor: "black",
+    padding: "10px",
   },
+  title: {},
+  navbarBackBtn: {
+    backgroundColor: "white",
+    marginLeft: "20px",
+  },
+  lives: {
+    marginRight: "20px",
+  },
+  // ^^^
   musicSheet: {
     height: "50%",
     backgroundColor: "grey",
@@ -49,12 +66,26 @@ function Level() {
   let params = useParams();
   return (
     <>
-      {state.loseGame === true ? (
+      {state.loseGame ? (
         <LoseScreen />
       ) : (
         <div className={style.container}>
-          {state.level === 1 || state.level === 2 ? <PopUp /> : null}
-          <div className={style.navbar}>Level {params.level} - Merge Sort</div>
+          {(state.level === 1 || state.level === 2) &&
+          state.loseGame === false ? (
+            <PopUp />
+          ) : null}
+          <div className={style.navbar}>
+            {/* TEMPORARY COMMENTS! DONT DELETE */}
+            {/* <div className={style.navbarBackBtn}>
+              <Link to="/">
+                <Button>back</Button>
+              </Link>
+            </div> */}
+            <div className={style.title}>Level {params.level} - Merge Sort</div>
+            {/* <div className={style.lives}>
+              <Lives />
+            </div> */}
+          </div>
           <div className={style.musicSheet}>
             <Sheet />
           </div>

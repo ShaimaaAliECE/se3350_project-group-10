@@ -4,7 +4,7 @@ import state from "../store/Store";
 import { view } from "@risingstack/react-easy-state";
 import { Button } from "@material-ui/core";
 import { Modal } from "@material-ui/core";
-import LoseScreen from "../components/LoseScreen";
+//import LoseScreen from "../components/LoseScreen";
 
 import {
   playCorrectSound,
@@ -81,6 +81,7 @@ function navigateSheet() {
 
 export function handleSubmitClick(handleGameOver) {
   //Check the answer, if its right --> increment step, handle restart, state.sheet.push(state.input)
+
   if (arrComp(state.ans[state.step].array, state.input)) {
     state.appendSheet(
       state.ans[state.step].type,
@@ -199,6 +200,7 @@ function CreateMap(arrOuter) {
             SUBMIT
           </Button>
         </div>
+
         <Modal
           open={openModal}
           aria-labelledby="modal-modal-title"

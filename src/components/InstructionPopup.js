@@ -7,14 +7,14 @@ import { view } from "@risingstack/react-easy-state";
 const useStyles = makeStyles((theme) => ({
   container: {
     position: "fixed",
-    top: 80,
-    left: 55,
+    bottom: "4%",
+    left: "2%",
     borderRadius: 30,
-    width: 200,
-    height: 300,
+    width: 300,
+    height: 200,
     backgroundColor: "rgba(131,130,130,0.9)",
     margin: "auto",
-    zIndex: 10,
+    zIndex: 6,
   },
 
   detailsContainer: {

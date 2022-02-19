@@ -18,6 +18,9 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     height: "100vh",
+    zIndex: 30,
+    fontFamily: "Raleway",
+    backgroundColor: "rgba(52, 52, 52, 0.8)",
   },
 
   content: {
@@ -28,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
     height: "500px",
     backgroundSize: "cover",
     backgroundColor: "darkgrey",
+    fontFamily: "Raleway",
     // backgroundImage: `url(${image})`,
   },
 
@@ -46,6 +50,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   buttons: {
+    fontFamily: "Raleway",
     padding: "20px",
   },
 }));
