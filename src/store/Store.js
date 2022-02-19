@@ -154,13 +154,20 @@ function resetStates() {
   state.input = [];
   state.ans = [];
   state.level = 0;
+  state.instruct = 0;
+  state.algo = "merge";
   state.sheet = [];
+  state.flags = [];
   state.depth = 1;
   state.runnable = 1;
   state.step = 1;
   state.gameOver = false;
-  state.instruct = 0;
-  state.loseGame = false;
+  state.splits = [0];
+  state.zeroesEncountered = 0;
+  state.maxMergLen = 0;
+  state.reseting = false;
+  state.indRef = -1;
+  state.feedbackColor = "rgba(220,220,220, .6)";
 }
 
 const state = store({
