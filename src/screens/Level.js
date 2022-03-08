@@ -1,4 +1,4 @@
-import { makeStyles, Button } from "@material-ui/core";
+import { makeStyles, Button, Grow } from "@material-ui/core";
 import Piano from "../components/Piano";
 import InputContainer from "../components/InputContainer";
 import state from "../store/Store";
@@ -9,6 +9,7 @@ import LoseScreen from "../components/LoseScreen";
 import { view } from "@risingstack/react-easy-state";
 import Lives from "../components/Lives";
 import { Link } from "react-router-dom";
+import backBtn from "../assets/back.svg"; 
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -31,15 +32,36 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "30px",
     backgroundColor: "black",
     padding: "10px",
+
   },
-  title: {},
+  title: { 
+    flex:"2",
+    flexGrow:"15"
+    
+  },
   navbarBackBtn: {
-    backgroundColor: "white",
-    marginLeft: "20px",
+    image: backBtn,
+    flex:"1",
+    justifyContent:"flex-start", 
+    alignItems:"center",
+    backgroundColor: "black",
+    marginTop:"8px",
+    marginRight:"20px",
+    flexDirection:"row",
+    flexGrow:"1"
+   
+   
+
   },
+    
   lives: {
     marginRight: "20px",
   },
+  thirdBox:
+    {
+      flex:"3",
+      flexGrow:"1"
+    },
   // ^^^
   musicSheet: {
     height: "50%",
@@ -76,15 +98,16 @@ function Level() {
           ) : null}
           <div className={style.navbar}>
             {/* TEMPORARY COMMENTS! DONT DELETE */}
-            {/* <div className={style.navbarBackBtn}>
+            {<div className={style.navbarBackBtn}>
               <Link to="/">
-                <Button>back</Button>
+              <img src={backBtn} style={{height:"100%", width:"100%", justifyContent:"flex-end" }}/>
               </Link>
-            </div> */}
+            </div>}
             <div className={style.title}>Level {params.level} - Merge Sort</div>
             {/* <div className={style.lives}>
               <Lives />
             </div> */}
+            <div className={style.thirdBox}></div>
           </div>
           <div className={style.musicSheet}>
             <Sheet />
