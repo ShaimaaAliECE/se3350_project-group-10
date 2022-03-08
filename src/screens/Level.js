@@ -100,7 +100,7 @@ function Level() {
             {/* TEMPORARY COMMENTS! DONT DELETE */}
             {<div className={style.navbarBackBtn}>
               <Link to="/">
-              <img src={backBtn} style={{height:"100%", width:"100%" }}/>
+              <img src={backBtn}/>
               </Link>
             </div>}
             <div className={style.title}>Level {params.level} - Merge Sort</div>
