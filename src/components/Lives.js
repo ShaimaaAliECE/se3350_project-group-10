@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     width: "50%",
   },
 
-  life1: {
+  life: {
     order: 1,
     margin: "5px",
   },
@@ -41,15 +41,15 @@ export function Lives() {
   const classes = useStyles();
   return (
     <div className={classes.livesContainer}>
-      <div id="l1" className={classes.life1}>
+      <div id="l1" className={classes.life} style={{order:1}}>
         {" "}
         <img src={l1} alt="life 1"></img>
       </div>
-      <div id="l2" className={classes.life2}>
+      <div id="l2" className={classes.life} style={{order:2}}>
         {" "}
         <img src={l2} alt="life 2"></img>
       </div>
-      <div id="l3" className={classes.life3}>
+      <div id="l3" className={classes.life} style={{order:3}}>
         {" "}
         <img src={l3} alt="life 3"></img>
       </div>
