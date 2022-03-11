@@ -24,18 +24,20 @@ const useStyles = makeStyles((theme) => ({
   content: {
     borderStyle: "solid",
     borderColor: "black",
-    borderRadius: "20px",
+    borderRadius: "40px",
     width: "1000px",
     height: "500px",
     backgroundSize: "cover",
-    backgroundColor: "white",
+    backgroundColor: "darkgrey",
     fontFamily: "Raleway",
     backgroundImage: `url(${loseBG})`,
   },
 
   title: {
+    fontFamily: "Raleway",
     textAlign: "center",
     fontSize: "50px",
+    paddingTop: "5%",
   },
 
   buttonSection: {
@@ -44,7 +46,8 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     height: "200px",
     flexDirection: "column",
-    padding: "100px",
+    paddingTop: "5%",
+    fontFamily: "Raleway",
   },
 
   buttons: {
@@ -52,20 +55,6 @@ const useStyles = makeStyles((theme) => ({
     padding: "20px",
   },
 }));
-
-// function btnClick(restart) {
-//   if (restart === true) {
-//     //ik this weird, will improve later
-//     if (state.reloadLevel === 1) {
-//       state.reloadLevel = 0;
-//     } else {
-//       state.reloadLevel = 1;
-//     }
-//     handleClick(state.level);
-//   } else {
-//     state.resetStates();
-//   }
-// }
 
 export default function LoseScreen() {
   const style = useStyles();
