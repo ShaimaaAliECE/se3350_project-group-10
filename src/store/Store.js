@@ -15,10 +15,20 @@ function firstZeroFinder(arr, type = "split") {
   return;
 }
 
-function appendSheet(array, row) {
-  let zeroIndex = firstZeroFinder(state.sheet[0][row]);
-  state.sheet[0][row].array.splice(zeroIndex, 1, [...array]);
+function appendSheet(array, row, flag = 0) {
+  if (flag != 0) {
+    console.log("APPEND1");
+    let zeroIndex = firstZeroFinder(state.sheet[0][row]);
+    console.log("sheet", state.sheet[0][row]);
+    state.sheet[0][row].array.splice(zeroIndex, 1, [...array]);
+  } else {
+    console.log("APPEND0");
+    let zeroIndex = firstZeroFinder(state.sheet[0][row]);
+    console.log("arr", array, "zi:", zeroIndex, "row: ", row);
+    state.sheet[0][row].array.splice(zeroIndex, 1, [...array]); //ISSUE: replaces whole subarray [[], [], []]
+  }
 }
+
 function getLengths(array) {
   //where array is 2d
   let count = -1;
@@ -169,6 +179,7 @@ function resetStates() {
   state.indRef = -1;
   state.feedbackColor = "rgba(220,220,220, .6)";
   state.loseGame = false;
+  state.mergePointer = 0;
 }
 
 const state = store({
@@ -191,9 +202,10 @@ const state = store({
   indRef: -1,
   feedbackColor: "rgba(220,220,220, .6)",
   loseGame: false,
+  mergePointer: 0,
   depthInc: () => (state.runnable ? state.depth++ : state.depth),
   stepInc: () => state.step++,
-  appendSheet: (array, row) => appendSheet(array, row),
+  appendSheet: (array, row, flag) => appendSheet(array, row, flag),
   resetStates: () => resetStates(),
   firstZeroFinder: (arr) => firstZeroFinder(arr),
   initializeSheets: () => initializeSheets(),
