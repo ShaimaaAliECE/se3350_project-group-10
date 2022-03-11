@@ -11,23 +11,20 @@ const useStyles = makeStyles((theme) => ({
     left: "2%",
     borderRadius: 30,
     width: 375,
-    height: 150,
-    backgroundColor: "rgba(242,242,242,0.9)", //130,130,130
+    minHeight: 150,
+    backgroundColor: "rgba(242,242,242,0.9)", 
     margin: "auto",
     zIndex: 6,
   },
 
   detailsContainer: {
-    paddingTop: 20,
-    paddingLeft: 20,
-    paddingRight: 20,
+    padding: 20,    
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
   },
 
   content: {
-    padding: 0,
     textAlign: "justified",
     backgroundColor: "transparent",
     fontFamily: "Raleway",
