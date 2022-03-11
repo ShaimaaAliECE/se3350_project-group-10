@@ -9,7 +9,7 @@ import LoseScreen from "../components/LoseScreen";
 import { view } from "@risingstack/react-easy-state";
 import Lives from "../components/Lives";
 import { Link } from "react-router-dom";
-import backBtn from "../assets/back.svg"; 
+import backBtn from "../assets/back.svg";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "grey",
     zindex: 10,
   },
-  // not complete yet
   navbar: {
     display: "flex",
     flexDirection: "row",
@@ -32,37 +31,25 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "30px",
     backgroundColor: "black",
     padding: "10px",
-
   },
-  title: { 
-    flex:"2",
-    flexGrow:"15"
-    
+  title: {
+    flex: "2",
+    flexGrow: "15",
   },
   navbarBackBtn: {
     image: backBtn,
-    flex:"1",
-    justifyContent:"flex-start", 
-    alignItems:"center",
+    flex: "1",
+    justifyContent: "flex-start",
+    alignItems: "center",
     backgroundColor: "black",
-    marginTop:"8px",
-    marginRight:"20px",
-    flexDirection:"row",
-    flexGrow:"1"
-   
-   
-
+    marginTop: "8px",
+    marginRight: "20px",
+    flexDirection: "row",
+    flexGrow: "1",
   },
-    
   lives: {
     marginRight: "20px",
   },
-  thirdBox:
-    {
-      flex:"3",
-      flexGrow:"1"
-    },
-  // ^^^
   musicSheet: {
     height: "50%",
     backgroundColor: "grey",
@@ -88,38 +75,44 @@ function Level() {
   let params = useParams();
   return (
     <>
-      {state.loseGame ? (
-        <LoseScreen />
-      ) : (
-        <div className={style.container}>
-          {(state.level === 1 || state.level === 2) &&
-          state.loseGame === false ? (
-            <PopUp />
-          ) : null}
-          <div className={style.navbar}>
-            {/* TEMPORARY COMMENTS! DONT DELETE */}
-            {<div className={style.navbarBackBtn}>
+      <div className={style.container}>
+        {/* Instruction Section */}
+        {(state.level === 1 || state.level === 2) &&
+        state.loseGame === false ? (
+          <PopUp />
+        ) : null}
+
+        {/* Lose Screen Popup Section */}
+        {state.loseGame === true ? <LoseScreen /> : null}
+
+        {/* Navbar Secition*/}
+        <div className={style.navbar}>
+          {/* TEMPORARY COMMENTS! DONT DELETE */}
+          {
+            <div className={style.navbarBackBtn}>
               <Link to="/">
-              <img src={backBtn}/>
+                <img src={backBtn} />
               </Link>
-            </div>}
-            <div className={style.title}>Level {params.level} - Merge Sort</div>
-            {/* <div className={style.lives}>
-              <Lives />
-            </div> */}
-            <div className={style.thirdBox}></div>
-          </div>
-          <div className={style.musicSheet}>
-            <Sheet />
-          </div>
-          <div className={style.inputContainer}>
-            <InputContainer />
-          </div>
-          <div className={style.piano}>
-            <Piano />
-          </div>
+            </div>
+          }
+          <div className={style.title}>Level {params.level} - Merge Sort</div>
         </div>
-      )}
+
+        {/* Music Sheet Section*/}
+        <div className={style.musicSheet}>
+          <Sheet />
+        </div>
+
+        {/* Input Container Section */}
+        <div className={style.inputContainer}>
+          <InputContainer />
+        </div>
+
+        {/* Piano Section */}
+        <div className={style.piano}>
+          <Piano />
+        </div>
+      </div>
     </>
   );
 }

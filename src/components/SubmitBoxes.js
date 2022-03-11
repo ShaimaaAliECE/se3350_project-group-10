@@ -4,7 +4,6 @@ import state from "../store/Store";
 import { view } from "@risingstack/react-easy-state";
 import { Button } from "@material-ui/core";
 import { Modal } from "@material-ui/core";
-//import LoseScreen from "../components/LoseScreen";
 
 import {
   playCorrectSound,

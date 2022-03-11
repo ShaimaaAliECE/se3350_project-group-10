@@ -4,28 +4,33 @@ import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import state from "../store/Store";
 import { handleClick } from "../screens/Home";
+import loseBG from "../assets/looseBackground.svg";
+import { StateTimeline } from "tone";
 
 const useStyles = makeStyles((theme) => ({
   container: {
+    width: "100%",
+    height: "100%",
+    position: "absolute",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     height: "100vh",
     zIndex: 30,
     fontFamily: "Raleway",
-    backgroundColor: "rgba(52, 52, 52, 0.8)",
+    backgroundColor: "rgba(52, 52, 52, 0.9)",
   },
 
   content: {
     borderStyle: "solid",
     borderColor: "black",
     borderRadius: "20px",
-    width: "800px",
+    width: "1000px",
     height: "500px",
     backgroundSize: "cover",
-    backgroundColor: "darkgrey",
+    backgroundColor: "white",
     fontFamily: "Raleway",
-    // backgroundImage: `url(${image})`,
+    backgroundImage: `url(${loseBG})`,
   },
 
   title: {
@@ -50,6 +55,12 @@ const useStyles = makeStyles((theme) => ({
 
 function btnClick(restart) {
   if (restart === true) {
+    //ik this weird, will improve later
+    if (state.reloadLevel === 1) {
+      state.reloadLevel = 0;
+    } else {
+      state.reloadLevel = 1;
+    }
     handleClick(state.level);
   } else {
     state.resetStates();
