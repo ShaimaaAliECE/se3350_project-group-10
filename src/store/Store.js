@@ -58,7 +58,7 @@ function appendSheet(array, row, flag = 0) {
     state.sheet[0][row].array[pos.ind].splice(pos.zeroIndex, 1, [...array]);
   } else {
     let zeroIndex = firstZeroFinder(state.sheet[0][row]);
-    state.sheet[0][row].array.splice(zeroIndex, 1, [...array]); //ISSUE: replaces whole subarray [[], [], []]
+    state.sheet[0][row].array.splice(zeroIndex, 1, [...array]); 
   }
 }
 

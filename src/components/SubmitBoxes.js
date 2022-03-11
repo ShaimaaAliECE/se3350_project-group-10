@@ -81,16 +81,28 @@ export function handleSubmitClick(handleGameOver) {
   if (state.ans[state.step].type == "merge") {
     let row = state.ans[state.step].row + state.depth;
 
-    if (
-      state.ans[state.step].array[state.mergePointer] ===
-      state.input[state.mergePointer]
-    ) {
-      tempArr = state.ans[state.step].array[state.mergePointer];
-      state.appendSheet([tempArr], row, 1);
-    }
-    state.mergePointer++;
-    if (state.ans[state.step].array.length == state.mergePointer) {
-      state.step++;
+    //current step sub array
+    tempArr =
+      state.sheet[0][row].array[
+        state.firstZeroFinder({ array: state.sheet[0][row].array })
+      ];
+
+    //If the input value is the same of ans sub array at merge pointer
+
+    console.log(
+      "hi",
+      state.mergePointer,
+      state.ans[state.step].array[state.mergePointer],
+      state.input[0]
+    );
+    if (state.ans[state.step].array[state.mergePointer] === state.input[0]) {
+      tempArr[tempArr.indexOf(0)] = state.input[0];
+      console.log("temp", tempArr);
+      state.appendSheet([...tempArr], row);
+      state.mergePointer++;
+      if (state.ans[state.step].array.length == state.mergePointer) {
+        state.step++;
+      }
     }
   } else {
     //Reset merge pointer
@@ -99,6 +111,7 @@ export function handleSubmitClick(handleGameOver) {
     //Check the answer, if its right --> increment step, handle restart, state.sheet.push(state.input)
     if (arrComp(state.ans[state.step].array, state.input)) {
       let row = state.ans[state.step].row;
+      console.log("input", state.input);
       state.appendSheet(state.input, row);
 
       state.stepInc();
