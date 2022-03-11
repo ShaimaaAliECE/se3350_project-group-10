@@ -14,6 +14,21 @@ function firstZeroFinder(arr, type = "split") {
 
   return;
 }
+//returns an array of random numbers between min and max of given length
+function random(min, max, length) {
+  let num = [];
+  for (let i = 0; i < length; i++) {
+    num.push(Math.floor(Math.random() * (max - min) + min));
+  }
+  return num;
+}
+
+function generateEmptyArr() {
+  state.input = [];
+  for (let i = 0; i < state.ans[state.step]?.array.length; i++) {
+    state.input.push(0);
+  }
+}
 
 function appendSheet(array, row) {
   let zeroIndex = firstZeroFinder(state.sheet[0][row]);
@@ -21,6 +36,8 @@ function appendSheet(array, row) {
 }
 function getLengths(array) {
   //where array is 2d
+
+  //This can be made without 2 arrays
   let count = -1;
   for (let i in array) {
     for (let j in array[i]) {
@@ -38,6 +55,32 @@ function fillGapsArr(start, end) {
   }
 
   return arr;
+}
+
+function handleLevel(lvl) {
+  switch (lvl) {
+    case 1: // Level 1
+      state.levelMax = 21; //1 --> 21 non inclusive upper bound
+      state.levelLength = 10;
+      break;
+    case 2: // Level 2, Includes instructions only
+      state.levelMax = 21;
+      state.levelLength = 10;
+      break;
+    case 3: // Level 3
+      state.levelMax = 21;
+      state.levelLength = 10;
+      break;
+    case 4: // Level 4
+      state.levelMax = 51;
+      state.levelLength = 20;
+      break;
+    case 5: // Level 5
+      state.levelMax = 101;
+      state.levelLength = 50;
+      break;
+    default:
+  }
 }
 
 function fillTheGaps(zeroesEncountered, type) {
@@ -151,46 +194,52 @@ function initializeSheets() {
 
 function resetStates() {
   state.lives = 3;
-  state.input = [];
-  state.ans = [];
   state.level = 0;
   state.instruct = 0;
-  state.algo = "merge";
-  state.sheet = [];
-  state.flags = [];
+  state.levelMin = 1;
+  state.levelMax = 0;
   state.depth = 1;
   state.runnable = 1;
   state.step = 1;
-  state.gameOver = false;
-  state.splits = [0];
   state.zeroesEncountered = 0;
   state.maxMergLen = 0;
-  state.reseting = false;
   state.indRef = -1;
-  state.feedbackColor = "rgba(220,220,220, .6)";
+  state.input = [];
+  state.ans = [];
+  state.algo = "merge";
+  state.sheet = [];
+  state.flags = [];
+  state.gameOver = false;
+  state.reseting = false;
   state.loseGame = false;
+  state.restartGame = true;
+  state.splits = [0];
+  state.feedbackColor = "rgba(220,220,220, .6)";
 }
 
 const state = store({
   lives: 3,
-  input: [],
-  ans: [],
   level: 0,
   instruct: 0,
-  algo: "merge",
-  sheet: [],
-  flags: [],
+  levelMin: 1,
+  levelMax: 0,
   depth: 1,
   runnable: 1,
   step: 1,
-  gameOver: false,
-  splits: [0],
   zeroesEncountered: 0,
   maxMergLen: 0,
-  reseting: false,
   indRef: -1,
-  feedbackColor: "rgba(220,220,220, .6)",
+  input: [],
+  ans: [],
+  algo: "merge",
+  sheet: [],
+  flags: [],
+  splits: [0],
+  gameOver: false,
+  reseting: false,
   loseGame: false,
+  restartGame: true,
+  feedbackColor: "rgba(220,220,220, .6)",
   depthInc: () => (state.runnable ? state.depth++ : state.depth),
   stepInc: () => state.step++,
   appendSheet: (array, row) => appendSheet(array, row),
@@ -200,6 +249,9 @@ const state = store({
   initializeSplit: () => initializeSplit(),
   fillTheGaps: (zeroesEncountered, type) =>
     fillTheGaps(zeroesEncountered, type),
+  random: (min, max, length) => random(min, max, length),
+  generateEmptyArr: () => generateEmptyArr(),
+  handleLevel: (lvl) => handleLevel(lvl),
 });
 
 export default state;
