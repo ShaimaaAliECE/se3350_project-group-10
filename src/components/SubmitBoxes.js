@@ -74,11 +74,10 @@ function navigateSheet() {
 }
 
 export function handleSubmitClick(handleGameOver) {
-  let tempArr = new Array(state.ans[state.step].array.length).fill(0);
+  let tempArr;
 
   //Check if the state is merge so we can compare values one by one
   //AL-115
-  console.log(state.step);
   if (state.ans[state.step].type == "merge") {
     let row = state.ans[state.step].row + state.depth;
 
@@ -86,43 +85,20 @@ export function handleSubmitClick(handleGameOver) {
       state.ans[state.step].array[state.mergePointer] ===
       state.input[state.mergePointer]
     ) {
-      tempArr[state.mergePointer] =
-        state.ans[state.step].array[state.mergePointer];
-
-      let arr = tempArr.splice(state.mergePointer);
-      console.log(arr);
-      state.appendSheet(arr, row, 1);
+      tempArr = state.ans[state.step].array[state.mergePointer];
+      state.appendSheet([tempArr], row, 1);
     }
     state.mergePointer++;
     if (state.ans[state.step].array.length == state.mergePointer) {
       state.step++;
     }
-    // state.step--;
-    //   if (state.mergePointer < state.ans[state.step].length) {
-    //     //increment the pointer but not the step
-    //     state.mergePointer++;
-    //     //change tempArr[pointer] = state.ans[state.step][pointer]
-    //     tempArr[state.mergePointer] = [
-    //       state.ans[state.step][state.mergePointer],
-    //     ];
-    //   } else {
-    //     //not sure
-    //   }
-    // }
-    // //Appendsheet tempArr
-    // state.appendSheet(tempArr);
   } else {
     //Reset merge pointer
     state.mergePointer = 0;
 
     //Check the answer, if its right --> increment step, handle restart, state.sheet.push(state.input)
     if (arrComp(state.ans[state.step].array, state.input)) {
-      let row;
-      // if (state.ans[state.step].type == "merge") {
-      //   row = state.ans[state.step].row + state.depth;
-      // } else {
-      row = state.ans[state.step].row;
-      // }
+      let row = state.ans[state.step].row;
       state.appendSheet(state.input, row);
 
       state.stepInc();

@@ -15,16 +15,34 @@ function firstZeroFinder(arr, type = "split") {
   return;
 }
 
+function firstZeroFinder2D(row) {
+  let zeroIndex = -1;
+  let temp = [];
+  let ind;
+
+  for (let i = 0; i < state.sheet[0][row].array.length; i++) {
+    zeroIndex = state.sheet[0][row].array[i].indexOf(0);
+    if (state.maxMergLen < getLengths(temp)) {
+      state.maxMergLen = getLengths(temp);
+    }
+    if (zeroIndex != -1) {
+      ind = i;
+      break;
+    }
+    temp.push(state.sheet[0][row].array.array[i]);
+  }
+
+  return { zeroIndex, ind };
+}
+
 function appendSheet(array, row, flag = 0) {
   if (flag != 0) {
-    console.log("APPEND1");
-    let zeroIndex = firstZeroFinder(state.sheet[0][row]);
-    console.log("sheet", state.sheet[0][row]);
-    state.sheet[0][row].array.splice(zeroIndex, 1, [...array]);
+    let pos;
+    pos = firstZeroFinder2D(row);
+    console.log(pos, array);
+    state.sheet[0][row].array[pos.ind].splice(pos.zeroIndex, 1, [...array]);
   } else {
-    console.log("APPEND0");
     let zeroIndex = firstZeroFinder(state.sheet[0][row]);
-    console.log("arr", array, "zi:", zeroIndex, "row: ", row);
     state.sheet[0][row].array.splice(zeroIndex, 1, [...array]); //ISSUE: replaces whole subarray [[], [], []]
   }
 }
@@ -53,10 +71,10 @@ function fillGapsArr(start, end) {
 function fillTheGaps(zeroesEncountered, type) {
   if (type === "merge") {
     for (let i = 0; i < state.depth - 2; i++) {
-      firstZeroFinder(state.sheet[0][i + state.depth], "merge");
+      firstZeroFinder2D(i + state.depth);
     }
 
-    let firstZero = firstZeroFinder(state.sheet[0][state.depth]);
+    let firstZero = firstZeroFinder2D(state.depth);
 
     state.sheet[0][state.depth].array.splice(
       firstZero,
