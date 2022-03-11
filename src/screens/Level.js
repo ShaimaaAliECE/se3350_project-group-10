@@ -7,9 +7,10 @@ import PopUp from "../components/InstructionPopup";
 import { useParams } from "react-router-dom";
 import LoseScreen from "../components/LoseScreen";
 import { view } from "@risingstack/react-easy-state";
-import Lives from "../components/Lives";
 import { Link } from "react-router-dom";
 import backBtn from "../assets/back.svg";
+import { mergeSort } from "../algorithms/mergesort";
+import { useEffect } from "react";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -47,9 +48,6 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "row",
     flexGrow: "1",
   },
-  lives: {
-    marginRight: "20px",
-  },
   musicSheet: {
     height: "50%",
     backgroundColor: "grey",
@@ -73,46 +71,65 @@ const useStyles = makeStyles((theme) => ({
 function Level() {
   const style = useStyles();
   let params = useParams();
+  let level = parseInt(params.level);
+
+  state.level = level;
+
+  useEffect(() => {
+    if (state.restartGame) {
+      state.resetStates();
+      state.handleLevel(level);
+      mergeSort([
+        ...state.random(state.levelMin, state.levelMax, state.levelLength),
+      ]);
+      state.generateEmptyArr();
+      state.initializeSplit();
+      state.initializeSheets();
+      state.restartGame = false;
+    }
+  }, [state.restartGame]);
+
   return (
     <>
-      <div className={style.container}>
-        {/* Instruction Section */}
-        {(state.level === 1 || state.level === 2) &&
-        state.loseGame === false ? (
-          <PopUp />
-        ) : null}
+      {(() => {
+        if (!state.restartGame) {
+          return (
+            <div className={style.container}>
+              {(state.level === 1 || state.level === 2) &&
+              state.loseGame === false ? (
+                <PopUp />
+              ) : null}
 
-        {/* Lose Screen Popup Section */}
-        {state.loseGame === true ? <LoseScreen /> : null}
+              {/* Lose Screen Popup Section */}
+              {state.loseGame === true ? <LoseScreen /> : null}
 
-        {/* Navbar Secition*/}
-        <div className={style.navbar}>
-          {/* TEMPORARY COMMENTS! DONT DELETE */}
-          {
-            <div className={style.navbarBackBtn}>
-              <Link to="/">
-                <img src={backBtn} />
-              </Link>
+              <div className={style.navbar}>
+                {/* TEMPORARY COMMENTS! DONT DELETE */}
+                {
+                  <div className={style.navbarBackBtn}>
+                    <a href="/">
+                      <img src={backBtn} />
+                    </a>
+                  </div>
+                }
+                <div className={style.title}>
+                  Level {params.level} - Merge Sort
+                </div>
+                <div className={style.thirdBox}></div>
+              </div>
+              <div className={style.musicSheet}>
+                <Sheet />
+              </div>
+              <div className={style.inputContainer}>
+                <InputContainer />
+              </div>
+              <div className={style.piano}>
+                <Piano />
+              </div>
             </div>
-          }
-          <div className={style.title}>Level {params.level} - Merge Sort</div>
-        </div>
-
-        {/* Music Sheet Section*/}
-        <div className={style.musicSheet}>
-          <Sheet />
-        </div>
-
-        {/* Input Container Section */}
-        <div className={style.inputContainer}>
-          <InputContainer />
-        </div>
-
-        {/* Piano Section */}
-        <div className={style.piano}>
-          <Piano />
-        </div>
-      </div>
+          );
+        }
+      })()}
     </>
   );
 }

@@ -53,19 +53,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function btnClick(restart) {
-  if (restart === true) {
-    //ik this weird, will improve later
-    if (state.reloadLevel === 1) {
-      state.reloadLevel = 0;
-    } else {
-      state.reloadLevel = 1;
-    }
-    handleClick(state.level);
-  } else {
-    state.resetStates();
-  }
-}
+// function btnClick(restart) {
+//   if (restart === true) {
+//     //ik this weird, will improve later
+//     if (state.reloadLevel === 1) {
+//       state.reloadLevel = 0;
+//     } else {
+//       state.reloadLevel = 1;
+//     }
+//     handleClick(state.level);
+//   } else {
+//     state.resetStates();
+//   }
+// }
 
 export default function LoseScreen() {
   const style = useStyles();
@@ -74,10 +74,9 @@ export default function LoseScreen() {
     <div className={style.container}>
       <div className={style.content}>
         <div className={style.title}>Nice Try!</div>
-
         <div className={style.buttonSection}>
           <div className={style.buttons}>
-            <Link to={currentLevel}>
+            <a to={currentLevel}>
               <Button
                 variant="contained"
                 className={style.button}
@@ -87,12 +86,12 @@ export default function LoseScreen() {
                   width: "250px",
                 }}
                 onClick={() => {
-                  btnClick(true);
+                  state.restartGame = true;
                 }}
               >
                 Restart Level
               </Button>
-            </Link>
+            </a>
           </div>
 
           <div className={style.buttons}>
@@ -104,9 +103,6 @@ export default function LoseScreen() {
                   backgroundColor: "#3D3D3D",
                   height: "50px",
                   width: "250px",
-                }}
-                onClick={() => {
-                  btnClick(false);
                 }}
               >
                 Quit Level
@@ -123,9 +119,6 @@ export default function LoseScreen() {
                   backgroundColor: "#3D3D3D",
                   height: "50px",
                   width: "250px",
-                }}
-                onClick={() => {
-                  btnClick(false);
                 }}
               >
                 Switch Algorithms

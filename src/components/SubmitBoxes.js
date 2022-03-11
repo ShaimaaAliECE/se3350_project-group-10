@@ -164,7 +164,7 @@ function CreateMap(arrOuter) {
     state.gameOver = true;
     setOpenModal(true);
     generateEmptyArr();
-    state.step = 0;
+    state.step = 1;
     state.instruct = 0;
     winSound();
   };
