@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100px",
     height: "50px",
     borderRadius: "15px",
+    backgroundColor: "#f2f2f2",
   },
   lives: {
     position: "absolute",
@@ -72,7 +73,7 @@ function InputContainer() {
         >
           <p
             style={{
-              backgroundColor: "white",
+              backgroundColor: "#f2f2f2",
               width: "25%",
               height: "25%",
               display: "flex",
