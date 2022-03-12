@@ -129,13 +129,12 @@ export function handleSubmitClick(handleGameOver) {
     } else {
       //Reset
       state.reseting = true;
-      //This is wrong --> Want to fill x's after each step increment, not each reset
-      if (state.ans[state.step + 1].type == "split") {
-        state.fillTheGaps(
-          state.ans[state.step - 1].zeroesEncountered,
-          state.ans[state.step - 1].type
-        );
-      }
+
+      //Fills in necessary x's
+      state.fillTheGaps(
+        state.ans[state.step - 1].zeroesEncountered,
+        state.ans[state.step - 1].type
+      );
 
       setTimeout(generateEmptyArr, 1000);
       setTimeout(handleRestartClick, 1000);
