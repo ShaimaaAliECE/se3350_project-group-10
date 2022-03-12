@@ -3,47 +3,46 @@ import { makeStyles } from "@material-ui/core";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import state from "../store/Store";
+import { StateTimeline } from "tone";
 
 const useStyles = makeStyles((theme) => ({
   container: {
+    width: "100%",
+    height: "100%",
+    position: "absolute",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    height: "100vh",
     zIndex: 30,
     fontFamily: "Raleway",
-    backgroundColor: "rgba(52, 52, 52, 0.8)",
+    backgroundColor: "rgba(0, 0, 0, 0.93)",
   },
 
   content: {
-    borderStyle: "solid",
-    borderColor: "black",
-    borderRadius: "20px",
-    width: "800px",
-    height: "500px",
+    color: "white",
     backgroundSize: "cover",
-    backgroundColor: "darkgrey",
     fontFamily: "Raleway",
-    // backgroundImage: `url(${image})`,
   },
 
   title: {
+    fontFamily: "Raleway",
     textAlign: "center",
-    fontSize: "50px",
+    fontSize: "100px",
   },
 
   buttonSection: {
     display: "flex",
     textAlign: "center",
     justifyContent: "center",
-    height: "200px",
-    flexDirection: "column",
-    padding: "100px",
+    flexDirection: "row",
+    paddingTop: "5%",
+    fontFamily: "Raleway",
   },
 
   buttons: {
     fontFamily: "Raleway",
     padding: "20px",
+    textDecoration: "none",
   },
 }));
 
@@ -53,7 +52,7 @@ export default function LoseScreen() {
   return (
     <div className={style.container}>
       <div className={style.content}>
-        <div className={style.title}>Nice Try!</div>
+        <div className={style.title}>GAME OVER.</div>
         <div className={style.buttonSection}>
           <div className={style.buttons}>
             <a to={currentLevel}>
@@ -61,9 +60,14 @@ export default function LoseScreen() {
                 variant="contained"
                 className={style.button}
                 sx={{
-                  backgroundColor: "#3D3D3D",
+                  color: "black",
+                  backgroundColor: "rgba(208, 208, 208, 1)",
                   height: "50px",
-                  width: "250px",
+                  width: "200px",
+                  "&:hover": {
+                    backgroundColor: "#4d4d4d",
+                    color: "white",
+                  },
                 }}
                 onClick={() => {
                   state.restartGame = true;
@@ -80,9 +84,14 @@ export default function LoseScreen() {
                 variant="contained"
                 className={style.button}
                 sx={{
-                  backgroundColor: "#3D3D3D",
+                  color: "black",
+                  backgroundColor: "rgba(208, 208, 208, 1)",
                   height: "50px",
-                  width: "250px",
+                  width: "200px",
+                  "&:hover": {
+                    backgroundColor: "#4d4d4d",
+                    color: "white",
+                  },
                 }}
               >
                 Quit Level
@@ -96,9 +105,14 @@ export default function LoseScreen() {
                 variant="contained"
                 className={style.button}
                 sx={{
-                  backgroundColor: "#3D3D3D",
+                  color: "black",
+                  backgroundColor: "rgba(208, 208, 208, 1)",
                   height: "50px",
-                  width: "250px",
+                  width: "200px",
+                  "&:hover": {
+                    backgroundColor: "#4d4d4d",
+                    color: "white",
+                  },
                 }}
               >
                 Switch Algorithms

@@ -7,8 +7,7 @@ import PopUp from "../components/InstructionPopup";
 import { useParams } from "react-router-dom";
 import LoseScreen from "../components/LoseScreen";
 import { view } from "@risingstack/react-easy-state";
-import Lives from "../components/Lives";
-
+import { Link } from "react-router-dom";
 import backBtn from "../assets/back.svg";
 import { mergeSort } from "../algorithms/mergesort";
 import { useEffect } from "react";
@@ -23,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "grey",
     zindex: 10,
   },
-  // not complete yet
   navbar: {
     display: "flex",
     flexDirection: "row",
@@ -48,14 +46,6 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "8px",
     marginRight: "20px",
     flexDirection: "row",
-    flexGrow: "1",
-  },
-
-  lives: {
-    marginRight: "20px",
-  },
-  thirdBox: {
-    flex: "3",
     flexGrow: "1",
   },
   musicSheet: {
@@ -103,46 +93,41 @@ function Level() {
     <>
       {(() => {
         if (!state.restartGame) {
-          if (state.loseGame) {
-            return <LoseScreen />;
-          } else {
-            return (
-              <div className={style.container}>
-                {(state.level === 1 || state.level === 2) &&
-                state.loseGame === false ? (
-                  <PopUp />
-                ) : null}
-                <div className={style.navbar}>
-                  {/* TEMPORARY COMMENTS! DONT DELETE */}
-                  {
-                    <div className={style.navbarBackBtn}>
-                      <a href="/">
-                        <img src={backBtn} />
-                      </a>
-                    </div>
-                  }
-                  <div className={style.title}>
-                    Level {params.level} - Merge Sort
+          return (
+            <div className={style.container}>
+              {(state.level === 1 || state.level === 2) &&
+              state.loseGame === false ? (
+                <PopUp />
+              ) : null}
+
+              {/* Lose Screen Popup Section */}
+              {state.loseGame === true ? <LoseScreen /> : null}
+
+              <div className={style.navbar}>
+                {/* TEMPORARY COMMENTS! DONT DELETE */}
+                {
+                  <div className={style.navbarBackBtn}>
+                    <a href="/">
+                      <img src={backBtn} />
+                    </a>
                   </div>
-                  {/* <div className={style.lives}>
-            <Lives />
-          </div> */}
-                  <div className={style.thirdBox}></div>
+                }
+                <div className={style.title}>
+                  Level {params.level} - Merge Sort
                 </div>
-                <div className={style.musicSheet}>
-                  <Sheet />
-                </div>
-                <div className={style.inputContainer}>
-                  <InputContainer />
-                </div>
-                <div className={style.piano}>
-                  <Piano />
-                </div>
+                <div className={style.thirdBox}></div>
               </div>
-            );
-          }
-        } else if (!state.loseGame) {
-          return <div>Loading</div>;
+              <div className={style.musicSheet}>
+                <Sheet />
+              </div>
+              <div className={style.inputContainer}>
+                <InputContainer />
+              </div>
+              <div className={style.piano}>
+                <Piano />
+              </div>
+            </div>
+          );
         }
       })()}
     </>
