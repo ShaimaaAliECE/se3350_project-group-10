@@ -30,36 +30,32 @@ function generateEmptyArr() {
   }
 }
 
-function firstZeroFinder2D(row) {
+function firstZeroFinder2D(array) {
   let zeroIndex = -1;
-  let temp = [];
-  let ind;
-
-  for (let i = 0; i < state.sheet[0][row].array.length; i++) {
-    zeroIndex = state.sheet[0][row].array[i].indexOf(0);
-    if (state.maxMergLen < getLengths(temp)) {
-      state.maxMergLen = getLengths(temp);
+  let ind = 0;
+  for (let i of array) {
+    zeroIndex = i.indexOf(0);
+    if (zeroIndex >= 0) {
+      return ind;
     }
-    if (zeroIndex != -1) {
-      ind = i;
-      break;
-    }
-    temp.push(state.sheet[0][row].array.array[i]);
+    ind++;
   }
-
-  return { zeroIndex, ind };
+  //If no zeros
+  return -1;
 }
 
 function appendSheet(array, row, flag = 0) {
+  let zeroIndex;
+
   if (flag != 0) {
-    let pos;
-    pos = firstZeroFinder2D(row);
-    console.log(pos, array);
-    state.sheet[0][row].array[pos.ind].splice(pos.zeroIndex, 1, [...array]);
+    zeroIndex = firstZeroFinder2D(
+      [...state.sheet[0][row].array],
+      state.sheet[0][row]
+    );
   } else {
-    let zeroIndex = firstZeroFinder(state.sheet[0][row]);
-    state.sheet[0][row].array.splice(zeroIndex, 1, [...array]); 
+    zeroIndex = firstZeroFinder(state.sheet[0][row]);
   }
+  state.sheet[0][row].array.splice(zeroIndex, 1, [...array]);
 }
 
 function getLengths(array) {
@@ -275,6 +271,7 @@ const state = store({
   appendSheet: (array, row, flag) => appendSheet(array, row, flag),
   resetStates: () => resetStates(),
   firstZeroFinder: (arr) => firstZeroFinder(arr),
+  firstZeroFinder2D: (arr) => firstZeroFinder2D(arr),
   initializeSheets: () => initializeSheets(),
   initializeSplit: () => initializeSplit(),
   fillTheGaps: (zeroesEncountered, type) =>

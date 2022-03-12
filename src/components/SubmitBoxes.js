@@ -51,9 +51,15 @@ function handleRestartClick(handleGameOver) {
 
 export function generateEmptyArr() {
   state.input = [];
-  for (let i = 0; i < state.ans[state.step]?.array.length; i++) {
+
+  if (state.ans[state.step]?.type == "merge") {
     state.input.push(0);
+  } else {
+    for (let i = 0; i < state.ans[state.step]?.array.length; i++) {
+      state.input.push(0);
+    }
   }
+
   state.feedbackColor = "rgba(220,220,220, .6)";
   state.reseting = false;
 }
@@ -75,83 +81,87 @@ function navigateSheet() {
 
 export function handleSubmitClick(handleGameOver) {
   let tempArr;
+  let type = state.ans[state.step].type;
+  let isCorrect = false;
+  let row = state.ans[state.step].row + state.depth;
 
-  //Check if the state is merge so we can compare values one by one
-  //AL-115
-  if (state.ans[state.step].type == "merge") {
+  if (type === "merge") {
+    //MERGE INPUT
     let row = state.ans[state.step].row + state.depth;
+    let ans = state.ans[state.step].array[state.mergePointer];
+    tempArr = [
+      ...state.sheet[0][row].array[
+        state.firstZeroFinder2D([...state.sheet[0][row].array])
+      ],
+    ];
+    //if their input is correct append it, set isCorrect = true
 
-    //current step sub array
-    tempArr =
-      state.sheet[0][row].array[
-        state.firstZeroFinder({ array: state.sheet[0][row].array })
-      ];
-
-    //If the input value is the same of ans sub array at merge pointer
-
-    console.log(
-      "hi",
-      state.mergePointer,
-      state.ans[state.step].array[state.mergePointer],
-      state.input[0]
-    );
-    if (state.ans[state.step].array[state.mergePointer] === state.input[0]) {
-      tempArr[tempArr.indexOf(0)] = state.input[0];
-      console.log("temp", tempArr);
-      state.appendSheet([...tempArr], row);
+    if (ans === state.input[0]) {
+      tempArr[state.mergePointer] = state.input[0];
+      state.appendSheet([...tempArr], row, 1);
       state.mergePointer++;
-      if (state.ans[state.step].array.length == state.mergePointer) {
-        state.step++;
-      }
+      isCorrect = true;
     }
   } else {
-    //Reset merge pointer
-    state.mergePointer = 0;
-
-    //Check the answer, if its right --> increment step, handle restart, state.sheet.push(state.input)
+    //SPLIT INPUT
+    //Check the answer, if correct set isCorrect = true
     if (arrComp(state.ans[state.step].array, state.input)) {
       let row = state.ans[state.step].row;
-      console.log("input", state.input);
       state.appendSheet(state.input, row);
-
+      isCorrect = true;
+    }
+  }
+  if (isCorrect) {
+    if (
+      (type === "merge" &&
+        state.ans[state.step].array.length === state.mergePointer) ||
+      type === "split"
+    ) {
+      //reset mergePointer when step is incremented
+      state.mergePointer = 0;
       state.stepInc();
-      if (state.level === 2) {
-        state.instruct++;
-      }
-      setTimeout(navigateSheet, 1000);
-      if (state.step >= state.ans.length) {
-        //Win!
-        handleGameOver();
-      } else {
-        state.reseting = true;
+    }
+
+    setTimeout(navigateSheet, 1000);
+    //Win
+    if (state.step >= state.ans.length) {
+      handleGameOver();
+    } else {
+      //Reset
+      state.reseting = true;
+      //This is wrong --> Want to fill x's after each step increment, not each reset
+      if (state.ans[state.step + 1].type == "split") {
         state.fillTheGaps(
           state.ans[state.step - 1].zeroesEncountered,
           state.ans[state.step - 1].type
         );
-        setTimeout(generateEmptyArr, 1000);
-        setTimeout(handleRestartClick, 1000);
-        playCorrectSound();
       }
-    } else {
-      // if incorrect, minus 1 life, play incorrect sound
-      state.lives--;
-      state.reseting = true;
-      setTimeout(handleRestartClick, 1000);
-      playIncorrectSound();
 
-      // remove life visually
-      if (state.lives === 2) {
-        let lostLife1 = document.getElementById("l1");
-        lostLife1.style.display = "none";
-      } else if (state.lives === 1) {
-        let lostLife2 = document.getElementById("l2");
-        lostLife2.style.display = "none";
-      } else if (state.lives === 0) {
-        let lostLife3 = document.getElementById("l3");
-        lostLife3.style.display = "none";
-        loseSound(); // play lose sound
-        state.loseGame = true;
-      }
+      setTimeout(generateEmptyArr, 1000);
+      setTimeout(handleRestartClick, 1000);
+      playCorrectSound();
+    }
+    if (state.level === 2 && type === "split") {
+      state.instruct++;
+    }
+  } else {
+    // if incorrect, minus 1 life, play incorrect sound
+    state.lives--;
+    state.reseting = true;
+    setTimeout(handleRestartClick, 1000);
+    playIncorrectSound();
+    // remove life visually
+    if (state.lives === 2) {
+      let lostLife1 = document.getElementById("l1");
+      lostLife1.style.display = "none";
+    } else if (state.lives === 1) {
+      let lostLife2 = document.getElementById("l2");
+      lostLife2.style.display = "none";
+    } else if (state.lives === 0) {
+      let lostLife3 = document.getElementById("l3");
+      lostLife3.style.display = "none";
+      loseSound(); // play lose sound
+      state.loseGame = true;
     }
   }
 }
@@ -173,8 +183,12 @@ function CreateMap(arrOuter) {
   };
 
   const handleFeedbackColor = () => {
+    let ans = state.ans[state.step].array[state.mergePointer];
     //if user input of array is correct
-    if (arrComp(state.ans[state.step].array, state.input)) {
+    if (
+      arrComp(state.ans[state.step].array, state.input) ||
+      ans === state.input[0]
+    ) {
       //set state of background colour to green on submit
       state.feedbackColor = "rgba(0, 255, 0, 0.6)";
     } else {

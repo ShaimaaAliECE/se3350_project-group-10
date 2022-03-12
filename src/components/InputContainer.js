@@ -1,7 +1,6 @@
 import { makeStyles, Button } from "@material-ui/core";
 import React from "react";
 import { view } from "@risingstack/react-easy-state";
-import levelone from "../assets/level-one.json";
 import { handleSubmitClick } from "./SubmitBoxes";
 import SubmitBoxes from "./SubmitBoxes";
 import state from "../store/Store";
