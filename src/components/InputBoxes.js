@@ -41,30 +41,50 @@ export function CreateMap(arrOuter, row) {
   //Set an index if the row should be highlighted
   let index;
   let stepRow;
+  let mergeInd;
   let i = -1;
-  if (state.ans[state.step].type === "merge") {
+  let j = -1;
+  let type = state.ans[state.step].type;
+
+  if (type === "merge") {
     stepRow = state.ans[state.step].row + state.depth;
   } else {
     stepRow = state.ans[state.step].row;
   }
+
   if (stepRow === row) {
-    index = state.firstZeroFinder({ array: [...arrOuter] });
+    if (type === "merge") {
+      index = state.firstZeroFinder2D([...state.sheet[0][row].array]);
+      mergeInd = state.sheet[0][row].array[index].indexOf(0);
+    } else {
+      index = state.firstZeroFinder({ array: [...arrOuter] });
+    }
   }
 
   return (
     <div className={style.stylesContainerOuter}>
       {arrOuter.map(function (arrInner) {
         i++;
+        j = -1;
         return (
-          <div
-            className={style.stylesContainerInner}
-            style={
-              i == index ? { backgroundColor: "grey", borderRadius: 10 } : null
-            }
-          >
+          <div className={style.stylesContainerInner}>
             {arrInner.map(function (arrObj) {
+              j++;
               return (
-                <div className={style.box}>{arrObj === 0 ? "" : arrObj}</div>
+                <div
+                  className={style.box}
+                  style={
+                    (i == index && j === mergeInd) ||
+                    (i == index && type == "split")
+                      ? {
+                          borderColor: "black",
+                          backgroundColor: "rgba(0,0,0,0.5)",
+                        }
+                      : null
+                  }
+                >
+                  {arrObj === 0 ? "" : arrObj}
+                </div>
               );
             })}
           </div>
@@ -77,7 +97,6 @@ export function CreateMap(arrOuter, row) {
 function InputBoxes(props) {
   let arr = props.arrInnerObj.array;
   let row = props.arrInnerObj.row;
-
   //no more chunk, change to arr
   return (
     <div id={row} style={stylesMainInner}>
