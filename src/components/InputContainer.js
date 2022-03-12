@@ -1,7 +1,6 @@
 import { makeStyles, Button } from "@material-ui/core";
 import React from "react";
 import { view } from "@risingstack/react-easy-state";
-import levelone from "../assets/level-one.json";
 import { handleSubmitClick } from "./SubmitBoxes";
 import SubmitBoxes from "./SubmitBoxes";
 import state from "../store/Store";
@@ -117,10 +116,16 @@ function InputContainer() {
               variant="contained"
               className={style.nextBtn}
               onClick={() => {
-                if (state.instruct < state.ans.length) {
-                  state.instruct++;
+                if (state.ans[state.step].type == "merge") {
+                  state.input = [
+                    state.ans[state.step].array[state.mergePointer],
+                  ];
+                } else {
+                  if (state.instruct < state.ans.length) {
+                    state.instruct++;
+                  }
+                  state.input = state.ans[state.step].array;
                 }
-                state.input = state.ans[state.step].array;
                 handleSubmitClick(handleGameOver);
               }}
             >
