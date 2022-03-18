@@ -62,6 +62,27 @@ const useStyles = makeStyles((theme) => ({
       cursor: "pointer",
     },
   },
+  navbar: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    backgroundColor: "black", 
+    color: 'white',
+    textAlign: "center",
+    fontSize: "25px",
+    padding: "10px",
+    
+  },
+  login:
+  {
+    fontFamily: "Raleway",
+    color: "white",
+    "&:hover": {
+      cursor: "pointer",
+
+  },
+}, 
   link: {
     textDecoration: "none",
   },
@@ -154,7 +175,11 @@ export default function Home() {
 
   const classes = useStyles();
   return (
-    <div className={classes.container}>
+    <><div className={classes.navbar}>
+      <div className={classes.login}>Log In</div>
+      </div>
+      
+      <div className={classes.container}>
       <div className={classes.content}>
         <div className={classes.logo}>
           <img src={logo} style={{ height: 209, width: 661 }} alt="logo" />
@@ -173,11 +198,9 @@ export default function Home() {
                 <Tab label={<span className={classes.tabs}>Merge Sort</span>} />
                 <Tab label={<span className={classes.tabs}>Quick Sort</span>} />
                 <Tab
-                  label={<span className={classes.tabs}>Insertion Sort</span>}
-                />
+                  label={<span className={classes.tabs}>Insertion Sort</span>} />
                 <Tab
-                  label={<span className={classes.tabs}>Recursive Sort</span>}
-                />
+                  label={<span className={classes.tabs}>Recursive Sort</span>} />
               </Tabs>
             </AppBar>
 
@@ -192,7 +215,7 @@ export default function Home() {
                     className={classes.button}
                     onClick={() => {
                       handleClick(1);
-                    }}
+                    } }
                   >
                     Level 1
                   </button>
@@ -202,7 +225,7 @@ export default function Home() {
                     className={classes.button}
                     onClick={() => {
                       handleClick(2);
-                    }}
+                    } }
                   >
                     Level 2
                   </button>
@@ -212,7 +235,7 @@ export default function Home() {
                     className={classes.button}
                     onClick={() => {
                       handleClick(3);
-                    }}
+                    } }
                   >
                     Level 3
                   </button>
@@ -222,7 +245,7 @@ export default function Home() {
                     className={classes.button}
                     onClick={() => {
                       handleClick(4);
-                    }}
+                    } }
                   >
                     Level 4
                   </button>
@@ -232,7 +255,7 @@ export default function Home() {
                     className={classes.button}
                     onClick={() => {
                       handleClick(5);
-                    }}
+                    } }
                   >
                     Level 5
                   </button>
@@ -244,7 +267,7 @@ export default function Home() {
                     className={classes.button}
                     onClick={() => {
                       handleClick(1);
-                    }}
+                    } }
                   >
                     Level 1
                   </button>
@@ -254,7 +277,7 @@ export default function Home() {
                     className={classes.button}
                     onClick={() => {
                       handleClick(2);
-                    }}
+                    } }
                   >
                     Level 2
                   </button>
@@ -264,7 +287,7 @@ export default function Home() {
                     className={classes.button}
                     onClick={() => {
                       handleClick(3);
-                    }}
+                    } }
                   >
                     Level 3
                   </button>
@@ -274,7 +297,7 @@ export default function Home() {
                     className={classes.button}
                     onClick={() => {
                       handleClick(4);
-                    }}
+                    } }
                   >
                     Level 4
                   </button>
@@ -284,7 +307,7 @@ export default function Home() {
                     className={classes.button}
                     onClick={() => {
                       handleClick(5);
-                    }}
+                    } }
                   >
                     Level 5
                   </button>
@@ -296,7 +319,7 @@ export default function Home() {
                     className={classes.button}
                     onClick={() => {
                       handleClick(1);
-                    }}
+                    } }
                   >
                     Level 1
                   </button>
@@ -306,7 +329,7 @@ export default function Home() {
                     className={classes.button}
                     onClick={() => {
                       handleClick(2);
-                    }}
+                    } }
                   >
                     Level 2
                   </button>
@@ -316,7 +339,7 @@ export default function Home() {
                     className={classes.button}
                     onClick={() => {
                       handleClick(3);
-                    }}
+                    } }
                   >
                     Level 3
                   </button>
@@ -326,7 +349,7 @@ export default function Home() {
                     className={classes.button}
                     onClick={() => {
                       handleClick(4);
-                    }}
+                    } }
                   >
                     Level 4
                   </button>
@@ -336,7 +359,7 @@ export default function Home() {
                     className={classes.button}
                     onClick={() => {
                       handleClick(5);
-                    }}
+                    } }
                   >
                     Level 5
                   </button>
@@ -348,7 +371,7 @@ export default function Home() {
                     className={classes.button}
                     onClick={() => {
                       handleClick(1);
-                    }}
+                    } }
                   >
                     Level 1
                   </button>
@@ -358,7 +381,7 @@ export default function Home() {
                     className={classes.button}
                     onClick={() => {
                       handleClick(2);
-                    }}
+                    } }
                   >
                     Level 2
                   </button>
@@ -368,7 +391,7 @@ export default function Home() {
                     className={classes.button}
                     onClick={() => {
                       handleClick(3);
-                    }}
+                    } }
                   >
                     Level 3
                   </button>
@@ -378,7 +401,7 @@ export default function Home() {
                     className={classes.button}
                     onClick={() => {
                       handleClick(4);
-                    }}
+                    } }
                   >
                     Level 4
                   </button>
@@ -388,7 +411,7 @@ export default function Home() {
                     className={classes.button}
                     onClick={() => {
                       handleClick(5);
-                    }}
+                    } }
                   >
                     Level 5
                   </button>
@@ -398,6 +421,7 @@ export default function Home() {
           </Box>
         </div>
       </div>
-    </div>
+    </div></>
+
   );
 }
