@@ -47,6 +47,15 @@ function InputContainer() {
   let [openModal, setOpenModal] = useState(false);
 
   const handleGameOver = () => {
+    localStorage.setItem("livesLeft", state.lives);
+    //localStorage.setItem("time", state.getCurrentTimeStep())>>> FOR WHEN AL-113 is done
+    // appendDatabase(
+    //   localStorage.getItem("algo"),
+    //   localStorage.getItem("level"),
+    //   localStorage.getItem("attempts"),
+    //   localStorage.getItem("time"),
+    //   localStorage.getItem("livesLeft")
+    // ); >>>> FOR WHEN AL-109 is done
     state.gameOver = true;
     setOpenModal(true);
     generateEmptyArr();
