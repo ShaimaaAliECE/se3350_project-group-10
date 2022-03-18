@@ -4,9 +4,9 @@ import "./index.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./screens/Home.js";
 import Level from "./screens/Level.js";
-import { getFirestore } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 
+//Need env file set up for this to work
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
@@ -16,10 +16,10 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 };
-const app = initializeApp(firebaseConfig);
-const db = getFirestore();
 
-export default db;
+//Firebase Initialization
+const app = initializeApp(firebaseConfig);
+
 ReactDOM.render(
   <BrowserRouter>
     <Routes>
