@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route, Router } from "react-router-dom";
 import Home from "./screens/Home.js";
 import Level from "./screens/Level.js";
 import Admin from "./screens/Admin.js"; 
+import Login from "./screens/Login.js"
 
 ReactDOM.render(
   <BrowserRouter>
@@ -12,6 +13,7 @@ ReactDOM.render(
       <Route path="/" element={<Home />} />
       <Route path="/level_:level" element={<Level />} />
       <Route path="/admin" element={<Admin/>} />
+      <Route path="/login" element={<Login/>} />
     </Routes>
   </BrowserRouter>,
   document.getElementById("root")

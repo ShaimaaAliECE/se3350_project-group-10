@@ -80,8 +80,8 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     "&:hover": {
       cursor: "pointer",
-
   },
+
 }, 
   link: {
     textDecoration: "none",
@@ -176,7 +176,7 @@ export default function Home() {
   const classes = useStyles();
   return (
     <><div className={classes.navbar}>
-      <div className={classes.login}>Log In</div>
+       <Link to="/login" className={classes.link}>Log In</Link>
       </div>
       
       <div className={classes.container}>
