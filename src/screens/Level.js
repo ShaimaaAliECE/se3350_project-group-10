@@ -72,6 +72,8 @@ function Level() {
   const style = useStyles();
   let params = useParams();
   let level = parseInt(params.level);
+  localStorage.setItem("level", level);
+  localStorage.setItem("algo", "merge_sort");
 
   state.level = level;
 
