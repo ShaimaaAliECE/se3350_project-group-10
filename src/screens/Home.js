@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import state from "../store/Store";
 import { makeStyles } from "@material-ui/core";
@@ -11,7 +11,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import { TabPanel } from "../components/Tabs.js";
-import { getLevelAverageTime, getLevelTimes } from "../firebase/functions.js";
+
 const useStyles = makeStyles((theme) => ({
   appBar: {
     borderRadius: "5px",

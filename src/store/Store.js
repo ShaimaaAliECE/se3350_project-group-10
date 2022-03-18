@@ -274,7 +274,6 @@ const state = store({
   loseGame: false,
   mergePointer: 0,
   restartGame: true,
-  lvlAvgTime: 0,
   feedbackColor: "rgba(220,220,220, .6)",
   depthInc: () => (state.runnable ? state.depth++ : state.depth),
   stepInc: () => state.step++,
