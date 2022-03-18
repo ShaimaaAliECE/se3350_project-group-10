@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import state from "../store/Store";
 import { makeStyles } from "@material-ui/core";
@@ -82,13 +82,25 @@ export default function Home() {
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
   const classes = useStyles();
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
   const handleChangeIndex = (index) => {
     setValue(index);
   };
+
   state.resetStates();
+
+  useEffect(() => {
+    localStorage.setItem("algo", "");
+    localStorage.setItem("level", 0);
+    localStorage.setItem("attempts", 1);
+    localStorage.setItem("time", 0);
+    localStorage.setItem("livesLeft", 0);
+  }, []);
+
   return (
     <div className={classes.container}>
       <div className={classes.content}>

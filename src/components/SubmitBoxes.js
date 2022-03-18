@@ -156,6 +156,10 @@ export function handleSubmitClick(handleGameOver) {
       let lostLife2 = document.getElementById("l2");
       lostLife2.style.display = "none";
     } else if (state.lives === 0) {
+      localStorage.setItem(
+        "attempts",
+        parseInt(localStorage.getItem("attempts")) + 1
+      );
       let lostLife3 = document.getElementById("l3");
       lostLife3.style.display = "none";
       loseSound(); // play lose sound
@@ -198,6 +202,15 @@ function CreateMap(arrOuter) {
   let [openModal, setOpenModal] = useState(false);
 
   const handleGameOver = () => {
+    localStorage.setItem("livesLeft", state.lives);
+    //localStorage.setItem("time", state.getCurrentTimeStep())>>> FOR WHEN AL-113 is done
+    // appendDatabase(
+    //   localStorage.getItem("algo"),
+    //   localStorage.getItem("level"),
+    //   localStorage.getItem("attempts"),
+    //   localStorage.getItem("time"),
+    //   localStorage.getItem("livesLeft")
+    // ); >>>> FOR WHEN AL-109 is done
     state.gameOver = true;
     setOpenModal(true);
     generateEmptyArr();
@@ -210,10 +223,6 @@ function CreateMap(arrOuter) {
     <>
       <div className={style.stylesContainerOuter}>
         <div className={style.stylesContainerInner}>
-          {/* This generates the input box
-              If the ans[step].type === merge
-              Then generate a thing of length 1 */}
-          {/* arrOuter[0].map if its a merge*/}
           {arrOuter.map((arrInner) => (
             <div style={submitBox}>{arrInner === 0 ? "" : arrInner}</div>
           ))}
