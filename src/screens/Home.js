@@ -221,210 +221,70 @@ export default function Home() {
               >
                 <TabPanel value={value} index={0} dir={theme.direction}>
                   <Link to="/level_1" className={classes.link}>
-                    <button
-                      className={classes.button}
-                      onClick={() => {
-                        handleClick(1);
-                      }}
-                    >
-                      Level 1
-                    </button>
+                    <button className={classes.button}>Level 1</button>
                   </Link>
                   <Link to="/level_2" className={classes.link}>
-                    <button
-                      className={classes.button}
-                      onClick={() => {
-                        handleClick(2);
-                      }}
-                    >
-                      Level 2
-                    </button>
+                    <button className={classes.button}>Level 2</button>
                   </Link>
                   <Link to="/level_3" className={classes.link}>
-                    <button
-                      className={classes.button}
-                      onClick={() => {
-                        handleClick(3);
-                      }}
-                    >
-                      Level 3
-                    </button>
+                    <button className={classes.button}>Level 3</button>
                   </Link>
                   <Link to="/level_4" className={classes.link}>
-                    <button
-                      className={classes.button}
-                      onClick={() => {
-                        handleClick(4);
-                      }}
-                    >
-                      Level 4
-                    </button>
+                    <button className={classes.button}>Level 4</button>
                   </Link>
                   <Link to="/level_5" className={classes.link}>
-                    <button
-                      className={classes.button}
-                      onClick={() => {
-                        handleClick(5);
-                      }}
-                    >
-                      Level 5
-                    </button>
+                    <button className={classes.button}>Level 5</button>
                   </Link>
                 </TabPanel>
                 <TabPanel value={value} index={1} dir={theme.direction}>
                   <Link to="/level_1" className={classes.link}>
-                    <button
-                      className={classes.button}
-                      onClick={() => {
-                        handleClick(1);
-                      }}
-                    >
-                      Level 1
-                    </button>
+                    <button className={classes.button}>Level 1</button>
                   </Link>
                   <Link to="/level_2" className={classes.link}>
-                    <button
-                      className={classes.button}
-                      onClick={() => {
-                        handleClick(2);
-                      }}
-                    >
-                      Level 2
-                    </button>
+                    <button className={classes.button}>Level 2</button>
                   </Link>
                   <Link to="/level_3" className={classes.link}>
-                    <button
-                      className={classes.button}
-                      onClick={() => {
-                        handleClick(3);
-                      }}
-                    >
-                      Level 3
-                    </button>
+                    <button className={classes.button}>Level 3</button>
                   </Link>
                   <Link to="/level_4" className={classes.link}>
-                    <button
-                      className={classes.button}
-                      onClick={() => {
-                        handleClick(4);
-                      }}
-                    >
-                      Level 4
-                    </button>
+                    <button className={classes.button}>Level 4</button>
                   </Link>
                   <Link to="/level_5" className={classes.link}>
-                    <button
-                      className={classes.button}
-                      onClick={() => {
-                        handleClick(5);
-                      }}
-                    >
-                      Level 5
-                    </button>
+                    <button className={classes.button}>Level 5</button>
                   </Link>
                 </TabPanel>
                 <TabPanel value={value} index={2} dir={theme.direction}>
                   <Link to="/level_1" className={classes.link}>
-                    <button
-                      className={classes.button}
-                      onClick={() => {
-                        handleClick(1);
-                      }}
-                    >
-                      Level 1
-                    </button>
+                    <button className={classes.button}>Level 1</button>
                   </Link>
                   <Link to="/level_2" className={classes.link}>
-                    <button
-                      className={classes.button}
-                      onClick={() => {
-                        handleClick(2);
-                      }}
-                    >
-                      Level 2
-                    </button>
+                    <button className={classes.button}>Level 2</button>
                   </Link>
                   <Link to="/level_3" className={classes.link}>
-                    <button
-                      className={classes.button}
-                      onClick={() => {
-                        handleClick(3);
-                      }}
-                    >
-                      Level 3
-                    </button>
+                    <button className={classes.button}>Level 3</button>
                   </Link>
                   <Link to="/level_4" className={classes.link}>
-                    <button
-                      className={classes.button}
-                      onClick={() => {
-                        handleClick(4);
-                      }}
-                    >
-                      Level 4
-                    </button>
+                    <button className={classes.button}>Level 4</button>
                   </Link>
                   <Link to="/level_5" className={classes.link}>
-                    <button
-                      className={classes.button}
-                      onClick={() => {
-                        handleClick(5);
-                      }}
-                    >
-                      Level 5
-                    </button>
+                    <button className={classes.button}>Level 5</button>
                   </Link>
                 </TabPanel>
                 <TabPanel value={value} index={3} dir={theme.direction}>
                   <Link to="/level_1" className={classes.link}>
-                    <button
-                      className={classes.button}
-                      onClick={() => {
-                        handleClick(1);
-                      }}
-                    >
-                      Level 1
-                    </button>
+                    <button className={classes.button}>Level 1</button>
                   </Link>
                   <Link to="/level_2" className={classes.link}>
-                    <button
-                      className={classes.button}
-                      onClick={() => {
-                        handleClick(2);
-                      }}
-                    >
-                      Level 2
-                    </button>
+                    <button className={classes.button}>Level 2</button>
                   </Link>
                   <Link to="/level_3" className={classes.link}>
-                    <button
-                      className={classes.button}
-                      onClick={() => {
-                        handleClick(3);
-                      }}
-                    >
-                      Level 3
-                    </button>
+                    <button className={classes.button}>Level 3</button>
                   </Link>
                   <Link to="/level_4" className={classes.link}>
-                    <button
-                      className={classes.button}
-                      onClick={() => {
-                        handleClick(4);
-                      }}
-                    >
-                      Level 4
-                    </button>
+                    <button className={classes.button}>Level 4</button>
                   </Link>
                   <Link to="/level_5" className={classes.link}>
-                    <button
-                      className={classes.button}
-                      onClick={() => {
-                        handleClick(5);
-                      }}
-                    >
-                      Level 5
-                    </button>
+                    <button className={classes.button}>Level 5</button>
                   </Link>
                 </TabPanel>
               </SwipeableViews>
