@@ -1,7 +1,6 @@
 import { makeStyles, Button } from "@material-ui/core";
 import React from "react";
 import { view } from "@risingstack/react-easy-state";
-import levelone from "../assets/level-one.json";
 import { handleSubmitClick } from "./SubmitBoxes";
 import SubmitBoxes from "./SubmitBoxes";
 import state from "../store/Store";
@@ -29,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100px",
     height: "50px",
     borderRadius: "15px",
+    backgroundColor: "#f2f2f2",
   },
   lives: {
     position: "absolute",
@@ -47,6 +47,15 @@ function InputContainer() {
   let [openModal, setOpenModal] = useState(false);
 
   const handleGameOver = () => {
+    localStorage.setItem("livesLeft", state.lives);
+    //localStorage.setItem("time", state.getCurrentTimeStep())>>> FOR WHEN AL-113 is done
+    // appendDatabase(
+    //   localStorage.getItem("algo"),
+    //   localStorage.getItem("level"),
+    //   localStorage.getItem("attempts"),
+    //   localStorage.getItem("time"),
+    //   localStorage.getItem("livesLeft")
+    // ); >>>> FOR WHEN AL-109 is done
     state.gameOver = true;
     setOpenModal(true);
     generateEmptyArr();
@@ -73,7 +82,7 @@ function InputContainer() {
         >
           <p
             style={{
-              backgroundColor: "white",
+              backgroundColor: "#f2f2f2",
               width: "25%",
               height: "25%",
               display: "flex",
@@ -116,10 +125,16 @@ function InputContainer() {
               variant="contained"
               className={style.nextBtn}
               onClick={() => {
-                if (state.instruct < state.ans.length) {
-                  state.instruct++;
+                if (state.ans[state.step].type == "merge") {
+                  state.input = [
+                    state.ans[state.step].array[state.mergePointer],
+                  ];
+                } else {
+                  if (state.instruct < state.ans.length) {
+                    state.instruct++;
+                  }
+                  state.input = state.ans[state.step].array;
                 }
-                state.input = state.ans[state.step].array;
                 handleSubmitClick(handleGameOver);
               }}
             >

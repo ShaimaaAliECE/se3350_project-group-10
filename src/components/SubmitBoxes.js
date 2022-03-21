@@ -4,7 +4,6 @@ import state from "../store/Store";
 import { view } from "@risingstack/react-easy-state";
 import { Button } from "@material-ui/core";
 import { Modal } from "@material-ui/core";
-//import LoseScreen from "../components/LoseScreen";
 
 import {
   playCorrectSound,
@@ -34,13 +33,6 @@ const stylesMainInner = {
   alignItems: "center",
 };
 
-function chunk(array, limit) {
-  const chunks = Math.ceil(array.length / limit);
-  return Array.from({ length: chunks }, (_, i) =>
-    array.slice((i * array.length) / chunks, ((i + 1) * array.length) / chunks)
-  );
-}
-
 function arrComp(arr1, arr2) {
   return arr1.every((val, index) => val === arr2[index]);
 }
@@ -58,12 +50,19 @@ function handleRestartClick(handleGameOver) {
 
 export function generateEmptyArr() {
   state.input = [];
-  for (let i = 0; i < state.ans[state.step]?.array.length; i++) {
+
+  if (state.ans[state.step]?.type == "merge") {
     state.input.push(0);
+  } else {
+    for (let i = 0; i < state.ans[state.step]?.array.length; i++) {
+      state.input.push(0);
+    }
   }
+
   state.feedbackColor = "rgba(220,220,220, .6)";
   state.reseting = false;
 }
+
 function navigateSheet() {
   let row;
   if (state.ans[state.step].type == "merge") {
@@ -80,34 +79,68 @@ function navigateSheet() {
 }
 
 export function handleSubmitClick(handleGameOver) {
-  //Check the answer, if its right --> increment step, handle restart, state.sheet.push(state.input)
+  let tempArr;
+  let type = state.ans[state.step].type;
+  let isCorrect = false;
+  let row = state.ans[state.step].row + state.depth;
 
-  if (arrComp(state.ans[state.step].array, state.input)) {
-    let row;
-    if (state.ans[state.step].type == "merge") {
-      row = state.ans[state.step].row + state.depth;
-    } else {
-      row = state.ans[state.step].row;
-    }
-    state.appendSheet(state.input, row);
+  if (type === "merge") {
+    //MERGE INPUT
+    let row = state.ans[state.step].row + state.depth;
+    let ans = state.ans[state.step].array[state.mergePointer];
+    tempArr = [
+      ...state.sheet[0][row].array[
+        state.firstZeroFinder2D([...state.sheet[0][row].array])
+      ],
+    ];
+    //if their input is correct append it, set isCorrect = true
 
-    state.stepInc();
-    if (state.level === 2) {
-      state.instruct++;
+    if (ans === state.input[0]) {
+      tempArr[state.mergePointer] = state.input[0];
+      state.appendSheet([...tempArr], row, 1);
+      state.mergePointer++;
+      isCorrect = true;
     }
+  } else {
+    //SPLIT INPUT
+    //Check the answer, if correct set isCorrect = true
+    if (arrComp(state.ans[state.step].array, state.input)) {
+      let row = state.ans[state.step].row;
+      state.appendSheet(state.input, row);
+      isCorrect = true;
+    }
+  }
+  if (isCorrect) {
+    if (
+      (type === "merge" &&
+        state.ans[state.step].array.length === state.mergePointer) ||
+      type === "split"
+    ) {
+      //reset mergePointer when step is incremented
+      state.mergePointer = 0;
+      state.stepInc();
+    }
+
     setTimeout(navigateSheet, 1000);
+    //Win
     if (state.step >= state.ans.length) {
-      //Win!
       handleGameOver();
     } else {
+      //Reset
       state.reseting = true;
+
+      //Fills in necessary x's
       state.fillTheGaps(
         state.ans[state.step - 1].zeroesEncountered,
         state.ans[state.step - 1].type
       );
+
       setTimeout(generateEmptyArr, 1000);
       setTimeout(handleRestartClick, 1000);
       playCorrectSound();
+    }
+    if (state.level === 2 && type === "split") {
+      state.instruct++;
     }
   } else {
     // if incorrect, minus 1 life, play incorrect sound
@@ -115,7 +148,6 @@ export function handleSubmitClick(handleGameOver) {
     state.reseting = true;
     setTimeout(handleRestartClick, 1000);
     playIncorrectSound();
-
     // remove life visually
     if (state.lives === 2) {
       let lostLife1 = document.getElementById("l1");
@@ -124,6 +156,10 @@ export function handleSubmitClick(handleGameOver) {
       let lostLife2 = document.getElementById("l2");
       lostLife2.style.display = "none";
     } else if (state.lives === 0) {
+      localStorage.setItem(
+        "attempts",
+        parseInt(localStorage.getItem("attempts")) + 1
+      );
       let lostLife3 = document.getElementById("l3");
       lostLife3.style.display = "none";
       loseSound(); // play lose sound
@@ -149,8 +185,12 @@ function CreateMap(arrOuter) {
   };
 
   const handleFeedbackColor = () => {
+    let ans = state.ans[state.step].array[state.mergePointer];
     //if user input of array is correct
-    if (arrComp(state.ans[state.step].array, state.input)) {
+    if (
+      arrComp(state.ans[state.step].array, state.input) ||
+      ans === state.input[0]
+    ) {
       //set state of background colour to green on submit
       state.feedbackColor = "rgba(0, 255, 0, 0.6)";
     } else {
@@ -162,10 +202,19 @@ function CreateMap(arrOuter) {
   let [openModal, setOpenModal] = useState(false);
 
   const handleGameOver = () => {
+    localStorage.setItem("livesLeft", state.lives);
+    //localStorage.setItem("time", state.getCurrentTimeStep())>>> FOR WHEN AL-113 is done
+    // appendDatabase(
+    //   localStorage.getItem("algo"),
+    //   localStorage.getItem("level"),
+    //   localStorage.getItem("attempts"),
+    //   localStorage.getItem("time"),
+    //   localStorage.getItem("livesLeft")
+    // ); >>>> FOR WHEN AL-109 is done
     state.gameOver = true;
     setOpenModal(true);
     generateEmptyArr();
-    state.step = 0;
+    state.step = 1;
     state.instruct = 0;
     winSound();
   };

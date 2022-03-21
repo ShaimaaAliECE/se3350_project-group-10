@@ -1,5 +1,7 @@
 import { store } from "@risingstack/react-easy-state";
 
+// Finds the first zero in an array
+// Also sets the maxMergeLen based on the largest indexOf(0)
 function firstZeroFinder(arr, type = "split") {
   let temp = [];
   for (let i in arr.array) {
@@ -15,12 +17,56 @@ function firstZeroFinder(arr, type = "split") {
   return;
 }
 
-function appendSheet(array, row) {
-  let zeroIndex = firstZeroFinder(state.sheet[0][row]);
+// returns an array of random numbers between min and max of given length
+function random(min, max, length) {
+  let num = [];
+  for (let i = 0; i < length; i++) {
+    num.push(Math.floor(Math.random() * (max - min) + min));
+  }
+  return num;
+}
+
+function generateEmptyArr() {
+  state.input = [];
+  for (let i = 0; i < state.ans[state.step]?.array.length; i++) {
+    state.input.push(0);
+  }
+}
+
+// Not exactly needed but fine for now, finds the first zero in a 2d array
+function firstZeroFinder2D(array) {
+  let zeroIndex = -1;
+  let ind = 0;
+  for (let i of array) {
+    zeroIndex = i.indexOf(0);
+    if (zeroIndex >= 0) {
+      return ind;
+    }
+    ind++;
+  }
+  //If no zeros
+  return -1;
+}
+
+// Splices in arrays into the sheet
+function appendSheet(array, row, flag = 0) {
+  let zeroIndex;
+
+  // Flag corresponds to a merge step
+  // Needed to splice merge elements 1 by 1
+  if (flag != 0) {
+    zeroIndex = firstZeroFinder2D(
+      [...state.sheet[0][row].array],
+      state.sheet[0][row]
+    );
+  } else {
+    zeroIndex = firstZeroFinder(state.sheet[0][row]);
+  }
   state.sheet[0][row].array.splice(zeroIndex, 1, [...array]);
 }
+
+// Returns the total number of elements in a 2d array
 function getLengths(array) {
-  //where array is 2d
   let count = -1;
   for (let i in array) {
     for (let j in array[i]) {
@@ -30,6 +76,7 @@ function getLengths(array) {
   return count;
 }
 
+// Generates an array of x's to be spliced
 function fillGapsArr(start, end) {
   let arr = [];
 
@@ -40,14 +87,17 @@ function fillGapsArr(start, end) {
   return arr;
 }
 
+// Fills the necessary spaces with x's
 function fillTheGaps(zeroesEncountered, type) {
   if (type === "merge") {
+    //Checks each row in 'merge' for the longest occurence >> this sets the maxMergeLength
     for (let i = 0; i < state.depth - 2; i++) {
-      firstZeroFinder(state.sheet[0][i + state.depth], "merge");
+      firstZeroFinder(state.sheet[0][i + state.depth].array, "merge");
     }
 
-    let firstZero = firstZeroFinder(state.sheet[0][state.depth]);
+    let firstZero = firstZeroFinder(state.sheet[0][state.depth + 1], "merge");
 
+    //Splices the x's in based so the length of the first row of 'merge' is the same as the longest filled in row in 'merge'
     state.sheet[0][state.depth].array.splice(
       firstZero,
       state.maxMergLen - firstZero,
@@ -61,6 +111,32 @@ function fillTheGaps(zeroesEncountered, type) {
       zeroesEncountered - firstZero,
       ...fillGapsArr(firstZero, zeroesEncountered)
     );
+  }
+}
+
+function handleLevel(lvl) {
+  switch (lvl) {
+    case 1: // Level 1
+      state.levelMax = 21; //1 --> 21 non inclusive upper bound
+      state.levelLength = 10;
+      break;
+    case 2: // Level 2, Includes instructions only
+      state.levelMax = 21;
+      state.levelLength = 10;
+      break;
+    case 3: // Level 3
+      state.levelMax = 21;
+      state.levelLength = 10;
+      break;
+    case 4: // Level 4
+      state.levelMax = 51;
+      state.levelLength = 20;
+      break;
+    case 5: // Level 5
+      state.levelMax = 101;
+      state.levelLength = 50;
+      break;
+    default:
   }
 }
 
@@ -151,55 +227,67 @@ function initializeSheets() {
 
 function resetStates() {
   state.lives = 3;
-  state.input = [];
-  state.ans = [];
   state.level = 0;
   state.instruct = 0;
-  state.algo = "merge";
-  state.sheet = [];
-  state.flags = [];
+  state.levelMin = 1;
+  state.levelMax = 0;
   state.depth = 1;
   state.runnable = 1;
   state.step = 1;
-  state.gameOver = false;
-  state.splits = [0];
   state.zeroesEncountered = 0;
   state.maxMergLen = 0;
-  state.reseting = false;
   state.indRef = -1;
-  state.feedbackColor = "rgba(220,220,220, .6)";
+  state.input = [];
+  state.ans = [];
+  state.algo = "merge";
+  state.sheet = [];
+  state.flags = [];
+  state.gameOver = false;
+  state.reseting = false;
   state.loseGame = false;
+  state.mergePointer = 0;
+  state.restartGame = true;
+  state.splits = [0];
+  state.feedbackColor = "rgba(220,220,220, .6)";
 }
 
 const state = store({
   lives: 3,
-  input: [],
-  ans: [],
   level: 0,
   instruct: 0,
-  algo: "merge",
-  sheet: [],
-  flags: [],
+  levelMin: 1,
+  levelMax: 0,
   depth: 1,
   runnable: 1,
   step: 1,
-  gameOver: false,
-  splits: [0],
   zeroesEncountered: 0,
   maxMergLen: 0,
-  reseting: false,
   indRef: -1,
-  feedbackColor: "rgba(220,220,220, .6)",
+  input: [],
+  ans: [],
+  algo: "merge",
+  sheet: [],
+  flags: [],
+  splits: [0],
+  gameOver: false,
+  reseting: false,
   loseGame: false,
+  mergePointer: 0,
+  restartGame: true,
+  feedbackColor: "rgba(220,220,220, .6)",
   depthInc: () => (state.runnable ? state.depth++ : state.depth),
   stepInc: () => state.step++,
-  appendSheet: (array, row) => appendSheet(array, row),
+  appendSheet: (array, row, flag) => appendSheet(array, row, flag),
   resetStates: () => resetStates(),
   firstZeroFinder: (arr) => firstZeroFinder(arr),
+  firstZeroFinder2D: (arr) => firstZeroFinder2D(arr),
   initializeSheets: () => initializeSheets(),
   initializeSplit: () => initializeSplit(),
   fillTheGaps: (zeroesEncountered, type) =>
     fillTheGaps(zeroesEncountered, type),
+  random: (min, max, length) => random(min, max, length),
+  generateEmptyArr: () => generateEmptyArr(),
+  handleLevel: (lvl) => handleLevel(lvl),
 });
 
 export default state;
