@@ -7,32 +7,29 @@ import { view } from "@risingstack/react-easy-state";
 const useStyles = makeStyles((theme) => ({
   container: {
     position: "fixed",
-    bottom: "4%",
+    bottom: "2%",
     left: "2%",
     borderRadius: 30,
-    width: 300,
-    height: 200,
-    backgroundColor: "rgba(131,130,130,0.9)",
+    width: 375,
+    minHeight: 150,
+    backgroundColor: "rgba(242,242,242,0.9)", 
     margin: "auto",
     zIndex: 6,
   },
 
   detailsContainer: {
-    paddingTop: 20,
-    paddingLeft: 20,
-    paddingRight: 20,
+    padding: 20,    
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
   },
 
   content: {
-    padding: 0,
-    textAlign: "left",
+    textAlign: "justified",
     backgroundColor: "transparent",
     fontFamily: "Raleway",
     fontSize: "19px",
-    color: "white",
+    color: "#1a1a1a",
   },
 }));
 
