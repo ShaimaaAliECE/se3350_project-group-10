@@ -119,22 +119,32 @@ function handleLevel(lvl) {
     case 1: // Level 1
       state.levelMax = 21; //1 --> 21 non inclusive upper bound
       state.levelLength = 10;
+      state.isActive = true; 
+      state.StopWatch(); 
       break;
     case 2: // Level 2, Includes instructions only
       state.levelMax = 21;
       state.levelLength = 10;
+      state.isActive = true;
+      state.StopWatch(); 
       break;
     case 3: // Level 3
       state.levelMax = 21;
       state.levelLength = 10;
+      state.isActive = true;
+      state.StopWatch(); 
       break;
     case 4: // Level 4
       state.levelMax = 51;
       state.levelLength = 20;
+      state.isActive = true;
+      state.StopWatch(); 
       break;
     case 5: // Level 5
       state.levelMax = 101;
       state.levelLength = 50;
+      state.isActive = true;
+      state.StopWatch(); 
       break;
     default:
   }
