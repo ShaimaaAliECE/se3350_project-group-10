@@ -65,8 +65,7 @@ export default function LoseScreen() {
                   height: "50px",
                   width: "200px",
                   "&:hover": {
-                    backgroundColor: "#4d4d4d",
-                    color: "white",
+                    backgroundColor: "#38c6d9",
                   },
                 }}
                 onClick={() => {
@@ -89,8 +88,7 @@ export default function LoseScreen() {
                   height: "50px",
                   width: "200px",
                   "&:hover": {
-                    backgroundColor: "#4d4d4d",
-                    color: "white",
+                    backgroundColor: "#38c6d9",
                   },
                 }}
               >
@@ -110,8 +108,7 @@ export default function LoseScreen() {
                   height: "50px",
                   width: "200px",
                   "&:hover": {
-                    backgroundColor: "#4d4d4d",
-                    color: "white",
+                    backgroundColor: "#38c6d9",
                   },
                 }}
               >

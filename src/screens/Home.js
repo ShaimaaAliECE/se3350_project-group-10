@@ -86,6 +86,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 10,
     "&:hover": {
       cursor: "pointer",
+      backgroundColor: "#363232",
     },
   },
   link: {
