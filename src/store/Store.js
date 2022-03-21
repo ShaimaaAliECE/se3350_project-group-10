@@ -149,6 +149,18 @@ function initializeSheets() {
   state.appendSheet(state.ans[0].array, 0);
 }
 
+  // timer function 
+  function StopWatch() {
+    let interval = null;
+    interval = setInterval(function () {
+        if (state.isActive) {
+            state.timer++
+        } else if (!state.isActive && state.timer !== 0) { clearInterval(interval); }
+    }, 1000);
+    return () => clearInterval(interval);
+}
+
+
 function resetStates() {
   state.lives = 3;
   state.input = [];
@@ -169,6 +181,8 @@ function resetStates() {
   state.indRef = -1;
   state.feedbackColor = "rgba(220,220,220, .6)";
   state.loseGame = false;
+  state.timer = 0; 
+  state.isActive = false;
 }
 
 const state = store({
@@ -191,6 +205,8 @@ const state = store({
   indRef: -1,
   feedbackColor: "rgba(220,220,220, .6)",
   loseGame: false,
+  timer: 0,
+  isActive: false,
   depthInc: () => (state.runnable ? state.depth++ : state.depth),
   stepInc: () => state.step++,
   appendSheet: (array, row) => appendSheet(array, row),
@@ -200,6 +216,7 @@ const state = store({
   initializeSplit: () => initializeSplit(),
   fillTheGaps: (zeroesEncountered, type) =>
     fillTheGaps(zeroesEncountered, type),
+  StopWatch: () => StopWatch(),
 });
 
 export default state;
