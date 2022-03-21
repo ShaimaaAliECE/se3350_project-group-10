@@ -119,32 +119,32 @@ function handleLevel(lvl) {
     case 1: // Level 1
       state.levelMax = 21; //1 --> 21 non inclusive upper bound
       state.levelLength = 10;
-      state.isActive = true; 
-      state.StopWatch(); 
+      state.isActive = true;
+      state.StopWatch();
       break;
     case 2: // Level 2, Includes instructions only
       state.levelMax = 21;
       state.levelLength = 10;
       state.isActive = true;
-      state.StopWatch(); 
+      state.StopWatch();
       break;
     case 3: // Level 3
       state.levelMax = 21;
       state.levelLength = 10;
       state.isActive = true;
-      state.StopWatch(); 
+      state.StopWatch();
       break;
     case 4: // Level 4
       state.levelMax = 51;
       state.levelLength = 20;
       state.isActive = true;
-      state.StopWatch(); 
+      state.StopWatch();
       break;
     case 5: // Level 5
       state.levelMax = 101;
       state.levelLength = 50;
       state.isActive = true;
-      state.StopWatch(); 
+      state.StopWatch();
       break;
     default:
   }
@@ -235,13 +235,15 @@ function initializeSheets() {
   state.appendSheet(state.ans[0].array, 0);
 }
 
-// timer function 
+// timer function
 function StopWatch() {
   let interval = null;
   interval = setInterval(function () {
-      if (state.isActive) {
-          state.timer++
-      } else if (!state.isActive && state.timer !== 0) { clearInterval(interval); }
+    if (state.isActive) {
+      state.timer++;
+    } else if (!state.isActive && state.timer !== 0) {
+      clearInterval(interval);
+    }
   }, 1000);
   return () => clearInterval(interval);
 }
@@ -270,8 +272,8 @@ function resetStates() {
   state.restartGame = true;
   state.splits = [0];
   state.feedbackColor = "rgba(220,220,220, .6)";
-  state.timer = 0; 
-  state.isActive = false; 
+  state.timer = 0;
+  state.isActive = false;
 }
 
 const state = store({
@@ -298,8 +300,8 @@ const state = store({
   mergePointer: 0,
   restartGame: true,
   feedbackColor: "rgba(220,220,220, .6)",
-  timer:0,
-  isActive:false,
+  timer: 0,
+  isActive: false,
   depthInc: () => (state.runnable ? state.depth++ : state.depth),
   stepInc: () => state.step++,
   appendSheet: (array, row, flag) => appendSheet(array, row, flag),
@@ -313,7 +315,7 @@ const state = store({
   random: (min, max, length) => random(min, max, length),
   generateEmptyArr: () => generateEmptyArr(),
   handleLevel: (lvl) => handleLevel(lvl),
-  StopWatch: ()=> StopWatch(), 
+  StopWatch: () => StopWatch(),
 });
 
 export default state;
