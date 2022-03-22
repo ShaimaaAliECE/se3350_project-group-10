@@ -81,12 +81,13 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Raleway",
     color: "white",
     textAlign: "center",
-    backgroundColor: "#504c4c",
+    backgroundColor: "#252525",
     border: 0,
     borderRadius: 10,
     "&:hover": {
       cursor: "pointer",
-      backgroundColor: "#363232",
+      backgroundColor: "#A4A4A4",
+      color: "#242424",
     },
   },
   link: {
@@ -238,15 +239,21 @@ export default function Home() {
               <img src={logo} style={{ height: 209, width: 661 }} alt="logo" />
             </div>
             <div>
-              <Box sx={{ bgcolor: "background.paper" }} className={classes.box}>
+              <Box
+                sx={{ bgcolor: "rgba(255,255,255,0)" }}
+                className={classes.box}
+              >
                 <AppBar className={classes.appBar} position="static">
                   <Tabs
-                    TabIndicatorProps={{ style: { backgroundColor: "white" } }}
+                    TabIndicatorProps={{
+                      style: { backgroundColor: "#38c6d9" },
+                    }}
                     value={value}
                     onChange={handleChange}
                     textColor="inherit"
                     variant="fullWidth"
                     className={classes.tabContainer}
+                    sx={{ bgcolor: "#252525" }}
                   >
                     <Tab
                       label={<span className={classes.tabs}>Merge Sort</span>}
