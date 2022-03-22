@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { Drawer, makeStyles } from "@material-ui/core";
 import levelone from "../assets/level-one.json";
 import state from "../store/Store";
-import { autoEffect, view } from "@risingstack/react-easy-state";
-import backBtn from "../assets/back.svg";
+import { view } from "@risingstack/react-easy-state";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -12,7 +11,6 @@ const useStyles = makeStyles((theme) => ({
     left: "2%",
     borderRadius: 30,
     width: 375,
-    // minHeight: 150,
     height: "100vh",
     backgroundColor: "rgba(242,242,242,0.9)",
     margin: "auto",
@@ -24,22 +22,26 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    backgroundColor: "rgba(242,242,242,0.9)",
+    margin: "auto",
   },
 
   content: {
     textAlign: "justified",
-    backgroundColor: "rgba(242,242,242,0.9)",
     fontFamily: "Raleway",
     fontSize: "19px",
     color: "#1a1a1a",
     width: "400px",
-    // height: "400px",
-    marginTop: "80%",
+    height: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
   },
 
   buttonDrawer: {
     position: "absolute",
-    right: "1%",
+    left: "1%",
     bottom: "23%",
   },
 
@@ -50,7 +52,8 @@ const useStyles = makeStyles((theme) => ({
   },
 
   Drawer: {
-    backgroundColor: "rgba(0,0,0,0)",
+    backgroundColor: "transparent",
+    borderStyle: "none",
   },
 }));
 
@@ -64,7 +67,7 @@ function InstructionPopup() {
       <div className={classes.buttonDrawer}>
         <>
           <button
-            className={classes.showButton}
+            className={classes.showButton} // show or hide button text
             onClick={() => {
               setDrawer(!drawer);
             }}
@@ -72,33 +75,28 @@ function InstructionPopup() {
             {" "}
             {drawer ? "Hide Instructions" : "Show Instructions"}
           </button>
-          <Drawer
-            className={classes.Drawer}
-            // style={{
-            //   background: "black",
-            // }}
+          <Drawer //drawer component
             variant="persistent"
-            anchor={"left"}
+            anchor={"right"}
+            classes={{ paper: classes.Drawer }}
             open={drawer}
             onClose={() => {
               setDrawer(false);
             }}
           >
-            {/* <div className={classes.container}>
-              <div className={classes.detailsContainer}></div>
-            </div> */}
-            <div className={classes.content}>
-              <link
-                rel="stylesheet"
-                type="text/css"
-                href="//fonts.googleapis.com/css?family=Raleway"
-              />
-              {state.instruct === 0
-                ? "Split the array in half as evenly as possible. Take the floor function of the length/2 to correctly divide the array. Start by entering the values of the left sub-array."
-                : levelone.map((levelone) => levelone[state.instruct])}
+            <div className={classes.detailsContainer}>
+              <div className={classes.content}>
+                <link
+                  rel="stylesheet"
+                  type="text/css"
+                  href="//fonts.googleapis.com/css?family=Raleway"
+                />
+                {state.instruct === 0
+                  ? "Split the array in half as evenly as possible. Take the floor function of the length/2 to correctly divide the array. Start by entering the values of the left sub-array."
+                  : levelone.map((levelone) => levelone[state.instruct])}
+              </div>
             </div>
           </Drawer>
-          {/* </div> */}
         </>
       </div>
     </>
