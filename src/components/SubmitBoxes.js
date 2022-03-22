@@ -125,6 +125,7 @@ export function handleSubmitClick(handleGameOver) {
     //Win
     if (state.step >= state.ans.length) {
       handleGameOver();
+      state.isActive=false; 
     } else {
       //Reset
       state.reseting = true;
