@@ -125,13 +125,13 @@ function InputContainer() {
               variant="contained"
               className={style.nextBtn}
               onClick={() => {
+                state.instruct++;
                 if (state.ans[state.step].type == "merge") {
                   state.input = [
                     state.ans[state.step].array[state.mergePointer],
                   ];
                 } else {
                   if (state.instruct < state.ans.length) {
-                    state.instruct++;
                   }
                   state.input = state.ans[state.step].array;
                 }
