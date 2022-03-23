@@ -112,7 +112,7 @@ function InputContainer() {
         </div>
       </Modal>
       <div className={style.stylesMainOuter}>
-        {state.level != 1 ? (
+        {state.level !== 1 ? (
           <div className={style.container}>
             <SubmitBoxes />
             <div className={style.lives}>
@@ -125,8 +125,9 @@ function InputContainer() {
               variant="contained"
               className={style.nextBtn}
               onClick={() => {
-                state.instruct++;
+
                 if (state.ans[state.step].type == "merge") {
+
                   state.input = [
                     state.ans[state.step].array[state.mergePointer],
                   ];
