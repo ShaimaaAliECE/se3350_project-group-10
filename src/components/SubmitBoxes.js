@@ -111,7 +111,6 @@ export function handleSubmitClick(handleGameOver) {
     }
   }
   if (isCorrect) {
-    state.instruct++;
     if (
       (type === "merge" &&
         state.ans[state.step].array.length === state.mergePointer) ||
@@ -140,6 +139,9 @@ export function handleSubmitClick(handleGameOver) {
       setTimeout(generateEmptyArr, 1000);
       setTimeout(handleRestartClick, 1000);
       playCorrectSound();
+    }
+    if (state.level == 2) {
+      state.instruct++;
     }
   } else {
     // if incorrect, minus 1 life, play incorrect sound
