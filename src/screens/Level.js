@@ -6,6 +6,7 @@ import Sheet from "../components/Sheet";
 import PopUp from "../components/InstructionPopup";
 import { useParams } from "react-router-dom";
 import LoseScreen from "../components/LoseScreen";
+import Timer from "../components/Timer"; 
 import { view } from "@risingstack/react-easy-state";
 import { Link } from "react-router-dom";
 import backBtn from "../assets/back.svg";
@@ -116,6 +117,7 @@ function Level() {
                 <div className={style.title}>
                   Level {params.level} - Merge Sort
                 </div>
+                <Timer/>
                 <div className={style.thirdBox}></div>
               </div>
               <div className={style.musicSheet}>
