@@ -106,7 +106,6 @@ function Level() {
               {state.loseGame === true ? <LoseScreen /> : null}
 
               <div className={style.navbar}>
-                {/* TEMPORARY COMMENTS! DONT DELETE */}
                 {
                   <div className={style.navbarBackBtn}>
                     <a href="/">
