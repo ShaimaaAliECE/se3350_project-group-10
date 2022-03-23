@@ -8,10 +8,12 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     backgroundColor: "white",
-    width: 60,
+    width: "100%",
     height: "100%",
-    padding: 5,
+    padding: 15,
     zIndex: -1,
+    borderRight: "solid .75",
+    borderLeft: 0,
   },
   black: {
     display: "flex",
@@ -19,11 +21,12 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     backgroundColor: "black",
     color: "white",
-    width: 40,
+    width: "100%",
     height: "50%",
-    padding: 5,
+    padding: 10,
     zIndex: 2,
-    marginLeft: -25,
+    marginLeft: -12,
+    border: "none",
     marginRight: -25,
   },
 }));
@@ -75,6 +78,7 @@ function playSound(totalNotes, currentNote) {
 export default view(function Key(props) {
   const styles = useStyles();
   const index = props.index;
+  const note = props.note;
   const totalNotes = props.totalNotes;
 
   const handleClick = () => {
@@ -89,9 +93,10 @@ export default view(function Key(props) {
     while (currentArr[i] !== 0) {
       i++;
     }
-    currentArr[i] = index + 1;
+    currentArr[i] = note;
     state.input = currentArr;
   };
+
   return (
     <button
       style={{ alignItems: "flex-end", paddingBottom: 20 }}
@@ -110,8 +115,7 @@ export default view(function Key(props) {
       }
       onClick={handleClick}
     >
-      {" "}
-      {index + 1}{" "}
+      <> {note} </>
     </button>
   );
 });
