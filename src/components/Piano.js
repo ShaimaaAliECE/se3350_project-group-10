@@ -30,13 +30,13 @@ function RenderKeys(x, notesArr) {
       if (numberStore.indexOf(notesArr[i]) === -1) {
         numberStore.push(notesArr[i]);
         arr.push(
-          <div style={{}} key={i}>
-            <Key
-              index={numberStore.length - 1}
-              totalNotes={x}
-              note={notesArr[i]}
-            />
-          </div>
+          // <div  key={i}>
+          <Key
+            index={numberStore.length - 1}
+            totalNotes={x}
+            note={notesArr[i]}
+          />
+          // </div>
         );
       }
     }
