@@ -125,6 +125,7 @@ export function handleSubmitClick(handleGameOver) {
     //Win
     if (state.step >= state.ans.length) {
       handleGameOver();
+      state.isActive=false; 
     } else {
       //Reset
       state.reseting = true;
@@ -156,10 +157,15 @@ export function handleSubmitClick(handleGameOver) {
       let lostLife2 = document.getElementById("l2");
       lostLife2.style.display = "none";
     } else if (state.lives === 0) {
+      localStorage.setItem(
+        "attempts",
+        parseInt(localStorage.getItem("attempts")) + 1
+      );
       let lostLife3 = document.getElementById("l3");
       lostLife3.style.display = "none";
       loseSound(); // play lose sound
       state.loseGame = true;
+      state.isActive = false; 
     }
   }
 }
@@ -198,11 +204,21 @@ function CreateMap(arrOuter) {
   let [openModal, setOpenModal] = useState(false);
 
   const handleGameOver = () => {
+    localStorage.setItem("livesLeft", state.lives);
+    //localStorage.setItem("time", state.getCurrentTimeStep())>>> FOR WHEN AL-113 is done
+    // appendDatabase(
+    //   localStorage.getItem("algo"),
+    //   localStorage.getItem("level"),
+    //   localStorage.getItem("attempts"),
+    //   localStorage.getItem("time"),
+    //   localStorage.getItem("livesLeft")
+    // ); >>>> FOR WHEN AL-109 is done
     state.gameOver = true;
     setOpenModal(true);
     generateEmptyArr();
     state.step = 1;
     state.instruct = 0;
+    state.isActive= false; 
     winSound();
   };
 
@@ -210,10 +226,6 @@ function CreateMap(arrOuter) {
     <>
       <div className={style.stylesContainerOuter}>
         <div className={style.stylesContainerInner}>
-          {/* This generates the input box
-              If the ans[step].type === merge
-              Then generate a thing of length 1 */}
-          {/* arrOuter[0].map if its a merge*/}
           {arrOuter.map((arrInner) => (
             <div style={submitBox}>{arrInner === 0 ? "" : arrInner}</div>
           ))}
@@ -265,7 +277,7 @@ function CreateMap(arrOuter) {
                 alignItems: "center",
               }}
             >
-              You have Completed Level {state.level}!
+              You have Completed Level {state.level} in {state.timer} time!
             </p>
             <a
               href="/"
