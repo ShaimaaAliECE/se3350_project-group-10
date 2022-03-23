@@ -125,7 +125,7 @@ export function handleSubmitClick(handleGameOver) {
     //Win
     if (state.step >= state.ans.length) {
       handleGameOver();
-      state.isActive=false; 
+      state.isActive = false;
     } else {
       //Reset
       state.reseting = true;
@@ -140,7 +140,7 @@ export function handleSubmitClick(handleGameOver) {
       setTimeout(handleRestartClick, 1000);
       playCorrectSound();
     }
-    if (state.level === 2 && type === "split") {
+    if (state.level == 2) {
       state.instruct++;
     }
   } else {
@@ -165,7 +165,7 @@ export function handleSubmitClick(handleGameOver) {
       lostLife3.style.display = "none";
       loseSound(); // play lose sound
       state.loseGame = true;
-      state.isActive = false; 
+      state.isActive = false;
     }
   }
 }
@@ -218,7 +218,7 @@ function CreateMap(arrOuter) {
     generateEmptyArr();
     state.step = 1;
     state.instruct = 0;
-    state.isActive= false; 
+    state.isActive = false;
     winSound();
   };
 
