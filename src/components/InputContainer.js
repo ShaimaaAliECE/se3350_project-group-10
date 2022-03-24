@@ -28,7 +28,8 @@ const useStyles = makeStyles((theme) => ({
     width: "100px",
     height: "50px",
     borderRadius: "15px",
-    backgroundColor: "#f2f2f2",
+    backgroundColor: "#a7a7a7",
+    borderColor: "#38c6d9",
   },
   lives: {
     position: "absolute",

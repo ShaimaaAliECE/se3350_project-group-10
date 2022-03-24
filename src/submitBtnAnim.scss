@@ -1,5 +1,5 @@
 .btn {
-    --hue: 190;
+    --hue: 190 ;
     position: relative;
     padding: 0.25rem 1rem;
     font-size: .9rem;
@@ -30,7 +30,7 @@
   
     &-ghost {
       color: hsl(var(--hue), 100%, 41%);
-      background-color: transparent;
+      background-color: rgb(100, 100, 100);
       border-color: hsl(var(--hue), 100%, 41%);
   
       &:hover {
