@@ -14,6 +14,7 @@ import { TabPanel } from "../components/Tabs.js";
 import { useState } from "react";
 import { styled } from "@mui/system";
 import ModalUnstyled from "@mui/base/ModalUnstyled";
+import "../homeAnimation.css";
 
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
@@ -50,7 +51,8 @@ const useStyles = makeStyles((theme) => ({
     margin: 0,
     width: "100%",
     height: "100%",
-    backgroundImage: `url(${bg})`,
+    //backgroundImage: `url(${bg})`,
+    backgroundColor: "black",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
@@ -68,6 +70,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     marginBottom: 65, //Toolbar takes up 65px
+    zIndex: 10,
   },
   button: {
     margin: 20,
@@ -78,11 +81,13 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Raleway",
     color: "white",
     textAlign: "center",
-    backgroundColor: "#504c4c",
+    backgroundColor: "#252525",
     border: 0,
     borderRadius: 10,
     "&:hover": {
       cursor: "pointer",
+      backgroundColor: "#A4A4A4",
+      color: "#242424",
     },
   },
   navbar: {
@@ -177,118 +182,192 @@ export default function Home() {
 
   return (
     <>
-      <div className={classes.navbar}>
-        <Link to="/login" className={classes.link}>
-          Log In
-        </Link>
-      </div>
-
-      <div className={classes.container}>
-        <div className={classes.content}>
-          <div className={classes.logo}>
-            <img src={logo} style={{ height: 209, width: 661 }} alt="logo" />
+      <div class="bgAnimation">
+        <div class="note-1">&#9835; &#9833;</div>
+        <div class="note-2">&#119070;</div>
+        <div class="note-3">&#9839; &#9834;</div>
+        <div class="note-4">&#9834;</div>
+        <div class="note-5">&#119070;</div>
+        <div class="note-6">&#9839; &#9834;</div>
+        <StyledModal
+          aria-labelledby="unstyled-modal-title"
+          aria-describedby="unstyled-modal-description"
+          open={open}
+          onClose={handleClose}
+          BackdropComponent={Backdrop}
+        >
+          <div className={classes.loginModal}>
+            <form
+              className={classes.form}
+              onSubmit={(e) => {
+                let username = e.target.username.value;
+                let password = e.target.password.value;
+                if (username == "admin" && password == "admin") {
+                  localStorage.setItem("isLoggedIn", true);
+                } else {
+                  alert("Incorrect Login");
+                  e.preventDefault();
+                }
+              }}
+            >
+              <TextField
+                id="username"
+                label="Username"
+                variant="outlined"
+                style={{ marginBottom: 20 }}
+              />
+              <TextField
+                id="password"
+                label="Password"
+                variant="outlined"
+                type="password"
+                style={{ marginBottom: 20 }}
+              />
+              <Button variant="outlined" type="submit">
+                Login
+              </Button>
+            </form>
           </div>
-          <div>
-            <Box sx={{ bgcolor: "background.paper" }} className={classes.box}>
-              <AppBar className={classes.appBar} position="static">
-                <Tabs
-                  TabIndicatorProps={{ style: { backgroundColor: "white" } }}
-                  value={value}
-                  onChange={handleChange}
-                  textColor="inherit"
-                  variant="fullWidth"
-                  className={classes.tabContainer}
-                >
-                  <Tab
-                    label={<span className={classes.tabs}>Merge Sort</span>}
-                  />
-                  <Tab
-                    label={<span className={classes.tabs}>Quick Sort</span>}
-                  />
-                  <Tab
-                    label={<span className={classes.tabs}>Insertion Sort</span>}
-                  />
-                  <Tab
-                    label={<span className={classes.tabs}>Recursive Sort</span>}
-                  />
-                </Tabs>
-              </AppBar>
-
-              <SwipeableViews
-                axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-                index={value}
-                onChangeIndex={handleChangeIndex}
+        </StyledModal>
+        <div className={classes.container}>
+          <div className={classes.loginContainer}>
+            {!isLoggedIn ? (
+              <button
+                className={classes.loginButton}
+                onClick={() => {
+                  setOpen(true);
+                }}
               >
-                <TabPanel value={value} index={0} dir={theme.direction}>
-                  <Link to="/level_1" className={classes.link}>
-                    <button className={classes.button}>Level 1</button>
-                  </Link>
-                  <Link to="/level_2" className={classes.link}>
-                    <button className={classes.button}>Level 2</button>
-                  </Link>
-                  <Link to="/level_3" className={classes.link}>
-                    <button className={classes.button}>Level 3</button>
-                  </Link>
-                  <Link to="/level_4" className={classes.link}>
-                    <button className={classes.button}>Level 4</button>
-                  </Link>
-                  <Link to="/level_5" className={classes.link}>
-                    <button className={classes.button}>Level 5</button>
-                  </Link>
-                </TabPanel>
-                <TabPanel value={value} index={1} dir={theme.direction}>
-                  <Link to="/level_1" className={classes.link}>
-                    <button className={classes.button}>Level 1</button>
-                  </Link>
-                  <Link to="/level_2" className={classes.link}>
-                    <button className={classes.button}>Level 2</button>
-                  </Link>
-                  <Link to="/level_3" className={classes.link}>
-                    <button className={classes.button}>Level 3</button>
-                  </Link>
-                  <Link to="/level_4" className={classes.link}>
-                    <button className={classes.button}>Level 4</button>
-                  </Link>
-                  <Link to="/level_5" className={classes.link}>
-                    <button className={classes.button}>Level 5</button>
-                  </Link>
-                </TabPanel>
-                <TabPanel value={value} index={2} dir={theme.direction}>
-                  <Link to="/level_1" className={classes.link}>
-                    <button className={classes.button}>Level 1</button>
-                  </Link>
-                  <Link to="/level_2" className={classes.link}>
-                    <button className={classes.button}>Level 2</button>
-                  </Link>
-                  <Link to="/level_3" className={classes.link}>
-                    <button className={classes.button}>Level 3</button>
-                  </Link>
-                  <Link to="/level_4" className={classes.link}>
-                    <button className={classes.button}>Level 4</button>
-                  </Link>
-                  <Link to="/level_5" className={classes.link}>
-                    <button className={classes.button}>Level 5</button>
-                  </Link>
-                </TabPanel>
-                <TabPanel value={value} index={3} dir={theme.direction}>
-                  <Link to="/level_1" className={classes.link}>
-                    <button className={classes.button}>Level 1</button>
-                  </Link>
-                  <Link to="/level_2" className={classes.link}>
-                    <button className={classes.button}>Level 2</button>
-                  </Link>
-                  <Link to="/level_3" className={classes.link}>
-                    <button className={classes.button}>Level 3</button>
-                  </Link>
-                  <Link to="/level_4" className={classes.link}>
-                    <button className={classes.button}>Level 4</button>
-                  </Link>
-                  <Link to="/level_5" className={classes.link}>
-                    <button className={classes.button}>Level 5</button>
-                  </Link>
-                </TabPanel>
-              </SwipeableViews>
-            </Box>
+                login
+              </button>
+            ) : (
+              <button
+                className={classes.loginButton}
+                onClick={() => {
+                  localStorage.setItem("isLoggedIn", false);
+                  setIsLoggedIn(false);
+                }}
+              >
+                logout
+              </button>
+            )}
+          </div>
+          <div className={classes.content}>
+            <div className={classes.logo}>
+              <img src={logo} style={{ height: 209, width: 661 }} alt="logo" />
+            </div>
+            <div>
+              <Box
+                sx={{ bgcolor: "rgba(255,255,255,0)" }}
+                className={classes.box}
+              >
+                <AppBar className={classes.appBar} position="static">
+                  <Tabs
+                    TabIndicatorProps={{
+                      style: { backgroundColor: "#38c6d9" },
+                    }}
+                    value={value}
+                    onChange={handleChange}
+                    textColor="inherit"
+                    variant="fullWidth"
+                    className={classes.tabContainer}
+                    sx={{ bgcolor: "#252525" }}
+                  >
+                    <Tab
+                      label={<span className={classes.tabs}>Merge Sort</span>}
+                    />
+                    <Tab
+                      label={<span className={classes.tabs}>Quick Sort</span>}
+                    />
+                    <Tab
+                      label={
+                        <span className={classes.tabs}>Insertion Sort</span>
+                      }
+                    />
+                    <Tab
+                      label={
+                        <span className={classes.tabs}>Recursive Sort</span>
+                      }
+                    />
+                  </Tabs>
+                </AppBar>
+
+                <SwipeableViews
+                  axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+                  index={value}
+                  onChangeIndex={handleChangeIndex}
+                >
+                  <TabPanel value={value} index={0} dir={theme.direction}>
+                    <Link to="/level_1" className={classes.link}>
+                      <button className={classes.button}>Level 1</button>
+                    </Link>
+                    <Link to="/level_2" className={classes.link}>
+                      <button className={classes.button}>Level 2</button>
+                    </Link>
+                    <Link to="/level_3" className={classes.link}>
+                      <button className={classes.button}>Level 3</button>
+                    </Link>
+                    <Link to="/level_4" className={classes.link}>
+                      <button className={classes.button}>Level 4</button>
+                    </Link>
+                    <Link to="/level_5" className={classes.link}>
+                      <button className={classes.button}>Level 5</button>
+                    </Link>
+                  </TabPanel>
+                  <TabPanel value={value} index={1} dir={theme.direction}>
+                    <Link to="/level_1" className={classes.link}>
+                      <button className={classes.button}>Level 1</button>
+                    </Link>
+                    <Link to="/level_2" className={classes.link}>
+                      <button className={classes.button}>Level 2</button>
+                    </Link>
+                    <Link to="/level_3" className={classes.link}>
+                      <button className={classes.button}>Level 3</button>
+                    </Link>
+                    <Link to="/level_4" className={classes.link}>
+                      <button className={classes.button}>Level 4</button>
+                    </Link>
+                    <Link to="/level_5" className={classes.link}>
+                      <button className={classes.button}>Level 5</button>
+                    </Link>
+                  </TabPanel>
+                  <TabPanel value={value} index={2} dir={theme.direction}>
+                    <Link to="/level_1" className={classes.link}>
+                      <button className={classes.button}>Level 1</button>
+                    </Link>
+                    <Link to="/level_2" className={classes.link}>
+                      <button className={classes.button}>Level 2</button>
+                    </Link>
+                    <Link to="/level_3" className={classes.link}>
+                      <button className={classes.button}>Level 3</button>
+                    </Link>
+                    <Link to="/level_4" className={classes.link}>
+                      <button className={classes.button}>Level 4</button>
+                    </Link>
+                    <Link to="/level_5" className={classes.link}>
+                      <button className={classes.button}>Level 5</button>
+                    </Link>
+                  </TabPanel>
+                  <TabPanel value={value} index={3} dir={theme.direction}>
+                    <Link to="/level_1" className={classes.link}>
+                      <button className={classes.button}>Level 1</button>
+                    </Link>
+                    <Link to="/level_2" className={classes.link}>
+                      <button className={classes.button}>Level 2</button>
+                    </Link>
+                    <Link to="/level_3" className={classes.link}>
+                      <button className={classes.button}>Level 3</button>
+                    </Link>
+                    <Link to="/level_4" className={classes.link}>
+                      <button className={classes.button}>Level 4</button>
+                    </Link>
+                    <Link to="/level_5" className={classes.link}>
+                      <button className={classes.button}>Level 5</button>
+                    </Link>
+                  </TabPanel>
+                </SwipeableViews>
+              </Box>
+            </div>
           </div>
         </div>
       </div>
