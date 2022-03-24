@@ -14,6 +14,7 @@ import { mergeSort } from "../algorithms/mergesort";
 import { useEffect } from "react";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { IconButton } from "@material-ui/core";
+import Navbar from "../components/NavBar";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -106,24 +107,8 @@ function Level() {
               {/* Lose Screen Popup Section */}
               {state.loseGame === true ? <LoseScreen /> : null}
 
-              <div className={style.navbar}>
-                {
-                  <div>
-                    <a href="/">
-                      <div className={style.navbarInner}>
-                        <IconButton className={style.iconBtn}>
-                          <ArrowBackIosNewIcon style={{ color: "inherit" }} />
-                        </IconButton>
-                        <img alt="back" style={{ width: 35 }} src={backBtn} />
-                      </div>
-                    </a>
-                  </div>
-                }
-                <div className={style.title}>
-                  Level {params.level} - Merge Sort
-                </div>
-                <Timer />
-              </div>
+              <Navbar />
+
               <div className={style.musicSheet}>
                 <Sheet />
               </div>
