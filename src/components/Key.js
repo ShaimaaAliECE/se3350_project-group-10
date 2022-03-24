@@ -10,6 +10,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "white",
     height: "100%",
     borderRight: "0",
+    borderBottom: 0,
+    borderTop: 0,
     width: "100%",
   },
   black: {
@@ -20,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     padding: 10,
     border: "none",
     zIndex: 2,
-    margin: "0px -18px",
+    margin: "0px -1.5%",
   },
 }));
 
@@ -108,7 +110,7 @@ export default view(function Key(props) {
       }
       onClick={handleClick}
     >
-      {note}
+      <div>{note}</div>
     </button>
   );
 });

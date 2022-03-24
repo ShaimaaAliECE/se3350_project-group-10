@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "row",
     justifyContent: "center",
     height: "100%",
-    backgroundColor: "rgba(0,0,0,0)",
+    backgroundColor: "white",
     maxWidth: "70%",
     minWidth: "50%",
   },
