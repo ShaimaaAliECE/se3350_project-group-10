@@ -1,12 +1,5 @@
 import state from "../store/Store";
 
-let rowSplit = 0;
-let rowMerge = -1;
-let prevSizeSplit = 0;
-let prevSizeMerge = 0;
-let tripleEqual = 0;
-let reachedDepth = 0;
-
 let x;
 
 function merge(left, right) {
@@ -22,26 +15,26 @@ function merge(left, right) {
   }
 
   //If the array has grown in size while merging
-  if ([...arr, ...left, ...right].length > prevSizeMerge) {
+  if ([...arr, ...left, ...right].length > state.prevSizeMerge) {
     //If we increase, for sure increase
-    rowMerge++;
+    state.rowMerge++;
 
     //If the merged array is smaller than the previous array
   } else if (
-    [...arr, ...left, ...right].length === prevSizeMerge ||
-    [...arr, ...left, ...right].length + 1 === prevSizeMerge
+    [...arr, ...left, ...right].length === state.prevSizeMerge ||
+    [...arr, ...left, ...right].length + 1 === state.prevSizeMerge
   ) {
   } else {
     let y = Math.floor(
       Math.log([...arr, ...left, ...right].length) / Math.log(2)
     );
 
-    rowMerge = rowMerge - y - 1;
+    state.rowMerge = state.rowMerge - y - 1;
   }
 
   let rowObj = {
     array: [...arr, ...left, ...right],
-    row: rowMerge,
+    row: state.rowMerge,
     type: "merge",
     zeroesEncountered: state.zeroesEncountered,
   };
@@ -49,7 +42,7 @@ function merge(left, right) {
   state.ans.push(rowObj);
 
   state.runnable = 0;
-  prevSizeMerge = [...arr, ...left, ...right].length;
+  state.prevSizeMerge = [...arr, ...left, ...right].length;
 
   return [...arr, ...left, ...right];
 }
@@ -57,34 +50,37 @@ function merge(left, right) {
 //SPLIT
 export function mergeSort(array) {
   //If the length of the array has shrunk since last check
-  if (array.length < prevSizeSplit) {
-    rowSplit++;
-    tripleEqual = 0;
+  if (array.length < state.prevSizeSplit) {
+    state.rowSplit++;
+    state.tripleEqual = 0;
     //If the array has grown and has split more than once (is not the original)
-  } else if (array.length > prevSizeSplit && rowSplit > 0) {
+  } else if (array.length > state.prevSizeSplit && state.rowSplit > 0) {
     //Should return 2 if given 4
-    x = Math.floor(Math.log(array.length) / Math.log(2));
-    if (rowSplit === state.depth && !state.runnable) {
-      x++;
-      reachedDepth = true;
+    state.x = Math.floor(Math.log(array.length) / Math.log(2));
+    if (state.rowSplit === state.depth && !state.runnable) {
+      state.x++;
+      state.reachedDepth = true;
     }
 
-    rowSplit = rowSplit - x;
+    state.rowSplit = state.rowSplit - state.x;
 
-    if (reachedDepth) {
-      x--;
+    if (state.reachedDepth) {
+      state.x--;
     }
 
-    tripleEqual = 0;
+    state.tripleEqual = 0;
     //If the array has been the same length 3 times >> Do this after even arrays work
   } else {
-    if (array.length === prevSizeSplit && !tripleEqual) {
-      tripleEqual = 1;
-    } else if (tripleEqual === array.length && array.length === prevSizeSplit) {
+    if (array.length === state.prevSizeSplit && !state.tripleEqual) {
+      state.tripleEqual = 1;
+    } else if (
+      state.tripleEqual === array.length &&
+      array.length === state.prevSizeSplit
+    ) {
       //Special case >>apend to current index and prev index at nearest 0
-      rowSplit--;
+      state.rowSplit--;
       //Append to row previous
-      tripleEqual = 0;
+      state.tripleEqual = 0;
     }
   }
 
@@ -99,7 +95,7 @@ export function mergeSort(array) {
 
   let rowObj = {
     array: [...array],
-    row: rowSplit,
+    row: state.rowSplit,
     type: "split",
     zeroesEncountered: state.zeroesEncountered,
   };
@@ -110,7 +106,7 @@ export function mergeSort(array) {
 
   // Base case or terminating case
 
-  prevSizeSplit = array.length;
+  state.prevSizeSplit = array.length;
 
   if (array.length < 2) {
     return array;
