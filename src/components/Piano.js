@@ -10,7 +10,8 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     height: "100%",
     backgroundColor: "rgba(0,0,0,0)",
-    width: "50%",
+    maxWidth: "70%",
+    minWidth: "50%",
   },
 }));
 

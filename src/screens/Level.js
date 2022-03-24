@@ -26,29 +26,18 @@ const useStyles = makeStyles((theme) => ({
   navbar: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "space-between",
     alignItems: "center",
     color: "white",
-    textAlign: "center",
-    fontSize: "30px",
     backgroundColor: "black",
     padding: "10px",
+    paddingRight: 20,
+    paddingLeft: 20,
   },
   title: {
-    flex: "2",
-    flexGrow: "15",
+    fontSize: 20,
   },
-  navbarBackBtn: {
-    image: backBtn,
-    flex: "1",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    backgroundColor: "black",
-    marginTop: "8px",
-    marginRight: "20px",
-    flexDirection: "row",
-    flexGrow: "1",
-  },
+  navbarBackBtn: {},
   musicSheet: {
     height: "50%",
     backgroundColor: "grey",
@@ -63,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "grey",
   },
   piano: {
-    backgroundColor: "pink",
+    backgroundColor: "black",
     flexGrow: 1,
     paddingBottom: 20,
     display: "flex",
@@ -110,20 +99,18 @@ function Level() {
               {state.loseGame === true ? <LoseScreen /> : null}
 
               <div className={style.navbar}>
-                {
-                  <div className={style.navbarBackBtn}>
-                    <a href="/">
-                      <img src={backBtn} />
-                    </a>
-                  </div>
-                }
+                <div className={style.navbarBackBtn}>
+                  <a href="/">
+                    <img src={backBtn} />
+                  </a>
+                </div>
+
                 <div className={style.title}>
                   Level {params.level} - Merge Sort
                 </div>
                 <Timer />
-                <div className={style.thirdBox}></div>
               </div>
-              <div className={style.musicSheet}>
+              <div className={style.musicSheet} level={level}>
                 <Sheet />
               </div>
               <div className={style.inputContainer}>

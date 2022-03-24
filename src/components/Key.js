@@ -10,27 +10,17 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "white",
     height: "100%",
     borderRight: "0",
-    flexGrow: 1,
-    // marginLeft: "-1%",
-    // maxWidth: "10%",
-    // width: 40,
-    // padding: 30,
-    // zIndex: 1,
-    // padding: "1%",
+    width: "100%",
   },
   black: {
-    display: "flex",
-    position: "relative",
     justifyContent: "center",
     backgroundColor: "black",
     color: "white",
-    maxWidth: "2%",
     height: "50%",
     padding: 10,
-    marginLeft: "-1%",
     border: "none",
-    // marginRight: "-1%",
-    zIndex: 20,
+    zIndex: 2,
+    margin: "0px -18px",
   },
 }));
 
@@ -118,7 +108,7 @@ export default view(function Key(props) {
       }
       onClick={handleClick}
     >
-      <> {note} </>
+      {note}
     </button>
   );
 });
