@@ -1,4 +1,5 @@
 import { store } from "@risingstack/react-easy-state";
+import { Navigate } from "react-router-dom";
 
 // Finds the first zero in an array
 // Also sets the maxMergeLen based on the largest indexOf(0)
@@ -117,37 +118,35 @@ function fillTheGaps(zeroesEncountered, type) {
 function handleLevel(lvl) {
   switch (lvl) {
     case 1: // Level 1
-      state.levelMax = 21; //1 --> 21 non inclusive upper bound
-      state.levelLength = 10;
-      state.isActive = true;
-      state.StopWatch();
+      setLevelStats(21, 10);
       break;
     case 2: // Level 2, Includes instructions only
-      state.levelMax = 21;
-      state.levelLength = 10;
-      state.isActive = true;
-      state.StopWatch();
+      setLevelStats(21, 10);
       break;
     case 3: // Level 3
-      state.levelMax = 21;
-      state.levelLength = 10;
-      state.isActive = true;
-      state.StopWatch();
+      setLevelStats(21, 10);
       break;
     case 4: // Level 4
-      state.levelMax = 51;
-      state.levelLength = 20;
-      state.isActive = true;
-      state.StopWatch();
+      setLevelStats(51, 20);
       break;
     case 5: // Level 5
-      state.levelMax = 101;
-      state.levelLength = 50;
-      state.isActive = true;
-      state.StopWatch();
+      setLevelStats(101, 50);
       break;
     default:
   }
+}
+
+function setLevelStats(max, len) {
+  // Level params
+  state.levelMax = max;
+  state.levelLength = len;
+
+  // Timer activation
+  state.isActive = true;
+  state.StopWatch();
+
+  // Timeout timer activation
+  state.Watchdog();
 }
 
 function chunk(array) {
@@ -248,6 +247,24 @@ function StopWatch() {
   return () => clearInterval(interval);
 }
 
+// timeout function
+function Watchdog() {
+  let interval = 0;
+
+  interval = setInterval(function () {
+    if (state.isActive) {
+      state.timeout++;
+    } else if (!state.isActive && state.timeout !== 0) {
+      clearInterval(interval);
+    }
+  }, 1000);
+  return () => clearInterval(interval);
+}
+
+function userActive() {
+  state.timeout = 0;
+}
+
 function resetStates() {
   state.lives = 3;
   state.level = 0;
@@ -273,6 +290,7 @@ function resetStates() {
   state.splits = [0];
   state.feedbackColor = "rgba(220,220,220, .6)";
   state.timer = 0;
+  state.timeout = 0;
   state.isActive = false;
   state.prevSizeSplit = 0;
   state.prevSizeMerge = 0;
@@ -307,6 +325,7 @@ const state = store({
   restartGame: true,
   feedbackColor: "rgba(220,220,220, .6)",
   timer: 0,
+  timeout: 0,
   isActive: false,
   rowSplit: 0,
   prevSizeSplit: 0,
@@ -329,6 +348,8 @@ const state = store({
   generateEmptyArr: () => generateEmptyArr(),
   handleLevel: (lvl) => handleLevel(lvl),
   StopWatch: () => StopWatch(),
+  Watchdog: () => Watchdog(),
+  userActive: () => userActive(),
 });
 
 export default state;

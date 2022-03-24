@@ -4,7 +4,7 @@ import InputContainer from "../components/InputContainer";
 import state from "../store/Store";
 import Sheet from "../components/Sheet";
 import PopUp from "../components/InstructionPopup";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams, useNavigate } from "react-router-dom";
 import LoseScreen from "../components/LoseScreen";
 import Timer from "../components/Timer";
 import { view } from "@risingstack/react-easy-state";
@@ -79,7 +79,14 @@ function Level() {
 
   state.level = level;
 
+  let navigate = useNavigate();
+
   useEffect(() => {
+    console.log("ping");
+    if (state.timeout > 300) {
+      console.log("GOING");
+      navigate("/", { replace: true });
+    }
     if (state.restartGame) {
       state.resetStates();
       state.handleLevel(level);
@@ -91,7 +98,7 @@ function Level() {
       state.initializeSheets();
       state.restartGame = false;
     }
-  }, [state.restartGame]);
+  }, [state.restartGame, state.timeout]);
 
   return (
     <>
