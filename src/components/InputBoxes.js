@@ -7,6 +7,8 @@ const useStyles = makeStyles((theme) => ({
   stylesContainerOuter: {
     display: "flex",
     flexDirection: "row",
+    // flexShrink: 1,
+    overflow: "hidden",
   },
 
   stylesContainerInner: {
@@ -15,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     color: "black",
     margin: 15,
+    // flexShrink: 1,
   },
   box: {
     display: "flex",

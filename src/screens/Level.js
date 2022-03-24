@@ -63,9 +63,12 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "grey",
   },
   piano: {
-    backgroundColor: "black",
+    backgroundColor: "pink",
     flexGrow: 1,
     paddingBottom: 20,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
 }));
 

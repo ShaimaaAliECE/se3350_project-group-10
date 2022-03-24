@@ -50,6 +50,8 @@ function Sheet() {
                     top: "50%",
                     left: "50%",
                     transform: " translate(-50%, -50%)",
+                    width: "100%",
+                    overflow: "scroll",
                   }}
                 >
                   <InputBoxes arrInnerObj={arrInnerObj} />

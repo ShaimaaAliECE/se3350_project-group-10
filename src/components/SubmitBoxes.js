@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     color: "black",
     margin: 15,
+    width: "100%",
   },
 }));
 

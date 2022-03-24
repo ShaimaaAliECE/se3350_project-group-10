@@ -9,14 +9,8 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "row",
     justifyContent: "center",
     height: "100%",
-    backgroundColor: "black",
-  },
-  whiteKey: {
-    padding: 10,
-  },
-  blackKey: {
-    backgroundColor: "back",
-    zIndex: 2,
+    backgroundColor: "rgba(0,0,0,0)",
+    width: "50%",
   },
 }));
 
@@ -44,9 +38,9 @@ function RenderKeys(x, notesArr) {
     //where x is the piano length
     for (let i = 0; i < x; i++) {
       arr.push(
-        <div style={{}} key={i}>
-          <Key index={i} totalNotes={x} note={i + 1} />
-        </div>
+        // <div style={{}} key={i}>
+        <Key index={i} totalNotes={x} note={i + 1} />
+        // </div>
       );
     }
   }
