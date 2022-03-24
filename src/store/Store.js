@@ -274,6 +274,12 @@ function resetStates() {
   state.feedbackColor = "rgba(220,220,220, .6)";
   state.timer = 0;
   state.isActive = false;
+  state.prevSizeSplit = 0;
+  state.prevSizeMerge = 0;
+  state.tripleEqual = 0;
+  state.reachedDepth = 0;
+  state.rowMerge = -1;
+  state.x = 0;
 }
 
 const state = store({
@@ -302,6 +308,13 @@ const state = store({
   feedbackColor: "rgba(220,220,220, .6)",
   timer: 0,
   isActive: false,
+  rowSplit: 0,
+  prevSizeSplit: 0,
+  prevSizeMerge: 0,
+  tripleEqual: 0,
+  reachedDepth: 0,
+  rowMerge: -1,
+  x: 0,
   depthInc: () => (state.runnable ? state.depth++ : state.depth),
   stepInc: () => state.step++,
   appendSheet: (array, row, flag) => appendSheet(array, row, flag),
