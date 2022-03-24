@@ -9,6 +9,7 @@ import anIcon from "../assets/line-chart.svg";
 import dp from "../assets/dp.svg";
 import l1 from "../assets/l1.svg";
 import Analytics from "./Analytics";
+import button from "../assets/anLink.svg";
 
 const useStyles = makeStyles((theme) => ({
   page: {
@@ -70,7 +71,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     height: "100%",
     width: "15%",
-    position: "fixed",
     top: 0,
     left: 0,
     flexDirection: "column",
@@ -135,16 +135,23 @@ const useStyles = makeStyles((theme) => ({
     
   },
 
-  anContainter: {
+  anContainer: {
     display: "flex",
     flexDirection: "column",
     marginTop: 25,
-    marginBottom: 25,
     width: "100%",
-    height: "60%",
+    height: "55%",
     backgroundColor: "#111111",
   },
 
+  anContainerInner: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    height: "90%",
+    width: "100%"
+
+  },
   anImg: {
     flex: 2,
     alignItems: "center",
@@ -167,13 +174,14 @@ const useStyles = makeStyles((theme) => ({
     flex: "3",
     flexGrow: "1",
   },
+
   textHighlight:{
     color:"white",
     textDecoration: "none",
     "&:hover": {
       color: "#38C6D9",
     },
-  }
+  },
 
 }));
 
@@ -234,10 +242,15 @@ function Admin() {
             <div className={style.text}>Hello,</div>
             <img src={dp} style={{height: "70%", width: "auto"}}></img>
         </div>
-        <div className={style.anContainter}>
-          <div className={style.text}>Analytics</div>
-          <img src={l1} style={{height: "35%", width: "auto", marginTop: 15}}></img>
-        </div>
+        <div className={style.anContainer}>
+              <div className={style.text}>Analytics</div>   
+              <div className={style.anContainerInner}>
+                  <img src={l1} style={{height: "40%", width: "auto", marginTop: 27}}></img>
+                  <Link to="/Analytics" style={{width:"70%"}} >
+                    <img src={button} style={{marginTop: 25, width: "100%"}}></img>
+                  </Link>    
+              </div> 
+          </div>
         </div>
         
       </div>

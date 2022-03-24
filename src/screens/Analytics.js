@@ -14,9 +14,10 @@ import l3 from "../assets/l3.svg";
 import l4 from "../assets/l4.svg";
 import l5 from "../assets/l5.svg";
 import prev from "../assets/leftBtn.svg";
-import next from "../assets/nextBtn.svg";
+import next from "../assets/rightBtn.svg";
+import history from "../assets/historyIcon.svg";
+import button from "../assets/histLink.svg";
 import SwipeableViews from 'react-swipeable-views';
-
 import zIndex from "@material-ui/core/styles/zIndex";
 import { CenterFocusStrong } from "@mui/icons-material";
 
@@ -72,8 +73,6 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: "column",
       backgroundColor: "#111111",
       float: "left",
-      
-      
      },
     
       firstBox: {
@@ -167,14 +166,23 @@ const useStyles = makeStyles((theme) => ({
         height: "40%",
       },
 
-      anContainter: {
+      anContainer: {
         display: "flex",
         flexDirection: "column",
         marginTop: 25,
-        marginBottom: 25,
         width: "100%",
-        height: "60%",
+        height: "55%",
         backgroundColor: "#111111",
+       
+      },
+
+      anContainerInner: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        height: "90%",
+        width: "100%"
+
       },
 
       text: {
@@ -191,16 +199,40 @@ const useStyles = makeStyles((theme) => ({
         height: "50%",
       },
 
-      
       arrowBtn: {
         backgroundImage: `url(${prev})`,
+        margin: "5px",
+        height: "63px",
+        width: "40px",
+        justifyContent:"flex-end",
+        top: "42%",
+        border: 0,
+        cursor: "pointer",
+        backgroundColor: "transparent",
+        padding: 0,
+        "&:hover": {
+          opacity: "60%",
+        },
+
+      },
+
+      arrowBtnR: {
+        backgroundImage: `url(${next})`,
         margin: "5px",
         height: "63px",
         width: "50px",
         justifyContent:"flex-end",
         top: "42%",
+        border: 0,
+        cursor: "pointer",
+        backgroundColor: "transparent",
+        padding: 0,
+        "&:hover": {
+          opacity: "60%",
+        },
       },
 
+      
       levelBar:{
         height:"80%",
         display: "flex",
@@ -283,23 +315,41 @@ function Analytics(){
             <div className={style.levelBox}>
                 <div className={style.text} style={{textAlign: "center", height: "10%"}}>Average Statistics</div>
                 <div className={style.levelBar}>
-                  <div className={style.arrowBtn}></div>
-                  <img src={l1} className={style.levelIcon}></img>
-                  <div className={style.arrowBtn}></div>
+                  <button className={style.arrowBtn}>
+                          {/* onClick={() => { */}
+                               {/* default state is Level 1. Set prev state */}
+                          {/* }} */}
+                  </button>
+
+                  {/* Icon for Level 1. The rest are already imported, just follow the same formatting. */}
+                  <img src={l1} className={style.levelIcon}></img> 
+                  
+                  <button className={style.arrowBtnR}>
+                          {/* onClick={() => { */}
+                               {/* default state is Level 1. Set next state */}
+                          {/* }} */}
+                  </button>
                 </div>
             </div>
             
         </div>
         <div className={style.container}>
+
           <div className={style.profile}>
               <div className={style.text}>Hello,</div>
               <img src={dp} style={{height: "70%", width: "auto"}}></img>
           </div>
-          <div className={style.anContainter}>
-            <div className={style.text}>Analytics</div>
+
+          <div className={style.anContainer}>
+              <div className={style.text}>History</div>   
+              <div className={style.anContainerInner}>
+                  <img src={history} style={{height: "50%", width: "auto", marginTop: 20}}></img>
+                  <Link to="/Admin" style={{width:"70%"}} >
+                    <img src={button} style={{marginTop: 20, width: "100%"}}></img>
+                  </Link>    
+              </div> 
           </div>
         </div>
-
     </div>
     </>
 
