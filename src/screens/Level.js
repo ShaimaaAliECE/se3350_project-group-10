@@ -123,7 +123,6 @@ function Level() {
                   Level {params.level} - Merge Sort
                 </div>
                 <Timer />
-                <div className={style.thirdBox}></div>
               </div>
               <div className={style.musicSheet}>
                 <Sheet />

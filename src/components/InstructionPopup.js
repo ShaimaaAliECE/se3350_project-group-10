@@ -53,6 +53,8 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Raleway",
     fontSize: "20px",
     borderRadius: 30,
+    color: "white",
+    "&:hover": { color: "#38c6d9" },
   },
 
   Drawer: {
