@@ -40,6 +40,11 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
   },
+  iconBtn: {
+    color: "white",
+    "&:hover": { color: "#38c6d9" },
+    paddingRight: 0,
+  },
   title: {
     fontSize: 20,
   },
@@ -106,8 +111,8 @@ function Level() {
                   <div>
                     <a href="/">
                       <div className={style.navbarInner}>
-                        <IconButton style={{ paddingRight: 0 }}>
-                          <ArrowBackIosNewIcon style={{ color: "#38c6d9" }} />
+                        <IconButton className={style.iconBtn}>
+                          <ArrowBackIosNewIcon style={{ color: "inherit" }} />
                         </IconButton>
                         <img alt="back" style={{ width: 35 }} src={backBtn} />
                       </div>
