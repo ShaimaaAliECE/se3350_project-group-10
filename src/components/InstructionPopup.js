@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     backgroundColor: "rgba(242,242,242,0.9)",
     margin: "auto",
+    color: "white",
   },
 
   content: {

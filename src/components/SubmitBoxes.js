@@ -13,11 +13,6 @@ import {
 } from "../assets/tones.js";
 
 const useStyles = makeStyles((theme) => ({
-  stylesContainerOuter: {
-    display: "flex",
-    flexDirection: "row",
-  },
-
   stylesContainerInner: {
     display: "flex",
     alignContent: "center",
@@ -177,12 +172,11 @@ function CreateMap(arrOuter) {
 
   const submitBox = {
     display: "flex",
-    width: 50,
-    height: 50,
-    flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
     color: "black",
+    width: 50,
+    height: 50,
     margin: 10,
     background: state.feedbackColor,
   };
@@ -225,81 +219,79 @@ function CreateMap(arrOuter) {
 
   return (
     <>
-      <div className={style.stylesContainerOuter}>
-        <div className={style.stylesContainerInner}>
-          {arrOuter.map((arrInner) => (
-            <div style={submitBox}>{arrInner === 0 ? "" : arrInner}</div>
-          ))}
-        </div>
-        <div style={{ display: "flex", padding: 10, flexDirection: "column" }}>
-          <Button
-            variant="contained"
-            onClick={() => {
-              handleRestartClick();
-            }}
-            disabled={state.gameOver || state.reseting}
-          >
-            RESET
-          </Button>
-          <br />
-          <Button
-            variant="contained"
-            onClick={() => {
-              handleFeedbackColor();
-              handleSubmitClick(handleGameOver);
-            }}
-            disabled={state.gameOver || state.reseting}
-          >
-            SUBMIT
-          </Button>
-        </div>
-
-        <Modal
-          open={openModal}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
+      <div className={style.stylesContainerInner}>
+        {arrOuter.map((arrInner) => (
+          <div style={submitBox}>{arrInner === 0 ? "" : arrInner}</div>
+        ))}
+      </div>
+      <div style={{ display: "flex", padding: 10, flexDirection: "column" }}>
+        <Button
+          variant="contained"
+          onClick={() => {
+            handleRestartClick();
+          }}
+          disabled={state.gameOver || state.reseting}
         >
-          <div
+          RESET
+        </Button>
+        <br />
+        <Button
+          variant="contained"
+          onClick={() => {
+            handleFeedbackColor();
+            handleSubmitClick(handleGameOver);
+          }}
+          disabled={state.gameOver || state.reseting}
+        >
+          SUBMIT
+        </Button>
+      </div>
+
+      <Modal
+        open={openModal}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100%",
+            flexDirection: "column",
+          }}
+        >
+          <p
             style={{
+              backgroundColor: "white",
+              width: "25%",
+              height: "25%",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              height: "100%",
-              flexDirection: "column",
             }}
           >
-            <p
-              style={{
-                backgroundColor: "white",
-                width: "25%",
-                height: "25%",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              You have Completed Level {state.level} in {state.timer} time!
-            </p>
-            <a
-              href="/"
-              style={{
-                backgroundColor: "black",
-                paddingLeft: 30,
-                paddingTop: 10,
-                paddingBottom: 10,
-                paddingRight: 30,
-                borderRadius: 20,
-                textAlign: "center",
-                color: "white",
-                fontFamily: "Raleway",
-                textDecoration: "none",
-              }}
-            >
-              Home
-            </a>
-          </div>
-        </Modal>
-      </div>
+            You have Completed Level {state.level} in {state.timer} time!
+          </p>
+          <a
+            href="/"
+            style={{
+              backgroundColor: "black",
+              paddingLeft: 30,
+              paddingTop: 10,
+              paddingBottom: 10,
+              paddingRight: 30,
+              borderRadius: 20,
+              textAlign: "center",
+              color: "white",
+              fontFamily: "Raleway",
+              textDecoration: "none",
+            }}
+          >
+            Home
+          </a>
+        </div>
+      </Modal>
     </>
   );
 }

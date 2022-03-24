@@ -7,8 +7,8 @@ const useStyles = makeStyles((theme) => ({
   stylesContainerOuter: {
     display: "flex",
     flexDirection: "row",
-    // flexShrink: 1,
-    overflow: "hidden",
+    overflow: "auto",
+    justifyContent: "center",
   },
 
   stylesContainerInner: {
@@ -17,25 +17,24 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     color: "black",
     margin: 15,
-    // flexShrink: 1,
+
+    backgroundColor: "white",
   },
   box: {
     display: "flex",
     width: 50,
     height: 50,
-    flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
     color: "black",
-    margin: 10,
+    margin: 2,
     background: "rgba(220,220,220, 1)",
   },
 }));
 
 const stylesMainInner = {
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
+  display: "inline-block",
+  width: "100%",
 };
 
 export function CreateMap(arrOuter, row) {

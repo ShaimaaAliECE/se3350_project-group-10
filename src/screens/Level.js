@@ -12,8 +12,9 @@ import { Link } from "react-router-dom";
 import backBtn from "../assets/back.svg";
 import { mergeSort } from "../algorithms/mergesort";
 import { useEffect } from "react";
+import { Lives } from "../components/Lives";
+import { IconButton } from "@mui/material";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import { IconButton } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -48,7 +49,6 @@ const useStyles = makeStyles((theme) => ({
   title: {
     fontSize: 20,
   },
-  navbarBackBtn: {},
   musicSheet: {
     height: "50%",
     display: "flex",
@@ -124,7 +124,6 @@ function Level() {
                   Level {params.level} - Merge Sort
                 </div>
                 <Timer />
-                <div className={style.thirdBox}></div>
               </div>
               <div className={style.musicSheet} level={level}>
                 <Sheet />
@@ -134,6 +133,9 @@ function Level() {
               </div>
               <div className={style.piano}>
                 <Piano level={level} />
+                <div style={{}}>
+                  <Lives />
+                </div>
               </div>
             </div>
           );
