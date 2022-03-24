@@ -6,12 +6,14 @@ import Sheet from "../components/Sheet";
 import PopUp from "../components/InstructionPopup";
 import { useParams } from "react-router-dom";
 import LoseScreen from "../components/LoseScreen";
-import Timer from "../components/Timer"; 
+import Timer from "../components/Timer";
 import { view } from "@risingstack/react-easy-state";
 import { Link } from "react-router-dom";
 import backBtn from "../assets/back.svg";
 import { mergeSort } from "../algorithms/mergesort";
 import { useEffect } from "react";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import { IconButton } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -20,38 +22,29 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     display: "flex",
     flexDirection: "column",
-    backgroundColor: "grey",
-    zindex: 10,
+    backgroundColor: "#111111",
   },
   navbar: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "space-between",
     alignItems: "center",
     color: "white",
-    textAlign: "center",
-    fontSize: "30px",
     backgroundColor: "black",
     padding: "10px",
+    paddingRight: 20,
+    paddingLeft: 20,
+  },
+  navbarInner: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
   title: {
-    flex: "2",
-    flexGrow: "15",
-  },
-  navbarBackBtn: {
-    image: backBtn,
-    flex: "1",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    backgroundColor: "black",
-    marginTop: "8px",
-    marginRight: "20px",
-    flexDirection: "row",
-    flexGrow: "1",
+    fontSize: 20,
   },
   musicSheet: {
     height: "50%",
-    backgroundColor: "grey",
     display: "flex",
     overflow: "auto",
     width: "95%",
@@ -59,19 +52,21 @@ const useStyles = makeStyles((theme) => ({
     marginRight: "auto",
     paddingTop: 20,
   },
-  inputContainer: {
-    backgroundColor: "grey",
-  },
+  inputContainer: {},
   piano: {
     backgroundColor: "black",
     flexGrow: 1,
     paddingBottom: 20,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
 }));
 
 function Level() {
   const style = useStyles();
   let params = useParams();
+
   let level = parseInt(params.level);
   localStorage.setItem("level", level);
   localStorage.setItem("algo", "merge_sort");
@@ -108,16 +103,21 @@ function Level() {
 
               <div className={style.navbar}>
                 {
-                  <div className={style.navbarBackBtn}>
+                  <div>
                     <a href="/">
-                      <img src={backBtn} />
+                      <div className={style.navbarInner}>
+                        <IconButton style={{ paddingRight: 0 }}>
+                          <ArrowBackIosNewIcon style={{ color: "#38c6d9" }} />
+                        </IconButton>
+                        <img alt="back" style={{ width: 35 }} src={backBtn} />
+                      </div>
                     </a>
                   </div>
                 }
                 <div className={style.title}>
                   Level {params.level} - Merge Sort
                 </div>
-                <Timer/>
+                <Timer />
                 <div className={style.thirdBox}></div>
               </div>
               <div className={style.musicSheet}>
