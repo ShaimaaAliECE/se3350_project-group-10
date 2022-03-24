@@ -12,6 +12,8 @@ import { Link } from "react-router-dom";
 import backBtn from "../assets/back.svg";
 import { mergeSort } from "../algorithms/mergesort";
 import { useEffect } from "react";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import { IconButton } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -20,8 +22,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     display: "flex",
     flexDirection: "column",
-    backgroundColor: "grey",
-    zindex: 10,
+    backgroundColor: "#111111",
   },
   navbar: {
     display: "flex",
@@ -34,13 +35,22 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: 20,
     paddingLeft: 20,
   },
+  navbarInner: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  iconBtn: {
+    color: "white",
+    "&:hover": { color: "#38c6d9" },
+    paddingRight: 0,
+  },
   title: {
     fontSize: 20,
   },
   navbarBackBtn: {},
   musicSheet: {
     height: "50%",
-    backgroundColor: "grey",
     display: "flex",
     overflow: "auto",
     width: "95%",
@@ -48,9 +58,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: "auto",
     paddingTop: 20,
   },
-  inputContainer: {
-    backgroundColor: "grey",
-  },
+  inputContainer: {},
   piano: {
     backgroundColor: "black",
     flexGrow: 1,
@@ -64,6 +72,7 @@ const useStyles = makeStyles((theme) => ({
 function Level() {
   const style = useStyles();
   let params = useParams();
+
   let level = parseInt(params.level);
   localStorage.setItem("level", level);
   localStorage.setItem("algo", "merge_sort");
@@ -99,16 +108,23 @@ function Level() {
               {state.loseGame === true ? <LoseScreen /> : null}
 
               <div className={style.navbar}>
-                <div className={style.navbarBackBtn}>
-                  <a href="/">
-                    <img src={backBtn} />
-                  </a>
-                </div>
-
+                {
+                  <div>
+                    <a href="/">
+                      <div className={style.navbarInner}>
+                        <IconButton className={style.iconBtn}>
+                          <ArrowBackIosNewIcon style={{ color: "inherit" }} />
+                        </IconButton>
+                        <img alt="back" style={{ width: 35 }} src={backBtn} />
+                      </div>
+                    </a>
+                  </div>
+                }
                 <div className={style.title}>
                   Level {params.level} - Merge Sort
                 </div>
                 <Timer />
+                <div className={style.thirdBox}></div>
               </div>
               <div className={style.musicSheet} level={level}>
                 <Sheet />

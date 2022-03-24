@@ -3,6 +3,9 @@ import { Drawer, makeStyles } from "@material-ui/core";
 import levelone from "../assets/level-one.json";
 import state from "../store/Store";
 import { view } from "@risingstack/react-easy-state";
+import { IconButton } from "@material-ui/core";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -19,8 +22,9 @@ const useStyles = makeStyles((theme) => ({
 
   detailsContainer: {
     padding: 20,
+    paddingLeft: 0,
     display: "flex",
-    flexDirection: "column",
+    flexDirection: "row",
     alignItems: "center",
     backgroundColor: "rgba(242,242,242,0.9)",
     margin: "auto",
@@ -41,8 +45,8 @@ const useStyles = makeStyles((theme) => ({
 
   buttonDrawer: {
     position: "absolute",
-    left: "1%",
-    bottom: "23%",
+    right: "0%",
+    top: "50%",
   },
 
   showButton: {
@@ -60,21 +64,21 @@ const useStyles = makeStyles((theme) => ({
 function InstructionPopup() {
   const classes = useStyles();
 
-  const [drawer, setDrawer] = useState(false);
+  const [drawer, setDrawer] = useState(true);
 
   return (
     <>
       <div className={classes.buttonDrawer}>
         <>
-          <button
-            className={classes.showButton} // show or hide button text
+          <IconButton
+            className={classes.showButton}
             onClick={() => {
               setDrawer(!drawer);
             }}
           >
-            {" "}
-            {drawer ? "Hide Instructions" : "Show Instructions"}
-          </button>
+            <ArrowBackIosNewIcon />
+          </IconButton>
+
           <Drawer //drawer component
             variant="persistent"
             anchor={"right"}
@@ -85,6 +89,14 @@ function InstructionPopup() {
             }}
           >
             <div className={classes.detailsContainer}>
+              <IconButton
+                onClick={() => {
+                  setDrawer(!drawer);
+                }}
+              >
+                <ArrowForwardIosIcon />
+              </IconButton>
+
               <div className={classes.content}>
                 <link
                   rel="stylesheet"
