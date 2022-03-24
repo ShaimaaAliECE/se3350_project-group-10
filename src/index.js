@@ -4,6 +4,9 @@ import "./index.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./screens/Home.js";
 import Level from "./screens/Level.js";
+import Admin from "./screens/Admin.js";
+import Analytics from "./screens/Analytics.js";
+import Login from "./screens/Login.js";
 import { initializeApp } from "firebase/app";
 
 //Need env file set up for this to work
@@ -25,6 +28,9 @@ ReactDOM.render(
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/level_:level" element={<Level />} />
+      <Route path="/admin" element={<Admin />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/analytics" element={<Analytics />} />
     </Routes>
   </BrowserRouter>,
   document.getElementById("root")

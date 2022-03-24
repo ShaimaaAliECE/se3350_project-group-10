@@ -90,6 +90,24 @@ const useStyles = makeStyles((theme) => ({
       color: "#242424",
     },
   },
+  navbar: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    backgroundColor: "black",
+    color: "white",
+    textAlign: "center",
+    fontSize: "25px",
+    padding: "10px",
+  },
+  login: {
+    fontFamily: "Raleway",
+    color: "white",
+    "&:hover": {
+      cursor: "pointer",
+    },
+  },
   link: {
     textDecoration: "none",
   },
