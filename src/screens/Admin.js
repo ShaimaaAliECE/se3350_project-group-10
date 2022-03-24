@@ -8,8 +8,8 @@ import homeIcon from "../assets/home.svg";
 import anIcon from "../assets/line-chart.svg";
 import dp from "../assets/dp.svg";
 import l1 from "../assets/l1.svg";
-import Analytics from "./Analytics";
 import button from "../assets/anLink.svg";
+import Navbar from "../components/NavBar";
 
 const useStyles = makeStyles((theme) => ({
   page: {
@@ -22,21 +22,20 @@ const useStyles = makeStyles((theme) => ({
     zindex: -10,
   },
 
-  container:{
+  container: {
     display: "flex",
     flexDirection: "column",
     height: "94%",
     width: "20%",
     marginTop: 25,
     marginRight: 25,
-    
   },
 
   mainContainer: {
     display: "flex",
     width: "65%",
     height: "94%",
-},
+  },
   navbar: {
     display: "flex",
     flexDirection: "row",
@@ -121,7 +120,7 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     width: "100%",
     margin: 25,
-    overflow: "auto"
+    overflow: "auto",
   },
 
   profile: {
@@ -132,7 +131,6 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "25px",
     width: "100%",
     height: "40%",
-    
   },
 
   anContainer: {
@@ -149,8 +147,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
     height: "90%",
-    width: "100%"
-
+    width: "100%",
   },
   anImg: {
     flex: 2,
@@ -158,7 +155,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     height: "100%",
     marginLeft: 50,
-    marginTop: 30
+    marginTop: 30,
   },
 
   text: {
@@ -175,14 +172,13 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: "1",
   },
 
-  textHighlight:{
-    color:"white",
+  textHighlight: {
+    color: "white",
     textDecoration: "none",
     "&:hover": {
       color: "#38C6D9",
     },
   },
-
 }));
 
 function Admin() {
@@ -190,30 +186,23 @@ function Admin() {
   let params = useParams();
   return (
     <>
-    <div className={style.navbar}>
-          {
-            <div className={style.navbarBackBtn}>
-              <Link to="/">
-                <img src={backBtn} />
-              </Link>
-            </div>
-          }
-          <div className={style.title}>Dashboard</div>
-          <div className={style.thirdBox}></div>
-    </div>
-      <div className={style.page}>
-        
-        <div className={style.sideBar}>
+      <Navbar />
 
+      <div className={style.page}>
+        <div className={style.sideBar}>
           <div className={style.firstBox}></div>
 
           <div className={style.history}>
-            <Link to="/Admin" className={style.textHighlight} style={{color:"#38C6D9", fontWeight: "bold"}}>
+            <Link
+              to="/Admin"
+              className={style.textHighlight}
+              style={{ color: "#38C6D9", fontWeight: "bold" }}
+            >
               <div className={style.button}>
-                  <div className={style.icon}>
+                <div className={style.icon}>
                   <img src={homeIcon}></img>
-                  </div>
-                    History
+                </div>
+                History
               </div>
             </Link>
           </div>
@@ -223,36 +212,41 @@ function Admin() {
               <div className={style.button}>
                 <div className={style.icon}>
                   <img src={anIcon}></img>
-                  </div>
-                    Analytics
-                  </div>
+                </div>
+                Analytics
+              </div>
             </Link>
           </div>
 
           <div style={{ flex: "4", flexGrow: "10" }}></div>
-          </div>
+        </div>
 
         <div className={style.mainContainer}>
           <div className={style.dataBox}>
-              <div className={style.text}>Logged Data</div>
-          </div>  
-        </div>
-        <div className={style.container}>
-        <div className={style.profile}>
-            <div className={style.text}>Hello,</div>
-            <img src={dp} style={{height: "70%", width: "auto"}}></img>
-        </div>
-        <div className={style.anContainer}>
-              <div className={style.text}>Analytics</div>   
-              <div className={style.anContainerInner}>
-                  <img src={l1} style={{height: "40%", width: "auto", marginTop: 27}}></img>
-                  <Link to="/Analytics" style={{width:"70%"}} >
-                    <img src={button} style={{marginTop: 25, width: "100%"}}></img>
-                  </Link>    
-              </div> 
+            <div className={style.text}>Logged Data</div>
           </div>
         </div>
-        
+        <div className={style.container}>
+          <div className={style.profile}>
+            <div className={style.text}>Hello,</div>
+            <img src={dp} style={{ height: "70%", width: "auto" }}></img>
+          </div>
+          <div className={style.anContainer}>
+            <div className={style.text}>Analytics</div>
+            <div className={style.anContainerInner}>
+              <img
+                src={l1}
+                style={{ height: "40%", width: "auto", marginTop: 27 }}
+              ></img>
+              <Link to="/Analytics" style={{ width: "70%" }}>
+                <img
+                  src={button}
+                  style={{ marginTop: 25, width: "100%" }}
+                ></img>
+              </Link>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
