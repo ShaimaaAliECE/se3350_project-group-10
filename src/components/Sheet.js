@@ -31,7 +31,9 @@ const useStyles = makeStyles(() => ({
 function Sheet() {
   const styles = useStyles();
   let level = useParams().level;
-  let arr = [...state.sheet];
+
+  let arr = [state.sheet];
+
   return (
     <div
       className={styles.container}
@@ -39,6 +41,7 @@ function Sheet() {
     >
       <div className={styles.stylesContainerInner}>
         {arr.map(function (arrObj) {
+          console.log(arrObj);
           return arrObj.map(function (arrInnerObj) {
             return (
               <div

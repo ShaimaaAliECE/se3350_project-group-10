@@ -86,8 +86,8 @@ export function handleSubmitClick(handleGameOver) {
     let row = state.ans[state.step].row + state.depth;
     let ans = state.ans[state.step].array[state.mergePointer];
     tempArr = [
-      ...state.sheet[0][row].array[
-        state.firstZeroFinder2D([...state.sheet[0][row].array])
+      ...state.sheet[row].array[
+        state.firstZeroFinder2D([...state.sheet[row].array])
       ],
     ];
     //if their input is correct append it, set isCorrect = true

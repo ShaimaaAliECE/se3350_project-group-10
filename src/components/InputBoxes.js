@@ -71,8 +71,8 @@ export function CreateMap(arrOuter, row, level) {
 
   if (stepRow === row) {
     if (type === "merge") {
-      index = state.firstZeroFinder2D([...state.sheet[0][row].array]);
-      mergeInd = state.sheet[0][row].array[index].indexOf(0);
+      index = state.firstZeroFinder2D([...state.sheet[row].array]);
+      mergeInd = state.sheet[row].array[index].indexOf(0);
     } else {
       index = state.firstZeroFinder({ array: [...arrOuter] });
     }

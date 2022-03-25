@@ -89,7 +89,7 @@ function Level() {
         ...state.random(state.levelMin, state.levelMax, state.levelLength),
       ]);
       state.generateEmptyArr();
-      state.initializeSplit();
+      // state.initializeSplit();
       state.initializeSheets();
       state.restartGame = false;
     }
