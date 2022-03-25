@@ -113,9 +113,7 @@ function Level() {
 
               {/* Lose Screen Popup Section */}
               {state.loseGame === true ? <LoseScreen /> : null}
-
               <Navbar />
-
               <div className={style.musicSheet}>
                 <Sheet />
               </div>
@@ -123,10 +121,18 @@ function Level() {
                 <InputContainer />
               </div>
               <div className={style.piano}>
+                {state.level != 1 ? (
+                  <div
+                    style={{
+                      position: "absolute",
+                      left: 10,
+                      top: "70%",
+                    }}
+                  >
+                    <Lives />
+                  </div>
+                ) : null}
                 <Piano level={level} />
-                {/* <div style={{}}>
-                  <Lives />
-                </div> */}
               </div>
             </div>
           );
