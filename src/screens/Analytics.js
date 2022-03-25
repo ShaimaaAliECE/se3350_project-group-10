@@ -23,6 +23,7 @@ import { CenterFocusStrong } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
+import { FetchAllLevels } from "../firebase/functions";
 
 const useStyles = makeStyles((theme) => ({
   page: {
@@ -255,6 +256,7 @@ function Analytics() {
   let params = useParams();
   let navigate = useNavigate();
   const [levelState, setLevelState] = useState(1);
+
   let levelNums = [l1, l2, l3, l4, l5];
   let isLoggedIn = localStorage.getItem("isLoggedIn");
 

@@ -11,6 +11,7 @@ import l1 from "../assets/l1.svg";
 import button from "../assets/anLink.svg";
 import Navbar from "../components/NavBar";
 import { useState } from "react";
+import FetchLevel, { FetchAllLevels } from "../firebase/functions";
 
 const useStyles = makeStyles((theme) => ({
   page: {
@@ -180,7 +181,37 @@ const useStyles = makeStyles((theme) => ({
       color: "#38C6D9",
     },
   },
+  data: {
+    color: "white",
+  },
 }));
+
+function RenderTable(values) {
+  let count = 0;
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      <div style={{ display: "flex", flexDirection: "row" }}>
+        <h1>Level</h1>
+        <h1>Time</h1>
+        <h1>Attemps</h1>
+        <h1>Lives</h1>
+      </div>
+      {values.map((x) => {
+        count++;
+        return (
+          <div style={{ display: "flex", flexDirection: "row" }}>
+            {count}
+            {x.map((y) => {
+              console.log(y.time);
+              return <div>{y.time}</div>;
+            })}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
 
 function Admin() {
   const style = useStyles();
@@ -188,6 +219,8 @@ function Admin() {
   let navigate = useNavigate();
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { data, loading, error } = FetchAllLevels("merge_sort", 5);
+
   useEffect(() => {
     setIsLoggedIn(localStorage.getItem("isLoggedIn"));
   }, []);
@@ -234,6 +267,9 @@ function Admin() {
         <div className={style.mainContainer}>
           <div className={style.dataBox}>
             <div className={style.text}>Logged Data</div>
+            <div className={style.data}>
+              {loading ? null : RenderTable(data)}
+            </div>
           </div>
         </div>
         <div className={style.container}>

@@ -30,6 +30,7 @@ export default function FetchLevel(algo, lvl) {
         setLoading(true);
         const data = [];
         const querySnapshot = await getDocs(collection(db, query));
+
         querySnapshot.forEach((doc) => {
           data.push(doc.data());
         });
@@ -80,6 +81,37 @@ export function GetAverages(algo, lvl) {
       }
     })();
   }, [algo, lvl]);
+
+  return { data, loading, error };
+}
+
+//Fetch all level stats
+export function FetchAllLevels(algo, lvls) {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  useEffect(() => {
+    (async function () {
+      try {
+        setLoading(true);
+        const data = [];
+        for (let i = 0; i < lvls; i++) {
+          let query = algo + "_" + (i + 1);
+          let temp = [];
+          const querySnapshot = await getDocs(collection(db, query));
+          querySnapshot.forEach((doc) => {
+            temp.push(doc.data());
+          });
+          data.push(temp);
+        }
+        setData(data);
+      } catch (e) {
+        setError(e);
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, [algo, lvls]);
 
   return { data, loading, error };
 }
