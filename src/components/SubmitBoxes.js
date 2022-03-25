@@ -4,6 +4,7 @@ import state from "../store/Store";
 import { view } from "@risingstack/react-easy-state";
 import { Button } from "@material-ui/core";
 import { Modal } from "@material-ui/core";
+import "../submitBtnAnim.scss";
 
 import {
   playCorrectSound,
@@ -124,9 +125,6 @@ export function handleSubmitClick(handleGameOver) {
       handleGameOver();
       state.isActive = false;
     } else {
-      //Reset
-      state.reseting = true;
-
       //Fills in necessary x's
       state.fillTheGaps(
         state.ans[state.step - 1].zeroesEncountered,
@@ -143,7 +141,7 @@ export function handleSubmitClick(handleGameOver) {
   } else {
     // if incorrect, minus 1 life, play incorrect sound
     state.lives--;
-    state.reseting = true;
+
     setTimeout(handleRestartClick, 1000);
     playIncorrectSound();
     // remove life visually
@@ -227,22 +225,22 @@ function CreateMap(arrOuter) {
       </div>
       <div style={{ display: "flex", padding: 10, flexDirection: "column" }}>
         <Button
+          class="btn btn-primary btn-ghost btn-shine"
           variant="contained"
           onClick={() => {
             handleRestartClick();
           }}
-          disabled={state.gameOver || state.reseting}
         >
           RESET
         </Button>
         <br />
         <Button
+          class="btn btn-primary btn-ghost btn-shine"
           variant="contained"
           onClick={() => {
             handleFeedbackColor();
             handleSubmitClick(handleGameOver);
           }}
-          disabled={state.gameOver || state.reseting}
         >
           SUBMIT
         </Button>
