@@ -1,15 +1,20 @@
 import { store } from "@risingstack/react-easy-state";
-import { Navigate } from "react-router-dom";
 
 // Finds the first zero in an array
 // Also sets the maxMergeLen based on the largest indexOf(0)
 function firstZeroFinder(arr, type = "split") {
   let temp = [];
-  for (let i in arr.array) {
-    if (arr.array[i][0] === 0) {
+
+  console.log(arr);
+  console.log(arr.array);
+  console.log(arr.array[0]);
+  console.log(arr.array[0][0]);
+  for (let i in arr) {
+    if (arr[i][0] === 0) {
       if (type === "merge" && state.maxMergLen < getLengths(temp)) {
         state.maxMergLen = getLengths(temp);
       }
+      console.log("dsds");
       return i;
     }
     temp.push(arr.array[i]);
@@ -130,7 +135,7 @@ function handleLevel(lvl) {
       setLevelStats(51, 20);
       break;
     case 5: // Level 5
-      setLevelStats(101, 50); //101 50
+      setLevelStats(101, 10); //101 50
       break;
     default:
   }
