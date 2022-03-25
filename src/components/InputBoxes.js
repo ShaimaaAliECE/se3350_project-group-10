@@ -71,18 +71,20 @@ export function CreateMap(arrOuter, row, level) {
 
   if (stepRow === row) {
     if (type === "merge") {
-      index = state.firstZeroFinder2D([...state.sheet[row].array]);
-      mergeInd = state.sheet[row].array[index].indexOf(0);
+      index = state.firstZeroFinder2D([...state.sheet[0][row].array]);
+      mergeInd = state.sheet[0][row].array[index].indexOf(0);
     } else {
       index = state.firstZeroFinder({ array: [...arrOuter] });
     }
   }
 
+  console.log("arrayOuter ", arrOuter);
   return (
     <div className={style.stylesContainerOuter}>
       {arrOuter.map(function (arrInner) {
         i++;
         j = -1;
+        console.log(arrOuter, arrInner);
         return (
           <div className={style.stylesContainerInner}>
             {arrInner.map(function (arrObj) {
@@ -114,6 +116,7 @@ export function CreateMap(arrOuter, row, level) {
 function InputBoxes(props) {
   let arr = props.arrInnerObj.array;
   let row = props.arrInnerObj.row;
+  console.log("MAPPING", arr, row);
   let level = useParams().level;
   //no more chunk, change to arr
   return (

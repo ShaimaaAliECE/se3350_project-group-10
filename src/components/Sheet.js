@@ -32,7 +32,7 @@ function Sheet() {
   const styles = useStyles();
   let level = useParams().level;
 
-  let arr = [state.sheet];
+  let arr = [...state.sheet];
 
   return (
     <div
@@ -43,6 +43,7 @@ function Sheet() {
         {arr.map(function (arrObj) {
           console.log(arrObj);
           return arrObj.map(function (arrInnerObj) {
+            console.log(arrInnerObj);
             return (
               <div
                 style={{

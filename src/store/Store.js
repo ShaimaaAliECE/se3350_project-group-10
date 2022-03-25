@@ -5,16 +5,11 @@ import { store } from "@risingstack/react-easy-state";
 function firstZeroFinder(arr, type = "split") {
   let temp = [];
 
-  console.log(arr);
-  console.log(arr.array);
-  console.log(arr.array[0]);
-  console.log(arr.array[0][0]);
   for (let i in arr) {
     if (arr[i][0] === 0) {
       if (type === "merge" && state.maxMergLen < getLengths(temp)) {
         state.maxMergLen = getLengths(temp);
       }
-      console.log("dsds");
       return i;
     }
     temp.push(arr.array[i]);
@@ -218,43 +213,48 @@ function zeroIfy(arr) {
   return arr;
 }
 
-function sheetEndsFixer() {
+function sheetEndsFixer(arr) {
   //Fix split ends
 
-  while (
-    state.sheet[state.depth - 1].array.length < state.ans[0].array.length
-  ) {
-    state.sheet[state.depth - 1].array.push([0]);
+  while (arr[state.depth - 1].array.length < state.ans[0].array.length) {
+    arr[state.depth - 1].array.push([0]);
   }
-  console.log("here");
   //Fix merge ends
-  while (
-    state.sheet[state.depth].array.length <
-    state.ans[0].array.length / 2
-  ) {
-    state.sheet[state.depth].array.push([0, 0]);
+  while (arr[state.depth].array.length < state.ans[0].array.length / 2) {
+    arr[state.depth].array.push([0, 0]);
   }
 }
 
 //Changed ther row to i + depth
 function initializeSheets() {
-  console.log(state.ans);
+  let sheet = [state.sheet];
+  console.log(state.ans[0].array);
+
   //Initialize sheet array
-  for (let i = 0; i < state.depth * 2 - 1; i++) {
-    state.sheet.push({ array: [], row: i });
+  for (let i = 1; i < state.depth * 2 - 1; i++) {
+    sheet.push({ array: [], row: i });
   }
 
-  for (let i = 0; i < state.ans.length; i++) {
+  sheet[state.ans[0].row] = { array: state.ans[0].array, row: 0 };
+
+  console.log(sheet);
+
+  for (let i = 1; i < state.ans.length; i++) {
+    console.log(sheet);
     if (state.ans[i].type == "split") {
-      state.sheet[state.ans[i].row].array.push(zeroIfy(state.ans[i].array));
+      console.log(state.ans[i].row);
+      sheet[state.ans[i].row].array.push(zeroIfy(state.ans[i].array));
     } else {
-      state.sheet[state.ans[i].row + state.depth].array.push(
+      sheet[state.ans[i].row + state.depth].array.push(
         zeroIfy(state.ans[i].array)
       );
     }
   }
 
-  sheetEndsFixer();
+  sheetEndsFixer(sheet);
+
+  console.log(sheet);
+  state.sheet.push(sheet);
 
   // let depth = state.depth;
   // let sheetSplit = [];
