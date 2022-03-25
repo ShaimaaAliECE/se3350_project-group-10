@@ -20,6 +20,10 @@ import button from "../assets/histLink.svg";
 import Navbar from "../components/NavBar";
 import zIndex from "@material-ui/core/styles/zIndex";
 import { CenterFocusStrong } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useState } from "react";
+import { FetchAllLevels, GetAverages } from "../firebase/functions";
 
 const useStyles = makeStyles((theme) => ({
   page: {
@@ -245,16 +249,34 @@ const useStyles = makeStyles((theme) => ({
       fontWeight: "bold",
     },
   },
+  statsText: {
+    display: "flex",
+    justifyContent: "center",
+    marginTop: "50%",
+    color: "white",
+    fontFamily: "Raleway",
+    fontSize: 60,
+  },
 }));
 
 function Analytics() {
   const style = useStyles();
   let params = useParams();
+  let navigate = useNavigate();
+  const [levelState, setLevelState] = useState(1);
+
+  let levelNums = [l1, l2, l3, l4, l5];
+  let isLoggedIn = localStorage.getItem("isLoggedIn");
+
+  const { data, loading, error } = GetAverages("merge_sort", levelState);
+
+  if (!isLoggedIn) {
+    navigate("/");
+  }
 
   return (
     <>
-      <Navbar />
-
+      <Navbar admin={true} />
       <div className={style.page}>
         <div className={style.sideBar}>
           <div className={style.firstBox}></div>
@@ -290,13 +312,22 @@ function Analytics() {
 
         <div className={style.mainContainer}>
           <div className={style.box}>
-            <div className={style.text}>Time Spent</div>
+            <div className={style.text}>Time Spent (sec)</div>
+            {!loading ? (
+              <div className={style.statsText}> {data?.time}</div>
+            ) : null}
           </div>
           <div className={style.box}>
             <div className={style.text}>Lives Left</div>
+            {!loading ? (
+              <div className={style.statsText}>{data?.livesLeft}</div>
+            ) : null}
           </div>
           <div className={style.box}>
             <div className={style.text}>Attempts</div>
+            {!loading ? (
+              <div className={style.statsText}>{data?.attempts}</div>
+            ) : null}
           </div>
           <div className={style.levelBox}>
             <div
@@ -306,20 +337,25 @@ function Analytics() {
               Average Statistics
             </div>
             <div className={style.levelBar}>
-              <button className={style.arrowBtn}>
-                {/* onClick={() => { */}
-                {/* default state is Level 1. Set prev state */}
-                {/* }} */}
-              </button>
+              <button
+                className={style.arrowBtn}
+                disabled={levelState == 1}
+                onClick={() => {
+                  setLevelState(levelState - 1);
+                }}
+              ></button>
+              <img
+                src={levelNums[levelState - 1]}
+                className={style.levelIcon}
+              ></img>
 
-              {/* Icon for Level 1. The rest are already imported, just follow the same formatting. */}
-              <img src={l1} className={style.levelIcon}></img>
-
-              <button className={style.arrowBtnR}>
-                {/* onClick={() => { */}
-                {/* default state is Level 1. Set next state */}
-                {/* }} */}
-              </button>
+              <button
+                className={style.arrowBtnR}
+                disabled={levelState == 5}
+                onClick={() => {
+                  setLevelState(levelState + 1);
+                }}
+              ></button>
             </div>
           </div>
         </div>

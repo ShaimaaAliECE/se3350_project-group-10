@@ -4,6 +4,7 @@ import state from "../store/Store";
 import { view } from "@risingstack/react-easy-state";
 import { Button } from "@material-ui/core";
 import { Modal } from "@material-ui/core";
+import "../submitBtnAnim.scss";
 
 import {
   playCorrectSound,
@@ -11,6 +12,7 @@ import {
   winSound,
   loseSound,
 } from "../assets/tones.js";
+import { AppendDatabase } from "../firebase/functions";
 
 const useStyles = makeStyles((theme) => ({
   stylesContainerInner: {
@@ -124,9 +126,6 @@ export function handleSubmitClick(handleGameOver) {
       handleGameOver();
       state.isActive = false;
     } else {
-      //Reset
-      state.reseting = true;
-
       //Fills in necessary x's
       state.fillTheGaps(
         state.ans[state.step - 1].zeroesEncountered,
@@ -143,7 +142,7 @@ export function handleSubmitClick(handleGameOver) {
   } else {
     // if incorrect, minus 1 life, play incorrect sound
     state.lives--;
-    state.reseting = true;
+
     setTimeout(handleRestartClick, 1000);
     playIncorrectSound();
     // remove life visually
@@ -202,14 +201,14 @@ function CreateMap(arrOuter) {
 
   const handleGameOver = () => {
     localStorage.setItem("livesLeft", state.lives);
-    //localStorage.setItem("time", state.getCurrentTimeStep())>>> FOR WHEN AL-113 is done
-    // appendDatabase(
-    //   localStorage.getItem("algo"),
-    //   localStorage.getItem("level"),
-    //   localStorage.getItem("attempts"),
-    //   localStorage.getItem("time"),
-    //   localStorage.getItem("livesLeft")
-    // ); >>>> FOR WHEN AL-109 is done
+    localStorage.setItem("time", state.timer);
+    AppendDatabase(
+      localStorage.getItem("algo"),
+      localStorage.getItem("level"),
+      localStorage.getItem("attempts"),
+      localStorage.getItem("time"),
+      localStorage.getItem("livesLeft")
+    );
     state.gameOver = true;
     setOpenModal(true);
     generateEmptyArr();
@@ -229,22 +228,22 @@ function CreateMap(arrOuter) {
       </div>
       <div style={{ display: "flex", padding: 10, flexDirection: "column" }}>
         <Button
+          class="btn btn-primary btn-ghost btn-shine"
           variant="contained"
           onClick={() => {
             handleRestartClick();
           }}
-          disabled={state.gameOver || state.reseting}
         >
           RESET
         </Button>
         <br />
         <Button
+          class="btn btn-primary btn-ghost btn-shine"
           variant="contained"
           onClick={() => {
             handleFeedbackColor();
             handleSubmitClick(handleGameOver);
           }}
-          disabled={state.gameOver || state.reseting}
         >
           SUBMIT
         </Button>

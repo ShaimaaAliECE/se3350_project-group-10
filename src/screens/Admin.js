@@ -1,6 +1,6 @@
 import { makeStyles, Button, Grow } from "@material-ui/core";
-import React from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { view } from "@risingstack/react-easy-state";
 import { Link } from "react-router-dom";
 import backBtn from "../assets/back.svg";
@@ -10,6 +10,8 @@ import dp from "../assets/dp.svg";
 import l1 from "../assets/l1.svg";
 import button from "../assets/anLink.svg";
 import Navbar from "../components/NavBar";
+import { useState } from "react";
+import { FetchAllLevels } from "../firebase/functions";
 
 const useStyles = makeStyles((theme) => ({
   page: {
@@ -20,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "row",
     backgroundColor: "black",
     zindex: -10,
+    overflow: "hidden",
   },
 
   container: {
@@ -29,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
     width: "20%",
     marginTop: 25,
     marginRight: 25,
+    overflow: "hidden",
   },
 
   mainContainer: {
@@ -120,7 +124,8 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     width: "100%",
     margin: 25,
-    overflow: "auto",
+    overflowY: "scroll",
+    "&::-webkit-scrollbar": { display: "none" },
   },
 
   profile: {
@@ -179,15 +184,156 @@ const useStyles = makeStyles((theme) => ({
       color: "#38C6D9",
     },
   },
+  data: {
+    color: "white",
+  },
 }));
+
+function RenderTable(values) {
+  let count = 0;
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        paddingLeft: "5%",
+        paddingRight: "5%",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <h1
+          style={{
+            width: "10%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          Level
+        </h1>
+        <h1
+          style={{
+            width: "10%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          Time
+        </h1>
+        <h1
+          style={{
+            width: "10%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          Attemps
+        </h1>
+        <h1
+          style={{
+            width: "10%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          Lives
+        </h1>
+      </div>
+      {values.map((x) => {
+        count++;
+        {
+          return x.map((y) => {
+            if (y.time) {
+              return (
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    fontSize: 30,
+                  }}
+                >
+                  <h6
+                    style={{
+                      width: "10%",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    {count}
+                  </h6>
+                  <h6
+                    style={{
+                      width: "10%",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    {y.time}
+                  </h6>
+                  <h6
+                    style={{
+                      width: "10%",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    {y.attempts}
+                  </h6>
+                  <h6
+                    style={{
+                      width: "10%",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    {y.livesLeft}
+                  </h6>
+                </div>
+              );
+            }
+          });
+        }
+      })}
+    </div>
+  );
+}
 
 function Admin() {
   const style = useStyles();
   let params = useParams();
+  let navigate = useNavigate();
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { data, loading, error } = FetchAllLevels("merge_sort", 5);
+
+  useEffect(() => {
+    setIsLoggedIn(localStorage.getItem("isLoggedIn"));
+  }, []);
+
+  if (!isLoggedIn) {
+    navigate("/");
+  }
+
   return (
     <>
-      <Navbar />
-
+      <Navbar admin={true} />
       <div className={style.page}>
         <div className={style.sideBar}>
           <div className={style.firstBox}></div>
@@ -224,6 +370,9 @@ function Admin() {
         <div className={style.mainContainer}>
           <div className={style.dataBox}>
             <div className={style.text}>Logged Data</div>
+            <div className={style.data}>
+              {loading ? null : RenderTable(data)}
+            </div>
           </div>
         </div>
         <div className={style.container}>

@@ -8,6 +8,7 @@ import Admin from "./screens/Admin.js";
 import Analytics from "./screens/Analytics.js";
 import Login from "./screens/Login.js";
 import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
 
 //Need env file set up for this to work
 const firebaseConfig = {
@@ -22,6 +23,8 @@ const firebaseConfig = {
 
 //Firebase Initialization
 const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+export default db;
 
 ReactDOM.render(
   <BrowserRouter>
