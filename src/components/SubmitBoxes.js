@@ -11,6 +11,7 @@ import {
   winSound,
   loseSound,
 } from "../assets/tones.js";
+import { AppendDatabase } from "../firebase/functions";
 
 const useStyles = makeStyles((theme) => ({
   stylesContainerInner: {
@@ -201,14 +202,14 @@ function CreateMap(arrOuter) {
 
   const handleGameOver = () => {
     localStorage.setItem("livesLeft", state.lives);
-    //localStorage.setItem("time", state.getCurrentTimeStep())>>> FOR WHEN AL-113 is done
-    // appendDatabase(
-    //   localStorage.getItem("algo"),
-    //   localStorage.getItem("level"),
-    //   localStorage.getItem("attempts"),
-    //   localStorage.getItem("time"),
-    //   localStorage.getItem("livesLeft")
-    // ); >>>> FOR WHEN AL-109 is done
+    localStorage.setItem("time", state.timer);
+    AppendDatabase(
+      localStorage.getItem("algo"),
+      localStorage.getItem("level"),
+      localStorage.getItem("attempts"),
+      localStorage.getItem("time"),
+      localStorage.getItem("livesLeft")
+    );
     state.gameOver = true;
     setOpenModal(true);
     generateEmptyArr();

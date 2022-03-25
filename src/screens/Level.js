@@ -78,9 +78,7 @@ function Level() {
   let navigate = useNavigate();
 
   useEffect(() => {
-    console.log("ping");
     if (state.timeout > 300) {
-      console.log("GOING");
       navigate("/", { replace: true });
     }
     if (state.restartGame) {
