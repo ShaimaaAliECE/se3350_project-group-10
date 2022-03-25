@@ -4,7 +4,7 @@ import InputContainer from "../components/InputContainer";
 import state from "../store/Store";
 import Sheet from "../components/Sheet";
 import PopUp from "../components/InstructionPopup";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams, useNavigate } from "react-router-dom";
 import LoseScreen from "../components/LoseScreen";
 import Timer from "../components/Timer";
 import { view } from "@risingstack/react-easy-state";
@@ -12,8 +12,9 @@ import backBtn from "../assets/back.svg";
 import { mergeSort } from "../algorithms/mergesort";
 import { useEffect } from "react";
 import { Lives } from "../components/Lives";
-import { IconButton } from "@mui/material";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import { IconButton } from "@material-ui/core";
+import Navbar from "../components/NavBar";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -74,7 +75,14 @@ function Level() {
 
   state.level = level;
 
+  let navigate = useNavigate();
+
   useEffect(() => {
+    console.log("ping");
+    if (state.timeout > 300) {
+      console.log("GOING");
+      navigate("/", { replace: true });
+    }
     if (state.restartGame) {
       state.resetStates();
       state.handleLevel(level);
@@ -86,7 +94,7 @@ function Level() {
       state.initializeSheets();
       state.restartGame = false;
     }
-  }, [state.restartGame]);
+  }, [state.restartGame, state.timeout]);
 
   if (level != 5) {
     style.innerHTML = `.html::-webkit-scrollbar {display: none;}`;
@@ -106,25 +114,9 @@ function Level() {
               {/* Lose Screen Popup Section */}
               {state.loseGame === true ? <LoseScreen /> : null}
 
-              <div className={style.navbar}>
-                {
-                  <div>
-                    <a href="/">
-                      <div className={style.navbarInner}>
-                        <IconButton className={style.iconBtn}>
-                          <ArrowBackIosNewIcon style={{ color: "inherit" }} />
-                        </IconButton>
-                        <img alt="back" style={{ width: 35 }} src={backBtn} />
-                      </div>
-                    </a>
-                  </div>
-                }
-                <div className={style.title}>
-                  Level {params.level} - Merge Sort
-                </div>
-                <Timer />
-              </div>
-              <div className={style.musicSheet} level={level}>
+              <Navbar />
+
+              <div className={style.musicSheet}>
                 <Sheet />
               </div>
               <div className={style.inputContainer}>

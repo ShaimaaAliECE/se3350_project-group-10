@@ -75,6 +75,7 @@ function navigateSheet() {
 }
 
 export function handleSubmitClick(handleGameOver) {
+  state.userActive();
   let tempArr;
   let type = state.ans[state.step].type;
   let isCorrect = false;

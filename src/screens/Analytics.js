@@ -17,7 +17,7 @@ import prev from "../assets/leftBtn.svg";
 import next from "../assets/rightBtn.svg";
 import history from "../assets/historyIcon.svg";
 import button from "../assets/histLink.svg";
-import SwipeableViews from "react-swipeable-views";
+import Navbar from "../components/NavBar";
 import zIndex from "@material-ui/core/styles/zIndex";
 import { CenterFocusStrong } from "@mui/icons-material";
 
@@ -253,17 +253,8 @@ function Analytics() {
 
   return (
     <>
-      <div className={style.navbar}>
-        {
-          <div className={style.navbarBackBtn}>
-            <Link to="/">
-              <img src={backBtn} />
-            </Link>
-          </div>
-        }
-        <div className={style.title}>Dashboard</div>
-        <div className={style.thirdBox}></div>
-      </div>
+      <Navbar />
+
       <div className={style.page}>
         <div className={style.sideBar}>
           <div className={style.firstBox}></div>
