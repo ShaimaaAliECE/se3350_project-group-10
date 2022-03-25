@@ -149,6 +149,19 @@ const useStyles = makeStyles((theme) => ({
     right: "5%",
     top: "5%",
   },
+  Analytics: {
+    marginRight: 20,
+    textDecoration: "none",
+    fontFamily: "Raleway",
+    backgroundColor: "rgba(0,0,0,0)",
+    color: "white",
+    border: "none",
+    fontSize: 25,
+    "&:hover": {
+      cursor: "pointer",
+      color: "grey",
+    },
+  },
 }));
 
 export default function Home() {
@@ -241,15 +254,20 @@ export default function Home() {
                 login
               </button>
             ) : (
-              <button
-                className={classes.loginButton}
-                onClick={() => {
-                  localStorage.setItem("isLoggedIn", false);
-                  setIsLoggedIn(false);
-                }}
-              >
-                logout
-              </button>
+              <>
+                <a className={classes.Analytics} href="/Admin">
+                  analytics
+                </a>
+                <button
+                  className={classes.loginButton}
+                  onClick={() => {
+                    localStorage.setItem("isLoggedIn", false);
+                    setIsLoggedIn(false);
+                  }}
+                >
+                  logout
+                </button>
+              </>
             )}
           </div>
           <div className={classes.content}>

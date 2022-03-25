@@ -9,6 +9,7 @@ import { winSound } from "../assets/tones.js";
 import { useState } from "react";
 import { Modal } from "@material-ui/core";
 import Lives from "../components/Lives";
+import { AppendDatabase } from "../firebase/functions";
 
 const useStyles = makeStyles((theme) => ({
   stylesMainOuter: {
@@ -49,19 +50,22 @@ function InputContainer() {
 
   const handleGameOver = () => {
     localStorage.setItem("livesLeft", state.lives);
-    //localStorage.setItem("time", state.getCurrentTimeStep())>>> FOR WHEN AL-113 is done
-    // appendDatabase(
-    //   localStorage.getItem("algo"),
-    //   localStorage.getItem("level"),
-    //   localStorage.getItem("attempts"),
-    //   localStorage.getItem("time"),
-    //   localStorage.getItem("livesLeft")
-    // ); >>>> FOR WHEN AL-109 is done
+    localStorage.setItem("livesLeft", state.lives);
+    localStorage.setItem("time", state.timer);
+
+    AppendDatabase(
+      localStorage.getItem("algo"),
+      localStorage.getItem("level"),
+      localStorage.getItem("attempts"),
+      localStorage.getItem("time"),
+      localStorage.getItem("livesLeft")
+    );
     state.gameOver = true;
     setOpenModal(true);
     generateEmptyArr();
-    state.step = 0;
+    state.step = 1;
     state.instruct = 0;
+    state.isActive = false;
     winSound();
   };
 
