@@ -262,35 +262,60 @@ function CreateMap(arrOuter) {
             flexDirection: "column",
           }}
         >
-          <p
+          <div
             style={{
-              backgroundColor: "white",
-              width: "25%",
-              height: "25%",
+              backgroundColor: "rgba(0, 0, 0, 0.93)",
+              width: "100%",
+              height: "100%",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              flexDirection: "column",
             }}
           >
-            You have Completed Level {state.level} in {state.timer} time!
-          </p>
-          <a
-            href="/"
-            style={{
-              backgroundColor: "black",
-              paddingLeft: 30,
-              paddingTop: 10,
-              paddingBottom: 10,
-              paddingRight: 30,
-              borderRadius: 20,
-              textAlign: "center",
-              color: "white",
-              fontFamily: "Raleway",
-              textDecoration: "none",
-            }}
-          >
-            Home
-          </a>
+            <div
+              style={{
+                fontFamily: "Raleway",
+                fontSize: "70px",
+                color: "white",
+              }}
+            >
+              LEVEL {state.level} COMPLETED.
+            </div>
+
+            <div
+              style={{
+                fontFamily: "Raleway",
+                fontSize: "30px",
+                color: "white",
+                marginTop: 15,
+                marginBottom: 25,
+              }}
+            >
+              Time: {state.timer} s
+            </div>
+
+            <div>
+              <a
+                href="/"
+                style={{
+                  backgroundColor: "rgba(208, 208, 208, 1)",
+                  paddingLeft: 50,
+                  paddingTop: 10,
+                  paddingBottom: 10,
+                  paddingRight: 50,
+                  borderRadius: 10,
+                  textAlign: "center",
+                  color: "black",
+                  fontFamily: "Raleway",
+                  fontWeight: "bold",
+                  textDecoration: "none",
+                }}
+              >
+                HOME
+              </a>
+            </div>
+          </div>
         </div>
       </Modal>
     </>
