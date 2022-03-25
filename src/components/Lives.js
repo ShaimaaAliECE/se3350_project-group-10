@@ -11,9 +11,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "row",
     rowGap: "50px",
-    //backgroundColor: "white",
-    //borderRadius: "20px",
-    //padding: "10px",
     margin: "10px",
     height: "10px",
     width: "50%",
@@ -38,8 +35,6 @@ const useStyles = makeStyles((theme) => ({
     filter: "drop-shadow(0 0 10px #A7A7A7)",
   },
 }));
-
-export function handleSubmitClick(handleGameOver) {}
 
 export function Lives() {
   const classes = useStyles();

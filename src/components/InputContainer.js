@@ -36,8 +36,9 @@ const useStyles = makeStyles((theme) => ({
     right: 10,
   },
   container: {
-    display: "flex",
-    flexDirection: "row",
+    display: "inline-block",
+    justifyContent: "center",
+    maxWidth: "90%",
   },
 }));
 
@@ -115,9 +116,6 @@ function InputContainer() {
         {state.level !== 1 ? (
           <div className={style.container}>
             <SubmitBoxes />
-            <div className={style.lives}>
-              <Lives />
-            </div>
           </div>
         ) : (
           <div className={style.fillerSpace}>
