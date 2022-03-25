@@ -2,13 +2,15 @@ import { makeStyles } from "@material-ui/core";
 import React from "react";
 import state from "../store/Store";
 import { view } from "@risingstack/react-easy-state";
-
+import { useParams } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   stylesContainerOuter: {
     display: "flex",
     flexDirection: "row",
-    overflow: "auto",
     justifyContent: "center",
+    alignItems: "center",
+    overflowX: "hidden",
+    width: "100%",
   },
 
   stylesContainerInner: {
@@ -16,9 +18,11 @@ const useStyles = makeStyles((theme) => ({
     alignContent: "center",
     justifyContent: "center",
     color: "black",
-    margin: 15,
-
-    backgroundColor: "white",
+    paddingRight: 15,
+    paddingTop: 15,
+    paddingBottom: 15,
+    width: "100%",
+    overflow: "hidden",
   },
   box: {
     display: "flex",
@@ -30,14 +34,25 @@ const useStyles = makeStyles((theme) => ({
     margin: 2,
     background: "rgba(220,220,220, 1)",
   },
+  smallBox: {
+    display: "flex",
+    width: 20,
+    height: 20,
+    justifyContent: "center",
+    padding: 2,
+    alignItems: "center",
+    color: "black",
+    margin: 2,
+    background: "rgba(220,220,220, 1)",
+  },
 }));
 
 const stylesMainInner = {
-  display: "inline-block",
   width: "100%",
+  padding: 15,
 };
 
-export function CreateMap(arrOuter, row) {
+export function CreateMap(arrOuter, row, level) {
   const style = useStyles();
 
   //Set an index if the row should be highlighted
@@ -74,7 +89,7 @@ export function CreateMap(arrOuter, row) {
               j++;
               return (
                 <div
-                  className={style.box}
+                  className={level == 5 ? style.smallBox : style.box}
                   style={
                     (i == index && j === mergeInd) ||
                     (i == index && type == "split")
@@ -99,10 +114,11 @@ export function CreateMap(arrOuter, row) {
 function InputBoxes(props) {
   let arr = props.arrInnerObj.array;
   let row = props.arrInnerObj.row;
+  let level = useParams().level;
   //no more chunk, change to arr
   return (
     <div id={row} style={stylesMainInner}>
-      {CreateMap(arr, row)}
+      {CreateMap(arr, row, level)}
     </div>
   );
 }

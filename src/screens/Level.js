@@ -8,7 +8,6 @@ import { useParams } from "react-router-dom";
 import LoseScreen from "../components/LoseScreen";
 import Timer from "../components/Timer";
 import { view } from "@risingstack/react-easy-state";
-import { Link } from "react-router-dom";
 import backBtn from "../assets/back.svg";
 import { mergeSort } from "../algorithms/mergesort";
 import { useEffect } from "react";
@@ -51,11 +50,7 @@ const useStyles = makeStyles((theme) => ({
   },
   musicSheet: {
     height: "50%",
-    display: "flex",
-    overflow: "auto",
-    width: "95%",
-    marginLeft: "auto",
-    marginRight: "auto",
+    width: "100%",
     paddingTop: 20,
   },
   inputContainer: {},
@@ -92,6 +87,10 @@ function Level() {
       state.restartGame = false;
     }
   }, [state.restartGame]);
+
+  if (level != 5) {
+    style.innerHTML = `.html::-webkit-scrollbar {display: none;}`;
+  }
 
   return (
     <>
@@ -133,9 +132,9 @@ function Level() {
               </div>
               <div className={style.piano}>
                 <Piano level={level} />
-                <div style={{}}>
+                {/* <div style={{}}>
                   <Lives />
-                </div>
+                </div> */}
               </div>
             </div>
           );
