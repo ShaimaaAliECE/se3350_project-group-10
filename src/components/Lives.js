@@ -32,8 +32,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function handleSubmitClick(handleGameOver) {}
-
 export function Lives() {
   const classes = useStyles();
   return (
