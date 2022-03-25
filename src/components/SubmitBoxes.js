@@ -4,6 +4,7 @@ import state from "../store/Store";
 import { view } from "@risingstack/react-easy-state";
 import { Button } from "@material-ui/core";
 import { Modal } from "@material-ui/core";
+import "../submitBtnAnim.scss";
 
 import {
   playCorrectSound,
@@ -220,33 +221,37 @@ function CreateMap(arrOuter) {
 
   return (
     <>
-      <div className={style.stylesContainerInner}>
-        {arrOuter.map((arrInner) => (
-          <div style={submitBox}>{arrInner === 0 ? "" : arrInner}</div>
-        ))}
-      </div>
-      <div style={{ display: "flex", padding: 10, flexDirection: "column" }}>
-        <Button
-          variant="contained"
-          onClick={() => {
-            handleRestartClick();
-          }}
-          disabled={state.gameOver || state.reseting}
-        >
-          RESET
-        </Button>
-        <br />
-        <Button
-          variant="contained"
-          onClick={() => {
-            handleFeedbackColor();
-            handleSubmitClick(handleGameOver);
-          }}
-          disabled={state.gameOver || state.reseting}
-        >
-          SUBMIT
-        </Button>
-      </div>
+      <div className={style.stylesContainerOuter}>
+        <div className={style.stylesContainerInner}>
+          {arrOuter.map((arrInner) => (
+            <div style={submitBox}>{arrInner === 0 ? "" : arrInner}</div>
+          ))}
+        </div>
+        <div style={{ display: "flex", padding: 10, flexDirection: "column" }}>
+          <Button
+            class="btn btn-primary btn-ghost btn-shine"
+            variant="contained"
+            onClick={() => {
+              handleRestartClick();
+            }}
+            disabled={state.gameOver || state.reseting}
+          >
+            RESET
+          </Button>
+          <br />
+          <Button
+            class="btn btn-primary btn-ghost btn-shine"
+            variant="contained"
+            onClick={() => {
+              handleFeedbackColor();
+              handleSubmitClick(handleGameOver);
+            }}
+            disabled={state.gameOver || state.reseting}
+          >
+            SUBMIT
+          </Button>
+        </div>
+
 
       <Modal
         open={openModal}
