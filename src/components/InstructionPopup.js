@@ -8,24 +8,10 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
 const useStyles = makeStyles((theme) => ({
-  container: {
-    position: "fixed",
-    bottom: "2%",
-    left: "2%",
-    borderRadius: 30,
-    width: 375,
-    height: "100vh",
-    backgroundColor: "rgba(242,242,242,0.9)",
-    margin: "auto",
-    zIndex: 6,
-  },
-
   detailsContainer: {
     padding: 20,
     paddingLeft: 0,
     display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
     backgroundColor: "rgba(242,242,242,0.9)",
     margin: "auto",
     color: "white",
@@ -47,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   buttonDrawer: {
     position: "absolute",
     right: "0%",
-    top: "50%",
+    top: "70%",
   },
 
   showButton: {
@@ -60,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
   Drawer: {
     backgroundColor: "transparent",
     borderStyle: "none",
+    top: "22%",
   },
 }));
 
