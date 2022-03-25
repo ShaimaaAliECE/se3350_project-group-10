@@ -26,6 +26,13 @@ import { useState } from "react";
 import { FetchAllLevels, GetAverages } from "../firebase/functions";
 
 const useStyles = makeStyles((theme) => ({
+  fullpage: {
+    display: "flex",
+    flexDirection: "column",
+    height: "100%",
+    width: "100%",
+    overflow: "hidden",
+  },
   page: {
     fontFamily: "Raleway",
     height: "100%",
@@ -122,7 +129,7 @@ const useStyles = makeStyles((theme) => ({
 
   mainContainer: {
     display: "flex",
-    flexWrap: "wrap",
+    flexDirection: "column",
     width: "65%",
     height: "94%",
   },
@@ -131,9 +138,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#111111",
     fontFamily: "Raleway",
     width: "30%",
-    height: "40%",
-    marginLeft: 25,
-    marginTop: 25,
+    height: "100%",
+    marginLeft: 20,
     zIndex: 10,
   },
 
@@ -143,9 +149,10 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#424242",
     borderRadius: 80,
     fontFamily: "Raleway",
-    margin: 25,
-    width: "100%",
-    height: "55%",
+    marginLeft: "5%",
+    marginTop: 25,
+    width: "90%",
+    height: "50%",
     zindex: 10,
     position: "relative",
   },
@@ -155,7 +162,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     height: "94%",
     width: "20%",
-    marginTop: 25,
+    flexWrap: "wrap",
     marginRight: 25,
   },
 
@@ -174,7 +181,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     marginTop: 25,
     width: "100%",
-    height: "55%",
+    height: "50%",
     backgroundColor: "#111111",
   },
 
@@ -257,6 +264,12 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Raleway",
     fontSize: 60,
   },
+  firstRow: {
+    display: "flex",
+    justifyContent: "center",
+    flexDirection: "row",
+    height: "40%",
+  },
 }));
 
 function Analytics() {
@@ -276,108 +289,109 @@ function Analytics() {
 
   return (
     <>
-      <Navbar admin={true} />
-      <div className={style.page}>
-        <div className={style.sideBar}>
-          <div className={style.firstBox}></div>
-
-          <div className={style.history}>
-            <Link to="/Admin" className={style.textHighlight}>
-              <div className={style.button}>
-                <div className={style.icon}>
-                  <img src={homeIcon}></img>
+      <div className={style.fullpage}>
+        <Navbar admin={true} />
+        <div className={style.page}>
+          <div className={style.sideBar}>
+            <div className={style.firstBox}></div>
+            <div className={style.history}>
+              <Link to="/Admin" className={style.textHighlight}>
+                <div className={style.button}>
+                  <div className={style.icon}>
+                    <img src={homeIcon}></img>
+                  </div>
+                  History
                 </div>
-                History
-              </div>
-            </Link>
-          </div>
-
-          <div className={style.analytics}>
-            <Link
-              to="/Analytics"
-              className={style.textHighlight}
-              style={{ color: "#38C6D9", fontWeight: "bold" }}
-            >
-              <div className={style.button}>
-                <div className={style.icon}>
-                  <img src={anIcon}></img>
-                </div>
-                Analytics
-              </div>
-            </Link>
-          </div>
-
-          <div style={{ flex: "4", flexGrow: "10" }}></div>
-        </div>
-
-        <div className={style.mainContainer}>
-          <div className={style.box}>
-            <div className={style.text}>Time Spent (sec)</div>
-            {!loading ? (
-              <div className={style.statsText}> {data?.time}</div>
-            ) : null}
-          </div>
-          <div className={style.box}>
-            <div className={style.text}>Lives Left</div>
-            {!loading ? (
-              <div className={style.statsText}>{data?.livesLeft}</div>
-            ) : null}
-          </div>
-          <div className={style.box}>
-            <div className={style.text}>Attempts</div>
-            {!loading ? (
-              <div className={style.statsText}>{data?.attempts}</div>
-            ) : null}
-          </div>
-          <div className={style.levelBox}>
-            <div
-              className={style.text}
-              style={{ textAlign: "center", height: "10%" }}
-            >
-              Average Statistics
-            </div>
-            <div className={style.levelBar}>
-              <button
-                className={style.arrowBtn}
-                disabled={levelState == 1}
-                onClick={() => {
-                  setLevelState(levelState - 1);
-                }}
-              ></button>
-              <img
-                src={levelNums[levelState - 1]}
-                className={style.levelIcon}
-              ></img>
-
-              <button
-                className={style.arrowBtnR}
-                disabled={levelState == 5}
-                onClick={() => {
-                  setLevelState(levelState + 1);
-                }}
-              ></button>
-            </div>
-          </div>
-        </div>
-        <div className={style.container}>
-          <div className={style.profile}>
-            <div className={style.text}>Hello,</div>
-            <img src={dp} style={{ height: "70%", width: "auto" }}></img>
-          </div>
-
-          <div className={style.anContainer}>
-            <div className={style.text}>History</div>
-            <div className={style.anContainerInner}>
-              <img
-                src={history}
-                style={{ height: "50%", width: "auto", marginTop: 20 }}
-              ></img>
-              <Link to="/Admin" style={{ width: "70%" }}>
-                <img
-                  src={button}
-                  style={{ marginTop: 20, width: "100%" }}
-                ></img>
               </Link>
+            </div>
+            <div className={style.analytics}>
+              <Link
+                to="/Analytics"
+                className={style.textHighlight}
+                style={{ color: "#38C6D9", fontWeight: "bold" }}
+              >
+                <div className={style.button}>
+                  <div className={style.icon}>
+                    <img src={anIcon}></img>
+                  </div>
+                  Analytics
+                </div>
+              </Link>
+            </div>
+            <div style={{ flex: "4", flexGrow: "10" }}></div>
+          </div>
+          <div className={style.mainContainer}>
+            <div className={style.firstRow}>
+              <div className={style.box}>
+                <div className={style.text}>Time Spent (s)</div>
+                {!loading ? (
+                  <div className={style.statsText}> {data?.time}</div>
+                ) : null}
+              </div>
+              <div className={style.box}>
+                <div className={style.text}>Lives Left</div>
+                {!loading ? (
+                  <div className={style.statsText}>{data?.livesLeft}</div>
+                ) : null}
+              </div>
+              <div className={style.box}>
+                <div className={style.text}>Attempts</div>
+                {!loading ? (
+                  <div className={style.statsText}>{data?.attempts}</div>
+                ) : null}
+              </div>
+            </div>
+            <div className={style.levelBox}>
+              <div
+                className={style.text}
+                style={{ textAlign: "center", height: "10%" }}
+              >
+                Average Statistics
+              </div>
+              <div className={style.levelBar}>
+                <button
+                  className={style.arrowBtn}
+                  disabled={levelState == 1}
+                  onClick={() => {
+                    setLevelState(levelState - 1);
+                  }}
+                ></button>
+                <img
+                  src={levelNums[levelState - 1]}
+                  className={style.levelIcon}
+                ></img>
+
+                <button
+                  className={style.arrowBtnR}
+                  disabled={levelState == 5}
+                  onClick={() => {
+                    setLevelState(levelState + 1);
+                  }}
+                ></button>
+              </div>
+            </div>
+          </div>
+
+          <div className={style.container}>
+            <div className={style.profile}>
+              <div className={style.text}>Hello,</div>
+              <img src={dp} style={{ height: "70%", width: "auto" }}></img>
+            </div>
+
+            <div className={style.anContainer}>
+              <div className={style.text}>History</div>
+              <div className={style.anContainerInner}>
+                <img
+                  src={history}
+                  style={{ height: "50%", width: "auto", marginTop: 20 }}
+                ></img>
+                <Link to="/Admin" style={{ width: "70%" }}>
+                  <img
+                    src={button}
+                    style={{ marginTop: 20, width: "100%" }}
+                  ></img>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
