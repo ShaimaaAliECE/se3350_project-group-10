@@ -94,10 +94,6 @@ function Level() {
     }
   }, [state.restartGame, state.timeout]);
 
-  if (level != 5) {
-    style.innerHTML = `.html::-webkit-scrollbar {display: none;}`;
-  }
-
   return (
     <>
       {(() => {

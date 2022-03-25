@@ -9,7 +9,7 @@ export function AppendDatabase(algo, lvl, attempts, time, lives) {
     try {
       const documentRef = await addDoc(collection(db, query), {
         time: parseInt(time),
-        attemps: parseInt(attempts),
+        attempts: parseInt(attempts),
         livesLeft: parseInt(lives),
       });
     } catch (e) {
