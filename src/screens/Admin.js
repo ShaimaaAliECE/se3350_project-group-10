@@ -1,6 +1,6 @@
 import { makeStyles, Button, Grow } from "@material-ui/core";
-import React from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { view } from "@risingstack/react-easy-state";
 import { Link } from "react-router-dom";
 import backBtn from "../assets/back.svg";
@@ -10,6 +10,7 @@ import dp from "../assets/dp.svg";
 import l1 from "../assets/l1.svg";
 import button from "../assets/anLink.svg";
 import Navbar from "../components/NavBar";
+import { useState } from "react";
 
 const useStyles = makeStyles((theme) => ({
   page: {
@@ -184,10 +185,19 @@ const useStyles = makeStyles((theme) => ({
 function Admin() {
   const style = useStyles();
   let params = useParams();
+  let navigate = useNavigate();
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    setIsLoggedIn(localStorage.getItem("isLoggedIn"));
+  }, []);
+
+  if (!isLoggedIn) {
+    navigate("/");
+  }
   return (
     <>
-      <Navbar />
-
+      <Navbar admin={true} />
       <div className={style.page}>
         <div className={style.sideBar}>
           <div className={style.firstBox}></div>

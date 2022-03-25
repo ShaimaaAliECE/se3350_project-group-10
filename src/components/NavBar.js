@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Navbar() {
+function Navbar(props) {
   const style = useStyles();
   let params = useParams();
 
@@ -57,8 +57,12 @@ function Navbar() {
             </a>
           </div>
         }
-        <div className={style.title}>Level {params.level} - Merge Sort</div>
-        <Timer />
+        {props.admin ? null : (
+          <>
+            <div className={style.title}>Level {params.level} - Merge Sort</div>
+            <Timer />
+          </>
+        )}
       </div>
     </>
   );
