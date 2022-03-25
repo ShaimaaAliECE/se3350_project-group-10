@@ -130,7 +130,7 @@ function handleLevel(lvl) {
       setLevelStats(51, 20);
       break;
     case 5: // Level 5
-      setLevelStats(101, 50);
+      setLevelStats(101, 50); //101 50
       break;
     default:
   }
@@ -150,16 +150,18 @@ function setLevelStats(max, len) {
 }
 
 function chunk(array) {
+  console.log(array);
   let divisor;
   let temp = [];
   state.indRef++;
+
   if (state.splits[state.indRef] !== 0) {
-    divisor = Math.round(
-      state.ans[0].array.length / (2 * state.splits[state.indRef])
-    );
+    divisor = Math.round(array.length / (2 * state.splits[state.indRef]));
   } else {
-    divisor = state.ans[0].array.length;
+    divisor = array.length;
   }
+
+  console.log("divisor", divisor);
 
   const chunks = Math.ceil(array.length / divisor);
   let arr = Array.from({ length: chunks }, (_, i) =>
@@ -194,6 +196,7 @@ function chunk(array) {
     return arr;
   }
 }
+
 function initializeSplit() {
   for (let i = 1; i < state.depth; i++) {
     state.splits.push(i);
@@ -218,6 +221,7 @@ function initializeSheets() {
     for (let j = 0; j < state.ans[0].array.length; j++) {
       temp.push(0);
     }
+
     sheetSplit.push({ array: chunk([...temp]), row: i });
   }
   //Fill sheetMerge
@@ -254,6 +258,10 @@ function Watchdog() {
   interval = setInterval(function () {
     if (state.isActive) {
       state.timeout++;
+
+      if (state.timeout > 300) {
+        state.timedOut = 1;
+      }
     } else if (!state.isActive && state.timeout !== 0) {
       clearInterval(interval);
     }
@@ -298,6 +306,7 @@ function resetStates() {
   state.reachedDepth = 0;
   state.rowMerge = -1;
   state.x = 0;
+  state.timedOut = 0;
 }
 
 const state = store({
@@ -334,6 +343,7 @@ const state = store({
   reachedDepth: 0,
   rowMerge: -1,
   x: 0,
+  timedOut: 0,
   depthInc: () => (state.runnable ? state.depth++ : state.depth),
   stepInc: () => state.step++,
   appendSheet: (array, row, flag) => appendSheet(array, row, flag),

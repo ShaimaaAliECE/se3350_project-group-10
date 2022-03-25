@@ -82,10 +82,9 @@ function Level() {
   let navigate = useNavigate();
 
   useEffect(() => {
-    console.log("ping");
-    if (state.timeout > 300) {
-      console.log("GOING");
+    if (state.timedOut) {
       navigate("/", { replace: true });
+      state.timedOut = 0;
     }
     if (state.restartGame) {
       state.resetStates();
@@ -98,7 +97,7 @@ function Level() {
       state.initializeSheets();
       state.restartGame = false;
     }
-  }, [state.restartGame, state.timeout]);
+  }, [state.restartGame, state.timedOut]);
 
   return (
     <>
