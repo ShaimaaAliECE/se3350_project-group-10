@@ -121,15 +121,17 @@ function Level() {
                 <InputContainer />
               </div>
               <div className={style.piano}>
-                <div
-                  style={{
-                    position: "absolute",
-                    left: 10,
-                    top: "70%",
-                  }}
-                >
-                  <Lives />
-                </div>
+                {state.level != 1 ? (
+                  <div
+                    style={{
+                      position: "absolute",
+                      left: 10,
+                      top: "70%",
+                    }}
+                  >
+                    <Lives />
+                  </div>
+                ) : null}
                 <Piano level={level} />
               </div>
             </div>
