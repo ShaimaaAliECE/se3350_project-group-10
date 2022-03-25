@@ -19,20 +19,22 @@ const useStyles = makeStyles((theme) => ({
   life1: {
     order: 1,
     margin: "5px",
+    fill: "#1b5e20",
+    filter: "drop-shadow(0 0 1px #A7A7A7)",
   },
 
   life2: {
     order: 2,
     margin: "5px",
+    filter: "drop-shadow(0 0 1px #A7A7A7)",
   },
 
   life3: {
     order: 3,
     margin: "5px",
+    filter: "drop-shadow(0 0 1px #A7A7A7)",
   },
 }));
-
-export function handleSubmitClick(handleGameOver) {}
 
 export function Lives() {
   const classes = useStyles();

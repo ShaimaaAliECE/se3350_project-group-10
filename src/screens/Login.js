@@ -3,11 +3,7 @@ import { makeStyles } from "@material-ui/core";
 import bg from "../assets/homeBG.svg";
 import { useTheme } from "@mui/material/styles";
 
-
-
 const useStyles = makeStyles((theme) => ({
-
-
   container: {
     padding: 0,
     margin: 0,
@@ -21,7 +17,6 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
   },
-
 
   content: {
     display: "flex",
@@ -49,26 +44,20 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "row",
     justifyContent: "flex-end",
     alignItems: "center",
-    backgroundColor: "black", 
-    color: 'white',
+    backgroundColor: "black",
+    color: "white",
     textAlign: "center",
     fontSize: "25px",
     padding: "10px",
-    
   },
-  login:
-  {
+  login: {
     fontFamily: "Raleway",
     color: "white",
     "&:hover": {
       cursor: "pointer",
+    },
   },
-
-}, 
-
 }));
-
-
 
 export default function Login() {
   //Values and States for the Tabs
@@ -85,16 +74,15 @@ export default function Login() {
 
   const classes = useStyles();
   return (
-    <><div className={classes.navbar}>
-      </div>
+    <>
+      <div className={classes.navbar}></div>
       <div className={classes.container}>
-      <div className={classes.content}>
-      <div className={classes.login}></div>
-      
-        <div>
+        <div className={classes.content}>
+          <div className={classes.login}></div>
+
+          <div></div>
         </div>
       </div>
-    </div></>
-
+    </>
   );
 }
