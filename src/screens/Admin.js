@@ -5,6 +5,7 @@ import { view } from "@risingstack/react-easy-state";
 import { Link } from "react-router-dom";
 import backBtn from "../assets/back.svg";
 import homeIcon from "../assets/home.svg";
+import historyIcon from "../assets/miniHistIcon.svg";
 import anIcon from "../assets/line-chart.svg";
 import dp from "../assets/dp.svg";
 import l1 from "../assets/l1.svg";
@@ -14,6 +15,14 @@ import { useState } from "react";
 import { FetchAllLevels } from "../firebase/functions";
 
 const useStyles = makeStyles((theme) => ({
+  fullpage: {
+    display: "flex",
+    flexDirection: "column",
+    height: "100%",
+    width: "100%",
+    overflow: "hidden",
+  },
+
   page: {
     fontFamily: "Raleway",
     height: "100%",
@@ -22,7 +31,6 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "row",
     backgroundColor: "black",
     zindex: -10,
-    overflow: "hidden",
   },
 
   container: {
@@ -30,7 +38,6 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     height: "94%",
     width: "20%",
-    marginTop: 25,
     marginRight: 25,
     overflow: "hidden",
   },
@@ -38,7 +45,9 @@ const useStyles = makeStyles((theme) => ({
   mainContainer: {
     display: "flex",
     width: "65%",
-    height: "94%",
+    height: "90%",
+    marginBottom: 25,
+    overflow: "hidden",
   },
   navbar: {
     display: "flex",
@@ -123,7 +132,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#111111",
     height: "100%",
     width: "100%",
-    margin: 25,
+    marginLeft: 25,
+    marginRight: 25,
     overflowY: "scroll",
     "&::-webkit-scrollbar": { display: "none" },
   },
@@ -143,7 +153,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     marginTop: 25,
     width: "100%",
-    height: "55%",
+    height: "52.6%",
     backgroundColor: "#111111",
   },
 
@@ -333,66 +343,68 @@ function Admin() {
 
   return (
     <>
-      <Navbar admin={true} />
-      <div className={style.page}>
-        <div className={style.sideBar}>
-          <div className={style.firstBox}></div>
+      <div className={style.fullpage}>
+        <Navbar admin={true} />
+        <div className={style.page}>
+          <div className={style.sideBar}>
+            <div className={style.firstBox}></div>
 
-          <div className={style.history}>
-            <Link
-              to="/Admin"
-              className={style.textHighlight}
-              style={{ color: "#38C6D9", fontWeight: "bold" }}
-            >
-              <div className={style.button}>
-                <div className={style.icon}>
-                  <img src={homeIcon}></img>
+            <div className={style.history}>
+              <Link
+                to="/Admin"
+                className={style.textHighlight}
+                style={{ color: "#38C6D9", fontWeight: "bold" }}
+              >
+                <div className={style.button}>
+                  <div className={style.icon}>
+                    <img src={historyIcon}></img>
+                  </div>
+                  History
                 </div>
-                History
-              </div>
-            </Link>
+              </Link>
+            </div>
+
+            <div className={style.analytics}>
+              <Link to="/Analytics" className={style.textHighlight}>
+                <div className={style.button}>
+                  <div className={style.icon}>
+                    <img src={anIcon}></img>
+                  </div>
+                  Analytics
+                </div>
+              </Link>
+            </div>
+
+            <div style={{ flex: "4", flexGrow: "10" }}></div>
           </div>
 
-          <div className={style.analytics}>
-            <Link to="/Analytics" className={style.textHighlight}>
-              <div className={style.button}>
-                <div className={style.icon}>
-                  <img src={anIcon}></img>
-                </div>
-                Analytics
+          <div className={style.mainContainer}>
+            <div className={style.dataBox}>
+              <div className={style.text}>Logged Data</div>
+              <div className={style.data}>
+                {loading ? null : RenderTable(data)}
               </div>
-            </Link>
-          </div>
-
-          <div style={{ flex: "4", flexGrow: "10" }}></div>
-        </div>
-
-        <div className={style.mainContainer}>
-          <div className={style.dataBox}>
-            <div className={style.text}>Logged Data</div>
-            <div className={style.data}>
-              {loading ? null : RenderTable(data)}
             </div>
           </div>
-        </div>
-        <div className={style.container}>
-          <div className={style.profile}>
-            <div className={style.text}>Hello,</div>
-            <img src={dp} style={{ height: "70%", width: "auto" }}></img>
-          </div>
-          <div className={style.anContainer}>
-            <div className={style.text}>Analytics</div>
-            <div className={style.anContainerInner}>
-              <img
-                src={l1}
-                style={{ height: "40%", width: "auto", marginTop: 27 }}
-              ></img>
-              <Link to="/Analytics" style={{ width: "70%" }}>
+          <div className={style.container}>
+            <div className={style.profile}>
+              <div className={style.text}>Hello,</div>
+              <img src={dp} style={{ height: "70%", width: "auto" }}></img>
+            </div>
+            <div className={style.anContainer}>
+              <div className={style.text}>Analytics</div>
+              <div className={style.anContainerInner}>
                 <img
-                  src={button}
-                  style={{ marginTop: 25, width: "100%" }}
+                  src={l1}
+                  style={{ height: "40%", width: "auto", marginTop: 27 }}
                 ></img>
-              </Link>
+                <Link to="/Analytics" style={{ width: "70%" }}>
+                  <img
+                    src={button}
+                    style={{ marginTop: 25, width: "100%" }}
+                  ></img>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
