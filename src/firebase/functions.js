@@ -57,7 +57,7 @@ export function GetAverages(algo, lvl) {
     let avgTime = 0,
       avgLives = 0,
       avgAttempts = 0;
-    let count = 1;
+    let count = 0;
     (async function () {
       try {
         setLoading(true);

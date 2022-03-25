@@ -23,7 +23,7 @@ import { CenterFocusStrong } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
-import { FetchAllLevels } from "../firebase/functions";
+import { FetchAllLevels, GetAverages } from "../firebase/functions";
 
 const useStyles = makeStyles((theme) => ({
   page: {
@@ -249,6 +249,14 @@ const useStyles = makeStyles((theme) => ({
       fontWeight: "bold",
     },
   },
+  statsText: {
+    display: "flex",
+    justifyContent: "center",
+    marginTop: "50%",
+    color: "white",
+    fontFamily: "Raleway",
+    fontSize: 60,
+  },
 }));
 
 function Analytics() {
@@ -260,9 +268,12 @@ function Analytics() {
   let levelNums = [l1, l2, l3, l4, l5];
   let isLoggedIn = localStorage.getItem("isLoggedIn");
 
+  const { data, loading, error } = GetAverages("merge_sort", levelState);
+
   if (!isLoggedIn) {
     navigate("/");
   }
+
   return (
     <>
       <Navbar admin={true} />
@@ -301,13 +312,22 @@ function Analytics() {
 
         <div className={style.mainContainer}>
           <div className={style.box}>
-            <div className={style.text}>Time Spent</div>
+            <div className={style.text}>Time Spent (sec)</div>
+            {!loading ? (
+              <div className={style.statsText}> {data?.time}</div>
+            ) : null}
           </div>
           <div className={style.box}>
             <div className={style.text}>Lives Left</div>
+            {!loading ? (
+              <div className={style.statsText}>{data?.livesLeft}</div>
+            ) : null}
           </div>
           <div className={style.box}>
             <div className={style.text}>Attempts</div>
+            {!loading ? (
+              <div className={style.statsText}>{data?.attempts}</div>
+            ) : null}
           </div>
           <div className={style.levelBox}>
             <div
