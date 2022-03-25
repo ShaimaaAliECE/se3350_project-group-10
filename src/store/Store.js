@@ -265,6 +265,18 @@ function userActive() {
   state.timeout = 0;
 }
 
+function userTime() {
+  let timer = state.timer
+  let hrs = Math.floor(timer / 3600);
+  let min = Math.floor((timer % 3600) / 60);
+  let sec = (timer % 3600) % 60;
+  if (hrs && min && sec != 0) {
+    state.timeDisplay = hrs + ":" + min + ":" + sec;
+  } else {
+    state.timeDisplay = min + ":" + sec;
+  }
+}
+
 function resetStates() {
   state.lives = 3;
   state.level = 0;
@@ -298,6 +310,7 @@ function resetStates() {
   state.reachedDepth = 0;
   state.rowMerge = -1;
   state.x = 0;
+  state.timeDisplay = " ";
 }
 
 const state = store({
@@ -334,6 +347,7 @@ const state = store({
   reachedDepth: 0,
   rowMerge: -1,
   x: 0,
+  timeDisplay: " ",
   depthInc: () => (state.runnable ? state.depth++ : state.depth),
   stepInc: () => state.step++,
   appendSheet: (array, row, flag) => appendSheet(array, row, flag),
@@ -350,6 +364,7 @@ const state = store({
   StopWatch: () => StopWatch(),
   Watchdog: () => Watchdog(),
   userActive: () => userActive(),
+  userTime: () => userTime(),
 });
 
 export default state;

@@ -87,7 +87,7 @@ export function handleSubmitClick(handleGameOver) {
     let ans = state.ans[state.step].array[state.mergePointer];
     tempArr = [
       ...state.sheet[0][row].array[
-        state.firstZeroFinder2D([...state.sheet[0][row].array])
+      state.firstZeroFinder2D([...state.sheet[0][row].array])
       ],
     ];
     //if their input is correct append it, set isCorrect = true
@@ -197,6 +197,7 @@ function CreateMap(arrOuter) {
     }
   };
 
+
   let [openModal, setOpenModal] = useState(false);
 
   const handleGameOver = () => {
@@ -216,6 +217,7 @@ function CreateMap(arrOuter) {
     state.instruct = 0;
     state.isActive = false;
     winSound();
+    state.userTime();
   };
 
   return (
@@ -292,7 +294,7 @@ function CreateMap(arrOuter) {
                 marginBottom: 25,
               }}
             >
-              Time: {state.timer} s
+              Time to complete: {state.timeDisplay} s !
             </div>
 
             <div>
