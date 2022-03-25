@@ -5,6 +5,7 @@ import { view } from "@risingstack/react-easy-state";
 import { Link } from "react-router-dom";
 import backBtn from "../assets/back.svg";
 import homeIcon from "../assets/home.svg";
+import historyIcon from "../assets/miniHistIcon.svg";
 import anIcon from "../assets/line-chart.svg";
 import dp from "../assets/dp.svg";
 import l1 from "../assets/l1.svg";
@@ -135,7 +136,6 @@ const useStyles = makeStyles((theme) => ({
     marginRight: 25,
     overflowY: "scroll",
     "&::-webkit-scrollbar": { display: "none" },
-    
   },
 
   profile: {
@@ -357,7 +357,7 @@ function Admin() {
               >
                 <div className={style.button}>
                   <div className={style.icon}>
-                    <img src={homeIcon}></img>
+                    <img src={historyIcon}></img>
                   </div>
                   History
                 </div>

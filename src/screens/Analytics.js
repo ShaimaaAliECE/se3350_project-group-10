@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import backBtn from "../assets/back.svg";
 import { fontFamily } from "@mui/system";
 import homeIcon from "../assets/home.svg";
+import historyIcon from "../assets/miniHistIcon.svg";
 import anIcon from "../assets/line-chart.svg";
 import dp from "../assets/dp.svg";
 import l1 from "../assets/l1.svg";
@@ -298,7 +299,7 @@ function Analytics() {
               <Link to="/Admin" className={style.textHighlight}>
                 <div className={style.button}>
                   <div className={style.icon}>
-                    <img src={homeIcon}></img>
+                    <img src={historyIcon}></img>
                   </div>
                   History
                 </div>
