@@ -14,17 +14,13 @@ import {
 } from "../assets/tones.js";
 
 const useStyles = makeStyles((theme) => ({
-  stylesContainerOuter: {
-    display: "flex",
-    flexDirection: "row",
-  },
-
   stylesContainerInner: {
     display: "flex",
     alignContent: "center",
     justifyContent: "center",
     color: "black",
     margin: 15,
+    width: "100%",
   },
 }));
 
@@ -80,6 +76,7 @@ function navigateSheet() {
 }
 
 export function handleSubmitClick(handleGameOver) {
+  state.userActive();
   let tempArr;
   let type = state.ans[state.step].type;
   let isCorrect = false;
@@ -177,12 +174,11 @@ function CreateMap(arrOuter) {
 
   const submitBox = {
     display: "flex",
-    width: 50,
-    height: 50,
-    flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
     color: "black",
+    width: 50,
+    height: 50,
     margin: 10,
     background: state.feedbackColor,
   };
@@ -256,52 +252,77 @@ function CreateMap(arrOuter) {
           </Button>
         </div>
 
-        <Modal
-          open={openModal}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
+
+      <Modal
+        open={openModal}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100%",
+            flexDirection: "column",
+          }}
         >
           <div
             style={{
+              backgroundColor: "rgba(0, 0, 0, 0.93)",
+              width: "100%",
+              height: "100%",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              height: "100%",
               flexDirection: "column",
             }}
           >
-            <p
+            <div
               style={{
-                backgroundColor: "white",
-                width: "25%",
-                height: "25%",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              You have Completed Level {state.level} in {state.timer} time!
-            </p>
-            <a
-              href="/"
-              style={{
-                backgroundColor: "black",
-                paddingLeft: 30,
-                paddingTop: 10,
-                paddingBottom: 10,
-                paddingRight: 30,
-                borderRadius: 20,
-                textAlign: "center",
-                color: "white",
                 fontFamily: "Raleway",
-                textDecoration: "none",
+                fontSize: "70px",
+                color: "white",
               }}
             >
-              Home
-            </a>
+              LEVEL {state.level} COMPLETED.
+            </div>
+
+            <div
+              style={{
+                fontFamily: "Raleway",
+                fontSize: "30px",
+                color: "white",
+                marginTop: 15,
+                marginBottom: 25,
+              }}
+            >
+              Time: {state.timer} s
+            </div>
+
+            <div>
+              <a
+                href="/"
+                style={{
+                  backgroundColor: "rgba(208, 208, 208, 1)",
+                  paddingLeft: 50,
+                  paddingTop: 10,
+                  paddingBottom: 10,
+                  paddingRight: 50,
+                  borderRadius: 10,
+                  textAlign: "center",
+                  color: "black",
+                  fontFamily: "Raleway",
+                  fontWeight: "bold",
+                  textDecoration: "none",
+                }}
+              >
+                HOME
+              </a>
+            </div>
           </div>
-        </Modal>
-      </div>
+        </div>
+      </Modal>
     </>
   );
 }
