@@ -43,6 +43,7 @@ function Sheet() {
   const styles = useStyles();
   let level = useParams().level;
   let arr = [...state.sheet];
+
   return (
     <div
       className={styles.container}

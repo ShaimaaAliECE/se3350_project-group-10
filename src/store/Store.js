@@ -1,5 +1,6 @@
 import { store } from "@risingstack/react-easy-state";
 import { Navigate } from "react-router-dom";
+import { getSheet } from "../taboo/getSheet";
 
 // Finds the first zero in an array
 // Also sets the maxMergeLen based on the largest indexOf(0)
@@ -232,6 +233,8 @@ function initializeSheets() {
   state.sheet.push([...sheetSplit, ...sheetMerge]);
 
   state.appendSheet(state.ans[0].array, 0);
+
+  getSheet();
 }
 
 // timer function
@@ -266,7 +269,7 @@ function userActive() {
 }
 
 function userTime() {
-  let timer = state.timer
+  let timer = state.timer;
   let hrs = Math.floor(timer / 3600);
   let min = Math.floor((timer % 3600) / 60);
   let sec = (timer % 3600) % 60;
