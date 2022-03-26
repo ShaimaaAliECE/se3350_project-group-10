@@ -1,19 +1,15 @@
-import { makeStyles, Button, Grow } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 import Piano from "../components/Piano";
 import InputContainer from "../components/InputContainer";
 import state from "../store/Store";
 import Sheet from "../components/Sheet";
 import PopUp from "../components/InstructionPopup";
-import { Navigate, useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import LoseScreen from "../components/LoseScreen";
-import Timer from "../components/Timer";
 import { view } from "@risingstack/react-easy-state";
-import backBtn from "../assets/back.svg";
 import { mergeSort } from "../algorithms/mergesort";
 import { useEffect } from "react";
 import { Lives } from "../components/Lives";
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import { IconButton } from "@material-ui/core";
 import Navbar from "../components/NavBar";
 
 const useStyles = makeStyles((theme) => ({
@@ -25,27 +21,6 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     backgroundColor: "#111111",
   },
-  navbar: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    color: "white",
-    backgroundColor: "black",
-    padding: "10px",
-    paddingRight: 20,
-    paddingLeft: 20,
-  },
-  navbarInner: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  iconBtn: {
-    color: "white",
-    "&:hover": { color: "#38c6d9" },
-    paddingRight: 0,
-  },
   title: {
     fontSize: 20,
   },
@@ -54,7 +29,6 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     paddingTop: 20,
   },
-  inputContainer: {},
   piano: {
     backgroundColor: "black",
     flexGrow: 1,
@@ -68,11 +42,10 @@ const useStyles = makeStyles((theme) => ({
 function Level() {
   const style = useStyles();
   let params = useParams();
-
   let level = parseInt(params.level);
+
   localStorage.setItem("level", level);
   localStorage.setItem("algo", "merge_sort");
-
   state.level = level;
 
   let navigate = useNavigate();
