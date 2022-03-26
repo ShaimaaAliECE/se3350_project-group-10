@@ -93,7 +93,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#646464",
   },
   loginModal: {
-    backgroundColor: "rgba(255,255,255,1)",
+    backgroundColor: "#111111",
     padding: 40,
     display: "flex",
     flexDirection: "column",
@@ -194,18 +194,22 @@ export default function Home() {
             >
               <TextField
                 id="username"
-                label="Username"
                 variant="outlined"
-                style={{ marginBottom: 20 }}
+                placeholder="Username"
+                style={{ marginBottom: 20, color: "white" }}
               />
               <TextField
                 id="password"
-                label="Password"
                 variant="outlined"
                 type="password"
+                placeholder="Password"
                 style={{ marginBottom: 20 }}
               />
-              <Button variant="outlined" type="submit">
+              <Button
+                variant="outlined"
+                type="submit"
+                style={{ color: "white", borderColor: "white" }}
+              >
                 Login
               </Button>
             </form>
