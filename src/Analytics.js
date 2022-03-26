@@ -35,16 +35,21 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "row",
     backgroundColor: "black",
     zindex: -10,
+    position: "relative",
   },
   sideBar: {
     display: "flex",
+    height: "100%",
     width: "15%",
+    top: 0,
+    left: 0,
     flexDirection: "column",
     backgroundColor: "#111111",
+    float: "left",
   },
   button: {
     display: "flex",
-    padding: 20,
+    alignItems: "left",
     cursor: "pointer",
     "&:hover": {
       backgroundColor: "#393939",
@@ -53,10 +58,14 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   history: {
+    flex: "2",
+    flexGrow: "1.5",
     color: "white",
     fontSize: "25px",
   },
   analytics: {
+    flex: "3",
+    flexGrow: "1.5",
     color: "#38C6D9",
     fontSize: "25px",
   },
@@ -74,7 +83,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#111111",
     fontFamily: "Raleway",
     width: "30%",
+    height: "100%",
     marginLeft: 20,
+    zIndex: 10,
   },
   levelBox: {
     display: "flex",
@@ -86,6 +97,8 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 25,
     width: "90%",
     height: "50%",
+    zindex: 10,
+    position: "relative",
   },
   container: {
     display: "flex",
@@ -101,12 +114,14 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#111111",
     fontFamily: "Raleway",
     fontSize: "25px",
+    width: "100%",
     height: "40%",
   },
   anContainer: {
     display: "flex",
     flexDirection: "column",
     marginTop: 25,
+    width: "100%",
     height: "50%",
     backgroundColor: "#111111",
   },
@@ -115,6 +130,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
     height: "90%",
+    width: "100%",
   },
   text: {
     fontFamily: "Raleway",
@@ -129,9 +145,11 @@ const useStyles = makeStyles((theme) => ({
     height: "50%",
   },
   arrowBtn: {
+    backgroundImage: `url(${prev})`,
     margin: "5px",
     height: "63px",
     width: "40px",
+    justifyContent: "flex-end",
     top: "42%",
     border: 0,
     cursor: "pointer",
@@ -141,7 +159,21 @@ const useStyles = makeStyles((theme) => ({
       opacity: "60%",
     },
   },
-
+  arrowBtnR: {
+    backgroundImage: `url(${next})`,
+    margin: "5px",
+    height: "63px",
+    width: "50px",
+    justifyContent: "flex-end",
+    top: "42%",
+    border: 0,
+    cursor: "pointer",
+    backgroundColor: "transparent",
+    padding: 0,
+    "&:hover": {
+      opacity: "60%",
+    },
+  },
   levelBar: {
     height: "80%",
     display: "flex",
@@ -260,7 +292,6 @@ function Analytics() {
               <div className={style.levelBar}>
                 <button
                   className={style.arrowBtn}
-                  style={{ backgroundImage: `url(${prev})` }}
                   disabled={levelState == 1}
                   onClick={() => {
                     setLevelState(levelState - 1);
@@ -273,8 +304,7 @@ function Analytics() {
                 ></img>
 
                 <button
-                  className={style.arrowBtn}
-                  style={{ backgroundImage: `url(${next})` }}
+                  className={style.arrowBtnR}
                   disabled={levelState == 5}
                   onClick={() => {
                     setLevelState(levelState + 1);
