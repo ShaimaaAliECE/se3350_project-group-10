@@ -3,7 +3,6 @@ import { makeStyles } from "@material-ui/core";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import state from "../store/Store";
-import { StateTimeline } from "tone";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -55,7 +54,7 @@ export default function LoseScreen() {
         <div className={style.title}>GAME OVER.</div>
         <div className={style.buttonSection}>
           <div className={style.buttons}>
-            <a to={currentLevel}>
+            <a href={currentLevel}>
               <Button
                 variant="contained"
                 className={style.button}

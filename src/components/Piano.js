@@ -25,24 +25,18 @@ function RenderKeys(x, notesArr) {
       if (numberStore.indexOf(notesArr[i]) === -1) {
         numberStore.push(notesArr[i]);
         arr.push(
-          // <div  key={i}>
           <Key
             index={numberStore.length - 1}
             totalNotes={x}
             note={notesArr[i]}
           />
-          // </div>
         );
       }
     }
   } else {
     //where x is the piano length
     for (let i = 0; i < x; i++) {
-      arr.push(
-        // <div style={{}} key={i}>
-        <Key index={i} totalNotes={x} note={i + 1} />
-        // </div>
-      );
+      arr.push(<Key index={i} totalNotes={x} note={i + 1} />);
     }
   }
 
@@ -57,8 +51,6 @@ export default view(function Piano(props) {
     //Render Piano with only needed values
     notesArr = state.ans[state.ans.length - 1].array;
   }
-
-  //import store
   //get max# piano keys from store
   const pianoLength = Math.max(...state.ans[0].array);
   return (

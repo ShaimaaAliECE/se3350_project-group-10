@@ -1,10 +1,9 @@
-import { makeStyles, Button, Grow } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { view } from "@risingstack/react-easy-state";
 import { Link } from "react-router-dom";
 import backBtn from "../assets/back.svg";
-import homeIcon from "../assets/home.svg";
 import historyIcon from "../assets/miniHistIcon.svg";
 import anIcon from "../assets/line-chart.svg";
 import dp from "../assets/dp.svg";
@@ -30,7 +29,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "row",
     backgroundColor: "black",
-    zindex: -10,
   },
 
   container: {
@@ -49,54 +47,16 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 25,
     overflow: "hidden",
   },
-  navbar: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    color: "white",
-    textAlign: "center",
-    fontSize: "30px",
-    fontFamily: "Raleway",
-    backgroundColor: "#111111",
-    padding: "10px",
-  },
-
-  navbarBackBtn: {
-    image: backBtn,
-    flex: "1",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    backgroundColor: "#111111",
-    marginTop: "8px",
-    marginRight: "20px",
-    flexDirection: "row",
-    flexGrow: "1",
-  },
-
-  title: {
-    flex: "2",
-    flexGrow: "15",
-  },
-
   sideBar: {
     display: "flex",
     height: "100%",
     width: "15%",
-    top: 0,
-    left: 0,
     flexDirection: "column",
     backgroundColor: "#111111",
   },
-
-  firstBox: {
-    flex: "1",
-    flexGrow: "0.75",
-  },
-
   button: {
     display: "flex",
-    alignItems: "left",
+    padding: 20,
     cursor: "pointer",
     "&:hover": {
       backgroundColor: "#393939",
@@ -104,33 +64,22 @@ const useStyles = makeStyles((theme) => ({
       fontWeight: "bold",
     },
   },
-
   history: {
-    flex: "2",
-    flexGrow: "1.5",
     color: "white",
     fontSize: "25px",
-    marginLeft: "15%",
   },
-
   analytics: {
-    flex: "3",
-    flexGrow: "1.5",
     color: "#38C6D9",
     fontSize: "25px",
-    marginLeft: "15%",
   },
-
   icon: {
     maxWidth: "100%",
     marginRight: "5%",
   },
-
   dataBox: {
     display: "flex",
     flexDirection: "column",
     backgroundColor: "#111111",
-    height: "100%",
     width: "100%",
     marginLeft: 25,
     marginRight: 25,
@@ -144,7 +93,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#111111",
     fontFamily: "Raleway",
     fontSize: "25px",
-    width: "100%",
     height: "40%",
   },
 
@@ -152,7 +100,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     marginTop: 25,
-    width: "100%",
     height: "52.6%",
     backgroundColor: "#111111",
   },
@@ -162,17 +109,12 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
     height: "90%",
-    width: "100%",
   },
   anImg: {
-    flex: 2,
     alignItems: "center",
-    width: "100%",
-    height: "100%",
     marginLeft: 50,
     marginTop: 30,
   },
-
   text: {
     fontFamily: "Raleway",
     color: "white",
@@ -181,12 +123,6 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 15,
     marginLeft: 20,
   },
-
-  thirdBox: {
-    flex: "3",
-    flexGrow: "1",
-  },
-
   textHighlight: {
     color: "white",
     textDecoration: "none",
@@ -263,6 +199,7 @@ function RenderTable(values) {
       </div>
       {values.map((x) => {
         count++;
+        // eslint-disable-next-line no-lone-blocks
         {
           return x.map((y) => {
             if (y.time) {
@@ -327,11 +264,9 @@ function RenderTable(values) {
 
 function Admin() {
   const style = useStyles();
-  let params = useParams();
   let navigate = useNavigate();
-
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const { data, loading, error } = FetchAllLevels("merge_sort", 5);
+  const { data, loading } = FetchAllLevels("merge_sort", 5);
 
   useEffect(() => {
     setIsLoggedIn(localStorage.getItem("isLoggedIn"));
@@ -348,16 +283,15 @@ function Admin() {
         <div className={style.page}>
           <div className={style.sideBar}>
             <div className={style.firstBox}></div>
-
             <div className={style.history}>
               <Link
-                to="/Admin"
+                to="/admin"
                 className={style.textHighlight}
                 style={{ color: "#38C6D9", fontWeight: "bold" }}
               >
                 <div className={style.button}>
                   <div className={style.icon}>
-                    <img src={historyIcon}></img>
+                    <img src={historyIcon} alt="history"></img>
                   </div>
                   History
                 </div>
@@ -365,17 +299,15 @@ function Admin() {
             </div>
 
             <div className={style.analytics}>
-              <Link to="/Analytics" className={style.textHighlight}>
+              <Link to="/analytics" className={style.textHighlight}>
                 <div className={style.button}>
                   <div className={style.icon}>
-                    <img src={anIcon}></img>
+                    <img src={anIcon} alt="analytics"></img>
                   </div>
                   Analytics
                 </div>
               </Link>
             </div>
-
-            <div style={{ flex: "4", flexGrow: "10" }}></div>
           </div>
 
           <div className={style.mainContainer}>
@@ -389,19 +321,21 @@ function Admin() {
           <div className={style.container}>
             <div className={style.profile}>
               <div className={style.text}>Hello,</div>
-              <img src={dp} style={{ height: "70%", width: "auto" }}></img>
+              <img src={dp} style={{ height: "70%" }} alt="profile"></img>
             </div>
             <div className={style.anContainer}>
               <div className={style.text}>Analytics</div>
               <div className={style.anContainerInner}>
                 <img
                   src={l1}
-                  style={{ height: "40%", width: "auto", marginTop: 27 }}
+                  style={{ height: "40%", marginTop: 27 }}
+                  alt="l1"
                 ></img>
                 <Link to="/Analytics" style={{ width: "70%" }}>
                   <img
                     src={button}
                     style={{ marginTop: 25, width: "100%" }}
+                    alt="button"
                   ></img>
                 </Link>
               </div>

@@ -8,9 +8,7 @@
   border-radius: 20px;
   text-decoration: none;
   text-transform: uppercase;
-  //background-color: hsl(var(--hue), 100%, 41%);
   background-color: "#111111";
-  //border: 1px solid hsl(var(--hue), 100%, 41%);
   border: black;
   outline: transparent;
   overflow: hidden;
@@ -23,8 +21,6 @@
 
   &:hover {
     background: hsl(var(--hue), 100%, 31%);
-    border: 1px solid hsl(var(--hue), 100%, 41%);
-
   }
 
   &-primary {
@@ -63,7 +59,6 @@
 
     &:hover {
       background: transparent;
-      //box-shadow: 0 0 20px 10px hsla(var(--hue), 100%, 41%, 0.5);
     }
 
     &:hover::before {
