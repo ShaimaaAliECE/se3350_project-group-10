@@ -70,7 +70,7 @@ export function GetAverages(algo, lvl) {
           count++;
         });
         setData({
-          time: avgTime / count,
+          time: (avgTime / count).toFixed(2),
           livesLeft: avgLives / count,
           attempts: avgAttempts / count,
         });
