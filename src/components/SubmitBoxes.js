@@ -23,6 +23,42 @@ const useStyles = makeStyles((theme) => ({
     margin: 15,
     width: "100%",
   },
+  modalContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%",
+    flexDirection: "column",
+  },
+  textContainer: {
+    backgroundColor: "rgba(0, 0, 0, 0.93)",
+    width: "100%",
+    height: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
+  },
+  time: {
+    fontFamily: "Raleway",
+    fontSize: "30px",
+    color: "white",
+    marginTop: 15,
+    marginBottom: 25,
+  },
+  homeLink: {
+    backgroundColor: "rgba(208, 208, 208, 1)",
+    paddingLeft: 50,
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingRight: 50,
+    borderRadius: 10,
+    textAlign: "center",
+    color: "black",
+    fontFamily: "Raleway",
+    fontWeight: "bold",
+    textDecoration: "none",
+  },
 }));
 
 const stylesMainInner = {
@@ -89,7 +125,7 @@ export function handleSubmitClick(handleGameOver) {
     let ans = state.ans[state.step].array[state.mergePointer];
     tempArr = [
       ...state.sheet[0][row].array[
-      state.firstZeroFinder2D([...state.sheet[0][row].array])
+        state.firstZeroFinder2D([...state.sheet[0][row].array])
       ],
     ];
     //if their input is correct append it, set isCorrect = true
@@ -167,8 +203,8 @@ export function handleSubmitClick(handleGameOver) {
 }
 
 function CreateMap(arrOuter) {
-  //Maps user entered array
   const style = useStyles();
+  let [openModal, setOpenModal] = useState(false);
 
   const submitBox = {
     display: "flex",
@@ -180,7 +216,6 @@ function CreateMap(arrOuter) {
     margin: 10,
     background: state.feedbackColor,
   };
-
   const handleFeedbackColor = () => {
     let ans = state.ans[state.step].array[state.mergePointer];
     //if user input of array is correct
@@ -195,10 +230,6 @@ function CreateMap(arrOuter) {
       state.feedbackColor = "rgba(255, 0, 0, 0.6)";
     }
   };
-
-
-  let [openModal, setOpenModal] = useState(false);
-
   const handleGameOver = () => {
     localStorage.setItem("livesLeft", state.lives);
     localStorage.setItem("time", state.timer);
@@ -226,7 +257,13 @@ function CreateMap(arrOuter) {
           <div style={submitBox}>{arrInner === 0 ? "" : arrInner}</div>
         ))}
       </div>
-      <div style={{ display: "flex", padding: 10, flexDirection: "column" }}>
+      <div
+        style={{
+          display: "flex",
+          padding: 10,
+          flexDirection: "column",
+        }}
+      >
         <Button
           class="btn btn-primary btn-ghost btn-shine"
           variant="contained"
@@ -254,26 +291,8 @@ function CreateMap(arrOuter) {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "100%",
-            flexDirection: "column",
-          }}
-        >
-          <div
-            style={{
-              backgroundColor: "rgba(0, 0, 0, 0.93)",
-              width: "100%",
-              height: "100%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              flexDirection: "column",
-            }}
-          >
+        <div className={style.modalContainer}>
+          <div className={style.textContainer}>
             <div
               style={{
                 fontFamily: "Raleway",
@@ -284,35 +303,12 @@ function CreateMap(arrOuter) {
               LEVEL {state.level} COMPLETED.
             </div>
 
-            <div
-              style={{
-                fontFamily: "Raleway",
-                fontSize: "30px",
-                color: "white",
-                marginTop: 15,
-                marginBottom: 25,
-              }}
-            >
+            <div className={style.time}>
               Time to complete: {state.timeDisplay} s !
             </div>
 
             <div>
-              <a
-                href="/"
-                style={{
-                  backgroundColor: "rgba(208, 208, 208, 1)",
-                  paddingLeft: 50,
-                  paddingTop: 10,
-                  paddingBottom: 10,
-                  paddingRight: 50,
-                  borderRadius: 10,
-                  textAlign: "center",
-                  color: "black",
-                  fontFamily: "Raleway",
-                  fontWeight: "bold",
-                  textDecoration: "none",
-                }}
-              >
+              <a href="/" className={style.homeLink}>
                 HOME
               </a>
             </div>

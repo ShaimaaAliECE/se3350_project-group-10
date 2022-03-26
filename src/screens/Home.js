@@ -224,7 +224,7 @@ export default function Home() {
               </button>
             ) : (
               <>
-                <a className={classes.analytics} href="/Admin">
+                <a className={classes.analytics} href="/admin">
                   analytics
                 </a>
                 <button
