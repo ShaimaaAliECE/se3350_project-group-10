@@ -10,6 +10,7 @@
 
 ### **What are the challenges we faced?**  <br>
 > Throughout the development process we came across obstacles that needed to be addressed. Some of these problems were as follows: creating the music sheet in a way that would move as the user progressed through the level, having the application not skip steps, including the life system, etc. One of the bigger areas where we faced a challenge was to demonstrate to the user how the algorithm works from a computer’s perspective. We had originally provided the Merge Sort algorithm in a way that shows how the human mind would compute the algorithm. We had to go back and redo how the application works from a coding/computer perspective and highlight this information to the user. This ultimately impacted every level as this was the basis for the project. 
+> Another challenge that was revisted many times was making it so that each level was dynamic (i.e having 1 level file for all levels). The challenge was generating the correct array, formatted on the sheet properly. Even by final release we were not able to have it 100% bug free, in the future we would refactor our approach to array generation.
 
 ### **How to install and run the project**
 1. Download the source code or clone the repository. <br>
