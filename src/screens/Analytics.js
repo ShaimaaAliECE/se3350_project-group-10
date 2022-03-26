@@ -75,6 +75,8 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Raleway",
     width: "30%",
     marginLeft: 20,
+    display: "flex",
+    flexDirection: "column",
   },
   levelBox: {
     display: "flex",
@@ -152,7 +154,6 @@ const useStyles = makeStyles((theme) => ({
   textHighlight: {
     color: "white",
     textDecoration: "none",
-
     "&:hover": {
       backgroundColor: "#393939",
       color: "#38C6D9",
@@ -162,7 +163,8 @@ const useStyles = makeStyles((theme) => ({
   statsText: {
     display: "flex",
     justifyContent: "center",
-    marginTop: "50%",
+    alignItems: "center",
+    height: "100%",
     color: "white",
     fontFamily: "Raleway",
     fontSize: 60,
