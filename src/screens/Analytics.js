@@ -1,7 +1,11 @@
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, Button, Grow } from "@material-ui/core";
 import React from "react";
+import { useParams } from "react-router-dom";
 import { view } from "@risingstack/react-easy-state";
 import { Link } from "react-router-dom";
+import backBtn from "../assets/back.svg";
+import { fontFamily } from "@mui/system";
+import homeIcon from "../assets/home.svg";
 import historyIcon from "../assets/miniHistIcon.svg";
 import anIcon from "../assets/line-chart.svg";
 import dp from "../assets/dp.svg";
@@ -15,9 +19,12 @@ import next from "../assets/rightBtn.svg";
 import history from "../assets/historyIcon.svg";
 import button from "../assets/histLink.svg";
 import Navbar from "../components/NavBar";
+import zIndex from "@material-ui/core/styles/zIndex";
+import { CenterFocusStrong } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import { useState } from "react";
-import { GetAverages } from "../firebase/functions";
+import { FetchAllLevels, GetAverages } from "../firebase/functions";
 
 const useStyles = makeStyles((theme) => ({
   fullpage: {
@@ -35,16 +42,63 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "row",
     backgroundColor: "black",
     zindex: -10,
+    position: "relative",
   },
+
+  navbar: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    color: "white",
+    textAlign: "center",
+    fontSize: "30px",
+    fontFamily: "Raleway",
+    backgroundColor: "#111111",
+    padding: "10px",
+  },
+
+  navbarBackBtn: {
+    image: backBtn,
+    flex: "1",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    backgroundColor: "#111111",
+    marginTop: "8px",
+    marginRight: "20px",
+    flexDirection: "row",
+    flexGrow: "1",
+  },
+
+  title: {
+    flex: "2",
+    flexGrow: "15",
+  },
+
   sideBar: {
     display: "flex",
+    height: "100%",
     width: "15%",
+    top: 0,
+    left: 0,
     flexDirection: "column",
     backgroundColor: "#111111",
+    float: "left",
   },
+
+  firstBox: {
+    flex: "1",
+    flexGrow: "0.75",
+  },
+
+  thirdBox: {
+    flex: "3",
+    flexGrow: "1",
+  },
+
   button: {
     display: "flex",
-    padding: 20,
+    alignItems: "left",
     cursor: "pointer",
     "&:hover": {
       backgroundColor: "#393939",
@@ -52,30 +106,44 @@ const useStyles = makeStyles((theme) => ({
       fontWeight: "bold",
     },
   },
+
   history: {
+    flex: "2",
+    flexGrow: "1.5",
     color: "white",
     fontSize: "25px",
+    marginLeft: "15%",
   },
+
   analytics: {
+    flex: "3",
+    flexGrow: "1.5",
     color: "#38C6D9",
     fontSize: "25px",
+    marginLeft: "15%",
   },
+
   icon: {
     maxWidth: "100%",
     marginRight: "5%",
   },
+
   mainContainer: {
     display: "flex",
     flexDirection: "column",
     width: "65%",
     height: "94%",
   },
+
   box: {
     backgroundColor: "#111111",
     fontFamily: "Raleway",
     width: "30%",
+    height: "100%",
     marginLeft: 20,
+    zIndex: 10,
   },
+
   levelBox: {
     display: "flex",
     flexDirection: "column",
@@ -86,7 +154,10 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 25,
     width: "90%",
     height: "50%",
+    zindex: 10,
+    position: "relative",
   },
+
   container: {
     display: "flex",
     flexDirection: "column",
@@ -95,27 +166,34 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: "wrap",
     marginRight: 25,
   },
+
   profile: {
     display: "flex",
     flexDirection: "column",
     backgroundColor: "#111111",
     fontFamily: "Raleway",
     fontSize: "25px",
+    width: "100%",
     height: "40%",
   },
+
   anContainer: {
     display: "flex",
     flexDirection: "column",
     marginTop: 25,
+    width: "100%",
     height: "50%",
     backgroundColor: "#111111",
   },
+
   anContainerInner: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     height: "90%",
+    width: "100%",
   },
+
   text: {
     fontFamily: "Raleway",
     color: "white",
@@ -125,13 +203,33 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 20,
     marginRight: 20,
   },
+
   levelIcon: {
     height: "50%",
   },
+
   arrowBtn: {
+    backgroundImage: `url(${prev})`,
     margin: "5px",
     height: "63px",
     width: "40px",
+    justifyContent: "flex-end",
+    top: "42%",
+    border: 0,
+    cursor: "pointer",
+    backgroundColor: "transparent",
+    padding: 0,
+    "&:hover": {
+      opacity: "60%",
+    },
+  },
+
+  arrowBtnR: {
+    backgroundImage: `url(${next})`,
+    margin: "5px",
+    height: "63px",
+    width: "50px",
+    justifyContent: "flex-end",
     top: "42%",
     border: 0,
     cursor: "pointer",
@@ -149,10 +247,10 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     alignItems: "center",
   },
+
   textHighlight: {
     color: "white",
     textDecoration: "none",
-
     "&:hover": {
       backgroundColor: "#393939",
       color: "#38C6D9",
@@ -177,26 +275,31 @@ const useStyles = makeStyles((theme) => ({
 
 function Analytics() {
   const style = useStyles();
+  let params = useParams();
   let navigate = useNavigate();
   const [levelState, setLevelState] = useState(1);
-  const { data, loading } = GetAverages("merge_sort", levelState);
+
   let levelNums = [l1, l2, l3, l4, l5];
   let isLoggedIn = localStorage.getItem("isLoggedIn");
+
+  const { data, loading, error } = GetAverages("merge_sort", levelState);
 
   if (!isLoggedIn) {
     navigate("/");
   }
+
   return (
     <>
       <div className={style.fullpage}>
         <Navbar admin={true} />
         <div className={style.page}>
           <div className={style.sideBar}>
+            <div className={style.firstBox}></div>
             <div className={style.history}>
               <Link to="/Admin" className={style.textHighlight}>
                 <div className={style.button}>
                   <div className={style.icon}>
-                    <img src={historyIcon} alt={"history"}></img>
+                    <img src={historyIcon}></img>
                   </div>
                   History
                 </div>
@@ -210,7 +313,7 @@ function Analytics() {
               >
                 <div className={style.button}>
                   <div className={style.icon}>
-                    <img src={anIcon} alt={"analytics"}></img>
+                    <img src={anIcon}></img>
                   </div>
                   Analytics
                 </div>
@@ -260,7 +363,6 @@ function Analytics() {
               <div className={style.levelBar}>
                 <button
                   className={style.arrowBtn}
-                  style={{ backgroundImage: `url(${prev})` }}
                   disabled={levelState == 1}
                   onClick={() => {
                     setLevelState(levelState - 1);
@@ -269,12 +371,10 @@ function Analytics() {
                 <img
                   src={levelNums[levelState - 1]}
                   className={style.levelIcon}
-                  alt={"level"}
                 ></img>
 
                 <button
-                  className={style.arrowBtn}
-                  style={{ backgroundImage: `url(${next})` }}
+                  className={style.arrowBtnR}
                   disabled={levelState == 5}
                   onClick={() => {
                     setLevelState(levelState + 1);
@@ -287,11 +387,7 @@ function Analytics() {
           <div className={style.container}>
             <div className={style.profile}>
               <div className={style.text}>Hello,</div>
-              <img
-                src={dp}
-                alt={"admin"}
-                style={{ height: "70%", width: "auto" }}
-              ></img>
+              <img src={dp} style={{ height: "70%", width: "auto" }}></img>
             </div>
 
             <div className={style.anContainer}>
@@ -300,13 +396,11 @@ function Analytics() {
                 <img
                   src={history}
                   style={{ height: "50%", width: "auto", marginTop: 20 }}
-                  alt={"history"}
                 ></img>
                 <Link to="/Admin" style={{ width: "70%" }}>
                   <img
                     src={button}
                     style={{ marginTop: 20, width: "100%" }}
-                    alt={"button"}
                   ></img>
                 </Link>
               </div>
