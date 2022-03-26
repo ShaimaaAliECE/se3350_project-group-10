@@ -204,7 +204,7 @@ function Analytics() {
             </div>
             <div className={style.analytics}>
               <Link
-                to="/Analytics"
+                to="/analytics"
                 className={style.textHighlight}
                 style={{ color: "#38C6D9", fontWeight: "bold" }}
               >
@@ -216,7 +216,6 @@ function Analytics() {
                 </div>
               </Link>
             </div>
-            <div style={{ flex: "4", flexGrow: "10" }}></div>
           </div>
           <div className={style.mainContainer}>
             <div className={style.firstRow}>
@@ -287,11 +286,7 @@ function Analytics() {
           <div className={style.container}>
             <div className={style.profile}>
               <div className={style.text}>Hello,</div>
-              <img
-                src={dp}
-                alt={"admin"}
-                style={{ height: "70%", width: "auto" }}
-              ></img>
+              <img src={dp} alt={"admin"} style={{ height: "70%" }}></img>
             </div>
 
             <div className={style.anContainer}>
@@ -299,10 +294,10 @@ function Analytics() {
               <div className={style.anContainerInner}>
                 <img
                   src={history}
-                  style={{ height: "50%", width: "auto", marginTop: 20 }}
+                  style={{ height: "50%", marginTop: 20 }}
                   alt={"history"}
                 ></img>
-                <Link to="/Admin" style={{ width: "70%" }}>
+                <Link to="/admin" style={{ width: "70%" }}>
                   <img
                     src={button}
                     style={{ marginTop: 20, width: "100%" }}
