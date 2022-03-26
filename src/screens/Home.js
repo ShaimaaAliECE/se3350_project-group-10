@@ -196,19 +196,21 @@ export default function Home() {
                 id="username"
                 variant="outlined"
                 placeholder="Username"
-                style={{ marginBottom: 20, color: "white" }}
+                style={{ marginBottom: 20 }}
+                InputProps={{ style: { color: "white", borderColor: "white" } }}
               />
               <TextField
                 id="password"
                 variant="outlined"
                 type="password"
                 placeholder="Password"
+                InputProps={{ style: { color: "white", borderColor: "white" } }}
                 style={{ marginBottom: 20 }}
               />
               <Button
                 variant="outlined"
                 type="submit"
-                style={{ color: "white", borderColor: "white" }}
+                style={{ color: "white", borderColor: "#0D0D0D" }}
               >
                 Login
               </Button>
