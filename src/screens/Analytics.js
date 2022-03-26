@@ -324,9 +324,20 @@ function Analytics() {
           <div className={style.mainContainer}>
             <div className={style.firstRow}>
               <div className={style.box}>
-                <div className={style.text}>Time Spent (s)</div>
+                <div className={style.text}>Time Spent</div>
                 {!loading ? (
-                  <div className={style.statsText}> {data?.time}</div>
+                  <div className={style.statsText}>
+                    {(function () {
+                      let hrs = Math.floor(data?.time / 3600);
+                      let min = Math.floor((data?.time % 3600) / 60);
+                      let sec = (data?.time % 3600) % 60;
+                      if (hrs && min && sec != 0) {
+                        return hrs + ":" + min + ":" + sec;
+                      } else {
+                        return min + ":" + sec;
+                      }
+                    })()}
+                  </div>
                 ) : null}
               </div>
               <div className={style.box}>
