@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import state from "../store/Store";
 import { makeStyles, TextField, Button } from "@material-ui/core";
-import bg from "../assets/homeBG.svg";
 import logo from "../assets/Logo.svg";
 import SwipeableViews from "react-swipeable-views";
 import { useTheme } from "@mui/material/styles";
@@ -47,30 +46,12 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "5px",
   },
   container: {
-    padding: 0,
-    margin: 0,
     width: "100%",
     height: "100%",
-    //backgroundImage: `url(${bg})`,
     backgroundColor: "black",
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-  },
-
-  buttonContainer: {
-    display: "flex",
-    justifyContent: "space-between",
-  },
-
-  content: {
-    display: "flex",
-    flexDirection: "column",
-    marginBottom: 65, //Toolbar takes up 65px
-    zIndex: 10,
   },
   button: {
     margin: 20,
@@ -89,17 +70,6 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "#A4A4A4",
       color: "#242424",
     },
-  },
-  navbar: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-end",
-    alignItems: "center",
-    backgroundColor: "black",
-    color: "white",
-    textAlign: "center",
-    fontSize: "25px",
-    padding: "10px",
   },
   login: {
     fontFamily: "Raleway",
@@ -123,7 +93,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#646464",
   },
   loginModal: {
-    backgroundColor: "rgba(255,255,255,1)",
+    backgroundColor: "#111111",
     padding: 40,
     display: "flex",
     flexDirection: "column",
@@ -149,7 +119,7 @@ const useStyles = makeStyles((theme) => ({
     right: "5%",
     top: "5%",
   },
-  Analytics: {
+  analytics: {
     marginRight: 20,
     textDecoration: "none",
     fontFamily: "Raleway",
@@ -168,16 +138,15 @@ export default function Home() {
   const theme = useTheme();
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-
   const [open, setOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const handleClose = () => {
     setOpen(false);
   };
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
   const handleChangeIndex = (index) => {
     setValue(index);
   };
@@ -225,18 +194,24 @@ export default function Home() {
             >
               <TextField
                 id="username"
-                label="Username"
                 variant="outlined"
+                placeholder="Username"
                 style={{ marginBottom: 20 }}
+                InputProps={{ style: { color: "white", borderColor: "white" } }}
               />
               <TextField
                 id="password"
-                label="Password"
                 variant="outlined"
                 type="password"
+                placeholder="Password"
+                InputProps={{ style: { color: "white", borderColor: "white" } }}
                 style={{ marginBottom: 20 }}
               />
-              <Button variant="outlined" type="submit">
+              <Button
+                variant="outlined"
+                type="submit"
+                style={{ color: "white", borderColor: "#0D0D0D" }}
+              >
                 Login
               </Button>
             </form>
@@ -255,7 +230,7 @@ export default function Home() {
               </button>
             ) : (
               <>
-                <a className={classes.Analytics} href="/Admin">
+                <a className={classes.analytics} href="/admin">
                   analytics
                 </a>
                 <button
@@ -334,53 +309,83 @@ export default function Home() {
                   </TabPanel>
                   <TabPanel value={value} index={1} dir={theme.direction}>
                     <Link to="/level_1" className={classes.link}>
-                      <button className={classes.button}>Level 1</button>
+                      <button className={classes.button} disabled>
+                        Level 1
+                      </button>
                     </Link>
                     <Link to="/level_2" className={classes.link}>
-                      <button className={classes.button}>Level 2</button>
+                      <button className={classes.button} disabled>
+                        Level 2
+                      </button>
                     </Link>
                     <Link to="/level_3" className={classes.link}>
-                      <button className={classes.button}>Level 3</button>
+                      <button className={classes.button} disabled>
+                        Level 3
+                      </button>
                     </Link>
                     <Link to="/level_4" className={classes.link}>
-                      <button className={classes.button}>Level 4</button>
+                      <button className={classes.button} disabled>
+                        Level 4
+                      </button>
                     </Link>
                     <Link to="/level_5" className={classes.link}>
-                      <button className={classes.button}>Level 5</button>
+                      <button className={classes.button} disabled>
+                        Level 5
+                      </button>
                     </Link>
                   </TabPanel>
                   <TabPanel value={value} index={2} dir={theme.direction}>
                     <Link to="/level_1" className={classes.link}>
-                      <button className={classes.button}>Level 1</button>
+                      <button className={classes.button} disabled>
+                        Level 1
+                      </button>
                     </Link>
                     <Link to="/level_2" className={classes.link}>
-                      <button className={classes.button}>Level 2</button>
+                      <button className={classes.button} disabled>
+                        Level 2
+                      </button>
                     </Link>
                     <Link to="/level_3" className={classes.link}>
-                      <button className={classes.button}>Level 3</button>
+                      <button className={classes.button} disabled>
+                        Level 3
+                      </button>
                     </Link>
                     <Link to="/level_4" className={classes.link}>
-                      <button className={classes.button}>Level 4</button>
+                      <button className={classes.button} disabled>
+                        Level 4
+                      </button>
                     </Link>
                     <Link to="/level_5" className={classes.link}>
-                      <button className={classes.button}>Level 5</button>
+                      <button className={classes.button} disabled>
+                        Level 5
+                      </button>
                     </Link>
                   </TabPanel>
                   <TabPanel value={value} index={3} dir={theme.direction}>
                     <Link to="/level_1" className={classes.link}>
-                      <button className={classes.button}>Level 1</button>
+                      <button className={classes.button} disabled>
+                        Level 1
+                      </button>
                     </Link>
                     <Link to="/level_2" className={classes.link}>
-                      <button className={classes.button}>Level 2</button>
+                      <button className={classes.button} disabled>
+                        Level 2
+                      </button>
                     </Link>
                     <Link to="/level_3" className={classes.link}>
-                      <button className={classes.button}>Level 3</button>
+                      <button className={classes.button} disabled>
+                        Level 3
+                      </button>
                     </Link>
                     <Link to="/level_4" className={classes.link}>
-                      <button className={classes.button}>Level 4</button>
+                      <button className={classes.button} disabled>
+                        Level 4
+                      </button>
                     </Link>
                     <Link to="/level_5" className={classes.link}>
-                      <button className={classes.button}>Level 5</button>
+                      <button className={classes.button} disabled>
+                        Level 5
+                      </button>
                     </Link>
                   </TabPanel>
                 </SwipeableViews>

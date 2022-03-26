@@ -3,7 +3,6 @@ import React from "react";
 import l1 from "../assets/life1.svg";
 import l2 from "../assets/life2.svg";
 import l3 from "../assets/life3.svg";
-import state from "../store/Store";
 import { view } from "@risingstack/react-easy-state";
 
 const useStyles = makeStyles((theme) => ({

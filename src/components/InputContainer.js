@@ -8,7 +8,6 @@ import { generateEmptyArr } from "./SubmitBoxes";
 import { winSound } from "../assets/tones.js";
 import { useState } from "react";
 import { Modal } from "@material-ui/core";
-import Lives from "../components/Lives";
 import { AppendDatabase } from "../firebase/functions";
 
 const useStyles = makeStyles((theme) => ({

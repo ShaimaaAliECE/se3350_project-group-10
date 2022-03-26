@@ -1,7 +1,5 @@
 import state from "../store/Store";
 
-let x;
-
 function merge(left, right) {
   let arr = [];
   // Break out of loop if any one of the array gets empty
@@ -104,10 +102,8 @@ export function mergeSort(array) {
 
   state.ans.push(rowObj);
 
-  // Base case or terminating case
-
   state.prevSizeSplit = array.length;
-
+  // Base case or terminating case
   if (array.length < 2) {
     return array;
   }

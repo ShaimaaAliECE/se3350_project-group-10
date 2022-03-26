@@ -1,10 +1,9 @@
-import { makeStyles, Button, Grow } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 import React from "react";
 import backBtn from "../assets/back.svg";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { IconButton } from "@material-ui/core";
 import Timer from "../components/Timer";
-import { view } from "@risingstack/react-easy-state";
 import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
