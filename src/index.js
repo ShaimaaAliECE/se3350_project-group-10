@@ -11,13 +11,13 @@ import { getFirestore } from "firebase/firestore";
 
 //Need env file set up for this to work
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_FIREBASE_APP_ID,
-  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
+  apiKey: "AIzaSyAXK2FpB-Rk9iC2IZ5T26DvzcdnBhl4mqc",
+  authDomain: "algorhythm-se3350-group-10.firebaseapp.com",
+  projectId: "algorhythm-se3350-group-10",
+  storageBucket: "algorhythm-se3350-group-10.appspot.com",
+  messagingSenderId: "520746370090",
+  appId: "1:520746370090:web:91a884d3a4bfdc72502f53",
+  measurementId: "G-3Z6WTR6QVE",
 };
 
 //Firebase Initialization
